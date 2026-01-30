@@ -146,18 +146,28 @@
   </section>-->
 
   <section id="messages" class="py-5">
-    <div class="container">
-      <h2>Message Board</h2>
-      <div id="messageBoard">
-        <form id="messageForm" class="mb-3">
-          <div class="mb-2"><input type="text" id="name" class="form-control" placeholder="Your name" required></div>
-          <div class="mb-2"><textarea id="message" rows="3" class="form-control" placeholder="Type your message..." required></textarea></div>
-          <button type="submit" class="btn btn-custom">Post Message</button>
-        </form>
-        <ul id="messagesList"></ul>
-      </div>
+  <div class="container">
+    <h2 class="fw-bold">Classmate Messages & Updates</h2>
+    <p class="lead">Verified messages and updates from our fellow classmates.</p>
+    
+    <div class="mt-4">
+      <ul class="list-group shadow-sm">
+        <li class="list-group-item p-3">
+          <strong style="color: var(--school-purple);">John Doe:</strong> 
+          <span>"Can't wait to see everyone! I'll be bringing my old yearbook."</span>
+        </li>
+        <li class="list-group-item p-3">
+          <strong style="color: var(--school-purple);">Jane Smith:</strong> 
+          <span>"Looking forward to the reunion. See you all in October!"</span>
+        </li>
+      </ul>
     </div>
-  </section>
+
+    <p class="mt-4 text-muted small">
+      *To have your message posted here, please use the <a href="#contact">Contact Form</a> below to send it to the committee for verification.
+    </p>
+  </div>
+</section>
 
   <section id="gallery" class="py-5 bg-light">
     <div class="container">
