@@ -145,27 +145,17 @@
     </div>
   </section>-->
 
-  <section id="messages" class="py-5">
+ <section id="messages" class="py-5 bg-light">
   <div class="container">
-    <h2 class="fw-bold">Classmate Messages & Updates</h2>
-    <p class="lead">Verified messages and updates from our fellow classmates.</p>
-    
-    <div class="mt-4">
-      <ul class="list-group shadow-sm">
-        <li class="list-group-item p-3">
-          <strong style="color: var(--school-purple);">John Doe:</strong> 
-          <span>"Can't wait to see everyone! I'll be bringing my old yearbook."</span>
-        </li>
-        <li class="list-group-item p-3">
-          <strong style="color: var(--school-purple);">Jane Smith:</strong> 
-          <span>"Looking forward to the reunion. See you all in October!"</span>
-        </li>
-      </ul>
+    <h2>Message Board</h2>
+    <div id="messageBoard">
+      <form id="messageForm" class="mb-3">
+        <div class="mb-2"><input type="text" id="name" class="form-control" placeholder="Your Name" required></div>
+        <div class="mb-2"><textarea id="message" rows="3" class="form-control" placeholder="Type your message..." required></textarea></div>
+        <button type="submit" class="btn btn-custom">Post Message</button>
+      </form>
+      <ul id="messagesList" class="list-unstyled mt-4"></ul>
     </div>
-
-    <p class="mt-4 text-muted small">
-      *To have your message posted here, please use the <a href="#contact">Contact Form</a> below to send it to the committee for verification.
-    </p>
   </div>
 </section>
 
@@ -182,23 +172,32 @@
   </section>
 
  <section id="memorial" class="py-5">
-    <div class="container">
-      <h2 class="fw-bold">In Memory Of</h2>
-      <p class="lead">We honor and remember our classmates who are no longer with us.</p>
-      
-      <ul class="list-group list-group-flush mb-4" id="memorial-list">
-        <li class="list-group-item" style="font-style: italic; color: #666;">
-          Our list is currently being updated. Please use the button below to submit a name.
-        </li>
-      </ul>
-
-      <div class="p-4 border rounded shadow-sm bg-white text-center">
-        <h5 class="fw-bold">Notice someone missing?</h5>
-        <p>Please help us complete our memorial list by submitting their information.</p>
-        <a href="#" target="_blank" class="btn btn-custom">Submit a Name</a>
+  <div class="container">
+    <h2 class="fw-bold">In Memory Of</h2>
+    <p class="lead">We honor and remember our classmates who are no longer with us.</p>
+    
+    <div class="row mt-4">
+      <div class="col-md-6">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">John "Tiger" Guidry</li>
+          <li class="list-group-item">Mary Alice Broussard</li>
+          <li class="list-group-item">Robert Sonnier</li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Susan Marie Hebert</li>
+          <li class="list-group-item">James "Jimmy" Olivier</li>
+          </ul>
       </div>
     </div>
-  </section>
+
+    <div class="mt-5 p-4 border rounded shadow-sm bg-light text-center">
+      <h5 class="fw-bold">Notice someone missing?</h5>
+      <p>Please use the <a href="#contact">Contact Form</a> below to let the committee know so we can add them to our memorial.</p>
+    </div>
+  </div>
+</section>
 
 
   <section id="contact" class="py-5 bg-light">
