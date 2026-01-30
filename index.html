@@ -50,7 +50,14 @@
     #messageBoard,#contactForm { border:2px solid var(--school-purple);
                                  border-radius:8px; padding:1rem; background:#fff;}
     #messagesList { list-style:none; padding:0; max-height:300px; overflow-y:auto;}
-    #messagesList li { border-bottom:1px solid #ccc; padding:.5rem 0;}
+    #messagesList li { border-bottom:1px solid #ccc; padding:.5rem 0;}#memorial .list-group-item {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #ddd;
+      padding: 15px 0;
+      font-size: 1.1rem;
+      color: var(--school-purple);
+    }
   </style>
 </head>
 
@@ -175,11 +182,11 @@
 
   <section id="memorial" class="py-5">
     <div class="container">
-      <h2>In Memory Of</h2>
+      <h2>In Memory Of</h2>
       <ul class="list-group">
-        <li class="list-group-item">John Doe – 1958–2005</li>
-        <li class="list-group-item">Mary Smith – 1958–2015</li>
-        <li class="list-group-item">James Williams – 1957–2020</li>
+        <li class="list-group-item">John Doe – 1958–2005</li>
+        <li class="list-group-item">Mary Smith – 1958–2015</li>
+        <li class="list-group-item">James Williams – 1957–2020</li>
       </ul>
     </div>
   </section>
