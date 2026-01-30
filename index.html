@@ -165,7 +165,7 @@
         </form>
         <ul id="messagesList"></ul>
       </div>
-    </div>-->
+    </div>
   </section>
 
   <section id="gallery" class="py-5 bg-light">
@@ -180,16 +180,25 @@
     </div>
   </section>
 
-  <section id="memorial" class="py-5">
+ <section id="memorial" class="py-5">
     <div class="container">
-      <h2>In Memory Of</h2>
-      <ul class="list-group">
-        <li class="list-group-item">John Doe – 1958–2005</li>
-        <li class="list-group-item">Mary Smith – 1958–2015</li>
-        <li class="list-group-item">James Williams – 1957–2020</li>
+      <h2 class="fw-bold">In Memory Of</h2>
+      <p class="lead">We honor and remember our classmates who are no longer with us.</p>
+      
+      <ul class="list-group list-group-flush mb-4" id="memorial-list">
+        <li class="list-group-item" style="font-style: italic; color: #666;">
+          Our list is currently being updated. Please use the button below to submit a name.
+        </li>
       </ul>
+
+      <div class="p-4 border rounded shadow-sm bg-white text-center">
+        <h5 class="fw-bold">Notice someone missing?</h5>
+        <p>Please help us complete our memorial list by submitting their information.</p>
+        <a href="#" target="_blank" class="btn btn-custom">Submit a Name</a>
+      </div>
     </div>
   </section>
+
 
   <section id="contact" class="py-5 bg-light">
     <div class="container">
