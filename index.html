@@ -294,31 +294,5 @@
   </footer>
 
 </body>
-</html>
-    // This makes the contact form work
-    const contactForm = document.getElementById('privateContactForm');
-    const contactStatus = document.getElementById('contactStatus');
-    
-    if (contactForm) {
-      contactForm.addEventListener('submit', async e => {
-        e.preventDefault();
-        const name = document.getElementById('contactName').value.trim();
-        const email = document.getElementById('contactEmail').value.trim();
-        const message = document.getElementById('contactMessage').value.trim();
-        contactStatus.textContent = 'Sending...';
-        try {
-          await fetch(API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ type: 'contact', name, email, message })
-          });
-          contactStatus.textContent = '✅ Message sent!';
-          contactForm.reset();
-        } catch (err) {
-          contactStatus.textContent = '❌ Error sending message.';
-        }
-      });
-    }
-  </script>
-</body>
+
 </html>
