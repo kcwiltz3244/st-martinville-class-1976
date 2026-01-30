@@ -258,22 +258,67 @@
 
   loadMessages();
 </script>
+<section id="planning" class="py-5 bg-white">
+    <div class="container">
+      <h2 class="fw-bold" style="color: var(--school-purple); border-bottom: 3px solid var(--school-gold); padding-bottom: 10px;">
+        Planning To-Do List
+      </h2>
+      <div class="table-responsive mt-4">
+        <table class="table table-bordered">
+          <thead class="table-light">
+            <tr style="color: #000; font-weight: bold;">
+              <th>What Needs to be Done</th>
+              <th>Who is Responsible</th>
+              <th>Status / When</th>
+            </tr>
+          </thead>
+          <tbody style="color: #000;">
+            <tr>
+              <td>Find a location</td>
+              <td>Committee</td>
+              <td>In Progress</td>
+            </tr>
+            <tr>
+              <td>Find entertainment</td>
+              <td>Entertainment Team</td>
+              <td>Searching</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
 
+  <footer>
+    <p>&copy; 2024 St. Martinville Sr. High – Class of 1976 Reunion Committee</p>
+  </footer>
 
-    const contactForm=document.getElementById('privateContactForm');
-    const contactStatus=document.getElementById('contactStatus');
-    contactForm.addEventListener('submit',async e=>{
-      e.preventDefault();
-      const name=document.getElementById('contactName').value.trim();
-      const email=document.getElementById('contactEmail').value.trim();
-      const message=document.getElementById('contactMessage').value.trim();
-      contactStatus.textContent='Sending...';
-      try{
-        await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'contact',name,email,message})});
-        contactStatus.textContent='✅ Message sent!';
-        contactForm.reset();
-      }catch(err){contactStatus.textContent='❌ Error sending message.';}
-    });
-  </script>
+  <script>
+    // This part handles the contact form you already had
+    const contactForm = document.getElementById('privateContactForm');
+    const contactStatus = document.getElementById('contactStatus');
+    
+    if (contactForm) {
+      contactForm.addEventListener('submit', async e => {
+        e.preventDefault();
+        const name = document.getElementById('contactName').value.trim();
+        const email = document.getElementById('contactEmail').value.trim();
+        const message = document.getElementById('contactMessage').value.trim();
+        contactStatus.textContent = 'Sending...';
+        try {
+          await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ type: 'contact', name, email, message })
+          });
+          contactStatus.textContent = '✅ Message sent!';
+          contactForm.reset();
+        } catch (err) {
+          contactStatus.textContent = '❌ Error sending message.';
+        }
+      });
+    }
+  
+    </script>
 </body>
 </html>
