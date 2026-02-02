@@ -86,7 +86,11 @@
       <h2>RSVP</h2>
       <div class="alert text-center mb-4" style="background: var(--school-gold); color: var(--school-purple); border: 3px solid var(--school-purple);">
         <h3 class="fw-bold">🎉 <span id="finalTotal">...</span> People are coming!</h3>
-        <p class="mb-0"><strong><span id="yesCount">0</span></strong> Classmates Confirmed | <strong><span id="maybeCount">0</span></strong> Maybes</p>
+        <p class="mb-0">
+  <strong><span id="yesCount">0</span></strong> Confirmed | 
+  <strong><span id="maybeCount">0</span></strong> Maybes | 
+  <strong><span id="noCount">0</span></strong> Declined
+</p>
       </div>
       
       <div class="text-center mb-4">
@@ -190,19 +194,23 @@
       } catch (e) { console.log("Msg Error"); }
     }
 
-    async function loadRSVPCount() {
+    async function loadRSVPData() {
       try {
-        const r = await fetch(API_URL + '?action=rsvpCount');
+        const r = await fetch(API_URL);
         const d = await r.json();
-        document.getElementById('finalTotal').textContent = d.grandTotal;
-        document.getElementById('yesCount').textContent = d.yes;
+        
+        document.getElementById('finalTotal').textContent = d.total;
+        document.getElementById('yesCount').textContent = d.yesCount;
         document.getElementById('maybeCount').textContent = d.maybe;
+        document.getElementById('noCount').textContent = d.no; // New line for 'No'
         
         const yesContainer = document.getElementById('yesListContainer');
-        yesContainer.innerHTML = d.yesList.length > 0 ? 
-          d.yesList.map(p => `<div class="p-2 border-bottom text-dark"><strong>${p.name}</strong> <small>(Party of ${p.guests})</small></div>`).join('') :
+        yesContainer.innerHTML = d.attendees.length > 0 ? 
+          d.attendees.map(p => `<div class="p-2 border-bottom text-dark"><strong>${p.name}</strong> <small>(Party of ${p.guests})</small></div>`).join('') :
           '<p class="text-muted">No confirmations yet.</p>';
-      } catch (e) { console.log("RSVP Error"); }
+      } catch (e) { 
+        console.log("RSVP Error", e); 
+      }
     }
 
     document.getElementById('messageForm').addEventListener('submit', async e => {
