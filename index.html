@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Class of 1976 - 50th Reunion</title>
-
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
@@ -23,8 +22,7 @@
     }
     header::after {
       content:""; position:absolute; top:0; left:0; width:100%; height:100%;
-      background:rgba(30,0,60,0.5); 
-      z-index:0;
+      background:rgba(30,0,60,0.5); z-index:0;
     }
     header .container { position:relative; z-index:1; }
 
@@ -44,37 +42,50 @@
     .btn-custom { background:var(--school-gold); color:var(--school-purple);
                   font-weight:bold; border:none; padding: 10px 25px; }
     .btn-custom:hover { background:#ffea70; color:var(--school-purple); }
-    .gallery img { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
-   /* Paste it right here */
-.navbar-nav .nav-link {
-    padding-left: 5px !important;
-    padding-right: 5px !important;
-    font-size: 14px !important; 
-}
-</style> 
- 
+    
+    /* The Magic Fix for Menu Space */
+    .navbar-nav .nav-link {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+        font-size: 14px !important; 
+    }
+    
+    /* Back to Top Button Styling */
+    #btn-back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: none;
+      z-index: 1000;
+      background: var(--school-purple);
+      color: var(--school-gold);
+      border: 2px solid var(--school-gold);
+      width: 50px;
+      height: 50px;
+    }
+  </style> 
 </head>
 
 <body>
- <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-  <div class="container">
-    <a class="navbar-brand fw-bold" href="index.html">SMSH '76</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="index.html">🏠 Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#rsvp">RSVP</a></li>
-        <li class="nav-item"><a class="nav-link" href="#calendar">Calendar</a></li>
-        <li class="nav-item"><a class="nav-link" href="#meetings">Notes</a></li>
-        <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
-        <li class="nav-item"><a class="nav-link" href="#memorial">Memorial</a></li>
-        <li class="nav-item"><a class="nav-link" href="#planning">Planning</a></li>
-      </ul>
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">SMSH '76</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">🏠 Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#rsvp">RSVP</a></li>
+          <li class="nav-item"><a class="nav-link" href="#calendar">Calendar</a></li>
+          <li class="nav-item"><a class="nav-link" href="#meetings">Notes</a></li>
+          <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+          <li class="nav-item"><a class="nav-link" href="#memorial">Memorial</a></li>
+          <li class="nav-item"><a class="nav-link" href="#planning">Planning</a></li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
   <header>
     <div class="container">
@@ -110,10 +121,7 @@
       
       <div class="text-center mb-4">
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNH2rLwb6w9zvIE113HT4Ru0yNCUORL29ijm2Jg4Ws2Bu8sA/viewform" 
-           target="_blank" 
-           class="btn btn-custom btn-lg shadow">
-           RSVP Now - Add Your Name!
-        </a>
+           target="_blank" class="btn btn-custom btn-lg shadow">RSVP Now - Add Your Name!</a>
       </div>
 
       <div class="row">
@@ -132,167 +140,112 @@
   <section id="calendar" class="py-5 bg-white">
     <div class="container">
       <h2>Reunion Calendar</h2>
-      <p>View upcoming dates, planning sessions, and joining links.</p>
-      
-      <div class="text-center mb-4">
-        <a href="PASTE_YOUR_LINK_HERE" target="_blank" class="btn btn-custom btn-lg shadow-sm">
-           Join the Tuesday Planning Meeting
-        </a>
-      </div>
-
       <div class="ratio ratio-16x9 mb-3 shadow-sm border rounded">
-        <iframe src="https://calendar.google.com/calendar/embed?src=fbcf3427770ee3c74ba269d485ba49d39d6ea67f45be295d849f038ba7c79497%40group.calendar.google.com&ctz=America%2FChicago&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=1" 
+        <iframe src="https://calendar.google.com/calendar/embed?src=fbcf3427770ee3c74ba269d485ba49d39d6ea67f45be295d849f038ba7c79497%40group.calendar.google.com&ctz=America%2FChicago&showTitle=0&showNav=1" 
         style="border: 0" frameborder="0" scrolling="no"></iframe>
       </div>
     </div>
   </section>
 
   <section id="meetings" class="py-5 bg-light">
-  <div class="container">
-    <h2>Meeting Notes & Minutes</h2>
-    <p class="text-muted">Committee members can document notes from our Tuesday sessions here.</p>
-    <form id="messageForm" class="mb-3">
-      <div class="mb-2">
-        <input type="text" id="name" class="form-control" placeholder="Date or Topic (e.g., Feb 3rd - Catering)" required>
-      </div>
-      <div class="mb-2">
-        <textarea id="message" rows="4" class="form-control" placeholder="Enter meeting notes here..." required></textarea>
-      </div>
-      <button type="submit" class="btn btn-custom">Save Meeting Notes</button>
-    </form>
-    <div id="messagesList" class="mt-4">
-      </div>
-  </div>
-</section>
-
- <section id="gallery" class="py-5 bg-white">
-  <div class="container text-center">
-    <h2>Class Photo Gallery</h2>
-    <p class="lead">We are collecting photos for the 50th Reunion slideshow!</p>
-    
-    <div class="p-5 border rounded bg-light shadow-sm">
-      <h4 class="mb-4">Have photos from 1976 or previous reunions?</h4>
-      <p>Click the button below to view our shared album or upload your own pictures directly to our secure folder.</p>
-      
-      <a href="https://drive.google.com/drive/folders/1MhLveVmQ_UKFsZ43Q5-4ggKxipUyO0i3?usp=sharing" 
-         target="_blank" 
-         class="btn btn-custom btn-lg">
-         📸 View & Upload Photos
-      </a>
+    <div class="container">
+      <h2>Meeting Notes & Minutes</h2>
+      <form id="messageForm" class="mb-3">
+        <div class="mb-2"><input type="text" id="name" class="form-control" placeholder="Topic" required></div>
+        <div class="mb-2"><textarea id="message" rows="4" class="form-control" placeholder="Notes..." required></textarea></div>
+        <button type="submit" class="btn btn-custom">Save Meeting Notes</button>
+      </form>
+      <div id="messagesList" class="mt-4"></div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <section id="gallery" class="py-5 bg-white text-center">
+    <div class="container">
+      <h2>Class Photo Gallery</h2>
+      <a href="https://drive.google.com/drive/folders/1MhLveVmQ_UKFsZ43Q5-4ggKxipUyO0i3?usp=sharing" target="_blank" class="btn btn-custom btn-lg">📸 View & Upload Photos</a>
+    </div>
+  </section>
 
   <section id="memorial" class="py-5 bg-light">
     <div class="container">
-      <h2 class="fw-bold">In Memory Of</h2>
-      <div class="row mt-4">
-        <div class="col-md-6">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">John "Tiger" Guidry</li>
-            <li class="list-group-item">Mary Broussard</li>
-            <li class="list-group-item">Robert Sonnier</li>
-          </ul>
-        </div>
-        <div class="col-md-6">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Susan Marie Hebert</li>
-            <li class="list-group-item">James "Jimmy" Olivier</li>
-          </ul>
-        </div>
-      </div>
+      <h2>In Memory Of</h2>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">John "Tiger" Guidry</li>
+        <li class="list-group-item">Mary Broussard</li>
+        <li class="list-group-item">Robert Sonnier</li>
+      </ul>
     </div>
   </section>
 
   <section id="planning" class="py-5 bg-white">
     <div class="container">
-      <h2 class="fw-bold">Planning To-Do List</h2>
-      <table class="table table-bordered bg-white">
-        <thead><tr style="color:black"><th>Task</th><th>Who</th><th>Status</th></tr></thead>
-        <tbody style="color:black">
-          <tr><td>Find a location</td><td>Committee</td><td>In Progress</td></tr>
-          <tr><td>Find entertainment</td><td>Team</td><td>Searching</td></tr>
-        </tbody>
+      <h2>Planning To-Do List</h2>
+      <table class="table table-bordered">
+        <thead><tr><th>Task</th><th>Status</th></tr></thead>
+        <tbody><tr><td>Find a location</td><td>In Progress</td></tr></tbody>
       </table>
     </div>
   </section>
 
   <footer>
-    <p>&copy; 2026 St. Martinville Sr. High – Class of 1976 Reunion Committee</p>
+    <p>&copy; 2026 St. Martinville Sr. High – Class of 1976</p>
   </footer>
+
+  <button type="button" class="btn rounded-circle shadow" id="btn-back-to-top">↑</button>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<script>
+  <script>
     const API_URL = 'https://script.google.com/macros/s/AKfycbzaJ59w5WF8gqam9EJe6TRIRAx0mZh_oaq77vvTaGKHvPeTkkrQxB4ZGgO5CSRTldvttw/exec';
 
-    // 1. Fetch data and update the page
     async function loadData() {
       try {
         const response = await fetch(API_URL);
         const data = await response.json();
-        
-        // Update the Gold RSVP Box
         document.getElementById('finalTotal').textContent = data.total || 0;
         document.getElementById('yesCount').textContent = data.yesCount || 0;
         document.getElementById('maybeCount').textContent = data.maybe || 0;
-
-        // Populate the RSVP Name Grid
         const grid = document.getElementById('attendeeGrid');
         if (data.attendees) {
-          grid.innerHTML = data.attendees.map(person => 
-            `<div class="col"><div class="p-2 border-bottom text-dark"><strong>${person.name}</strong></div></div>`
-          ).join('');
+          grid.innerHTML = data.attendees.map(p => `<div class="col"><div class="p-2 border-bottom text-dark"><strong>${p.name}</strong></div></div>`).join('');
         }
-
-        // Populate Meeting Notes as Cards
-        const notesList = document.getElementById('messagesList');
+        const list = document.getElementById('messagesList');
         if (data.messages) {
-          notesList.innerHTML = data.messages.reverse().map(m => `
+          list.innerHTML = data.messages.reverse().map(m => `
             <div class="card mb-3 shadow-sm border-0">
-              <div class="card-header" style="background:var(--school-purple); color:var(--school-gold); font-weight:bold;">
-                ${m.name}
-              </div>
-              <div class="card-body bg-white text-dark">
-                <p class="card-text" style="white-space: pre-wrap;">${m.message}</p>
-              </div>
-            </div>
-          `).join('');
+              <div class="card-header" style="background:var(--school-purple); color:var(--school-gold); font-weight:bold;">${m.name}</div>
+              <div class="card-body bg-white text-dark"><p style="white-space: pre-wrap;">${m.message}</p></div>
+            </div>`).join('');
         }
-      } catch (error) {
-        console.error("Load Error:", error);
-      }
+      } catch (e) { console.error(e); }
     }
 
-    // 2. Handle Saving Meeting Notes
     document.getElementById('messageForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const topic = document.getElementById('name').value;
-      const content = document.getElementById('message').value;
       const saveBtn = e.target.querySelector('button');
-
       saveBtn.disabled = true;
-      saveBtn.textContent = "Saving to Sheet...";
-
-      // 'no-cors' helps prevent the "Failed to save" error on some browsers
+      saveBtn.textContent = "Saving...";
       fetch(API_URL, {
         method: 'POST',
         mode: 'no-cors', 
-        body: JSON.stringify({ name: topic, message: content })
-      })
-      .then(() => {
-        alert("Note Saved Successfully!");
-        // We force a refresh so the new note shows up immediately
+        body: JSON.stringify({ name: document.getElementById('name').value, message: document.getElementById('message').value })
+      }).then(() => {
+        alert("Saved!");
         window.location.reload(); 
-      })
-      .catch(err => {
-        alert("Save Error: " + err);
-        saveBtn.disabled = false;
-        saveBtn.textContent = "Save Meeting Notes";
       });
     });
 
-    // Run everything on page load
+    // Back to Top Logic
+    let mybutton = document.getElementById("btn-back-to-top");
+    window.onscroll = function () {
+      if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    };
+    mybutton.addEventListener("click", () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
     loadData();
   </script>
 </body>
