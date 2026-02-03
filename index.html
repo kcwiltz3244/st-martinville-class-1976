@@ -59,7 +59,7 @@
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="#rsvp">RSVP</a></li>
           <li class="nav-item"><a class="nav-link" href="#calendar">Calendar</a></li>
-          <li class="nav-item"><a class="nav-link" href="#messages">Messages</a></li>
+          <li class="nav-item"><a class="nav-link" href="#meetings">Meeting Notes</a></li>
           <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
           <li class="nav-item"><a class="nav-link" href="#memorial">Memorial</a></li>
           <li class="nav-item"><a class="nav-link" href="#planning">Planning</a></li>
@@ -139,29 +139,41 @@
     </div>
   </section>
 
-  <section id="messages" class="py-5 bg-light">
-    <div class="container">
-      <h2>Message Board</h2>
-      <form id="messageForm" class="mb-3">
-        <div class="mb-2"><input type="text" id="name" class="form-control" placeholder="Your Name" required></div>
-        <div class="mb-2"><textarea id="message" rows="3" class="form-control" placeholder="Type your message..." required></textarea></div>
-        <button type="submit" class="btn btn-custom">Post Message</button>
-      </form>
-      <ul id="messagesList" class="list-unstyled mt-4"></ul>
-    </div>
-  </section>
-
-  <section id="gallery" class="py-5 bg-white">
-    <div class="container">
-      <h2>Photo Gallery</h2>
-      <a href="https://drive.google.com/drive/folders/1MhLveVmQ_UKFsZ43Q5-4ggKxipUyO0i3?usp=sharing" target="_blank" class="btn btn-custom mb-4">Upload Photos</a>
-      <div class="row gallery">
-        <div class="col-sm-6 col-md-4"><img src="photos/sample1.jpg" alt="Photo 1"></div>
-        <div class="col-sm-6 col-md-4"><img src="photos/sample2.jpg" alt="Photo 2"></div>
-        <div class="col-sm-6 col-md-4"><img src="photos/sample3.jpg" alt="Photo 3"></div>
+  <section id="meetings" class="py-5 bg-light">
+  <div class="container">
+    <h2>Meeting Notes & Minutes</h2>
+    <p class="text-muted">Committee members can document notes from our Tuesday sessions here.</p>
+    <form id="messageForm" class="mb-3">
+      <div class="mb-2">
+        <input type="text" id="name" class="form-control" placeholder="Date or Topic (e.g., Feb 3rd - Catering)" required>
       </div>
+      <div class="mb-2">
+        <textarea id="message" rows="4" class="form-control" placeholder="Enter meeting notes here..." required></textarea>
+      </div>
+      <button type="submit" class="btn btn-custom">Save Meeting Notes</button>
+    </form>
+    <div id="messagesList" class="mt-4">
+      </div>
+  </div>
+</section>
+
+ <section id="gallery" class="py-5 bg-white">
+  <div class="container text-center">
+    <h2>Class Photo Gallery</h2>
+    <p class="lead">We are collecting photos for the 50th Reunion slideshow!</p>
+    
+    <div class="p-5 border rounded bg-light shadow-sm">
+      <h4 class="mb-4">Have photos from 1976 or previous reunions?</h4>
+      <p>Click the button below to view our shared album or upload your own pictures directly to our secure folder.</p>
+      
+      <a href="https://drive.google.com/drive/folders/1MhLveVmQ_UKFsZ43Q5-4ggKxipUyO0i3?usp=sharing" 
+         target="_blank" 
+         class="btn btn-custom btn-lg">
+         📸 View & Upload Photos
+      </a>
     </div>
-  </section>
+  </div>
+</section>
 
   <section id="memorial" class="py-5 bg-light">
     <div class="container">
