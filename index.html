@@ -43,25 +43,22 @@
                   font-weight:bold; border:none; padding: 10px 25px; }
     .btn-custom:hover { background:#ffea70; color:var(--school-purple); }
     
-    /* The Magic Fix for Menu Space */
-    .navbar-nav .nav-link {
-        padding-left: 5px !important;
-        padding-right: 5px !important;
-        font-size: 14px !important; 
-    }
+    .navbar-nav .nav-link { padding-left: 5px !important; padding-right: 5px !important; font-size: 14px !important; }
     
-    /* Back to Top Button Styling */
     #btn-back-to-top {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      display: none;
-      z-index: 1000;
-      background: var(--school-purple);
-      color: var(--school-gold);
-      border: 2px solid var(--school-gold);
-      width: 50px;
-      height: 50px;
+      position: fixed; bottom: 20px; right: 20px; display: none; z-index: 1000;
+      background: var(--school-purple); color: var(--school-gold);
+      border: 2px solid var(--school-gold); width: 50px; height: 50px;
+    }
+
+    /* Memorial Enhancement */
+    .memorial-card {
+      background: #fff;
+      border-left: 5px solid var(--school-purple);
+      margin-bottom: 10px;
+      padding: 15px;
+      font-style: italic;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
   </style> 
 </head>
@@ -79,7 +76,6 @@
           <li class="nav-item"><a class="nav-link" href="#rsvp">RSVP</a></li>
           <li class="nav-item"><a class="nav-link" href="#calendar">Calendar</a></li>
           <li class="nav-item"><a class="nav-link" href="#meetings">Notes</a></li>
-          <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
           <li class="nav-item"><a class="nav-link" href="#memorial">Memorial</a></li>
           <li class="nav-item"><a class="nav-link" href="#planning">Planning</a></li>
         </ul>
@@ -99,91 +95,75 @@
       <h2 class="fw-bold text-center mb-4" style="color:var(--school-purple); border-bottom:4px solid var(--school-gold); display:inline-block; padding-bottom:0.4rem;">
         Welcome Class of 1976
       </h2>
-      <p class="lead mt-4">
-        Hard to believe it’s been 50 years since we walked the halls of St. Martinville Senior High. 
-        Whether it’s been five years or fifty since you last saw a classmate, we can't wait to 
-        reconnect, share stories, and celebrate the journey we’ve all been on since 1976. 
-        This is our space to get the party started!
-      </p>
+      <p class="lead mt-4">Hard to believe it’s been 50 years! This is our space to reconnect and celebrate.</p>
     </div>
   </section>
 
   <section id="rsvp" class="py-5 bg-light">
-    <div class="container">
-      <h2>RSVP</h2>
-      <div class="alert text-center mb-4" style="background: var(--school-gold); color: var(--school-purple); border: 3px solid var(--school-purple);">
-        <h3 class="fw-bold">🎉 <span id="finalTotal">...</span> People are coming!</h3>
-        <p class="mb-0">
-          <strong><span id="yesCount">0</span></strong> Confirmed | 
-          <strong><span id="maybeCount">0</span></strong> Maybes
-        </p>
+    <div class="container text-center">
+      <h2>RSVP List</h2>
+      <div class="alert mb-4" style="background: var(--school-gold); color: var(--school-purple); border: 3px solid var(--school-purple);">
+        <h3 class="fw-bold"><span id="finalTotal">...</span> People are coming!</h3>
       </div>
-      
-      <div class="text-center mb-4">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNH2rLwb6w9zvIE113HT4Ru0yNCUORL29ijm2Jg4Ws2Bu8sA/viewform" 
-           target="_blank" class="btn btn-custom btn-lg shadow">RSVP Now - Add Your Name!</a>
-      </div>
-
-      <div class="row">
-        <div class="col-md-12">
-          <h4 style="color: var(--school-purple);">✅ Confirmed Attendees</h4>
-          <div id="yesListContainer" class="border rounded p-3 bg-white shadow-sm" style="height: 300px; overflow-y: scroll;">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2" id="attendeeGrid">
-              <p class="text-muted">Loading list...</p>
-            </div>
+      <div id="yesListContainer" class="border rounded p-3 bg-white shadow-sm mx-auto" style="max-width:800px; height: 250px; overflow-y: scroll;">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2" id="attendeeGrid">
+            <p class="text-muted">Loading list...</p>
           </div>
-        </div>
       </div>
     </div>
   </section>
 
-  <section id="calendar" class="py-5 bg-white">
-    <div class="container">
-      <h2>Reunion Calendar</h2>
-      <div class="ratio ratio-16x9 mb-3 shadow-sm border rounded">
-        <iframe src="https://calendar.google.com/calendar/embed?src=fbcf3427770ee3c74ba269d485ba49d39d6ea67f45be295d849f038ba7c79497%40group.calendar.google.com&ctz=America%2FChicago&showTitle=0&showNav=1" 
-        style="border: 0" frameborder="0" scrolling="no"></iframe>
-      </div>
-    </div>
-  </section>
-
-  <section id="meetings" class="py-5 bg-light">
+  <section id="meetings" class="py-5 bg-white">
     <div class="container">
       <h2>Meeting Notes & Minutes</h2>
-      <form id="messageForm" class="mb-3">
-        <div class="mb-2"><input type="text" id="name" class="form-control" placeholder="Topic" required></div>
-        <div class="mb-2"><textarea id="message" rows="4" class="form-control" placeholder="Notes..." required></textarea></div>
-        <button type="submit" class="btn btn-custom">Save Meeting Notes</button>
-      </form>
-      <div id="messagesList" class="mt-4"></div>
-    </div>
-  </section>
-
-  <section id="gallery" class="py-5 bg-white text-center">
-    <div class="container">
-      <h2>Class Photo Gallery</h2>
-      <a href="https://drive.google.com/drive/folders/1MhLveVmQ_UKFsZ43Q5-4ggKxipUyO0i3?usp=sharing" target="_blank" class="btn btn-custom btn-lg">📸 View & Upload Photos</a>
+      <p class="text-muted">Click a link below to view the full minutes for each planning meeting.</p>
+      <div class="list-group shadow-sm">
+        <a href="PASTE_GOOGLE_DOC_LINK_HERE" target="_blank" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          <div><strong>Feb 3, 2026</strong> - Planning Kickoff</div>
+          <span class="badge bg-primary rounded-pill">View Notes</span>
+        </a>
+        </div>
     </div>
   </section>
 
   <section id="memorial" class="py-5 bg-light">
     <div class="container">
-      <h2>In Memory Of</h2>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">John "Tiger" Guidry</li>
-        <li class="list-group-item">Mary Broussard</li>
-        <li class="list-group-item">Robert Sonnier</li>
-      </ul>
+      <h2>In Loving Memory</h2>
+      <p class="mb-4">Remembering our classmates who are no longer with us but remain in our hearts.</p>
+      <div class="row">
+        <div class="col-md-4"><div class="memorial-card">🕊️ John "Tiger" Guidry</div></div>
+        <div class="col-md-4"><div class="memorial-card">🕊️ Mary Broussard</div></div>
+        <div class="col-md-4"><div class="memorial-card">🕊️ Robert Sonnier</div></div>
+      </div>
     </div>
   </section>
 
   <section id="planning" class="py-5 bg-white">
     <div class="container">
       <h2>Planning To-Do List</h2>
-      <table class="table table-bordered">
-        <thead><tr><th>Task</th><th>Status</th></tr></thead>
-        <tbody><tr><td>Find a location</td><td>In Progress</td></tr></tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="table table-striped table-hover border">
+          <thead class="table-dark">
+            <tr>
+              <th>Name</th>
+              <th>Task</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Committee</td>
+              <td>Secure Venue Location</td>
+              <td><span class="badge bg-warning text-dark">In Progress</span></td>
+            </tr>
+            <tr>
+              <td>Finance</td>
+              <td>Set Ticket Pricing</td>
+              <td><span class="badge bg-secondary">Pending</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 
@@ -203,39 +183,13 @@
         const response = await fetch(API_URL);
         const data = await response.json();
         document.getElementById('finalTotal').textContent = data.total || 0;
-        document.getElementById('yesCount').textContent = data.yesCount || 0;
-        document.getElementById('maybeCount').textContent = data.maybe || 0;
         const grid = document.getElementById('attendeeGrid');
         if (data.attendees) {
           grid.innerHTML = data.attendees.map(p => `<div class="col"><div class="p-2 border-bottom text-dark"><strong>${p.name}</strong></div></div>`).join('');
         }
-        const list = document.getElementById('messagesList');
-        if (data.messages) {
-          list.innerHTML = data.messages.reverse().map(m => `
-            <div class="card mb-3 shadow-sm border-0">
-              <div class="card-header" style="background:var(--school-purple); color:var(--school-gold); font-weight:bold;">${m.name}</div>
-              <div class="card-body bg-white text-dark"><p style="white-space: pre-wrap;">${m.message}</p></div>
-            </div>`).join('');
-        }
       } catch (e) { console.error(e); }
     }
 
-    document.getElementById('messageForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const saveBtn = e.target.querySelector('button');
-      saveBtn.disabled = true;
-      saveBtn.textContent = "Saving...";
-      fetch(API_URL, {
-        method: 'POST',
-        mode: 'no-cors', 
-        body: JSON.stringify({ name: document.getElementById('name').value, message: document.getElementById('message').value })
-      }).then(() => {
-        alert("Saved!");
-        window.location.reload(); 
-      });
-    });
-
-    // Back to Top Logic
     let mybutton = document.getElementById("btn-back-to-top");
     window.onscroll = function () {
       if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
