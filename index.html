@@ -206,53 +206,53 @@
   <script>
     const API_URL = 'https://script.google.com/macros/s/AKfycbzaJ59w5WF8gqam9EJe6TRIRAx0mZh_oaq77vvTaGKHvPeTkkrQxB4ZGgO5CSRTldvttw/exec';
 
-    async function loadRSVPData() {
-  try {
-    const r = await fetch(API_URL);
-    const d = await r.json();
-    
-    // This part keeps the numbers in the gold box working
-    document.getElementById('finalTotal').textContent = d.total || 0;
-    document.getElementById('yesCount').textContent = d.yesCount || 0;
-    document.getElementById('maybeCount').textContent = d.maybe || 0;
-
-    const grid = document.getElementById('attendeeGrid');
-    if (d.attendees && d.attendees.length > 0) {
-      // This part ONLY shows the names in the scrollable box
-      grid.innerHTML = d.attendees.map(p => 
-        `<div class="col"><div class="p-2 border-bottom text-dark"><strong>${p.name}</strong></div></div>`
-      ).join('');
-    } else {
-      grid.innerHTML = '<div class="col-12 text-muted">No confirmations yet.</div>';
+    // 1. Fixed Message Loader (This was missing!)
+    async function loadMessages() {
+      try {
+        const r = await fetch(API_URL);
+        const d = await r.json();
+        const list = document.getElementById('messagesList');
+        if (!list) return;
+        list.innerHTML = '';
+        // If your script returns messages, they show up here
+        if (d.messages) {
+          d.messages.reverse().forEach(m => {
+            const li = document.createElement('li');
+            li.className = "list-group-item mt-2 shadow-sm rounded border-start border-4 border-primary text-dark";
+            li.innerHTML = `<strong>${m.name}:</strong> <span>${m.message}</span>`;
+            list.appendChild(li);
+          });
+        }
+      } catch (e) { console.log("Msg Error", e); }
     }
-  } catch (e) { 
-    console.log("RSVP Error", e); 
-  }
-}
 
+    // 2. Fixed RSVP Data Loader (Cleaned up duplicates)
     async function loadRSVPData() {
       try {
         const r = await fetch(API_URL);
         const d = await r.json();
+        
+        // Update the counts in the gold box
         document.getElementById('finalTotal').textContent = d.total || 0;
         document.getElementById('yesCount').textContent = d.yesCount || 0;
         document.getElementById('maybeCount').textContent = d.maybe || 0;
 
         const grid = document.getElementById('attendeeGrid');
         if (d.attendees && d.attendees.length > 0) {
-          // This maps the names into Bootstrap columns
+          // Shows names in 3 columns, no extra numbers
           grid.innerHTML = d.attendees.map(p => 
             `<div class="col"><div class="p-2 border-bottom text-dark"><strong>${p.name}</strong></div></div>`
           ).join('');
         } else {
-          grid.innerHTML = '<p class="text-muted">No confirmations yet.</p>';
+          grid.innerHTML = '<div class="col-12 text-muted p-3 text-center">No confirmations yet.</div>';
         }
       } catch (e) { 
         console.log("RSVP Error", e); 
-        document.getElementById('attendeeGrid').innerHTML = '<p class="text-danger">Error loading data.</p>';
+        document.getElementById('attendeeGrid').innerHTML = '<div class="col-12 text-danger">Error loading attendee list.</div>';
       }
     }
 
+    // 3. Message Form Submission
     document.getElementById('messageForm').addEventListener('submit', async e => {
       e.preventDefault();
       const n = document.getElementById('name').value.trim();
@@ -264,6 +264,7 @@
       } catch (e) { console.log("Submit Error", e); }
     });
 
+    // Start everything
     loadMessages();
     loadRSVPData();
   </script>
