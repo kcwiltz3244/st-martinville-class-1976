@@ -56,6 +56,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="#rsvp">RSVP</a></li>
+          <li class="nav-item"><a class="nav-link" href="#calendar">Calendar</a></li>
           <li class="nav-item"><a class="nav-link" href="#messages">Messages</a></li>
           <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
           <li class="nav-item"><a class="nav-link" href="#memorial">Memorial</a></li>
@@ -72,7 +73,7 @@
     </div>
   </header>
 
- <section id="" class="-group-photo">
+ <section class="welcome-group-photo">
   <div class="container">
     <h2 class="fw-bold text-center mb-4" style="color:var(--school-purple); border-bottom:4px solid var(--school-gold); display:inline-block; padding-bottom:0.4rem;">
       Welcome Class of 1976
@@ -92,19 +93,19 @@
       <div class="alert text-center mb-4" style="background: var(--school-gold); color: var(--school-purple); border: 3px solid var(--school-purple);">
         <h3 class="fw-bold">🎉 <span id="finalTotal">...</span> People are coming!</h3>
         <p class="mb-0">
-  <strong><span id="yesCount">0</span></strong> Confirmed | 
-  <strong><span id="maybeCount">0</span></strong> Maybes | 
-  <strong><span id="noCount">0</span></strong> Declined
-</p>
+          <strong><span id="yesCount">0</span></strong> Confirmed | 
+          <strong><span id="maybeCount">0</span></strong> Maybes | 
+          <strong><span id="noCount">0</span></strong> Declined
+        </p>
       </div>
       
       <div class="text-center mb-4">
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNH2rLwb6w9zvIE113HT4Ru0yNCUORL29ijm2Jg4Ws2Bu8sA/viewform" 
-     target="_blank" 
-     class="btn btn-custom btn-lg">
-     RSVP Now - Add Your Name!
-  </a>
-</div>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNH2rLwb6w9zvIE113HT4Ru0yNCUORL29ijm2Jg4Ws2Bu8sA/viewform" 
+           target="_blank" 
+           class="btn btn-custom btn-lg">
+           RSVP Now - Add Your Name!
+        </a>
+      </div>
 
       <div class="row">
         <div class="col-md-12">
@@ -114,6 +115,29 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section id="calendar" class="py-5 bg-white">
+    <div class="container">
+      <h2>Reunion Calendar</h2>
+      <p>View upcoming dates, planning sessions, and Zoom/Teams links. Click an event to see joining details.</p>
+      <div class="ratio ratio-16x9 mb-3 shadow-sm border rounded">
+        <iframe src="https://calendar.google.com/calendar/embed?src=YOUR_EMAIL_HERE&ctz=America%2FChicago" 
+                style="border: 0" frameborder="0" scrolling="no"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section id="messages" class="py-5 bg-light">
+    <div class="container">
+      <h2>Message Board</h2>
+      <form id="messageForm" class="mb-3">
+        <div class="mb-2"><input type="text" id="name" class="form-control" placeholder="Your Name" required></div>
+        <div class="mb-2"><textarea id="message" rows="3" class="form-control" placeholder="Type your message..." required></textarea></div>
+        <button type="submit" class="btn btn-custom">Post Message</button>
+      </form>
+      <ul id="messagesList" class="list-unstyled mt-4"></ul>
     </div>
   </section>
 
@@ -150,19 +174,7 @@
     </div>
   </section>
 
-  <section id="messages" class="py-5 bg-white">
-    <div class="container">
-      <h2>Message Board</h2>
-      <form id="messageForm" class="mb-3">
-        <div class="mb-2"><input type="text" id="name" class="form-control" placeholder="Your Name" required></div>
-        <div class="mb-2"><textarea id="message" rows="3" class="form-control" placeholder="Type your message..." required></textarea></div>
-        <button type="submit" class="btn btn-custom">Post Message</button>
-      </form>
-      <ul id="messagesList" class="list-unstyled mt-4"></ul>
-    </div>
-  </section>
-
-  <section id="planning" class="py-5 bg-light">
+  <section id="planning" class="py-5 bg-white">
     <div class="container">
       <h2 class="fw-bold">Planning To-Do List</h2>
       <table class="table table-bordered bg-white">
@@ -203,17 +215,12 @@
       try {
         const r = await fetch(API_URL);
         const d = await r.json();
-        
-        // This updates the gold box numbers
         document.getElementById('finalTotal').textContent = d.total || 0;
         document.getElementById('yesCount').textContent = d.yesCount || 0;
         document.getElementById('maybeCount').textContent = d.maybe || 0;
-        // Since we aren't tracking "No" anymore, we can set this to 0 or remove the line
         if(document.getElementById('noCount')) {
           document.getElementById('noCount').textContent = "0";
         }
-        
-        // This updates the list of names
         const yesContainer = document.getElementById('yesListContainer');
         if (d.attendees && d.attendees.length > 0) {
           yesContainer.innerHTML = d.attendees.map(p => 
@@ -228,7 +235,6 @@
       }
     }
 
-    // This handles the message board form submission
     document.getElementById('messageForm').addEventListener('submit', async e => {
       e.preventDefault();
       const n = document.getElementById('name').value.trim();
@@ -236,16 +242,12 @@
       try {
         await fetch(API_URL, { method: 'POST', body: JSON.stringify({ name: n, message: m }) });
         document.getElementById('messageForm').reset();
-        loadMessages(); // Refresh messages after posting
-      } catch (e) {
-        console.log("Submit Error", e);
-      }
+        loadMessages();
+      } catch (e) { console.log("Submit Error", e); }
     });
 
-    // These two lines "turn on" the data when the page opens
     loadMessages();
     loadRSVPData();
   </script>
 </body>
 </html>
- 
