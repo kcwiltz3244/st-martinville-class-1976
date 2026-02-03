@@ -55,16 +55,18 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#rsvp">RSVP</a></li>
-          <li class="nav-item"><a class="nav-link" href="#calendar">Calendar</a></li>
-          <li class="nav-item"><a class="nav-link" href="#meetings">Meeting Notes</a></li>
-          <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
-          <li class="nav-item"><a class="nav-link" href="#memorial">Memorial</a></li>
-          <li class="nav-item"><a class="nav-link" href="#planning">Planning</a></li>
-        </ul>
-      </div>
+    <div class="collapse navbar-collapse" id="navbarNav">
+  <ul class="navbar-nav ms-auto">
+    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+    
+    <li class="nav-item"><a class="nav-link" href="#rsvp">RSVP</a></li>
+    <li class="nav-item"><a class="nav-link" href="#calendar">Calendar</a></li>
+    <li class="nav-item"><a class="nav-link" href="#meetings">Meeting Notes</a></li>
+    <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+    <li class="nav-item"><a class="nav-link" href="#memorial">Memorial</a></li>
+    <li class="nav-item"><a class="nav-link" href="#planning">Planning</a></li>
+  </ul>
+</div>
     </div>
   </nav>
 
@@ -218,81 +220,74 @@
 <script>
     const API_URL = 'https://script.google.com/macros/s/AKfycbzaJ59w5WF8gqam9EJe6TRIRAx0mZh_oaq77vvTaGKHvPeTkkrQxB4ZGgO5CSRTldvttw/exec';
 
-    // 1. Load the Meeting Notes and display them as cards
-    async function loadMessages() {
+    // 1. Fetch data and update the page
+    async function loadData() {
       try {
-        const r = await fetch(API_URL);
-        const d = await r.json();
-        const list = document.getElementById('messagesList');
-        if (!list) return;
-        list.innerHTML = '';
+        const response = await fetch(API_URL);
+        const data = await response.json();
         
-        if (d.messages) {
-          d.messages.reverse().forEach(m => {
-            const div = document.createElement('div');
-            div.innerHTML = `
-              <div class="card mb-3 shadow-sm">
-                <div class="card-header" style="background:var(--school-purple); color:var(--school-gold); font-weight:bold;">
-                  ${m.name}
-                </div>
-                <div class="card-body bg-white text-dark">
-                  <p class="card-text" style="white-space: pre-wrap;">${m.message}</p>
-                </div>
-              </div>
-            `;
-            list.appendChild(div);
-          });
-        }
-      } catch (e) { console.log("Meeting Notes Error", e); }
-    }
+        // Update the Gold RSVP Box
+        document.getElementById('finalTotal').textContent = data.total || 0;
+        document.getElementById('yesCount').textContent = data.yesCount || 0;
+        document.getElementById('maybeCount').textContent = data.maybe || 0;
 
-    // 2. Load the RSVP counts and attendee names
-    async function loadRSVPData() {
-      try {
-        const r = await fetch(API_URL);
-        const d = await r.json();
-        
-        document.getElementById('finalTotal').textContent = d.total || 0;
-        document.getElementById('yesCount').textContent = d.yesCount || 0;
-        document.getElementById('maybeCount').textContent = d.maybe || 0;
-
+        // Populate the RSVP Name Grid
         const grid = document.getElementById('attendeeGrid');
-        if (d.attendees && d.attendees.length > 0) {
-          grid.innerHTML = d.attendees.map(p => 
-            `<div class="col"><div class="p-2 border-bottom text-dark"><strong>${p.name}</strong></div></div>`
+        if (data.attendees) {
+          grid.innerHTML = data.attendees.map(person => 
+            `<div class="col"><div class="p-2 border-bottom text-dark"><strong>${person.name}</strong></div></div>`
           ).join('');
-        } else {
-          grid.innerHTML = '<div class="col-12 text-muted p-3 text-center">No confirmations yet.</div>';
         }
-      } catch (e) { console.log("RSVP Error", e); }
+
+        // Populate Meeting Notes as Cards
+        const notesList = document.getElementById('messagesList');
+        if (data.messages) {
+          notesList.innerHTML = data.messages.reverse().map(m => `
+            <div class="card mb-3 shadow-sm border-0">
+              <div class="card-header" style="background:var(--school-purple); color:var(--school-gold); font-weight:bold;">
+                ${m.name}
+              </div>
+              <div class="card-body bg-white text-dark">
+                <p class="card-text" style="white-space: pre-wrap;">${m.message}</p>
+              </div>
+            </div>
+          `).join('');
+        }
+      } catch (error) {
+        console.error("Load Error:", error);
+      }
     }
 
-    // 3. Handle the "Save Meeting Notes" button click
-    document.getElementById('messageForm').addEventListener('submit', async e => {
+    // 2. Handle Saving Meeting Notes
+    document.getElementById('messageForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const n = document.getElementById('name').value.trim();
-      const m = document.getElementById('message').value.trim();
-      
-      const btn = e.target.querySelector('button');
-      btn.disabled = true;
-      btn.textContent = 'Saving...';
+      const topic = document.getElementById('name').value;
+      const content = document.getElementById('message').value;
+      const saveBtn = e.target.querySelector('button');
 
-      try {
-        await fetch(API_URL, { method: 'POST', body: JSON.stringify({ name: n, message: m }) });
-        document.getElementById('messageForm').reset();
-        await loadMessages(); // Refresh the list so the new note appears
-      } catch (e) { 
-        console.log("Submit Error", e); 
-        alert("Failed to save note. Please try again.");
-      } finally {
-        btn.disabled = false;
-        btn.textContent = 'Save Meeting Notes';
-      }
+      saveBtn.disabled = true;
+      saveBtn.textContent = "Saving to Sheet...";
+
+      // 'no-cors' helps prevent the "Failed to save" error on some browsers
+      fetch(API_URL, {
+        method: 'POST',
+        mode: 'no-cors', 
+        body: JSON.stringify({ name: topic, message: content })
+      })
+      .then(() => {
+        alert("Note Saved Successfully!");
+        // We force a refresh so the new note shows up immediately
+        window.location.reload(); 
+      })
+      .catch(err => {
+        alert("Save Error: " + err);
+        saveBtn.disabled = false;
+        saveBtn.textContent = "Save Meeting Notes";
+      });
     });
 
-    // Run these as soon as the page opens
-    loadMessages();
-    loadRSVPData();
+    // Run everything on page load
+    loadData();
   </script>
 </body>
 </html>
