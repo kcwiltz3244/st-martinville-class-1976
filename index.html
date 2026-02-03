@@ -218,7 +218,7 @@
 <script>
     const API_URL = 'https://script.google.com/macros/s/AKfycbzaJ59w5WF8gqam9EJe6TRIRAx0mZh_oaq77vvTaGKHvPeTkkrQxB4ZGgO5CSRTldvttw/exec';
 
-    // This loads the Meeting Notes
+    // 1. Load the Meeting Notes and display them as cards
     async function loadMessages() {
       try {
         const r = await fetch(API_URL);
@@ -227,27 +227,26 @@
         if (!list) return;
         list.innerHTML = '';
         
-        // We use d.messages here because that's what the Google Sheet sends
         if (d.messages) {
           d.messages.reverse().forEach(m => {
-            const li = document.createElement('div'); // Changed to div for the "Card" look
-            li.innerHTML = `
+            const div = document.createElement('div');
+            div.innerHTML = `
               <div class="card mb-3 shadow-sm">
                 <div class="card-header" style="background:var(--school-purple); color:var(--school-gold); font-weight:bold;">
                   ${m.name}
                 </div>
-                <div class="card-body bg-white">
-                  <p class="card-text text-dark" style="white-space: pre-wrap;">${m.message}</p>
+                <div class="card-body bg-white text-dark">
+                  <p class="card-text" style="white-space: pre-wrap;">${m.message}</p>
                 </div>
               </div>
             `;
-            list.appendChild(li);
+            list.appendChild(div);
           });
         }
-      } catch (e) { console.log("Msg Error", e); }
+      } catch (e) { console.log("Meeting Notes Error", e); }
     }
 
-    // This loads the RSVP numbers and names
+    // 2. Load the RSVP counts and attendee names
     async function loadRSVPData() {
       try {
         const r = await fetch(API_URL);
@@ -268,16 +267,27 @@
       } catch (e) { console.log("RSVP Error", e); }
     }
 
-    // This sends the Meeting Notes to the Google Sheet
+    // 3. Handle the "Save Meeting Notes" button click
     document.getElementById('messageForm').addEventListener('submit', async e => {
       e.preventDefault();
       const n = document.getElementById('name').value.trim();
       const m = document.getElementById('message').value.trim();
+      
+      const btn = e.target.querySelector('button');
+      btn.disabled = true;
+      btn.textContent = 'Saving...';
+
       try {
         await fetch(API_URL, { method: 'POST', body: JSON.stringify({ name: n, message: m }) });
         document.getElementById('messageForm').reset();
-        loadMessages(); // Refresh the list immediately
-      } catch (e) { console.log("Submit Error", e); }
+        await loadMessages(); // Refresh the list so the new note appears
+      } catch (e) { 
+        console.log("Submit Error", e); 
+        alert("Failed to save note. Please try again.");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Save Meeting Notes';
+      }
     });
 
     // Run these as soon as the page opens
