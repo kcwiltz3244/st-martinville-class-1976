@@ -96,15 +96,14 @@
         <h3 class="fw-bold">🎉 <span id="finalTotal">...</span> People are coming!</h3>
         <p class="mb-0">
           <strong><span id="yesCount">0</span></strong> Confirmed | 
-          <strong><span id="maybeCount">0</span></strong> Maybes | 
-          <strong><span id="noCount">0</span></strong> Declined
+          <strong><span id="maybeCount">0</span></strong> Maybes
         </p>
       </div>
       
       <div class="text-center mb-4">
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNH2rLwb6w9zvIE113HT4Ru0yNCUORL29ijm2Jg4Ws2Bu8sA/viewform" 
            target="_blank" 
-           class="btn btn-custom btn-lg">
+           class="btn btn-custom btn-lg shadow">
            RSVP Now - Add Your Name!
         </a>
       </div>
@@ -112,8 +111,10 @@
       <div class="row">
         <div class="col-md-12">
           <h4 style="color: var(--school-purple);">✅ Confirmed Attendees</h4>
-          <div id="yesListContainer" class="border rounded p-3 bg-white" style="max-height: 300px; overflow-y: auto;">
-            <p class="text-muted">Loading list...</p>
+          <div id="yesListContainer" class="border rounded p-3 bg-white shadow-sm" style="height: 300px; overflow-y: scroll;">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2" id="attendeeGrid">
+              <p class="text-muted">Loading list...</p>
+            </div>
           </div>
         </div>
       </div>
@@ -227,20 +228,19 @@
         document.getElementById('finalTotal').textContent = d.total || 0;
         document.getElementById('yesCount').textContent = d.yesCount || 0;
         document.getElementById('maybeCount').textContent = d.maybe || 0;
-        if(document.getElementById('noCount')) {
-          document.getElementById('noCount').textContent = "0";
-        }
-        const yesContainer = document.getElementById('yesListContainer');
+
+        const grid = document.getElementById('attendeeGrid');
         if (d.attendees && d.attendees.length > 0) {
-          yesContainer.innerHTML = d.attendees.map(p => 
-            `<div class="p-2 border-bottom text-dark"><strong>${p.name}</strong> <small>(Party of ${p.guests})</small></div>`
+          // This maps the names into Bootstrap columns
+          grid.innerHTML = d.attendees.map(p => 
+            `<div class="col"><div class="p-2 border-bottom text-dark"><strong>${p.name}</strong></div></div>`
           ).join('');
         } else {
-          yesContainer.innerHTML = '<p class="text-muted">No confirmations yet.</p>';
+          grid.innerHTML = '<p class="text-muted">No confirmations yet.</p>';
         }
       } catch (e) { 
         console.log("RSVP Error", e); 
-        document.getElementById('yesListContainer').innerHTML = '<p class="text-danger">Error loading data.</p>';
+        document.getElementById('attendeeGrid').innerHTML = '<p class="text-danger">Error loading data.</p>';
       }
     }
 
