@@ -206,20 +206,29 @@
   <script>
     const API_URL = 'https://script.google.com/macros/s/AKfycbzaJ59w5WF8gqam9EJe6TRIRAx0mZh_oaq77vvTaGKHvPeTkkrQxB4ZGgO5CSRTldvttw/exec';
 
-    async function loadMessages() {
-      try {
-        const r = await fetch(API_URL);
-        const d = await r.json();
-        const list = document.getElementById('messagesList');
-        list.innerHTML = '';
-        d.reverse().forEach(m => {
-          const li = document.createElement('li');
-          li.className = "list-group-item mt-2 shadow-sm rounded border-start border-4 border-primary text-dark";
-          li.innerHTML = `<strong>${m.name}:</strong> <span>${m.message}</span>`;
-          list.appendChild(li);
-        });
-      } catch (e) { console.log("Msg Error"); }
+    async function loadRSVPData() {
+  try {
+    const r = await fetch(API_URL);
+    const d = await r.json();
+    
+    // This part keeps the numbers in the gold box working
+    document.getElementById('finalTotal').textContent = d.total || 0;
+    document.getElementById('yesCount').textContent = d.yesCount || 0;
+    document.getElementById('maybeCount').textContent = d.maybe || 0;
+
+    const grid = document.getElementById('attendeeGrid');
+    if (d.attendees && d.attendees.length > 0) {
+      // This part ONLY shows the names in the scrollable box
+      grid.innerHTML = d.attendees.map(p => 
+        `<div class="col"><div class="p-2 border-bottom text-dark"><strong>${p.name}</strong></div></div>`
+      ).join('');
+    } else {
+      grid.innerHTML = '<div class="col-12 text-muted">No confirmations yet.</div>';
     }
+  } catch (e) { 
+    console.log("RSVP Error", e); 
+  }
+}
 
     async function loadRSVPData() {
       try {
