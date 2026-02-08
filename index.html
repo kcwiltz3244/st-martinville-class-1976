@@ -130,19 +130,21 @@
     </div>
   </section>
 
-  <section id="rsvp" class="py-5 bg-light">
-    <div class="container text-center">
-      <h2>Who's Coming?</h2>
-      <div class="alert shadow-sm mb-4" style="background: white; border-left: 10px solid var(--school-purple);">
-        <h4 class="mb-0 fw-bold"><span id="finalTotal" style="color: var(--school-purple);">...</span> Classmates Confirmed!</h4>
-      </div>
-      <div id="yesListContainer" class="p-4" style="height: 300px; overflow-y: auto;">
-          <div class="row row-cols-2 row-cols-md-4 g-3" id="attendeeGrid">
-            <p class="text-muted w-100">Synchronizing list...</p>
-          </div>
-      </div>
+ <section id="rsvp" class="py-5 bg-light">
+  <div class="container text-center">
+    <h2>Who's Coming?</h2>
+    <div class="alert shadow-sm mb-4" style="background: white; border-left: 10px solid var(--school-purple);">
+      <h4 class="mb-0 fw-bold"><span id="finalTotal" style="color: var(--school-purple);">...</span> Classmates Confirmed!</h4>
     </div>
-  </section>
+    
+    <div id="yesListContainer" class="p-3">
+        <div class="rsvp-grid" id="attendeeGrid">
+          <p class="text-muted w-100">Synchronizing list...</p>
+        </div>
+    </div>
+    <p class="text-muted mt-2 small">Scroll to see full list</p>
+  </div>
+</section>
 
   <section id="calendar" class="py-5 bg-white">
     <div class="container">
