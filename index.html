@@ -1,67 +1,265 @@
-<style>
-  /* The Secret Sauce: The Slant */
-  .slant-divider {
-    position: relative;
-    background: #1e003c;
-    padding-bottom: 100px; /* Space for the slant */
-    clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
-    margin-bottom: -50px; /* Pulls the next section up to meet it */
-    z-index: 1;
-  }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Class of 1976 - 50th Reunion</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  #photos {
-    padding-top: 100px; /* Extra padding to account for the slant above */
-    background: #ffffff;
-    position: relative;
-    z-index: 0;
-  }
-
-  .scroll-hint {
-    color: var(--school-gold);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-top: 30px;
-    opacity: 0.7;
-  }
-</style>
-
-<section id="memorial" class="slant-divider">
-  <div class="container text-center pt-5">
-    <h2 style="color: var(--school-gold); border-bottom: none;">In Loving Memory</h2>
-    <p class="mb-4" style="color: #ccc;">Honoring our classmates who remain forever in our hearts.</p>
-    <div class="pb-2">
-      <span class="memorial-tag">🕊️ John Guidry</span>
-      <span class="memorial-tag">🕊️ Mary Broussard</span>
-      <span class="memorial-tag">🕊️ Robert Sonnier</span>
-      </div>
+  <style>
+    :root { --school-purple:#4b0082; --school-gold:#ffd700; --deep-purple: #2a004a; }
+    body { background:#fafafa; color:#333; font-family: 'Segoe UI', Arial, sans-serif; }
+    .navbar { background-color:var(--school-purple); border-bottom: 2px solid var(--school-gold); }
+    .navbar a.nav-link { color:var(--school-gold)!important; font-weight:bold; }
     
-    <div class="scroll-hint">
-      Scroll for Flashback Photos <br>
-      <span style="font-size: 1.5rem;">↓</span>
-    </div>
-  </div>
-</section>
+    header {
+      position:relative;
+      background:url("tiger.png") center/cover no-repeat;
+      color:var(--school-gold);
+      text-align:center;
+      padding:5rem 1rem;
+    }
+    header::after {
+      content:""; position:absolute; top:0; left:0; width:100%; height:100%;
+      background:rgba(30,0,60,0.6); z-index:0;
+    }
+    header .container { position:relative; z-index:1; }
 
-<section id="photos" class="py-5">
-  <div class="container">
-    <h2 class="text-center">Flashback Gallery</h2>
-    <div class="row g-4">
-      <div class="col-6 col-md-4">
-        <div class="photo-card shadow-sm">
-          <img src="Class%20of%201976.png" alt="Class Photo">
-        </div>
-      </div>
-      <div class="col-6 col-md-4">
-        <div class="photo-card shadow-sm bg-light d-flex align-items-center justify-content-center text-muted italic">
-          Memory #1
-        </div>
-      </div>
-      <div class="col-6 col-md-4">
-        <div class="photo-card shadow-sm bg-light d-flex align-items-center justify-content-center text-muted italic">
-          Memory #2
-        </div>
+    /* Countdown */
+    #countdown { background: var(--deep-purple); color: white; padding: 25px 0; border-bottom: 4px solid var(--school-gold); }
+    .countdown-number { display: block; font-size: 2.2rem; font-weight: bold; color: var(--school-gold); }
+    .countdown-label { font-size: 0.75rem; text-transform: uppercase; color: #bbb; }
+
+    /* RSVP Scroll Box */
+    #yesListContainer {
+      border-radius: 12px;
+      background: white;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
+      border: 1px solid #dee2e6;
+    }
+    .attendee-name {
+      font-size: 0.95rem;
+      padding: 8px;
+      background: #fdfdfd;
+      border: 1px solid #f0f0f0;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    /* Memorial with Slant Divider */
+    .slant-divider {
+      position: relative;
+      background: #1e003c;
+      padding: 80px 0 120px 0;
+      clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+      margin-bottom: -60px;
+      z-index: 1;
+      color: white;
+    }
+    .memorial-tag {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid var(--school-gold);
+      padding: 8px 18px;
+      border-radius: 50px;
+      display: inline-block;
+      margin: 6px;
+      font-style: italic;
+      transition: 0.3s;
+      color: white;
+    }
+    .memorial-tag:hover { background: var(--school-gold); color: var(--school-purple); transform: scale(1.05); }
+
+    /* Flashback Gallery */
+    #photos {
+      padding: 100px 0 60px 0;
+      background: #ffffff;
+      position: relative;
+      z-index: 0;
+    }
+    .photo-card { border: none; overflow: hidden; border-radius: 10px; height: 250px; }
+    .photo-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
+    .photo-card:hover img { transform: scale(1.05); }
+
+    .scroll-hint {
+      color: var(--school-gold);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: 30px;
+      opacity: 0.8;
+    }
+
+    h2 { color:var(--school-purple); font-weight: bold; margin-bottom: 1.5rem; text-align: center; }
+    #btn-back-to-top {
+      position: fixed; bottom: 20px; right: 20px; display: none; z-index: 1000;
+      background: var(--school-purple); color: var(--school-gold);
+      border: 2px solid var(--school-gold); width: 45px; height: 45px;
+    }
+  </style> 
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">SMSH '76</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">🏠 Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#rsvp">RSVP</a></li>
+          <li class="nav-item"><a class="nav-link" href="#calendar">Calendar</a></li>
+          <li class="nav-item"><a class="nav-link" href="#memorial">Memorial</a></li>
+          <li class="nav-item"><a class="nav-link" href="#photos">Flashback</a></li>
+          <li class="nav-item"><a class="nav-link" href="planning.html">📋 Planning Hub</a></li>
+        </ul>
       </div>
     </div>
-  </div>
-</section>
+  </nav>
+
+  <header>
+    <div class="container">
+      <h1 class="fw-bold display-4">St. Martinville Senior High</h1>
+      <h2 class="mt-2" style="color:var(--school-gold); border:none;">Class of 1976 — 50th Year Reunion</h2>
+    </div>
+  </header>
+
+  <section id="countdown">
+    <div class="container text-center">
+      <h6 class="mb-3" style="letter-spacing: 3px; color: var(--school-gold);">TIME UNTIL CELEBRATION</h6>
+      <div class="d-flex justify-content-center gap-3">
+        <div class="text-center"><span class="countdown-number" id="days">00</span><span class="countdown-label">Days</span></div>
+        <div class="text-center"><span class="countdown-number" id="hours">00</span><span class="countdown-label">Hrs</span></div>
+        <div class="text-center"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">Min</span></div>
+        <div class="text-center"><span class="countdown-number" id="seconds">00</span><span class="countdown-label">Sec</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-5 bg-white text-center">
+    <div class="container">
+      <h2 class="display-6">Half a Century of Memories</h2>
+      <p class="lead mx-auto" style="max-width: 800px;">
+        It’s been 50 years since we walked the halls of St. Martinville Senior High. 
+        Through all the changes life has brought, the bond of the Class of '76 remains. 
+        Gather with us to celebrate our history, share our present, and look forward to the future.
+      </p>
+    </div>
+  </section>
+
+  <section id="rsvp" class="py-5 bg-light">
+    <div class="container text-center">
+      <h2>Who's Coming?</h2>
+      <div class="alert shadow-sm mb-4" style="background: white; border-left: 10px solid var(--school-purple);">
+        <h4 class="mb-0 fw-bold"><span id="finalTotal" style="color: var(--school-purple);">...</span> Classmates Confirmed!</h4>
+      </div>
+      <div id="yesListContainer" class="p-4" style="height: 350px; overflow-y: auto;">
+          <div class="row row-cols-2 row-cols-md-4 g-3" id="attendeeGrid">
+            <p class="text-muted w-100">Synchronizing list...</p>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="calendar" class="py-5 bg-white">
+    <div class="container">
+      <h2 class="text-center">Events & Meetings</h2>
+      <div class="ratio ratio-16x9 shadow border rounded bg-white">
+        <iframe src="https://calendar.google.com/calendar/embed?src=fbcf3427770ee3c74ba269d485ba49d39d6ea67f45be295d849f038ba7c79497%40group.calendar.google.com&ctz=America%2FChicago&showTitle=0&showNav=1" style="border: 0" frameborder="0" scrolling="no"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section id="meetings" class="py-5 bg-light">
+    <div class="container text-center">
+      <h2>Committee Minutes</h2>
+      <div class="list-group shadow-sm mx-auto" style="max-width: 600px;">
+        <a href="INSERT_GOOGLE_DRIVE_FOLDER_LINK" target="_blank" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-3">
+          <span><strong>Official Planning Notes</strong></span>
+          <span class="btn btn-sm btn-primary">Open Folder</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="memorial" class="slant-divider text-center">
+    <div class="container">
+      <h2 style="color: var(--school-gold); border-bottom: none;">In Loving Memory</h2>
+      <p class="mb-4" style="color: #ccc;">Honoring our classmates who remain forever in our hearts.</p>
+      <div class="pb-2">
+        <span class="memorial-tag">🕊️ John Guidry</span>
+        <span class="memorial-tag">🕊️ Mary Broussard</span>
+        <span class="memorial-tag">🕊️ Robert Sonnier</span>
+      </div>
+      <div class="scroll-hint">
+        Scroll for Flashback Photos <br>
+        <span style="font-size: 1.5rem;">↓</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="photos">
+    <div class="container">
+      <h2 class="text-center">Flashback Gallery</h2>
+      <div class="row g-4">
+        <div class="col-6 col-md-4"><div class="photo-card shadow-sm"><img src="Class%20of%201976.png" alt="Class Photo"></div></div>
+        <div class="col-6 col-md-4"><div class="photo-card shadow-sm bg-light d-flex align-items-center justify-content-center text-muted italic">Memory #1</div></div>
+        <div class="col-6 col-md-4"><div class="photo-card shadow-sm bg-light d-flex align-items-center justify-content-center text-muted italic">Memory #2</div></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-4">
+    <div class="container text-center">
+      <p class="mb-0">&copy; 2026 St. Martinville Sr. High – Class of 1976</p>
+    </div>
+  </footer>
+
+  <button type="button" class="btn rounded-circle shadow" id="btn-back-to-top">↑</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // TIMER SCRIPT
+    const targetDate = new Date("June 26, 2026 00:00:00").getTime();
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+      document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+      document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
+    }
+    setInterval(updateCountdown, 1000); updateCountdown();
+
+    // RSVP SCRIPT
+    const API_URL = 'https://script.google.com/macros/s/AKfycbzaJ59w5WF8gqam9EJe6TRIRAx0mZh_oaq77vvTaGKHvPeTkkrQxB4ZGgO5CSRTldvttw/exec';
+    async function loadData() {
+      try {
+        const response = await fetch(API_URL);
+        const data = await response.json();
+        document.getElementById('finalTotal').textContent = data.total || 0;
+        const grid = document.getElementById('attendeeGrid');
+        if (data.attendees) {
+          grid.innerHTML = data.attendees.map(p => `
+            <div class="col">
+              <div class="attendee-name shadow-sm">
+                <strong>${p.name}</strong>
+              </div>
+            </div>`).join('');
+        }
+      } catch (e) { console.error(e); }
+    }
+    loadData();
+
+    // SCROLL TO TOP
+    let mybutton = document.getElementById("btn-back-to-top");
+    window.onscroll = function () {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) { mybutton.style.display = "block"; } 
+      else { mybutton.style.display = "none"; }
+    };
+    mybutton.addEventListener("click", () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  </script>
+</body>
+</html>
