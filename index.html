@@ -8,11 +8,10 @@
 
   <style>
     :root { --school-purple:#4b0082; --school-gold:#ffd700; --deep-purple: #2a004a; }
-    body { background:#fafafa; color:#333; font-family:Arial,sans-serif; }
-    .navbar { background-color:var(--school-purple); }
+    body { background:#fafafa; color:#333; font-family: 'Segoe UI', Arial, sans-serif; }
+    .navbar { background-color:var(--school-purple); border-bottom: 2px solid var(--school-gold); }
     .navbar a.nav-link { color:var(--school-gold)!important; font-weight:bold; }
-    .navbar-brand { color: var(--school-gold)!important; font-weight: bold; }
-
+    
     header {
       position:relative;
       background:url("tiger.png") center/cover no-repeat;
@@ -22,56 +21,60 @@
     }
     header::after {
       content:""; position:absolute; top:0; left:0; width:100%; height:100%;
-      background:rgba(30,0,60,0.5); z-index:0;
+      background:rgba(30,0,60,0.6); z-index:0;
     }
     header .container { position:relative; z-index:1; }
 
-    /* Countdown Styling */
-    #countdown { background: var(--deep-purple); color: white; padding: 20px 0; }
-    .countdown-unit { display: inline-block; min-width: 80px; }
-    .countdown-number { display: block; font-size: 2.5rem; font-weight: bold; color: var(--school-gold); }
-    .countdown-label { font-size: 0.8rem; text-transform: uppercase; }
+    /* Countdown */
+    #countdown { background: var(--deep-purple); color: white; padding: 25px 0; border-bottom: 4px solid var(--school-gold); }
+    .countdown-number { display: block; font-size: 2.2rem; font-weight: bold; color: var(--school-gold); }
+    .countdown-label { font-size: 0.75rem; text-transform: uppercase; color: #bbb; }
 
-    .welcome-group-photo {
-      background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), 
-                  url("Class%20of%201976.png") center/cover no-repeat;
-      padding: 60px 20px;
-      text-align: center;
-      border-bottom: 5px solid var(--school-gold);
-    }
-
-    /* Aesthetic Memorial Section */
-    #memorial { background: #f4f0f9; padding: 80px 0; }
-    .memorial-card {
-      background: white;
-      border: 1px solid #ddd;
-      border-top: 5px solid var(--school-purple);
-      border-radius: 15px;
-      padding: 25px;
-      transition: transform 0.3s;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    }
-    .memorial-card:hover { transform: translateY(-10px); }
-    .memorial-img {
-      width: 100px; height: 100px;
-      background: #eee;
-      border-radius: 50%;
-      margin: 0 auto 15px;
-      border: 3px solid var(--school-gold);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2rem; overflow: hidden;
-    }
-    .memorial-img img { width: 100%; height: 100%; object-fit: cover; }
-
-    h2 { color:var(--school-purple); border-bottom:3px solid var(--school-gold);
-         padding-bottom:.4rem; margin-bottom:2rem; text-align: center; }
-    footer { background:var(--school-purple); color:var(--school-gold);
-             text-align:center; padding:1.5rem; margin-top:0; }
+    /* Welcome Section */
+    .welcome-area { padding: 60px 20px; text-align: center; background: white; }
     
+    /* RSVP Scroll Box - Fixed for Mobile */
+    #yesListContainer {
+      border-radius: 12px;
+      background: white;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
+      border: 1px solid #dee2e6;
+    }
+    .attendee-name {
+      font-size: 0.95rem;
+      padding: 8px;
+      background: #fdfdfd;
+      border: 1px solid #f0f0f0;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    /* Photo Gallery Section */
+    .photo-card { border: none; overflow: hidden; border-radius: 10px; height: 200px; }
+    .photo-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
+    .photo-card:hover img { transform: scale(1.1); }
+
+    /* Compact Memorial for 20+ Names */
+    #memorial { background: #1e003c; color: white; padding: 80px 0; }
+    .memorial-tag {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid var(--school-gold);
+      padding: 10px 15px;
+      border-radius: 50px;
+      display: inline-block;
+      margin: 5px;
+      font-style: italic;
+      transition: 0.3s;
+    }
+    .memorial-tag:hover { background: var(--school-gold); color: var(--school-purple); }
+
+    h2 { color:var(--school-purple); font-weight: bold; margin-bottom: 2rem; }
+    .section-dark h2 { color: var(--school-gold); border-bottom-color: var(--school-gold); }
+
     #btn-back-to-top {
       position: fixed; bottom: 20px; right: 20px; display: none; z-index: 1000;
       background: var(--school-purple); color: var(--school-gold);
-      border: 2px solid var(--school-gold); width: 50px; height: 50px;
+      border: 2px solid var(--school-gold); width: 45px; height: 45px;
     }
   </style> 
 </head>
@@ -87,8 +90,8 @@
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="index.html">🏠 Home</a></li>
           <li class="nav-item"><a class="nav-link" href="#rsvp">RSVP</a></li>
+          <li class="nav-item"><a class="nav-link" href="#photos">Photos</a></li>
           <li class="nav-item"><a class="nav-link" href="#calendar">Calendar</a></li>
-          <li class="nav-item"><a class="nav-link" href="#meetings">Notes</a></li>
           <li class="nav-item"><a class="nav-link" href="#memorial">Memorial</a></li>
           <li class="nav-item"><a class="nav-link" href="planning.html">📋 Planning Hub</a></li>
         </ul>
@@ -97,99 +100,100 @@
   </nav>
 
   <header>
-    <div class="container text-center">
-      <h1 class="fw-bold display-5">St. Martinville Senior High School</h1>
-      <h2 class="mt-3" style="color:var(--school-gold); border:none;">Class of 1976 - 50th Reunion</h2>
+    <div class="container">
+      <h1 class="fw-bold display-4">St. Martinville Senior High</h1>
+      <h2 class="mt-2" style="color:var(--school-gold); border:none;">Class of 1976 — 50th Year Reunion</h2>
     </div>
   </header>
 
   <section id="countdown">
     <div class="container text-center">
-      <h4 class="mb-3" style="letter-spacing: 2px;">COUNTDOWN TO JUNE 26, 2026</h4>
+      <h6 class="mb-3" style="letter-spacing: 3px; color: var(--school-gold);">TIME UNTIL CELEBRATION</h6>
       <div class="d-flex justify-content-center gap-3">
-        <div class="countdown-unit"><span class="countdown-number" id="days">00</span><span class="countdown-label">Days</span></div>
-        <div class="countdown-unit"><span class="countdown-number" id="hours">00</span><span class="countdown-label">Hrs</span></div>
-        <div class="countdown-unit"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">Min</span></div>
-        <div class="countdown-unit"><span class="countdown-number" id="seconds">00</span><span class="countdown-label">Sec</span></div>
+        <div class="text-center"><span class="countdown-number" id="days">00</span><span class="countdown-label">Days</span></div>
+        <div class="text-center"><span class="countdown-number" id="hours">00</span><span class="countdown-label">Hrs</span></div>
+        <div class="text-center"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">Min</span></div>
+        <div class="text-center"><span class="countdown-number" id="seconds">00</span><span class="countdown-label">Sec</span></div>
       </div>
     </div>
   </section>
 
-  <section class="welcome-group-photo">
+  <section class="welcome-area">
     <div class="container">
-      <h2 class="fw-bold text-center mb-4" style="border:none;">Welcome Class of 1976</h2>
-      <p class="lead mt-4">Hard to believe it’s been 50 years! This is our space to reconnect and celebrate.</p>
+      <h2 class="display-6">Half a Century of Memories</h2>
+      <p class="lead mx-auto" style="max-width: 800px;">
+        They say time flies when you're having fun, and the last 50 years have been quite a journey. 
+        It's time to gather once again to share our stories, celebrate our friendships, 
+        and honor the shared history that began in the halls of SMSH. 
+        We can't wait to see you back where it all started!
+      </p>
     </div>
   </section>
 
   <section id="rsvp" class="py-5 bg-light">
     <div class="container text-center">
-      <h2>RSVP List</h2>
-      <div class="alert mb-4" style="background: var(--school-gold); color: var(--school-purple); border: 3px solid var(--school-purple);">
-        <h3 class="fw-bold"><span id="finalTotal">...</span> People are coming!</h3>
+      <h2>Who's Coming?</h2>
+      <div class="alert shadow-sm mb-4" style="background: white; border-left: 10px solid var(--school-purple);">
+        <h4 class="mb-0 fw-bold"><span id="finalTotal" style="color: var(--school-purple);">...</span> Classmates Confirmed!</h4>
       </div>
-      <div id="yesListContainer" class="border rounded p-3 bg-white shadow-sm mx-auto" style="max-width:800px; height: 250px; overflow-y: scroll;">
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2" id="attendeeGrid">
-            <p class="text-muted">Loading list...</p>
+      <div id="yesListContainer" class="p-4" style="height: 350px; overflow-y: auto;">
+          <div class="row row-cols-2 row-cols-md-4 g-3" id="attendeeGrid">
+            <p class="text-muted w-100">Synchronizing list...</p>
           </div>
       </div>
     </div>
   </section>
 
-  <section id="calendar" class="py-5 bg-white">
+  <section id="photos" class="py-5 bg-white">
     <div class="container">
-      <h2>Reunion Calendar</h2>
-      <div class="ratio ratio-16x9 shadow-sm border rounded">
-        <iframe src="https://calendar.google.com/calendar/embed?src=fbcf3427770ee3c74ba269d485ba49d39d6ea67f45be295d849f038ba7c79497%40group.calendar.google.com&ctz=America%2FChicago&showTitle=0&showNav=1" 
-        style="border: 0" frameborder="0" scrolling="no"></iframe>
+      <h2 class="text-center">Flashback Gallery</h2>
+      <div class="row g-3">
+        <div class="col-6 col-md-3"><div class="photo-card shadow-sm"><img src="Class%20of%201976.png" alt="Class Photo"></div></div>
+        <div class="col-6 col-md-3"><div class="photo-card shadow-sm bg-light d-flex align-items-center justify-content-center text-muted italic">More Photos Coming</div></div>
+        <div class="col-6 col-md-3"><div class="photo-card shadow-sm bg-light d-flex align-items-center justify-content-center text-muted italic">1976 Memories</div></div>
+        <div class="col-6 col-md-3"><div class="photo-card shadow-sm bg-light d-flex align-items-center justify-content-center text-muted italic">Upload Yours</div></div>
       </div>
     </div>
   </section>
 
-  <section id="meetings" class="py-5 bg-light">
+  <section id="calendar" class="py-5 bg-light">
     <div class="container">
-      <h2>Meeting Notes & Minutes</h2>
+      <h2 class="text-center">Events & Meetings</h2>
+      <div class="ratio ratio-16x9 shadow border rounded bg-white">
+        <iframe src="https://calendar.google.com/calendar/embed?src=fbcf3427770ee3c74ba269d485ba49d39d6ea67f45be295d849f038ba7c79497%40group.calendar.google.com&ctz=America%2FChicago&showTitle=0&showNav=1" style="border: 0" frameborder="0" scrolling="no"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section id="meetings" class="py-5 bg-white">
+    <div class="container">
+      <h2>Committee Minutes</h2>
+      <p class="text-muted">Stay informed on our progress. (Open to all classmates)</p>
       <div class="list-group shadow-sm">
-        <a href="https://docs.google.com/document/d/YOUR_LINK_HERE/edit" target="_blank" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-          <div><strong>Feb 10, 2026</strong> - Reunion Meeting</div>
-          <span class="badge bg-primary rounded-pill">View Minutes</span>
+        <a href="https://bit.ly/SMSH76-Meetings" target="_blank" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-3">
+          <span><strong>Current Meeting Notes</strong> (Feb 2026)</span>
+          <span class="btn btn-sm btn-outline-primary">Open Folder</span>
         </a>
       </div>
     </div>
   </section>
 
-  <section id="memorial">
+  <section id="memorial" class="section-dark">
     <div class="container text-center">
       <h2>In Loving Memory</h2>
-      <p class="mb-5 italic">Remembering those who remain forever in our hearts.</p>
-      <div class="row g-4">
-        <div class="col-md-4">
-          <div class="memorial-card">
-            <div class="memorial-img">🕊️</div>
-            <h5 class="fw-bold">John Guidry</h5>
-            <p class="text-muted small">Class of 1976</p>
-          </div>
+      <p class="mb-4" style="color: var(--school-gold);">To our classmates who have gone before us—forever Tigers in our hearts.</p>
+      <div class="pb-3">
+        <span class="memorial-tag">🕊️ John Guidry</span>
+        <span class="memorial-tag">🕊️ Mary Broussard</span>
+        <span class="memorial-tag">🕊️ Robert Sonnier</span>
         </div>
-        <div class="col-md-4">
-          <div class="memorial-card">
-            <div class="memorial-img">🕊️</div>
-            <h5 class="fw-bold">Mary Broussard</h5>
-            <p class="text-muted small">Class of 1976</p>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="memorial-card">
-            <div class="memorial-img">🕊️</div>
-            <h5 class="fw-bold">Robert Sonnier</h5>
-            <p class="text-muted small">Class of 1976</p>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
-  <footer>
-    <p>&copy; 2026 St. Martinville Sr. High – Class of 1976</p>
+  <footer class="py-4">
+    <div class="container">
+      <p class="mb-0">&copy; 2026 St. Martinville Sr. High – Class of 1976</p>
+    </div>
   </footer>
 
   <button type="button" class="btn rounded-circle shadow" id="btn-back-to-top">↑</button>
@@ -197,29 +201,22 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    // COUNTDOWN TIMER LOGIC
     const targetDate = new Date("June 26, 2026 00:00:00").getTime();
-    
     function updateCountdown() {
       const now = new Date().getTime();
       const distance = targetDate - now;
-      
       const d = Math.floor(distance / (1000 * 60 * 60 * 24));
       const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const s = Math.floor((distance % (1000 * 60)) / 1000);
-      
-      document.getElementById("days").innerText = d < 10 ? "0"+d : d;
-      document.getElementById("hours").innerText = h < 10 ? "0"+h : h;
-      document.getElementById("minutes").innerText = m < 10 ? "0"+m : m;
-      document.getElementById("seconds").innerText = s < 10 ? "0"+s : s;
+      document.getElementById("days").innerText = d;
+      document.getElementById("hours").innerText = h;
+      document.getElementById("minutes").innerText = m;
+      document.getElementById("seconds").innerText = s;
     }
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
+    setInterval(updateCountdown, 1000); updateCountdown();
 
-    // RSVP DATA LOAD
     const API_URL = 'https://script.google.com/macros/s/AKfycbzaJ59w5WF8gqam9EJe6TRIRAx0mZh_oaq77vvTaGKHvPeTkkrQxB4ZGgO5CSRTldvttw/exec';
-
     async function loadData() {
       try {
         const response = await fetch(API_URL);
@@ -227,22 +224,23 @@
         document.getElementById('finalTotal').textContent = data.total || 0;
         const grid = document.getElementById('attendeeGrid');
         if (data.attendees) {
-          grid.innerHTML = data.attendees.map(p => `<div class="col"><div class="p-2 border-bottom text-dark"><strong>${p.name}</strong></div></div>`).join('');
+          grid.innerHTML = data.attendees.map(p => `
+            <div class="col">
+              <div class="attendee-name shadow-sm">
+                <strong>${p.name}</strong>
+              </div>
+            </div>`).join('');
         }
       } catch (e) { console.error(e); }
     }
+    loadData();
 
     let mybutton = document.getElementById("btn-back-to-top");
     window.onscroll = function () {
-      if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-        mybutton.style.display = "block";
-      } else {
-        mybutton.style.display = "none";
-      }
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) { mybutton.style.display = "block"; } 
+      else { mybutton.style.display = "none"; }
     };
     mybutton.addEventListener("click", () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
-
-    loadData();
   </script>
 </body>
 </html>
