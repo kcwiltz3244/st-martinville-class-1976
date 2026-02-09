@@ -170,26 +170,8 @@
             <th>Status</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td class="p-3 fw-bold">Secure Location</td>
-            <td>Madelyn Phillips</td>
-            <td>March 2026</td>
-            <td><span class="badge bg-warning text-dark">In Progress</span></td>
-          </tr>
-          <tr>
-            <td class="p-3 fw-bold">Hotel Venues</td>
-            <td>Madelyn Phillips</td>
-            <td>May 2026</td>
-            <td><span class="badge bg-secondary">Pending</span></td>
-          </tr>
-          <tr>
-            <td class="p-3 fw-bold">Financial Planning</td>
-            <td>Madelyn Phillips</td>
-            <td>Jan 2026</td>
-            <td><span class="badge bg-success">Done</span></td>
-          </tr>
-        </tbody>
+      <tbody id="taskTableBody">
+  </tbody>
       </table>
     </div>
   </div>
@@ -243,8 +225,7 @@
   <button type="button" class="btn rounded-circle shadow" id="btn-back-to-top">↑</button>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-  <script>
+<script>
     // TIMER
     const targetDate = new Date("June 26, 2026 00:00:00").getTime();
     function updateCountdown() {
@@ -279,6 +260,35 @@
       else { mybutton.style.display = "none"; }
     };
     mybutton.addEventListener("click", () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+    // --- ADDED: TASK TRACKER CONTROL PANEL ---
+    const myTasks = [
+      { task: "Secure Location", who: "Madelyn Phillips", when: "March 2026", status: "In Progress" },
+      { task: "Hotel Venues", who: "Madelyn Phillips", when: "May 2026", status: "Pending" },
+      { task: "Financial Planning", who: "Madelyn Phillips", when: "Jan 2026", status: "Done" },
+      { task: "Memorial Coordination", who: "Committee", when: "Ongoing", status: "In Progress" }
+    ];
+
+    function renderTasks() {
+      const tableBody = document.getElementById('taskTableBody');
+      if(!tableBody) return;
+
+      tableBody.innerHTML = myTasks.map(item => {
+        let badgeClass = "bg-secondary"; 
+        if (item.status === "In Progress") badgeClass = "bg-warning text-dark";
+        if (item.status === "Done") badgeClass = "bg-success";
+
+        return `
+          <tr>
+            <td class="p-3 fw-bold">${item.task}</td>
+            <td>${item.who}</td>
+            <td>${item.when}</td>
+            <td><span class="badge ${badgeClass}">${item.status}</span></td>
+          </tr>
+        `;
+      }).join('');
+    }
+    renderTasks();
   </script>
 </body>
 </html>
