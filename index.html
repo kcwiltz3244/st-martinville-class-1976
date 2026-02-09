@@ -10,7 +10,8 @@
     :root { --school-purple:#4b0082; --school-gold:#ffd700; --deep-purple: #2a004a; }
     body { background:#fafafa; color:#333; font-family: 'Segoe UI', Arial, sans-serif; }
     .navbar { background-color:var(--school-purple); border-bottom: 2px solid var(--school-gold); }
-    .navbar a.nav-link { color:var(--school-gold)!important; font-weight:bold; }
+    .navbar a.nav-link { color:white !important; font-weight:bold; }
+    .navbar a.nav-link:hover { color: var(--school-gold) !important; }
     
     header {
       position:relative;
@@ -30,58 +31,31 @@
     .countdown-number { display: block; font-size: 2.2rem; font-weight: bold; color: var(--school-gold); }
     .countdown-label { font-size: 0.75rem; text-transform: uppercase; color: #bbb; }
 
-    /* COMPACT RSVP LIST (The "Dense Grid") */
+    /* COMPACT RSVP LIST */
     #yesListContainer {
       border-radius: 12px;
       background: #f8f9fa;
       box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
       border: 1px solid #dee2e6;
-      max-height: 280px; /* Keeps the section from getting too long */
+      max-height: 280px;
       overflow-y: auto;
     }
     .rsvp-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr); /* 2 names per row on phone */
+      grid-template-columns: repeat(2, 1fr);
       gap: 6px;
     }
     @media (min-width: 768px) { .rsvp-grid { grid-template-columns: repeat(4, 1fr); } }
     @media (min-width: 992px) { .rsvp-grid { grid-template-columns: repeat(6, 1fr); } }
 
     .attendee-name {
-      font-size: 0.82rem; /* SMALLER FONT */
-      padding: 4px 6px;   /* COMPACT PADDING */
+      font-size: 0.82rem;
+      padding: 4px 6px;
       background: white;
       border: 1px solid #e9ecef;
       border-radius: 4px;
       text-align: center;
       color: var(--deep-purple);
-      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
-    }
-
-    /* Photos Gallery */
-    #photos { padding: 60px 0; background: #ffffff; }
-    .photo-card { border: none; overflow: hidden; border-radius: 10px; height: 220px; }
-    .photo-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
-    .photo-card:hover img { transform: scale(1.05); }
-
-    /* Memorial Section Slant */
-    #memorial { 
-      background: #1e003c; 
-      color: white; 
-      padding: 100px 0;
-      clip-path: polygon(0 10%, 100% 0, 100% 100%, 0% 100%);
-      margin-top: -40px;
-    }
-    .memorial-tag {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid var(--school-gold);
-      padding: 6px 14px;
-      border-radius: 50px;
-      display: inline-block;
-      margin: 4px;
-      font-style: italic;
-      font-size: 0.9rem;
-      color: white;
     }
 
     h2 { color:var(--school-purple); font-weight: bold; margin-bottom: 1.5rem; text-align: center; }
@@ -97,25 +71,15 @@
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
   <div class="container">
     <a class="navbar-brand" href="#" style="color: var(--school-gold) !important;">SMSH '76 REUNION</a>
-    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto fw-bold text-uppercase" style="font-size: 0.9rem;">
-        <li class="nav-item">
-          <a class="nav-link px-3 text-white" href="#rsvp" onmouseover="this.style.color='var(--school-gold)'" onmouseout="this.style.color='white'">Who's Coming</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link px-3 text-white" href="#calendar" onmouseover="this.style.color='var(--school-gold)'" onmouseout="this.style.color='white'">Meetings</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link px-3 text-white" href="#tasks" onmouseover="this.style.color='var(--school-gold)'" onmouseout="this.style.color='white'">Task Tracker</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link px-3 text-white" href="#memorial" onmouseover="this.style.color='var(--school-gold)'" onmouseout="this.style.color='white'">Memorial</a>
-        </li>
+        <li class="nav-item"><a class="nav-link px-3" href="#rsvp">Who's Coming</a></li>
+        <li class="nav-item"><a class="nav-link px-3" href="#calendar">Meetings</a></li>
+        <li class="nav-item"><a class="nav-link px-3" href="#tasks">Task Tracker</a></li>
+        <li class="nav-item"><a class="nav-link px-3" href="#memorial">Memorial</a></li>
       </ul>
     </div>
   </div>
@@ -140,33 +104,20 @@
     </div>
   </section>
 
-  <section class="py-5 bg-white text-center">
-    <div class="container">
-      <h2 class="display-6">Half a Century of Memories</h2>
-      <p class="lead mx-auto" style="max-width: 800px;">
-        It’s been 50 years since we walked the halls of SMSH. 
-        Gather with us to celebrate our history and honor our lifelong bonds.
-      </p>
-    </div>
-  </section>
-
-<section id="rsvp" class="py-5 bg-light">
+  <section id="rsvp" class="py-5 bg-light">
     <div class="container text-center">
       <h2 class="mb-4">Who's Coming?</h2>
-      
       <div class="alert shadow mb-4" style="background: var(--deep-purple); border: 2px solid var(--school-gold); border-radius: 15px;">
         <h4 class="mb-0 fw-bold" style="color: var(--school-gold); letter-spacing: 1px;">
          <span id="finalTotal">...</span> Classmates & Guests Confirmed!
         </h4>
       </div>
-
       <div class="mb-5">
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNH2rLwb6w9zvIE113HT4Ru0yNCUORL29ijm2Jg4Ws2Bu8sA/viewform?usp=header" target="_blank" class="btn btn-lg shadow-sm" style="background-color: var(--school-purple); color: var(--school-gold); border: 2px solid var(--school-gold); padding: 12px 35px; font-weight: bold; border-radius: 50px;">
           📝 Click Here to RSVP
         </a>
       </div>
-
-      <div id="yesListContainer" class="p-3" style="background: #eee; border-radius: 10px;">
+      <div id="yesListContainer" class="p-3">
           <div class="rsvp-grid" id="attendeeGrid">
             <p class="text-muted w-100 py-3">Loading confirmed attendees...</p>
           </div>
@@ -177,18 +128,8 @@
 <section id="calendar" class="py-5 bg-white">
   <div class="container text-center">
     <h2 class="mb-4">Meetings & Events</h2>
-
-    <div class="shadow-sm border border-top-0 rounded-bottom overflow-hidden" style="height: 600px; background: #white;">
-  <iframe src="https://docs.google.com/document/d/e/YOUR_ID_HERE/pub?embedded=true" 
-          width="100%" 
-          height="600" 
-          frameborder="0">
-  </iframe>
-</div>
-<section id="notes" class="py-4">
-  <div class="container">
+    
     <div class="mx-auto" style="max-width: 1050px;">
-      
       <div class="d-flex justify-content-between align-items-center p-3 shadow-sm border rounded-top" 
            style="background-color: white; border-left: 8px solid var(--school-gold) !important;">
         <div class="d-flex align-items-center">
@@ -197,44 +138,31 @@
         </div>
         <span class="badge" style="background-color: var(--school-purple); color: var(--school-gold); font-weight: bold;">LIVE DOC</span>
       </div>
-
-      <div class="shadow-sm border border-top-0 rounded-bottom overflow-hidden" style="height: 700px; background: white;">
+      <div class="shadow-sm border border-top-0 rounded-bottom overflow-hidden mb-4" style="height: 700px; background: white;">
         <iframe src="https://docs.google.com/document/d/e/2PACX-1vQLCIwWnwEAXEzls-oVBJUvIDq5pHIXCQK9lE12yB4VLlH6bu-4kzCawn6LtQsQG7SRpse-pM-bh6i0/pub?embedded=true" 
-                width="100%" 
-                height="700" 
-                frameborder="0">
-        </iframe>
+                width="100%" height="700" frameborder="0"></iframe>
       </div>
-      
     </div>
   </div>
 </section>
-    <div class="mx-auto" style="max-width: 1050px;">
-      <a href="YOUR_GOOGLE_DRIVE_LINK_HERE" target="_blank" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-3 shadow-sm border" style="border-left: 8px solid var(--school-gold) !important; background-color: #f8f9fa;">
-        <span class="fw-bold" style="font-size: 1.2rem;">📂 Meeting Notes</span>
-        <span class="btn btn-sm" style="background-color: var(--school-purple); color: var(--school-gold); font-weight: bold;">Open Folder</span>
-      </a>
-    </div>
-  </div>
-</section>
+
 <section id="tasks" class="py-5 bg-light">
   <div class="container">
     <div class="text-center mb-4">
       <h2 class="fw-bold">Task Tracker</h2>
       <p class="text-muted">Current progress and upcoming deadlines</p>
     </div>
-    
     <div class="table-responsive shadow-sm bg-white rounded mx-auto" style="max-width: 1050px;">
       <table class="table table-hover align-middle mb-0">
         <thead style="background-color: var(--deep-purple); color: white;">
           <tr>
-            <th class="p-3" style="width: 40%;">Task</th>
-            <th style="width: 20%;">Who</th>
-            <th style="width: 20%;">When</th>
-            <th style="width: 20%;">Status</th>
+            <th class="p-3">Task</th>
+            <th>Who</th>
+            <th>When</th>
+            <th>Status</th>
           </tr>
         </thead>
-        <tbody style="background-color: white;">
+        <tbody>
           <tr>
             <td class="p-3 fw-bold">Venue Research & Contract</td>
             <td>Planning Team</td>
@@ -258,27 +186,16 @@
     </div>
   </div>
 </section>
-   <section id="photos" style="display: none;">
-    <div class="container text-center">
-      <h2>Photos Gallery</h2>
-      <p>This section is currently hidden while we set up the gallery.</p>
-    </div>
-  </section>
 
-  <section id="memorial" class="py-5" style="background-color: #f8f9fa; border-top: 3px solid var(--school-gold); border-bottom: 3px solid var(--school-gold);">
+<section id="memorial" class="py-5" style="background-color: #f8f9fa; border-top: 3px solid var(--school-gold); border-bottom: 3px solid var(--school-gold);">
   <div class="container text-center">
     <div class="mx-auto p-5 shadow-sm bg-white rounded" style="max-width: 1000px;">
-      
       <div class="mb-4">
         <span style="font-size: 2.5rem;">🕯️</span>
-        <h2 class="mt-2 fw-bold" style="color: var(--deep-purple); letter-spacing: 2px; text-transform: uppercase;">In Loving Memory</h2>
+        <h2 class="mt-2 fw-bold" style="color: var(--deep-purple); letter-spacing: 2px;">IN LOVING MEMORY</h2>
         <div class="mx-auto my-3" style="width: 60px; height: 2px; background-color: var(--school-gold);"></div>
       </div>
-
-      <p class="mb-5" style="font-style: italic; color: #666; font-size: 1.1rem;">
-        "Honoring our classmates who remain forever in our hearts."
-      </p>
-
+      <p class="mb-5" style="font-style: italic; color: #666; font-size: 1.1rem;">"Honoring our classmates who remain forever in our hearts."</p>
       <div class="row g-4 text-center justify-content-center" style="font-size: 1.2rem; color: var(--deep-purple);">
         <div class="col-md-5">
           <ul class="list-unstyled">
