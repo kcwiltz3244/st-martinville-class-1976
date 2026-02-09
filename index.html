@@ -1,148 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Class of 1976 - 50th Reunion</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMSH Class of 1976 - 50th Reunion</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  
   <style>
-    :root { --school-purple:#4b0082; --school-gold:#ffd700; --deep-purple: #2a004a; }
-    body { background:#fafafa; color:#333; font-family: 'Segoe UI', Arial, sans-serif; }
-    .navbar { background-color:var(--school-purple); border-bottom: 2px solid var(--school-gold); }
-    .navbar a.nav-link { color:var(--school-gold)!important; font-weight:bold; }
+    :root {
+      --school-purple: #4B0082;
+      --school-gold: #FFD700;
+      --deep-purple: #300052;
+    }
+
+    body { font-family: 'Poppins', sans-serif; background-color: #f8f9fa; }
     
-    header {
-      position:relative;
-      background:url("tiger.png") center/cover no-repeat;
-      color:var(--school-gold);
-      text-align:center;
-      padding:5rem 1rem;
-    }
-    header::after {
-      content:""; position:absolute; top:0; left:0; width:100%; height:100%;
-      background:rgba(30,0,60,0.6); z-index:0;
-    }
-    header .container { position:relative; z-index:1; }
+    /* Navbar / Header */
+    .navbar { background-color: var(--school-purple) !important; border-bottom: 4px solid var(--school-gold); }
+    .navbar-brand { font-family: 'Playfair Display', serif; font-weight: bold; color: var(--school-gold) !important; }
+    /* Banner SMSH '76 Fix */
+    .brand-accent { color: var(--school-gold) !important; }
 
-    /* Countdown */
-    #countdown { background: var(--deep-purple); color: white; padding: 25px 0; border-bottom: 4px solid var(--school-gold); }
-    .countdown-number { display: block; font-size: 2.2rem; font-weight: bold; color: var(--school-gold); }
-    .countdown-label { font-size: 0.75rem; text-transform: uppercase; color: #bbb; }
-
-    /* COMPACT RSVP LIST (The "Dense Grid") */
-    #yesListContainer {
-      border-radius: 12px;
-      background: #f8f9fa;
-      box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
-      border: 1px solid #dee2e6;
-      max-height: 280px; /* Keeps the section from getting too long */
-      overflow-y: auto;
-    }
+    /* RSVP Grid Styling */
     .rsvp-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr); /* 2 names per row on phone */
-      gap: 6px;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+      max-height: 400px;
+      overflow-y: auto;
+      padding: 15px;
     }
-    @media (min-width: 768px) { .rsvp-grid { grid-template-columns: repeat(4, 1fr); } }
-    @media (min-width: 992px) { .rsvp-grid { grid-template-columns: repeat(6, 1fr); } }
-
     .attendee-name {
-      font-size: 0.82rem; /* SMALLER FONT */
-      padding: 4px 6px;   /* COMPACT PADDING */
       background: white;
-      border: 1px solid #e9ecef;
-      border-radius: 4px;
-      text-align: center;
-      color: var(--deep-purple);
-      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      border-left: 4px solid var(--school-purple);
+      font-size: 0.95rem;
     }
 
-    /* Photos Gallery */
-    #photos { padding: 60px 0; background: #ffffff; }
-    .photo-card { border: none; overflow: hidden; border-radius: 10px; height: 220px; }
-    .photo-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
-    .photo-card:hover img { transform: scale(1.05); }
+    /* Task Tracker Styles */
+    .task-status-done { color: #28a745; font-weight: bold; }
+    .task-status-pending { color: #ffc107; font-weight: bold; }
 
-    /* Memorial Section Slant */
-    #memorial { 
-      background: #1e003c; 
-      color: white; 
-      padding: 100px 0;
-      clip-path: polygon(0 10%, 100% 0, 100% 100%, 0% 100%);
-      margin-top: -40px;
-    }
-    .memorial-tag {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid var(--school-gold);
-      padding: 6px 14px;
-      border-radius: 50px;
-      display: inline-block;
-      margin: 4px;
-      font-style: italic;
-      font-size: 0.9rem;
-      color: white;
-    }
-
-    h2 { color:var(--school-purple); font-weight: bold; margin-bottom: 1.5rem; text-align: center; }
-    #btn-back-to-top {
-      position: fixed; bottom: 20px; right: 20px; display: none; z-index: 1000;
-      background: var(--school-purple); color: var(--school-gold);
-      border: 2px solid var(--school-gold); width: 45px; height: 45px;
-    }
-  </style> 
+    .btn-school { background-color: var(--school-purple); color: var(--school-gold); border: 2px solid var(--school-gold); font-weight: bold; }
+    .btn-school:hover { background-color: var(--school-gold); color: var(--school-purple); }
+  </style>
 </head>
-
 <body>
+
   <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container">
-      <a class="navbar-brand fw-bold" href="index.html">SMSH '76</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">🏠 Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#rsvp">RSVP</a></li>
-          <li class="nav-item"><a class="nav-link" href="#calendar">Calendar</a></li>
-          <li class="nav-item"><a class="nav-link" href="#photos">Photos</a></li>
-          <li class="nav-item"><a class="nav-link" href="#memorial">Memorial</a></li>
-          <li class="nav-item"><a class="nav-link" href="planning.html">📋 Planning Hub</a></li>
-        </ul>
-      </div>
+      <a class="navbar-brand" href="#">SMSH <span class="brand-accent">'76</span> REUNION</a>
     </div>
   </nav>
 
-  <header>
-    <div class="container">
-      <h1 class="fw-bold display-4">St. Martinville Senior High</h1>
-      <h2 class="mt-2" style="color:var(--school-gold); border:none;">Class of 1976 — 50th Year Reunion</h2>
+  <header class="py-5 bg-dark text-white text-center" style="background: linear-gradient(rgba(48,0,82,0.8), rgba(48,0,82,0.8)), url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1500&q=80') center/cover;">
+    <div class="container py-5">
+      <h1 class="display-3 fw-bold mb-3">50th Class Reunion</h1>
+      <p class="lead mb-4">Save the Date: October 2026</p>
+      <div id="countdown" class="d-flex justify-content-center gap-3 fs-2 fw-bold text-warning">
+        </div>
     </div>
   </header>
 
-  <section id="countdown">
-    <div class="container text-center">
-      <h6 class="mb-3" style="letter-spacing: 3px; color: var(--school-gold);">TIME UNTIL CELEBRATION</h6>
-      <div class="d-flex justify-content-center gap-3">
-        <div class="text-center"><span class="countdown-number" id="days">00</span><span class="countdown-label">Days</span></div>
-        <div class="text-center"><span class="countdown-number" id="hours">00</span><span class="countdown-label">Hrs</span></div>
-        <div class="text-center"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">Min</span></div>
-        <div class="text-center"><span class="countdown-number" id="seconds">00</span><span class="countdown-label">Sec</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="py-5 bg-white text-center">
-    <div class="container">
-      <h2 class="display-6">Half a Century of Memories</h2>
-      <p class="lead mx-auto" style="max-width: 800px;">
-        It’s been 50 years since we walked the halls of SMSH. 
-        Gather with us to celebrate our history and honor our lifelong bonds.
-      </p>
-    </div>
-  </section>
-
-<section id="rsvp" class="py-5 bg-light">
+  <section id="rsvp" class="py-5 bg-light">
     <div class="container text-center">
       <h2 class="mb-4">Who's Coming?</h2>
       
@@ -153,12 +77,12 @@
       </div>
 
       <div class="mb-5">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNH2rLwb6w9zvIE113HT4Ru0yNCUORL29ijm2Jg4Ws2Bu8sA/viewform?usp=header" target="_blank" class="btn btn-lg shadow-sm" style="background-color: var(--school-purple); color: var(--school-gold); border: 2px solid var(--school-gold); padding: 12px 35px; font-weight: bold; border-radius: 50px;">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNH2rLwb6w9zvIE113HT4Ru0yNCUORL29ijm2Jg4Ws2Bu8sA/viewform?usp=header" target="_blank" class="btn btn-lg btn-school px-5 py-3 rounded-pill shadow">
           📝 Click Here to RSVP
         </a>
       </div>
 
-      <div id="yesListContainer" class="p-3" style="background: #eee; border-radius: 10px;">
+      <div id="yesListContainer" class="p-3 bg-white shadow-sm rounded">
           <div class="rsvp-grid" id="attendeeGrid">
             <p class="text-muted w-100 py-3">Loading confirmed attendees...</p>
           </div>
@@ -166,116 +90,104 @@
     </div>
   </section>
 
-<section id="calendar" class="py-5 bg-white">
+  <section id="calendar" class="py-5 bg-white border-top">
     <div class="container">
-      <h2 class="text-center">Events & Meetings</h2>
+      <h2 class="text-center mb-4">Events & Meetings</h2>
       <div class="ratio ratio-16x9 shadow border rounded bg-white mb-4">
         <iframe src="https://calendar.google.com/calendar/embed?src=fbcf3427770ee3c74ba269d485ba49d39d6ea67f45be295d849f038ba7c79497%40group.calendar.google.com&ctz=America%2FChicago&showTitle=0&showNav=1" style="border: 0" frameborder="0" scrolling="no"></iframe>
       </div>
 
       <div class="list-group shadow-sm mx-auto" style="max-width: 600px;">
-        <a href="INSERT_GOOGLE_DRIVE_FOLDER_LINK" target="_blank" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-3">
-          <span><strong>Official Planning Notes</strong></span>
-          <span class="btn btn-sm btn-primary" style="background-color: var(--school-purple); border:none;">Open Folder</span>
+        <a href="YOUR_GOOGLE_DRIVE_LINK_HERE" target="_blank" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-3" style="border-left: 6px solid var(--school-gold);">
+          <span><strong>Meeting Notes</strong></span>
+          <span class="btn btn-sm btn-school">Open Folder</span>
         </a>
       </div>
     </div>
   </section>
-<section id="planning" class="py-5" style="background: #f0f2f5;">
-    <div class="container text-center">
-      <h2 class="mb-4">Planning Committee Hub</h2>
-      <p class="lead mb-4">Transparency is key! View our progress, meeting minutes, and financial updates below.</p>
-      
-      <div class="row justify-content-center">
-        <div class="col-md-8">
-          <div class="card shadow-sm border-0">
-            <div class="card-body p-4">
-              <h5 class="card-title fw-bold" style="color: var(--school-purple);">Official Reunion Documents</h5>
-              <p class="card-text text-muted">Access our shared folder to see meeting notes, the budget tracker, and planning milestones.</p>
-              
-              <a href="INSERT_YOUR_GOOGLE_DRIVE_LINK_HERE" target="_blank" class="btn btn-primary btn-lg px-4 mt-2" style="background-color: var(--school-purple); border: none;">
-                📂 Open Planning Folder
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-   <section id="photos" style="display: none;">
-    <div class="container text-center">
-      <h2>Photos Gallery</h2>
-      <p>This section is currently hidden while we set up the gallery.</p>
-    </div>
-  </section>
-
-  <section id="memorial" class="text-center">
+  <section id="tasks" class="py-5 bg-light">
     <div class="container">
-      <h2 style="color: var(--school-gold); border-bottom: none; margin-top: 30px;">In Loving Memory</h2>
-      <p class="mb-4" style="color: #ccc; font-style: italic;">Honoring our classmates who remain forever in our hearts.</p>
-      
-      <div class="d-flex flex-wrap justify-content-center pb-5">
-        <span class="memorial-tag">🕊️ Nolan Charles Jr.</span>
-        <span class="memorial-tag">🕊️ Stella Orphe</span>
-        <span class="memorial-tag">🕊️ Evelyn Drake</span>
-        <span class="memorial-tag">🕊️ Sharon Wiltz Abraham</span>
-        <span class="memorial-tag">🕊️ Jody Anthony</span>
-        <span class="memorial-tag">🕊️ Perry Pierre</span>
-        <span class="memorial-tag">🕊️ Murphy Pradier</span>
-        <span class="memorial-tag">🕊️ Samuel Savoy</span>
-        <span class="memorial-tag">🕊️ Walton "Lanky" Stewart</span>
-        <span class="memorial-tag">🕊️ Kenneth Lastrappe</span>
-        <span class="memorial-tag">🕊️ Sherman Hypolite</span>
-        <span class="memorial-tag">🕊️ Tyrone Bowles</span>
+      <h2 class="text-center mb-4">Task Tracker</h2>
+      <div class="table-responsive shadow-sm bg-white rounded">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-dark" style="background-color: var(--deep-purple);">
+            <tr>
+              <th>Task Description</th>
+              <th>Assignee</th>
+              <th>Due Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Finalize Venue Contract</td>
+              <td>Planning Committee</td>
+              <td>Mar 2026</td>
+              <td><span class="task-status-pending">In Progress</span></td>
+            </tr>
+            <tr>
+              <td>Launch Website</td>
+              <td>Tech Team</td>
+              <td>Feb 2026</td>
+              <td><span class="task-status-done">Completed</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-center mt-3 small text-muted">Click the "Meeting Notes" folder above to see the full detailed task list.</p>
+    </div>
+  </section>
+
+  <section id="memorial" class="py-5 text-white" style="background-color: var(--deep-purple);">
+    <div class="container text-center">
+      <h2 class="mb-4" style="color: var(--school-gold);">In Loving Memory</h2>
+      <p class="mb-5">Remembering our classmates who are with us in spirit.</p>
+      <div class="row row-cols-2 row-cols-md-4 g-4">
+        <div class="col">Tyrone Bowles</div>
+        <div class="col">Sherman Hypolite</div>
       </div>
     </div>
   </section>
-  <footer class="py-4" style="background: #1e003c;">
-    <div class="container text-center">
-      <p class="mb-0" style="color: var(--school-gold);">&copy; 2026 St. Martinville Sr. High – Class of 1976</p>
-    </div>
-  </footer>
-
-  <button type="button" class="btn rounded-circle shadow" id="btn-back-to-top">↑</button>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    // TIMER
-    const targetDate = new Date("June 26, 2026 00:00:00").getTime();
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = targetDate - now;
-      document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-      document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
-    }
-    setInterval(updateCountdown, 1000); updateCountdown();
+    // Set your API link for the "Who's Coming" list here
+    const API_URL = 'https://script.google.com/macros/s/AKfycbxK7JP2N2kFfEYl1xakGg-v6_VpQyW8NhlSAom7gm8K3cSGY5pWmkUDL8f3aEK_fpWhhw/exec';
 
-    // RSVP DATA LOAD
-    const API_URL = 'https://script.google.com/macros/s/AKfycbxoIJZz2RDDkaW9V4K_Vz8w9GT2Gfaj_RZYWY84FyJfJ6elgq2IeNHkOE0jz3x4g5y6hw/exec';
     async function loadData() {
       try {
         const response = await fetch(API_URL);
         const data = await response.json();
-        document.getElementById('finalTotal').textContent = data.total || 0;
+        
         const grid = document.getElementById('attendeeGrid');
-        if (data.attendees) {
-          grid.innerHTML = data.attendees.map(p => `<div class="attendee-name"><strong>${p.name}</strong></div>`).join('');
-        }
-      } catch (e) { console.error(e); }
-    }
-    loadData();
+        const totalSpan = document.getElementById('finalTotal');
+        
+        grid.innerHTML = '';
+        totalSpan.innerText = data.totalGuests || 0;
 
-    // BACK TO TOP
-    let mybutton = document.getElementById("btn-back-to-top");
-    window.onscroll = function () {
-      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) { mybutton.style.display = "block"; } 
-      else { mybutton.style.display = "none"; }
-    };
-    mybutton.addEventListener("click", () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+        data.attendees.forEach(name => {
+          const div = document.createElement('div');
+          div.className = 'attendee-name';
+          div.innerHTML = `<strong>${name}</strong>`;
+          grid.appendChild(div);
+        });
+      } catch (e) {
+        console.error("Error loading attendee data", e);
+      }
+    }
+
+    // Simple Countdown (Target Oct 15, 2026)
+    function updateCountdown() {
+      const target = new Date("October 15, 2026 18:00:00").getTime();
+      const now = new Date().getTime();
+      const diff = target - now;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      document.getElementById("countdown").innerText = days + " Days To Go!";
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+    loadData();
   </script>
 </body>
 </html>
