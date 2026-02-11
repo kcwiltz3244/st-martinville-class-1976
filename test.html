@@ -14,72 +14,102 @@
 </head>
 <body style="background-color: #f3e5f5; padding: 20px;">
 
- <section id="photos" class="py-5 text-center" style="background-color: #f3e5f5;">
+<style>
+  /* Base styles for everyone */
+  .memorial-list {
+    font-family: 'Georgia', serif;
+    color: #4a148c;
+    line-height: 1.4;
+  }
+  
+  /* SPECIAL RULE FOR PHONES: Shrinks font and removes extra padding */
+  @media (max-width: 768px) {
+    .memorial-list {
+      font-size: 0.72rem !important; /* Slightly smaller to prevent name wrapping */
+    }
+    .memorial-list ul {
+      padding-left: 0 !important;
+    }
+    .memorial-list li {
+      white-space: nowrap; /* Forces name to stay on one line */
+      margin-bottom: 8px !important;
+    }
+  }
+
+  /* Rule for larger screens */
+  @media (min-width: 769px) {
+    .memorial-list {
+      font-size: 0.85rem;
+    }
+  }
+</style>
+
+<section id="photos" class="py-4 text-center" style="background-color: #f3e5f5;">
   <div class="container">
-    <div class="p-5 rounded-4 shadow-sm bg-white" style="border: 3px solid #ffd700;">
-      <h2 class="fw-bold" style="color: #4a148c; font-size: 2rem;">MEMORIES THROUGH THE YEARS</h2>
-      <p class="text-muted mb-4">Click below to view and add photos to our class gallery.</p>
-      <a href="https://photos.app.goo.gl/XVmX9Ets2LZX18qT8" target="_blank" class="btn btn-lg" 
-         style="background-color: #ffd700; color: #4a148c; font-weight: bold; border-radius: 50px; padding: 12px 35px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+    <div class="p-4 rounded-4 shadow-sm bg-white" style="border: 2px solid #ffd700;">
+      <h2 class="fw-bold" style="color: #4a148c; font-size: 1.5rem;">MEMORIES THROUGH THE YEARS</h2>
+      <p class="text-muted small mb-3">Click below to view and add photos to our gallery.</p>
+      <a href="https://photos.app.goo.gl/XVmX9Ets2LZX18qT8" target="_blank" class="btn btn-sm" 
+         style="background-color: #ffd700; color: #4a148c; font-weight: bold; border-radius: 50px; padding: 10px 25px; border: 1px solid #4a148c;">
          📸 View Class Gallery
       </a>
     </div>
   </div>
 </section>
 
-<section id="memorial" class="py-5 bg-white">
+<section id="memorial" class="py-4 bg-white">
   <div class="container">
-    <div class="row align-items-center g-4">
+    <div class="row align-items-start g-3">
       
-      <div class="col-lg-5 text-center">
-        <img src="empty chair.png" alt="In Loving Memory" class="img-fluid rounded-3 mb-3" style="max-height: 250px;">
-        <h2 class="fw-bold" style="color: #4a148c; font-size: 1.8rem;">IN LOVING MEMORY</h2>
-        <p style="font-family: 'Brush Script MT', cursive; font-size: 1.8rem; color: #6a1b9a;">"We haven't forgotten about you."</p>
+      <div class="col-12 col-lg-5 text-center">
+        <img src="empty chair.png" alt="In Loving Memory" class="img-fluid rounded-3 mb-2" style="max-height: 200px;">
+        <h2 class="fw-bold" style="color: #4a148c; font-size: 1.4rem;">IN LOVING MEMORY</h2>
+        <p style="font-family: 'Brush Script MT', cursive; font-size: 1.6rem; color: #6a1b9a;">"We haven't forgotten about you."</p>
       </div>
 
-      <div class="col-lg-7">
-        <div class="row row-cols-3 gx-2" style="font-family: 'Georgia', serif; color: #4a148c; font-size: 0.82rem;">
+      <div class="col-12 col-lg-7">
+        <div class="row row-cols-3 gx-1 memorial-list">
           
           <div class="col">
             <ul class="list-unstyled">
-              <li class="mb-2">🕊️ Roland Allen</li>
-              <li class="mb-2">🕊️ Jody Anthony</li>
-              <li class="mb-2">🕊️ Debra Batiste</li>
-              <li class="mb-2">🕊️ Linda Batiste</li>
-              <li class="mb-2">🕊️ Rickey Batiste</li>
-              <li class="mb-2">🕊️ Terry Benjamin</li>
-              <li class="mb-2">🕊️ Tyrone Bowles</li>
-              <li class="mb-2">🕊️ Gary Charles</li>
-              <li class="mb-2">🕊️ Jules Charles</li>
+              <li>🕊️ Roland Allen</li>
+              <li>🕊️ Jody Anthony</li>
+              <li>🕊️ Debra Batiste</li>
+              <li>🕊️ Linda Batiste</li>
+              <li>🕊️ Rickey Batiste</li>
+              <li>🕊️ Terry Benjamin</li>
+              <li>🕊️ Tyrone Bowles</li>
+              <li>🕊️ Gary Charles</li>
+              <li>🕊️ Jules Charles</li>
             </ul>
           </div>
 
           <div class="col">
             <ul class="list-unstyled">
-              <li class="mb-2">🕊️ MacGraw Charles</li>
-              <li class="mb-2">🕊️ Nolan Charles Jr.</li>
-              <li class="mb-2">🕊️ Evelyn Drake</li>
-              <li class="mb-2">🕊️ Chris Faulk</li>
-              <li class="mb-2">🕊️ Lois Gulliam</li>
-              <li class="mb-2">🕊️ Sherman Hypolite</li>
-              <li class="mb-2">🕊️ Ernest Joseph</li>
-              <li class="mb-2">🕊️ Kenneth Lastrappe</li>
-              <li class="mb-2">🕊️ Manuel Mallery</li>
+              <li>🕊️ MacGraw Charles</li>
+              <li>🕊️ Nolan Charles Jr.</li>
+              <li>🕊️ Evelyn Drake</li>
+              <li>🕊️ Chris Faulk</li>
+              <li>🕊️ Lois Gulliam</li>
+              <li>🕊️ Sherman Hypolite</li>
+              <li>🕊️ Ernest Joseph</li>
+              <li>🕊️ Kenneth Lastrappe</li>
+              <li>🕊️ Manuel Mallery</li>
             </ul>
           </div>
 
           <div class="col">
             <ul class="list-unstyled">
-              <li class="mb-2">🕊️ Ray Marshall</li>
-              <li class="mb-2">🕊️ Richard Marshall</li>
-              <li class="mb-2">🕊️ Mark Mitchell</li>
-              <li class="mb-2">🕊️ Stella Orphe</li>
-              <li class="mb-2">🕊️ Perry Pierre</li>
-              <li class="mb-2">🕊️ Chris Robertson</li>
-              <li class="mb-2">🕊️ Samuel Savoy</li>
-              <li class="mb-2">🕊️ Brenda Sias</li>
-              <li class="mb-2">🕊️ Lanky Stewart</li>
-              <li class="mb-2">🕊️ Lee Williams</li>
+              <li>🕊️ Ray Marshall</li>
+              <li>🕊️ Richard Marshall</li>
+              <li>🕊️ Mark Mitchell</li>
+              <li>🕊️ Stella Orphe</li>
+              <li>🕊️ Perry Pierre</li>
+              <li>🕊️ Chris Robertson</li>
+              <li>🕊️ Samuel Savoy</li>
+              <li>🕊️ Brenda Sias</li>
+              <li>🕊️ Lanky Stewart</li>
+              <li>🕊️ Lee Williams</li>
             </ul>
           </div>
 
