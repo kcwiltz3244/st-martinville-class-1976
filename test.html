@@ -1,29 +1,50 @@
-<section id="photos" class="py-4 text-center">
-  <div class="container">
+<section id="photos" class="py-5 bg-light">
+  <div class="container text-center">
     <div class="p-4 rounded-4 shadow-sm bg-white" style="border: 2px solid #ffd700;">
-      <h2 class="fw-bold" style="color: #4a148c; font-size: 1.5rem;">CLASS MEMORIES</h2>
-      <p class="text-muted small">Viewing a preview of our 200+ photos.</p>
-      
-      <div class="row g-2 mb-4">
-        <div class="col-3">
-          <img src="thumb1.jpg" class="img-fluid rounded photo-card" onerror="this.src='https://placehold.co/150x150?text=1'">
-        </div>
-        <div class="col-3">
-          <img src="thumb2.jpg" class="img-fluid rounded photo-card" onerror="this.src='https://placehold.co/150x150?text=2'">
-        </div>
-        <div class="col-3">
-          <img src="thumb3.jpg" class="img-fluid rounded photo-card" onerror="this.src='https://placehold.co/150x150?text=3'">
-        </div>
-        <div class="col-3">
-          <img src="thumb4.jpg" class="img-fluid rounded photo-card" onerror="this.src='https://placehold.co/150x150?text=4'">
-        </div>
+      <h2 class="fw-bold" style="color: #4a148c; font-size: 1.5rem; letter-spacing: 1px;">CLASS MEMORIES</h2>
+      <p class="text-muted small mb-4">Sharing moments from our journey together.</p>
+
+      <div class="photo-gallery">
+        <img src="images/gallery/1.jpg" alt="Memory 1" onerror="this.src='https://placehold.co/400x300?text=Photo+1'">
+        <img src="images/gallery/2.jpg" alt="Memory 2" onerror="this.src='https://placehold.co/400x500?text=Photo+2'">
+        <img src="images/gallery/3.jpg" alt="Memory 3" onerror="this.src='https://placehold.co/400x300?text=Photo+3'">
+        <img src="images/gallery/4.jpg" alt="Memory 4" onerror="this.src='https://placehold.co/400x400?text=Photo+4'">
+        <img src="images/gallery/5.jpg" alt="Memory 5" onerror="this.src='https://placehold.co/400x300?text=Photo+5'">
+        <img src="images/gallery/6.jpg" alt="Memory 6" onerror="this.src='https://placehold.co/400x600?text=Photo+6'">
+        <img src="images/gallery/7.jpg" alt="Memory 7" onerror="this.src='https://placehold.co/400x300?text=Photo+7'">
+        <img src="images/gallery/8.jpg" alt="Memory 8" onerror="this.src='https://placehold.co/400x400?text=Photo+8'">
       </div>
 
-      <a href="https://photos.app.goo.gl/XVmX9Ets2LZX18qT8" target="_blank" class="btn w-100 py-3" 
-         style="background-color: #ffd700; color: #4a148c; font-weight: bold; border-radius: 15px; border: 2px solid #4a148c; font-size: 1.1rem;">
-         📸 VIEW ALL 200+ PHOTOS HERE
-      </a>
-      <small class="d-block mt-2 text-muted text-uppercase fw-bold" style="font-size: 0.65rem;">Opens in Google Photos • Add yours too!</small>
+      <div class="mt-4 pt-3 border-top">
+         <p class="mb-0 text-muted small"><em>Have photos to share? Send them to the committee to be added here!</em></p>
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  .photo-gallery {
+    line-height: 0;
+    column-count: 4; /* 4 columns on computer */
+    column-gap: 12px;
+  }
+  .photo-gallery img {
+    width: 100% !important;
+    height: auto !important;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+  }
+  .photo-gallery img:hover {
+    transform: scale(1.03);
+    border-color: #ffd700;
+  }
+  /* Mobile View: 2 columns instead of 4 */
+  @media (max-width: 768px) {
+    .photo-gallery {
+      column-count: 2;
+    }
+  }
+</style>
