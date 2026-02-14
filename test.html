@@ -1,21 +1,63 @@
-<div class="photo-gallery" id="autoGallery">
+<section id="photos" class="py-5 bg-light">
+  <div class="container text-center">
+    <div class="p-4 rounded-4 shadow-sm bg-white" style="border: 2px solid #ffd700;">
+      <h2 class="fw-bold" style="color: #4a148c; font-size: 1.5rem; letter-spacing: 1px;">CLASS MEMORIES</h2>
+      <p class="text-muted small mb-4">Sharing moments from our journey together.</p>
+
+      <style>
+        .photo-gallery {
+          line-height: 0;
+          column-count: 4; /* 4 columns on computer */
+          column-gap: 12px;
+        }
+        .photo-gallery img {
+          width: 100% !important;
+          height: auto !important;
+          margin-bottom: 12px;
+          border-radius: 10px;
+          border: 1px solid #ddd;
+          box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+          transition: transform 0.3s ease;
+          display: inline-block; /* Prevents images from breaking across columns */
+        }
+        .photo-gallery img:hover {
+          transform: scale(1.03);
+          border-color: #ffd700;
+          cursor: pointer;
+        }
+        /* Mobile View: Adjust to 2 columns so photos aren't too small */
+        @media (max-width: 768px) {
+          .photo-gallery {
+            column-count: 2;
+          }
+        }
+      </style>
+
+      <div class="photo-gallery" id="autoGallery">
+        </div>
+
+      <script>
+        // 1. Set the number of photos you have uploaded to your images/gallery folder
+        const totalPhotos = 75; 
+        const galleryContainer = document.getElementById('autoGallery');
+        
+        let galleryHTML = '';
+
+        for (let i = 1; i <= totalPhotos; i++) {
+          // 2. This assumes files are named 1.jpg, 2.jpg, etc. inside images/gallery/
+          galleryHTML += `
+            <img src="images/gallery/${i}.jpg" 
+                 alt="Class Memory ${i}" 
+                 loading="lazy" 
+                 onerror="this.style.display='none'">`;
+        }
+
+        galleryContainer.innerHTML = galleryHTML;
+      </script>
+
+      <div class="mt-4 pt-3 border-top">
+         <p class="mb-0 text-muted small"><em>Have photos to share? Send them to the committee to be added here!</em></p>
+      </div>
+    </div>
   </div>
-
-<script>
-  // HOW TO USE: 
-  // 1. Change 'totalPhotos' to match how many you uploaded.
-  // 2. Make sure they are named 1.jpg, 2.jpg, etc.
-  
-  const totalPhotos = 75; 
-  const galleryContainer = document.getElementById('autoGallery');
-  let galleryHTML = '';
-
-  for (let i = 1; i <= totalPhotos; i++) {
-    galleryHTML += `
-      <img src="images/gallery/${i}.jpg" 
-           alt="Class Memory ${i}" 
-           onerror="this.style.display='none'">`;
-  }
-
-  galleryContainer.innerHTML = galleryHTML;
-</script>
+</section>
