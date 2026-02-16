@@ -195,64 +195,82 @@
     .memorial-list ul { padding-left: 0 !important; }
     .memorial-list li { white-space: nowrap; margin-bottom: 6px !important; display: flex; align-items: center; }
   }
+<style>
+  .memorial-list {
+    font-family: 'Georgia', serif;
+    color: #4a148c;
+    line-height: 1.4;
+  }
+  .memorial-list li {
+    margin-bottom: 8px;
+    white-space: nowrap; /* Prevents names from breaking into two lines */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Adds "..." if a name is way too long */
+  }
+  @media (max-width: 768px) {
+    .memorial-list { 
+      font-size: 0.65rem !important; /* Shrinks text specifically on phones */
+    }
+    .memorial-list ul { padding-left: 5px !important; }
+    .memorial-list li { margin-bottom: 5px !important; }
+  }
 </style>
 
 <section id="memorial" class="py-5 bg-white">
   <div class="container">
     <div class="row align-items-center g-4">
-      <div class="col-lg-5 text-center">
-        <img src="empty chair.png" alt="In Loving Memory" class="img-fluid rounded-3 mb-3" style="max-height: 250px;">
-        <h2 class="fw-bold" style="color: #4a148c;">IN LOVING MEMORY</h2>
-        <p style="font-family: 'Brush Script MT', cursive; font-size: 1.8rem; color: #6a1b9a;">"We haven't forgotten about you."</p>
+      
+      <div class="col-lg-4 text-center">
+        <img src="empty chair.png" alt="In Loving Memory" class="img-fluid rounded-3 mb-3" style="max-height: 200px;">
+        <h2 class="fw-bold" style="color: #4a148c; font-size: 1.5rem;">IN LOVING MEMORY</h2>
+        <p style="font-family: 'Brush Script MT', cursive; font-size: 1.5rem; color: #6a1b9a;">"We haven't forgotten about you."</p>
       </div>
 
-      <div class="col-lg-7">
-        <div class="row row-cols-3 gx-2 memorial-list" style="font-size: 1.1rem; color: #4a148c; font-family: 'Georgia', serif;">
+      <div class="col-lg-8">
+        <div class="row row-cols-3 gx-1 memorial-list">
           
           <div class="col">
             <ul class="list-unstyled">
-              <li class="mb-2">🕊️ Vernon Abbott</li>
-              <li class="mb-2">🕊️ Roland Allen</li>
-              <li class="mb-2">🕊️ Jody Anthony</li>
-              <li class="mb-2">🕊️ Debra Batiste</li>
-              <li class="mb-2">🕊️ Linda Batiste</li>
-              <li class="mb-2">🕊️ Rickey Batiste</li>
-              <li class="mb-2">🕊️ Terry Benjamin</li>
-              <li class="mb-2">🕊️ Tyrone Bowles</li>
-              <li class="mb-2">🕊️ Gary Charles</li>
-              <li class="mb-2">🕊️ Jules Charles</li>
+              <li>🕊️ Vernon Abbott</li>
+              <li>🕊️ Roland Allen</li>
+              <li>🕊️ Jody Anthony</li>
+              <li>🕊️ Debra Batiste</li>
+              <li>🕊️ Linda Batiste</li>
+              <li>🕊️ Rickey Batiste</li>
+              <li>🕊️ Terry Benjamin</li>
+              <li>🕊️ Tyrone Bowles</li>
+              <li>🕊️ Gary Charles</li>
+              <li>🕊️ Jules Charles</li>
             </ul>
           </div>
 
           <div class="col">
             <ul class="list-unstyled">
-              <li class="mb-2">🕊️ Barnabas "McGraw" Charles</li>
-              <li class="mb-2">🕊️ Nolan Charles Jr.</li>
-              <li class="mb-2">🕊️ Evelyn Drake</li>
-              <li class="mb-2">🕊️ Chris Faulk</li>
-              <li class="mb-2">🕊️ Linda George</li>
-              <li class="mb-2">🕊️ Lois Gulliam</li>
-              <li class="mb-2">🕊️ Sherman Hypolite</li>
-              <li class="mb-2">🕊️ Ernest Joseph</li>
-              <li class="mb-2">🕊️ Kenneth Lastrappe</li>
-              <li class="mb-2">🕊️ Manuel Mallery</li>
+              <li>🕊️ B. "McGraw" Charles</li> <li>🕊️ Nolan Charles Jr.</li>
+              <li>🕊️ Evelyn Drake</li>
+              <li>🕊️ Chris Faulk</li>
+              <li>🕊️ Linda George</li>
+              <li>🕊️ Lois Gulliam</li>
+              <li>🕊️ Sherman Hypolite</li>
+              <li>🕊️ Ernest Joseph</li>
+              <li>🕊️ Kenneth Lastrappe</li>
+              <li>🕊️ Manuel Mallery</li>
             </ul>
           </div>
 
           <div class="col">
             <ul class="list-unstyled">
-              <li class="mb-2">🕊️ Ray Marshall</li>
-              <li class="mb-2">🕊️ Richard Marshall</li>
-              <li class="mb-2">🕊️ Wanda James Minor</li>
-              <li class="mb-2">🕊️ Mark Mitchell</li>
-              <li class="mb-2">🕊️ Stella Orphe</li>
-              <li class="mb-2">🕊️ Perry Pierre</li>
-              <li class="mb-2">🕊️ Chris Robertson</li>
-              <li class="mb-2">🕊️ Samuel Savoy</li>
-              <li class="mb-2">🕊️ Brenda Sias</li>
-              <li class="mb-2">🕊️ Lanky Stewart</li>
-              <li class="mb-2">🕊️ Lee Williams</li>
-              <li class="mb-2">🕊️ Phyllis Williams</li>
+              <li>🕊️ Ray Marshall</li>
+              <li>🕊️ Richard Marshall</li>
+              <li>🕊️ Wanda J. Minor</li> <li>🕊️ Mark Mitchell</li>
+              <li>🕊️ Stella Orphe</li>
+              <li>🕊️ Perry Pierre</li>
+              <li>🕊️ Chris Robertson</li>
+              <li>🕊️ Samuel Savoy</li>
+              <li>🕊️ Brenda Sias</li>
+              <li>🕊️ Lanky Stewart</li>
+              <li>🕊️ Lee Williams</li>
+              <li>🕊️ Phyllis Williams</li>
             </ul>
           </div>
 
