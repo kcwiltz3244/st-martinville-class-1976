@@ -138,9 +138,118 @@
         </div>
         <span class="btn fw-bold px-2" style="background-color: var(--school-purple); color: var(--school-gold); border: 1px solid var(--school-gold);">VIEW NOTES</span>
       </a>
-    </div>
+    </div>/* ===== Deluxe Photo Gallery ===== */
+.gallery img {
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.gallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.lightbox img {
+  max-width: 92%;
+  max-height: 82%;
+  border-radius: 10px;
+}
+.lightbox span {
+  position: absolute;
+  font-size: 2.5rem;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+}
+.lightbox .close { top: 15px; right: 25px; }
+.lightbox .prev { left: 20px; top: 50%; transform: translateY(-50%); }
+.lightbox .next { right: 20px; top: 50%; transform: translateY(-50%); }
+.lightbox .caption { color: #ddd; margin-top: 10px; font-size: 0.9rem; }
+
   </div>
 </section>
+<section id="photos" class="py-5 bg-light">
+  <div class="container">
+
+    <div class="row g-3 gallery">
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="photos/01.jpg" class="img-fluid rounded shadow-sm" alt="">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="photos/02.jpg" class="img-fluid rounded shadow-sm" alt="">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="photos/03.jpg" class="img-fluid rounded shadow-sm" alt="">
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="photos/04.jpg" class="img-fluid rounded shadow-sm" alt="">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <span class="close" id="closeLightbox">&times;</span>
+  <span class="prev" id="prevImg">&#10094;</span>
+  <img id="lightboxImg">
+  <span class="next" id="nextImg">&#10095;</span>
+  <div class="caption" id="lightboxCaption"></div>
+</div>
+// ===== PHOTO GALLERY LIGHTBOX =====
+const galleryImages = document.querySelectorAll(".gallery img");
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightboxImg");
+const caption = document.getElementById("lightboxCaption");
+let currentIndex = 0;
+
+galleryImages.forEach((img, index) => {
+  img.addEventListener("click", () => {
+    currentIndex = index;
+    showLightbox();
+  });
+});
+
+function showLightbox() {
+  lightbox.style.display = "flex";
+  lightboxImg.src = galleryImages[currentIndex].src;
+  caption.textContent = galleryImages[currentIndex].alt;
+}
+
+function hideLightbox() {
+  lightbox.style.display = "none";
+}
+
+document.getElementById("closeLightbox").addEventListener("click", hideLightbox);
+
+document.getElementById("nextImg").addEventListener("click", () => {
+  currentIndex = (currentIndex + 1) % galleryImages.length;
+  showLightbox();
+});
+
+document.getElementById("prevImg").addEventListener("click", () => {
+  currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+  showLightbox();
+});
+
+document.addEventListener("keydown", (e) => {
+  if (lightbox.style.display === "flex") {
+    if (e.key === "ArrowRight") nextImg.click();
+    if (e.key === "ArrowLeft") prevImg.click();
+    if (e.key === "Escape") hideLightbox();
+  }
+});
 
 <!--section id="photos" class="py-5 text-center bg-light">
   <div class="container">
