@@ -9,11 +9,9 @@
     :root { --school-purple:#4b0082; --school-gold:#ffd700; --deep-purple: #2a004a; }
     body { background:#fafafa; font-family: 'Segoe UI', Arial, sans-serif; }
     
-    /* Navigation */
     .navbar { background-color:var(--school-purple); border-bottom: 2px solid var(--school-gold); }
     .navbar-brand { color: var(--school-gold) !important; font-weight: bold; }
 
-    /* Submission Box Styling */
     .submission-box {
       background: white;
       border-left: 5px solid var(--school-gold);
@@ -25,7 +23,6 @@
 
     h2 { color: var(--school-purple); font-weight: bold; }
     
-    /* Photo Card Styling */
     .photo-card {
       border-radius: 12px;
       overflow: hidden;
@@ -43,7 +40,6 @@
     .img-container { height: 250px; background: #f0f0f0; position: relative; }
     .img-container img { width: 100%; height: 100%; object-fit: cover; }
     
-    /* Spinner Styling */
     #loading-spinner { color: var(--school-purple); }
 
     .btn-back {
@@ -76,14 +72,22 @@
     <p class="text-muted">St. Martinville Senior High — Class of 1976</p>
   </div>
 
- <div class="submission-box text-center mx-auto" style="max-width: 800px;">
+  <div class="submission-box text-center mx-auto" style="max-width: 800px;">
     <h5 class="fw-bold" style="color: var(--deep-purple);">📸 Have photos to share?</h5>
-    <p class="mb-2">We are looking for photos from our school days or past reunions!</p>
-    <a href="mailto:smshclassof76photos@gmail.com?subject=SMSH%201976%20Reunion%20Photos" 
-       style="color: var(--school-purple); font-weight: bold; text-decoration: underline;">
-       Click here to email your photos to us
-    </a>
-</div>
+    <p class="mb-3">We are looking for photos from our school days or past reunions!</p>
+    
+    <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3">
+        <a href="mailto:smshclassof76photos@gmail.com?subject=SMSH%201976%20Reunion%20Photos" 
+           class="btn btn-sm" style="background-color: var(--school-purple); color: var(--school-gold); border-radius: 50px; padding: 8px 20px; font-weight: bold;">
+           📧 Email Photos
+        </a>
+
+        <button onclick="copyEmail()" id="copyBtn" class="btn btn-sm btn-outline-secondary" style="border-radius: 50px; padding: 8px 20px; font-weight: bold;">
+           📋 Copy Email Address
+        </button>
+    </div>
+    <small class="d-block mt-3 text-muted">smshclassof76photos@gmail.com</small>
+  </div>
 
   <div id="loading-spinner" class="text-center my-5">
     <div class="spinner-border" role="status">
@@ -92,8 +96,7 @@
     <p class="mt-2">Gathering memories...</p>
   </div>
 
-  <div class="row g-4" id="photoGrid">
-    </div>
+  <div class="row g-4" id="photoGrid"></div>
 
   <div class="text-center mt-5">
     <a href="test.html" class="btn btn-back">RETURN TO MAIN PAGE</a>
@@ -105,19 +108,15 @@
 </footer>
 
 <script>
-  // Script to generate the gallery automatically
+  // SCRIPT 1: Generate the gallery automatically
   window.onload = function() {
     const photoGrid = document.getElementById('photoGrid');
     const spinner = document.getElementById('loading-spinner');
-    
-    // Total number of photos you plan to have named pic1.jpg, pic2.jpg, etc.
     const totalPhotos = 75; 
 
     for (let i = 1; i <= totalPhotos; i++) {
       const col = document.createElement('div');
       col.className = 'col-lg-3 col-md-4 col-sm-6';
-      
-      // We use onerror to hide the card if the image file doesn't exist yet
       col.innerHTML = `
         <div class="card photo-card shadow-sm">
           <div class="img-container">
@@ -128,10 +127,24 @@
       `;
       photoGrid.appendChild(col);
     }
-    
-    // Hide the spinner once the script has finished building the grid
     spinner.style.display = 'none';
   };
+
+  // SCRIPT 2: Copy Email functionality
+  function copyEmail() {
+    const email = "smshclassof76photos@gmail.com";
+    navigator.clipboard.writeText(email).then(() => {
+      const btn = document.getElementById('copyBtn');
+      const originalText = btn.innerHTML;
+      btn.innerText = "✅ Copied!";
+      btn.classList.replace('btn-outline-secondary', 'btn-success');
+      
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.classList.replace('btn-success', 'btn-outline-secondary');
+      }, 3000);
+    });
+  }
 </script>
 
 </body>
