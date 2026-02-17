@@ -34,6 +34,18 @@
     .countdown-number { display: block; font-size: 2.2rem; font-weight: bold; color: var(--school-gold); }
     .countdown-label { font-size: 0.75rem; text-transform: uppercase; color: #bbb; }
 
+    /* Photo Gallery */
+    .gallery-item {
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      border: 5px solid white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 4px;
+    }
+    .gallery-item:hover { transform: scale(1.05) rotate(1deg); z-index: 10; }
+    .modal-content { background: transparent; border: none; }
+    .modal-body img { border: 5px solid white; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+
     /* RSVP Grid */
     #yesListContainer { border-radius: 12px; background: #f8f9fa; border: 1px solid #dee2e6; max-height: 280px; overflow-y: auto; }
     .rsvp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
@@ -41,14 +53,14 @@
     @media (min-width: 992px) { .rsvp-grid { grid-template-columns: repeat(6, 1fr); } }
     .attendee-name { font-size: 0.82rem; padding: 4px 6px; background: white; border: 1px solid #e9ecef; border-radius: 4px; text-align: center; color: var(--deep-purple); }
 
-    /* Memorial List Logic */
+    /* Memorial Animation */
+    .reveal-item { opacity: 0; transform: translateY(20px); transition: all 0.8s ease-out; }
+    .reveal-item.visible { opacity: 1; transform: translateY(0); }
+
     .memorial-list { font-family: 'Georgia', serif; color: #4a148c; line-height: 1.4; }
-    .memorial-list li { margin-bottom: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     
-    /* Mobile Fix for Memorial */
     @media (max-width: 768px) {
-      .memorial-list { font-size: 0.62rem !important; }
-      .memorial-list ul { padding-left: 2px !important; }
+      .memorial-list { font-size: 0.65rem !important; }
       .memorial-list li { margin-bottom: 4px !important; }
     }
 
@@ -74,7 +86,7 @@
         <li class="nav-item"><a class="nav-link px-3" href="#rsvp">Who's Coming</a></li>
         <li class="nav-item"><a class="nav-link px-3" href="#calendar">Meetings</a></li>
         <li class="nav-item"><a class="nav-link px-3" href="#photos">Photos</a></li>
-        <li class="nav-item"><a class="nav-link px-3" href="#tasks">Task Tracker</a></li>
+        <li class="nav-item"><a class="nav-link px-3" href="#tasks">Tasks</a></li>
         <li class="nav-item"><a class="nav-link px-3" href="#memorial">Memorial</a></li>
       </ul>
     </div>
@@ -109,7 +121,7 @@
       </h4>
     </div>
     <div class="mb-5">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNH2rLwb6w9zvIE113HT4Ru0yNCUORL29ijm2Jg4Ws2Bu8sA/viewform?usp=header" target="_blank" class="btn btn-lg shadow-sm" style="background-color: var(--school-purple); color: var(--school-gold); border: 2px solid var(--school-gold); padding: 12px 35px; font-weight: bold; border-radius: 50px;">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNH2rLwb6w9zvIE113HT4Ru0yNCUORL29ijm2Jg4Ws2Bu8sA/viewform" target="_blank" class="btn btn-lg shadow-sm" style="background-color: var(--school-purple); color: var(--school-gold); border: 2px solid var(--school-gold); padding: 12px 35px; font-weight: bold; border-radius: 50px;">
         📝 Click Here to RSVP
       </a>
     </div>
@@ -121,7 +133,7 @@
   </div>
 </section>
 
-<section id="calendar" class="py-5 bg-white">
+<section id="calendar" class="py-5 bg-white border-bottom">
   <div class="container text-center">
     <h2 class="mb-4">Meetings & Events</h2>
     <div class="mx-auto shadow-sm border rounded overflow-hidden mb-4" style="max-width: 1050px; height: 600px; background: #f8f9fa;">
@@ -136,21 +148,24 @@
             <small class="text-muted">Click to view notes from our last planning session</small>
           </div>
         </div>
-        <span class="btn fw-bold px-2" style="background-color: var(--school-purple); color: var(--school-gold); border: 1px solid var(--school-gold);">VIEW NOTES</span>
+        <span class="btn fw-bold" style="background-color: var(--school-purple); color: var(--school-gold); border: 1px solid var(--school-gold);">VIEW NOTES</span>
       </a>
     </div>
   </div>
 </section>
 
-<!--section id="photos" class="py-5 text-center bg-light">
-  <div class="container">
-    <h2 class="fw-bold" style="color: #4a148c;">MEMORIES THROUGH THE YEARS</h2>
-    <p class="text-muted">View photos and upload your own to our class album.</p>
-    <a href="https://photos.app.goo.gl/XVmX9Ets2LZX18qT8" target="_blank" class="btn btn-lg shadow" style="background-color: var(--school-gold); color: var(--deep-purple); font-weight: bold; border-radius: 50px; padding: 15px 40px;">
-      📸 View Class Gallery
-    </a>
+<section id="photos" class="py-5 bg-light">
+  <div class="container text-center">
+    <h2 class="fw-bold">Memories Through The Years</h2>
+    <p class="text-muted mb-5">Click a photo to enlarge</p>
+    <div class="row g-4">
+      <div class="col-6 col-md-4 col-lg-3"><img src="photo1.jpg" class="img-fluid gallery-item reveal-item" alt="Memories" data-bs-toggle="modal" data-bs-target="#photoModal" onclick="showPhoto(this.src)"></div>
+      <div class="col-6 col-md-4 col-lg-3"><img src="photo2.jpg" class="img-fluid gallery-item reveal-item" alt="Memories" data-bs-toggle="modal" data-bs-target="#photoModal" onclick="showPhoto(this.src)"></div>
+      <div class="col-6 col-md-4 col-lg-3"><img src="photo3.jpg" class="img-fluid gallery-item reveal-item" alt="Memories" data-bs-toggle="modal" data-bs-target="#photoModal" onclick="showPhoto(this.src)"></div>
+      <div class="col-6 col-md-4 col-lg-3"><img src="photo4.jpg" class="img-fluid gallery-item reveal-item" alt="Memories" data-bs-toggle="modal" data-bs-target="#photoModal" onclick="showPhoto(this.src)"></div>
+    </div>
   </div>
-</section>-->
+</section>
 
 <section id="tasks" class="py-5 bg-white">
   <div class="container">
@@ -169,7 +184,7 @@
   </div>
 </section>
 
-<section id="memorial" class="py-5 bg-white">
+<section id="memorial" class="py-5 bg-white border-top">
   <div class="container">
     <div class="row align-items-center g-4">
       <div class="col-lg-4 text-center">
@@ -181,17 +196,17 @@
         <div class="row row-cols-3 gx-1 memorial-list">
           <div class="col">
             <ul class="list-unstyled">
-              <li>🕊️ Vernon Abbott</li><li>🕊️ Roland Allen</li><li>🕊️ Jody Anthony</li><li>🕊️ Debra Batiste</li><li>🕊️ Linda Batiste</li><li>🕊️ Rickey Batiste</li><li>🕊️ Terry Benjamin</li><li>🕊️ Tyrone Bowles</li><li>🕊️ Gary Charles</li><li>🕊️ Jules Charles</li><li>🕊️ B. "McGraw" Charles</li>
+              <li class="reveal-item">🕊️ Vernon Abbott</li><li class="reveal-item">🕊️ Roland Allen</li><li class="reveal-item">🕊️ Jody Anthony</li><li class="reveal-item">🕊️ Debra Batiste</li><li class="reveal-item">🕊️ Linda Batiste</li><li class="reveal-item">🕊️ Rickey Batiste</li><li class="reveal-item">🕊️ Terry Benjamin</li><li class="reveal-item">🕊️ Tyrone Bowles</li><li class="reveal-item">🕊️ Gary Charles</li><li class="reveal-item">🕊️ Jules Charles</li><li class="reveal-item">🕊️ B. "McGraw" Charles</li>
             </ul>
           </div>
           <div class="col">
             <ul class="list-unstyled">
-              <li>🕊️ Nolan Charles Jr.</li><li>🕊️ Evelyn Drake</li><li>🕊️ Chris Faulk</li><li>🕊️ Linda George</li><li>🕊️ Lois Gulliam</li><li>🕊️ Sherman Hypolite</li><li>🕊️ Ernest Joseph</li><li>🕊️ Kenneth Lastrappe</li><li>🕊️ Manuel Mallery</li><li>🕊️ Ray Marshall</li><li>🕊️ Richard Marshall</li>
+              <li class="reveal-item">🕊️ Nolan Charles Jr.</li><li class="reveal-item">🕊️ Evelyn Drake</li><li class="reveal-item">🕊️ Chris Faulk</li><li class="reveal-item">🕊️ Linda George</li><li class="reveal-item">🕊️ Lois Gulliam</li><li class="reveal-item">🕊️ Sherman Hypolite</li><li class="reveal-item">🕊️ Ernest Joseph</li><li class="reveal-item">🕊️ Kenneth Lastrappe</li><li class="reveal-item">🕊️ Manuel Mallery</li><li class="reveal-item">🕊️ Ray Marshall</li><li class="reveal-item">🕊️ Richard Marshall</li>
             </ul>
           </div>
           <div class="col">
             <ul class="list-unstyled">
-              <li>🕊️ Wanda James Minor</li><li>🕊️ Mark Mitchell</li><li>🕊️ Stella Orphe</li><li>🕊️ Perry Pierre</li><li>🕊️ Chris Robertson</li><li>🕊️ Samuel Savoy</li><li>🕊️ Brenda Sias</li><li>🕊️ Walter "Lanky" Stewart</li><li>🕊️ Lee Williams</li><li>🕊️ Phyllis Williams</li>
+              <li class="reveal-item">🕊️ Wanda James Minor</li><li class="reveal-item">🕊️ Mark Mitchell</li><li class="reveal-item">🕊️ Stella Orphe</li><li class="reveal-item">🕊️ Perry Pierre</li><li class="reveal-item">🕊️ Chris Robertson</li><li class="reveal-item">🕊️ Samuel Savoy</li><li class="reveal-item">🕊️ Brenda Sias</li><li class="reveal-item">🕊️ Walter "Lanky" Stewart</li><li class="reveal-item">🕊️ Lee Williams</li><li class="reveal-item">🕊️ Phyllis Williams</li>
             </ul>
           </div>
         </div>
@@ -200,10 +215,19 @@
   </div>
 </section>
 
-<footer class="py-4" style="background: #1e003c; border-top: 1px solid rgba(255,255,255,0.1);">
-  <div class="container text-center">
-    <p class="mb-0" style="color: var(--school-gold); font-weight: bold;">&copy; 2026 St. Martinville Sr. High – Class of 1976</p>
+<div class="modal fade" id="photoModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-body text-center p-0">
+        <img src="" id="modalImage" class="img-fluid shadow-lg">
+        <div class="mt-3"><button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Close</button></div>
+      </div>
+    </div>
   </div>
+</div>
+
+<footer class="py-4 text-center" style="background: #1e003c; border-top: 1px solid rgba(255,255,255,0.1);">
+  <p class="mb-0" style="color: var(--school-gold); font-weight: bold;">&copy; 2026 SMSH – Class of 1976</p>
 </footer>
 
 <button type="button" class="btn rounded-circle shadow" id="btn-back-to-top">↑</button>
@@ -245,15 +269,26 @@
   };
   mybutton.addEventListener("click", () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
-  // TASK RENDER
+  // PHOTO POPUP
+  function showPhoto(src) { document.getElementById('modalImage').src = src; }
+
+  // REVEAL ANIMATION (SCROLL WATCHER)
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => { entry.target.classList.add('visible'); }, index * 100);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal-item').forEach((el) => observer.observe(el));
+
+  // TASK LIST
   const myTasks = [
-    { task: "Establish bank account and confirm signers", who: "Madelyn Phillips", when: "March 15, 2026", status: "In Progress" },
-    { task: "Confirm private room availability and fees", who: "Sandra Knatt", when: "March 15, 2026", status: "In Progress" },
-    { task: "Obtain catering estimates and provide T-shirt sample", who: "Sadie Fontenot", when: "Feb 17, 2026", status: "In Progress" },
-    { task: "Prepare classmate contact lists", who: "Shantley Guidry", when: "March 31, 2026", status: "In Progress" },
-    { task: "Research hotel pricing", who: "Lolly Alexander", when: "March 31, 2026", status: "In Progress" },
-    { task: "Collect music requests", who: "Patrick Prescott", when: "March 31, 2026", status: "In Progress" },
-    { task: "Finalize and distribute website link", who: "Kevin Wiltz", when: "Feb. 11, 2026", status: "Done" }
+    { task: "Establish bank account", who: "Madelyn Phillips", when: "March 15, 2026", status: "In Progress" },
+    { task: "Private room availability", who: "Sandra Knatt", when: "March 15, 2026", status: "In Progress" },
+    { task: "Catering & T-shirt samples", who: "Sadie Fontenot", when: "Feb 17, 2026", status: "In Progress" },
+    { task: "Prepare contact lists", who: "Shantley Guidry", when: "March 31, 2026", status: "In Progress" },
+    { task: "Finalize website", who: "Kevin Wiltz", when: "Feb 11, 2026", status: "Done" }
   ];
   function renderTasks() {
     const tableBody = document.getElementById('taskTableBody');
