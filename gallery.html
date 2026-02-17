@@ -8,10 +8,8 @@
   <style>
     :root { --school-purple:#4b0082; --school-gold:#ffd700; --deep-purple: #2a004a; }
     body { background:#fafafa; font-family: 'Segoe UI', Arial, sans-serif; }
-    
     .navbar { background-color:var(--school-purple); border-bottom: 2px solid var(--school-gold); }
     .navbar-brand { color: var(--school-gold) !important; font-weight: bold; }
-
     .submission-box {
       background: white;
       border-left: 5px solid var(--school-gold);
@@ -20,42 +18,12 @@
       margin-bottom: 40px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     }
-
     h2 { color: var(--school-purple); font-weight: bold; }
-    
-    .photo-card {
-      border-radius: 12px;
-      overflow: hidden;
-      background: white;
-      border: 1px solid #ddd;
-      transition: all 0.3s ease;
-      height: 100%;
-    }
-    .photo-card:hover { 
-      transform: translateY(-5px); 
-      border-color: var(--school-gold);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
-    
-    .img-container { height: 250px; background: #f0f0f0; position: relative; }
+    .photo-card { border-radius: 12px; overflow: hidden; background: white; border: 1px solid #ddd; transition: 0.3s; height: 100%; }
+    .photo-card:hover { transform: translateY(-5px); border-color: var(--school-gold); }
+    .img-container { height: 250px; background: #f0f0f0; }
     .img-container img { width: 100%; height: 100%; object-fit: cover; }
-    
-    #loading-spinner { color: var(--school-purple); }
-
-    .btn-back {
-      background-color: var(--school-purple);
-      color: var(--school-gold);
-      border: 2px solid var(--school-gold);
-      font-weight: bold;
-      border-radius: 50px;
-      padding: 12px 40px;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-    .btn-back:hover {
-      background-color: var(--deep-purple);
-      color: white;
-    }
+    .btn-back { background-color: var(--school-purple); color: var(--school-gold); border: 2px solid var(--school-gold); font-weight: bold; border-radius: 50px; padding: 12px 40px; text-decoration: none; }
   </style>
 </head>
 <body>
@@ -66,39 +34,27 @@
   </div>
 </nav>
 
-<div class="container py-5">
-  <div class="text-center mb-5">
-    <h2>Memory Gallery</h2>
-    <p class="text-muted">St. Martinville Senior High — Class of 1976</p>
-  </div>
+<div class="container py-5 text-center">
+  <h2>Memory Gallery</h2>
+  <p class="text-muted mb-5">St. Martinville Senior High — Class of 1976</p>
 
-  <div class="submission-box text-center mx-auto" style="max-width: 800px;">
-    <h5 class="fw-bold" style="color: var(--deep-purple);">📸 Have photos to share?</h5>
-    <p class="mb-3">We are looking for photos from our school days or past reunions!</p>
+  <div class="submission-box mx-auto" style="max-width: 650px;">
+    <h5 class="fw-bold" style="color: var(--deep-purple);">📸 Want to add your photos?</h5>
+    <p class="mb-3">Click the address below to copy it, then paste it into your email to send us your pictures!</p>
     
-    <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3">
-        <a href="mailto:smshclassof76photos@gmail.com?subject=SMSH%201976%20Reunion%20Photos" 
-           class="btn btn-sm" style="background-color: var(--school-purple); color: var(--school-gold); border-radius: 50px; padding: 8px 20px; font-weight: bold;">
-           📧 Email Photos
-        </a>
-
-        <button onclick="copyEmail()" id="copyBtn" class="btn btn-sm btn-outline-secondary" style="border-radius: 50px; padding: 8px 20px; font-weight: bold;">
-           📋 Copy Email Address
-        </button>
-    </div>
-    <small class="d-block mt-3 text-muted">smshclassof76photos@gmail.com</small>
+    <button onclick="copyAndNotify()" id="mainEmailBtn" class="btn btn-lg w-100" 
+            style="background-color: var(--school-purple); color: var(--school-gold); border-radius: 10px; padding: 15px; font-weight: bold; border: 2px solid var(--school-gold); font-size: 1.1rem;">
+            smshclassof76photos@gmail.com
+    </button>
+    
+    <p id="instructionText" class="mt-3 text-muted fw-bold">
+        (Click the box above to copy)
+    </p>
   </div>
 
-  <div id="loading-spinner" class="text-center my-5">
-    <div class="spinner-border" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-    <p class="mt-2">Gathering memories...</p>
-  </div>
+  <div class="row g-4 mt-2" id="photoGrid"></div>
 
-  <div class="row g-4" id="photoGrid"></div>
-
-  <div class="text-center mt-5">
+  <div class="mt-5">
     <a href="test.html" class="btn btn-back">RETURN TO MAIN PAGE</a>
   </div>
 </div>
@@ -108,41 +64,36 @@
 </footer>
 
 <script>
-  // SCRIPT 1: Generate the gallery automatically
+  // Script to build the gallery
   window.onload = function() {
     const photoGrid = document.getElementById('photoGrid');
-    const spinner = document.getElementById('loading-spinner');
     const totalPhotos = 75; 
-
     for (let i = 1; i <= totalPhotos; i++) {
       const col = document.createElement('div');
       col.className = 'col-lg-3 col-md-4 col-sm-6';
-      col.innerHTML = `
-        <div class="card photo-card shadow-sm">
-          <div class="img-container">
-            <img src="pic${i}.jpg" loading="lazy" alt="Class Memory" 
-                 onerror="this.closest('.col-lg-3').style.display='none'">
-          </div>
-        </div>
-      `;
+      col.innerHTML = `<div class="card photo-card shadow-sm"><div class="img-container"><img src="pic${i}.jpg" loading="lazy" onerror="this.closest('.col-lg-3').style.display='none'"></div></div>`;
       photoGrid.appendChild(col);
     }
-    spinner.style.display = 'none';
   };
 
-  // SCRIPT 2: Copy Email functionality
-  function copyEmail() {
+  // Script to Copy Email
+  function copyAndNotify() {
     const email = "smshclassof76photos@gmail.com";
+    const btn = document.getElementById('mainEmailBtn');
+    const text = document.getElementById('instructionText');
+
     navigator.clipboard.writeText(email).then(() => {
-      const btn = document.getElementById('copyBtn');
-      const originalText = btn.innerHTML;
-      btn.innerText = "✅ Copied!";
-      btn.classList.replace('btn-outline-secondary', 'btn-success');
-      
+      btn.innerText = "✅ COPIED!";
+      btn.style.backgroundColor = "#28a745"; 
+      text.innerHTML = "Success! Now open your email and paste the address.";
+      text.style.color = "#28a745";
+
       setTimeout(() => {
-        btn.innerHTML = originalText;
-        btn.classList.replace('btn-success', 'btn-outline-secondary');
-      }, 3000);
+        btn.innerText = email;
+        btn.style.backgroundColor = "var(--school-purple)";
+        text.innerHTML = "(Click the box above to copy)";
+        text.style.color = "#6c757d";
+      }, 4000);
     });
   }
 </script>
