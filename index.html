@@ -10,10 +10,11 @@
     :root { --school-purple:#4b0082; --school-gold:#ffd700; --deep-purple: #2a004a; }
     body { background:#fafafa; color:#333; font-family: 'Segoe UI', Arial, sans-serif; overflow-x: hidden; }
     
-    .navbar { background-color:var(--school-purple); border-bottom: 2px solid var(--school-gold); padding: 0.5rem 1rem; }
-    .navbar a.nav-link { color:white !important; font-weight:bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+    /* Navigation Bar */
+    .navbar { background-color:var(--school-purple); border-bottom: 2px solid var(--school-gold); padding: 0.6rem 1rem; }
+    .navbar a.nav-link { color:white !important; font-weight:bold; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
     
-    /* Header matches your image with no box */
+    /* Header (Tiger) Section */
     header {
       position:relative;
       background:url("tiger.png") center/cover no-repeat;
@@ -26,44 +27,54 @@
       background:rgba(0,0,0,0.4); z-index:0;
     }
     header .container { position:relative; z-index:1; }
-    header h1 { font-size: 3.5rem; font-weight: 800; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+    header h1 { font-size: 3.5rem; font-weight: 800; text-shadow: 2px 2px 5px rgba(0,0,0,0.7); }
     
-    /* Full-width purple countdown band from your image */
+    /* Countdown Purple Band (Matches Screenshot) */
     .timer-band {
       background: var(--deep-purple);
       color: white;
-      padding: 30px 0;
+      padding: 25px 0;
       text-align: center;
       border-top: 4px solid var(--school-gold);
       border-bottom: 4px solid var(--school-gold);
     }
-    #countdown-wrapper { display: flex; justify-content: center; gap: 20px; font-weight: bold; }
-    .timer-unit { font-size: 2.5rem; line-height: 1; }
-    .timer-label { font-size: 0.7rem; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-top: 5px; }
+    .countdown-container { display: flex; justify-content: center; gap: 30px; font-family: 'Courier New', monospace; }
+    .timer-unit { font-size: 2.8rem; font-weight: bold; line-height: 1; color: white; }
+    .timer-label { font-size: 0.75rem; text-transform: uppercase; color: var(--school-gold); margin-top: 5px; font-weight: bold; }
 
-    /* RSVP elements matching your pill design */
-    .rsvp-pill { 
+    /* Who's Coming / RSVP Layout (Matches Screenshot) */
+    .rsvp-status-bar { 
         background: var(--deep-purple); 
         color: var(--school-gold); 
-        border: 2px solid #000; 
-        border-radius: 15px; 
-        padding: 15px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        border: 2px solid var(--school-gold); 
+        border-radius: 50px; 
+        padding: 15px; 
+        max-width: 750px;
+        margin: 0 auto 30px auto;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
-    .btn-rsvp {
+    .btn-rsvp-pill {
         background: var(--school-purple);
         color: white;
         border: 2px solid var(--school-gold);
         border-radius: 50px;
-        padding: 10px 30px;
+        padding: 12px 40px;
         font-weight: bold;
+        transition: transform 0.2s;
     }
+    .btn-rsvp-pill:hover { color: var(--school-gold); transform: scale(1.05); }
 
-    #yesListContainer { border-radius: 12px; background: #fff; border: 1px solid #dee2e6; max-height: 300px; overflow-y: auto; }
-    .rsvp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
-    @media (min-width: 768px) { .rsvp-grid { grid-template-columns: repeat(6, 1fr); } }
-    .attendee-name { font-size: 0.8rem; padding: 6px; background: #fff; border: 1px solid #eee; border-radius: 4px; text-align: center; font-weight: 600; }
+    /* Attendee Grid */
+    #yesListContainer { border-radius: 12px; background: #fff; border: 1px solid #dee2e6; max-height: 320px; overflow-y: auto; }
+    .rsvp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    @media (min-width: 768px) { .rsvp-grid { grid-template-columns: repeat(5, 1fr); } }
+    .attendee-name { font-size: 0.85rem; padding: 6px; background: #fff; border: 1px solid #eee; border-radius: 4px; text-align: center; font-weight: 600; color: var(--deep-purple); }
     
+    /* Task Tracker Styles */
+    #tasks table { background: white; border-radius: 8px; overflow: hidden; }
+    .badge-progress { background-color: #ffc107; color: #000; }
+    .badge-done { background-color: #198754; color: #fff; }
+
     #btn-back-to-top { position: fixed; bottom: 20px; right: 20px; display: none; z-index: 1000; background: var(--school-purple); color: var(--school-gold); border: 2px solid var(--school-gold); width: 45px; height: 45px; border-radius: 50%; }
   </style> 
 </head>
@@ -77,7 +88,7 @@
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link px-3" href="#rsvp">Who's Coming</a></li>
         <li class="nav-item"><a class="nav-link px-3" href="#calendar">Meetings</a></li>
-        <li class="nav-item"><a class="nav-link px-3" href="#photos">Photos</a></li>
+        <li class="nav-item"><a class="nav-link px-3" href="#photos-placeholder">Photos</a></li>
         <li class="nav-item"><a class="nav-link px-3" href="#tasks">Tasks</a></li>
         <li class="nav-item"><a class="nav-link px-3" href="#memorial">Memorial</a></li>
       </ul>
@@ -95,7 +106,7 @@
 <section class="timer-band">
   <div class="container">
     <p class="text-uppercase fw-bold mb-3" style="letter-spacing: 2px; font-size: 0.9rem; color: var(--school-gold);">Time Until Celebration</p>
-    <div id="countdown-wrapper">
+    <div class="countdown-container">
         <div><div class="timer-unit" id="days">00</div><div class="timer-label">Days</div></div>
         <div><div class="timer-unit" id="hours">00</div><div class="timer-label">Hrs</div></div>
         <div><div class="timer-unit" id="mins">00</div><div class="timer-label">Min</div></div>
@@ -107,60 +118,120 @@
 <section id="rsvp" class="py-5 bg-white">
   <div class="container text-center">
     <h2 class="fw-bold mb-4" style="color: var(--deep-purple);">Who's Coming?</h2>
-    <div class="rsvp-pill shadow mb-4 mx-auto" style="max-width: 800px;">
-      <h4 class="mb-0 fw-bold">62 Classmates & Guests Confirmed!</h4>
+    
+    <div class="rsvp-status-bar shadow">
+      <h4 class="mb-0 fw-bold">
+        <span id="finalTotal">...</span> Classmates & Guests Confirmed!
+      </h4>
     </div>
     
-    <a href="https://docs.google.com/forms/d/..." target="_blank" class="btn btn-rsvp btn-lg mb-5 shadow">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNH2rLwb6w9zvIE113HT4Ru0yNCUORL29ijm2Jg4Ws2Bu8sA/viewform" target="_blank" class="btn btn-rsvp-pill btn-lg mb-5 shadow text-uppercase">
       📝 Click Here to RSVP
     </a>
 
-    <div id="yesListContainer" class="p-3 mb-4 shadow-sm">
+    <div id="yesListContainer" class="p-4 mb-4 shadow-sm border mx-auto" style="max-width: 1000px;">
         <div class="rsvp-grid" id="attendeeGrid"></div>
     </div>
   </div>
 </section>
 
-<section id="tasks" class="py-5 bg-light">
-    <div class="container">
-      <h2 class="text-center mb-4">Task Tracker</h2>
-      <div class="table-responsive shadow-sm mx-auto" style="max-width: 1000px;">
-        <table class="table table-hover align-middle bg-white">
-          <thead style="background: var(--deep-purple); color: white;">
-            <tr><th>Task</th><th>Who</th><th>When</th><th>Status</th></tr>
-          </thead>
-          <tbody id="taskTableBody"></tbody>
-        </table>
-      </div>
+<section id="calendar" class="py-5 bg-light border-bottom">
+  <div class="container text-center">
+    <h2 class="mb-4">Meetings & Events</h2>
+    <div class="ratio ratio-16x9 shadow-sm rounded mx-auto" style="max-width: 1000px; min-height: 500px;">
+      <iframe src="https://calendar.google.com/calendar/embed?src=fbcf3427770ee3c74ba269d485ba49d39d6ea67f45be295d849f038ba7c79497%40group.calendar.google.com&ctz=America%2FChicago" style="border:0" frameborder="0"></iframe>
     </div>
+  </div>
 </section>
 
+<section id="photos-placeholder" class="py-5 bg-white text-center">
+  <div class="container">
+    <div class="p-5 rounded-4" style="border: 2px dashed #ccc; background: #fafafa; max-width: 800px; margin: 0 auto;">
+      <h4 class="fw-bold text-muted">📸 MEMORIAL PHOTO GALLERY</h4>
+      <p class="mb-0 text-secondary fs-5">We are currently gathering memories. The gallery will be launching soon!</p>
+    </div>
+  </div>
+</section>
+
+<section id="tasks" class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center mb-4">Committee Task Tracker</h2>
+    <div class="table-responsive shadow-sm mx-auto" style="max-width: 1050px;">
+      <table class="table table-hover align-middle bg-white">
+        <thead style="background: var(--deep-purple); color: white;">
+          <tr><th class="p-3">Task Description</th><th>Assigned To</th><th>Target Date</th><th>Status</th></tr>
+        </thead>
+        <tbody id="taskTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="memorial" class="py-5 bg-white border-top">
+  <div class="container text-center">
+    <img src="empty chair.png" alt="Memory" class="img-fluid mb-4" style="max-height: 150px;">
+    <h3 class="fw-bold" style="color: #4a148c;">IN LOVING MEMORY</h3>
+    <div class="row row-cols-2 row-cols-md-3 mt-5 text-start" id="memorialGrid"></div>
+  </div>
+</section>
+
+<footer class="py-4 text-center" style="background: #1e003c; color: var(--school-gold);">
+  <p class="mb-0 fw-bold">&copy; 2026 SMSH – Class of 1976</p>
+</footer>
+
+<button type="button" id="btn-back-to-top">↑</button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+  // RESTORED TASK LIST
+  const myTasks = [
+    { task: "Establish bank account and confirm signers", who: "Madelyn Phillips", when: "March 15, 2026", status: "In Progress" },
+    { task: "Confirm private room availability and fees", who: "Sandra Knatt", when: "March 15, 2026", status: "In Progress" },
+    { task: "Obtain catering estimates and provide T-shirt sample", who: "Sadie Fontenot", when: "Feb 17, 2026", status: "In Progress" },
+    { task: "Prepare classmate contact lists", who: "Shantley Guidry", when: "March 31, 2026", status: "In Progress" },
+    { task: "Research hotel pricing", who: "Lolly Alexander", when: "March 31, 2026", status: "In Progress" },
+    { task: "Collect music requests", who: "Patrick Prescott", when: "March 31, 2026", status: "In Progress" },
+    { task: "Finalize and distribute website link", who: "Kevin Wiltz", when: "Feb. 11, 2026", status: "Done" }
+  ];
+
+  document.getElementById('taskTableBody').innerHTML = myTasks.map(item => `
+    <tr>
+      <td class="p-3 fw-bold">${item.task}</td>
+      <td>${item.who}</td>
+      <td>${item.when}</td>
+      <td><span class="badge ${item.status==='Done'?'bg-success':'bg-warning text-dark'}">${item.status}</span></td>
+    </tr>`).join('');
+
+  // TIMER LOGIC
   function updateTimer() {
     const targetDate = new Date("June 26, 2026 18:00:00").getTime();
     const now = new Date().getTime();
     const diff = targetDate - now;
-    
     document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
     document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     document.getElementById("mins").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     document.getElementById("secs").innerText = Math.floor((diff % (1000 * 60)) / 1000);
   }
-  setInterval(updateTimer, 1000);
-  updateTimer();
+  setInterval(updateTimer, 1000); updateTimer();
 
-  // Load Task Data (The full list you found earlier)
-  const myTasks = [
-      { task: "Establish bank account and confirm signers", who: "Madelyn Phillips", when: "March 15, 2026", status: "In Progress" },
-      { task: "Confirm private room availability and fees", who: "Sandra Knatt", when: "March 15, 2026", status: "In Progress" },
-      { task: "Obtain catering estimates and provide T-shirt sample", who: "Sadie Fontenot", when: "Feb 17, 2026", status: "In Progress" },
-      { task: "Prepare classmate contact lists", who: "Shantley Guidry", when: "March 31, 2026", status: "In Progress" },
-      { task: "Research hotel pricing", who: "Lolly Alexander", when: "March 31, 2026", status: "In Progress" },
-      { task: "Collect music requests", who: "Patrick Prescott", when: "March 31, 2026", status: "In Progress" },
-      { task: "Finalize and distribute website link", who: "Kevin Wiltz", when: "Feb. 11, 2026", status: "Done" }
-  ];
-  document.getElementById('taskTableBody').innerHTML = myTasks.map(item => `
-    <tr><td class="fw-bold">${item.task}</td><td>${item.who}</td><td>${item.when}</td><td><span class="badge ${item.status==='Done'?'bg-success':'bg-warning text-dark'}">${item.status}</span></td></tr>`).join('');
+  // RSVP DATA LOAD
+  const API_URL = 'https://script.google.com/macros/s/AKfycbxoIJZz2RDDkaW9V4K_Vz8w9GT2Gfaj_RZYWY84FyJfJ6elgq2IeNHkOE0jz3x4g5y6hw/exec';
+  async function loadData() {
+    try {
+      const res = await fetch(API_URL);
+      const data = await res.json();
+      document.getElementById('finalTotal').textContent = data.total || "0";
+      document.getElementById('attendeeGrid').innerHTML = data.attendees.map(a => `<div class="attendee-name">${a.name}</div>`).join('');
+    } catch (e) { document.getElementById('finalTotal').textContent = "??"; }
+  }
+  loadData();
+
+  // MEMORIAL LIST
+  const memorialNames = ["Vernon Abbott", "Roland Allen", "Jody Anthony", "Debra Batiste", "Linda Batiste", "Rickey Batiste", "Terry Benjamin", "Linda Bonhomme", "Tyrone Bowles", "Gary Charles", "Jules Charles", "Nolan Charles Jr.", "Evelyn Drake", "Chris Faulk", "Linda George", "Gary Guidry", "Lois Gulliam", "Sherman Hypolite", "Ernest Joseph", "Kenneth Lastrappe", "Mary Joyce Leon", "Manuel Mallery", "Ray Marshall", "Richard Marshall", "Mark Mitchell", "Stella Orphe", "Annette Pierre", "Perry Pierre", "Chris Robertson", "Samuel Savoy", "Brenda Sias", "Walter Lanky Stewart", "Lee Williams", "Phyllis Williams"];
+  document.getElementById('memorialGrid').innerHTML = memorialNames.map(name => `<div class="col mb-2">🕊️ ${name}</div>`).join('');
+
+  window.onscroll = () => { document.getElementById("btn-back-to-top").style.display = (window.scrollY > 200) ? "block" : "none"; };
+  document.getElementById("btn-back-to-top").onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
 </script>
 </body>
 </html>
