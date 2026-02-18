@@ -1,62 +1,28 @@
-<tbody>
-  <tr>
-    <td class="p-3 fw-bold">Finalize and distribute website</td>
-    <td>Kevin Wiltz</td>
-    <td>Feb 11, 2026</td>
-    <td><span class="badge bg-success">Done</span></td>
-  </tr>
-  <tr>
-    <td class="p-3 fw-bold">Catering estimates & T-shirt sample</td>
-    <td>Sadie Fontenot</td>
-    <td>Feb 17, 2026</td>
-    <td><span class="badge bg-warning text-dark">In Progress</span></td>
-  </tr>
-  <tr>
-    <td class="p-3 fw-bold">Bank account & confirm signers</td>
-    <td>Madelyn Phillips</td>
-    <td>March 15, 2026</td>
-    <td><span class="badge bg-warning text-dark">In Progress</span></td>
-  </tr>
-  <tr>
-    <td class="p-3 fw-bold">Confirm private room & fees</td>
-    <td>Sandra Knatt</td>
-    <td>March 15, 2026</td>
-    <td><span class="badge bg-warning text-dark">In Progress</span></td>
-  </tr>
-  <tr>
-    <td class="p-3 fw-bold">Prepare classmate contact lists</td>
-    <td>Shantley Guidry</td>
-    <td>March 31, 2026</td>
-    <td><span class="badge bg-warning text-dark">In Progress</span></td>
-  </tr>
-  <tr>
-    <td class="p-3 fw-bold">Research hotel pricing</td>
-    <td>Lolly Alexander</td>
-    <td>March 31, 2026</td>
-    <td><span class="badge bg-warning text-dark">In Progress</span></td>
-  </tr>
-  <tr>
-    <td class="p-3 fw-bold">Collect music requests</td>
-    <td>Patrick Prescott</td>
-    <td>March 31, 2026</td>
-    <td><span class="badge bg-warning text-dark">In Progress</span></td>
-  </tr>
-  <tr>
-    <td class="p-3 fw-bold">Decorations & Theme planning</td>
-    <td>Committee</td>
-    <td>April 15, 2026</td>
-    <td><span class="badge bg-warning text-dark">In Progress</span></td>
-  </tr>
-  <tr>
-    <td class="p-3 fw-bold">Finalize T-shirt order counts</td>
-    <td>Sadie Fontenot</td>
-    <td>May 01, 2026</td>
-    <td><span class="badge bg-warning text-dark">In Progress</span></td>
-  </tr>
-  <tr>
-    <td class="p-3 fw-bold">Design Memorial program</td>
-    <td>Kevin Wiltz</td>
-    <td>May 15, 2026</td>
-    <td><span class="badge bg-warning text-dark">In Progress</span></td>
-  </tr>
-</tbody>
+// TASK TRACKER DATA - FULL COMMITTEE LIST
+  const myTasks = [
+    { task: "Finalize and distribute website", who: "Kevin Wiltz", when: "Feb 11, 2026", status: "Done" },
+    { task: "Catering estimates & T-shirt sample", who: "Sadie Fontenot", when: "Feb 17, 2026", status: "In Progress" },
+    { task: "Bank account & confirm signers", who: "Madelyn Phillips", when: "March 15, 2026", status: "In Progress" },
+    { task: "Confirm private room & fees", who: "Sandra Knatt", when: "March 15, 2026", status: "In Progress" },
+    { task: "Prepare classmate contact lists", who: "Shantley Guidry", when: "March 31, 2026", status: "In Progress" },
+    { task: "Research hotel pricing", who: "Lolly Alexander", when: "March 31, 2026", status: "In Progress" },
+    { task: "Collect music requests", who: "Patrick Prescott", when: "March 31, 2026", status: "In Progress" },
+    { task: "Decorations & Theme planning", who: "Committee", when: "April 15, 2026", status: "In Progress" },
+    { task: "Finalize T-shirt order counts", who: "Sadie Fontenot", when: "May 01, 2026", status: "In Progress" },
+    { task: "Design Memorial program", who: "Kevin Wiltz", when: "May 15, 2026", status: "In Progress" }
+  ];
+
+  function renderTasks() {
+    const tableBody = document.getElementById('taskTableBody');
+    tableBody.innerHTML = myTasks.map(item => {
+      let badgeClass = item.status === "Done" ? "bg-success" : "bg-warning text-dark";
+      return `
+        <tr>
+          <td class="p-3 fw-bold">${item.task}</td>
+          <td>${item.who}</td>
+          <td>${item.when}</td>
+          <td><span class="badge ${badgeClass}">${item.status}</span></td>
+        </tr>`;
+    }).join('');
+  }
+  renderTasks();
