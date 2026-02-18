@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,43 +15,63 @@
     .navbar a.nav-link { color:white !important; font-weight:bold; }
     .navbar a.nav-link:hover { color: var(--school-gold) !important; }
     
-    /* Header */
+    /* Header & Countdown */
     header {
       position:relative;
       background:url("tiger.png") center/cover no-repeat;
       color:var(--school-gold);
       text-align:center;
-      padding:5rem 1rem;
+      padding:4rem 1rem;
     }
     header::after {
       content:""; position:absolute; top:0; left:0; width:100%; height:100%;
       background:rgba(30,0,60,0.6); z-index:0;
     }
     header .container { position:relative; z-index:1; }
+    
+    #countdown { 
+      background: var(--school-gold); 
+      color: var(--deep-purple); 
+      font-weight: bold; 
+      padding: 12px 25px; 
+      border-radius: 50px; 
+      display: inline-block; 
+      margin-top: 20px; 
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      font-size: 1.1rem;
+    }
 
-    /* Sections */
-    h2 { color:var(--school-purple); font-weight: bold; margin-bottom: 1.5rem; text-align: center; }
-    .section-title-alt { color: var(--school-purple); border-bottom: 2px solid var(--school-gold); display: inline-block; margin-bottom: 15px; }
+    /* Music Section Layout */
+    .jukebox-card { 
+      background: white; border-radius: 20px; border: 1px solid #dee2e6; 
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; height: 100%;
+    }
+    .card-label { 
+      background: var(--deep-purple); color: var(--school-gold); 
+      padding: 12px; font-weight: bold; text-align: center; text-transform: uppercase; 
+    }
+    .btn-playlist { 
+      background: var(--school-purple); color: var(--school-gold); 
+      border: 2px solid var(--school-gold); border-radius: 50px; 
+      padding: 12px 30px; font-weight: bold; text-decoration: none; 
+      transition: 0.3s; display: inline-block;
+    }
+    .btn-playlist:hover { background: var(--school-gold); color: var(--deep-purple); transform: scale(1.05); }
 
-    /* Music Section Specifics */
-    #music { background: #f0f0f0; border-top: 5px solid var(--school-purple); }
-    .music-card { background: white; border-radius: 15px; padding: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); height: 650px; }
-
-    /* RSVP Grid */
+    /* RSVP & Memorial */
     #yesListContainer { border-radius: 12px; background: #f8f9fa; border: 1px solid #dee2e6; max-height: 280px; overflow-y: auto; }
     .rsvp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
     @media (min-width: 768px) { .rsvp-grid { grid-template-columns: repeat(4, 1fr); } }
     .attendee-name { font-size: 0.82rem; padding: 4px 6px; background: white; border: 1px solid #e9ecef; border-radius: 4px; text-align: center; color: var(--deep-purple); }
-
-    /* Memorial Style */
+    
     .memorial-list { font-family: 'Georgia', serif; color: #4a148c; line-height: 1.4; }
     .reveal-item { opacity: 0; transform: translateY(20px); transition: all 0.8s ease-out; }
     .reveal-item.visible { opacity: 1; transform: translateY(0); }
 
-    #btn-back-to-top {
-      position: fixed; bottom: 20px; right: 20px; display: none; z-index: 1000;
-      background: var(--school-purple); color: var(--school-gold);
-      border: 2px solid var(--school-gold); width: 45px; height: 45px;
+    #btn-back-to-top { 
+      position: fixed; bottom: 20px; right: 20px; display: none; z-index: 1000; 
+      background: var(--school-purple); color: var(--school-gold); 
+      border: 2px solid var(--school-gold); width: 45px; height: 45px; 
     }
   </style> 
 </head>
@@ -82,16 +101,17 @@
   <div class="container">
     <h1 class="fw-bold display-4">ST. MARTINVILLE SENIOR HIGH</h1>
     <h2 style="color:var(--school-gold); border:none;">Class of 1976 — 50th Reunion</h2>
+    <div id="countdown">Loading Countdown...</div>
   </div>
 </header>
 
 <section id="rsvp" class="py-5 bg-light">
   <div class="container text-center">
-    <h2>Who's Coming?</h2>
-    <div class="alert shadow mb-4" style="background: var(--deep-purple); border: 2px solid var(--school-gold);">
+    <h2 class="mb-4">Who's Coming?</h2>
+    <div class="alert shadow mb-4 mx-auto" style="background: var(--deep-purple); border: 2px solid var(--school-gold); max-width: 400px;">
       <h4 class="mb-0 fw-bold" style="color: var(--school-gold);"><span id="finalTotal">...</span> Confirmed!</h4>
     </div>
-    <div id="yesListContainer" class="p-3 mb-4">
+    <div id="yesListContainer" class="p-3 mb-4 shadow-sm mx-auto" style="max-width: 1000px;">
         <div class="rsvp-grid" id="attendeeGrid"></div>
     </div>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNH2rLwb6w9zvIE113HT4Ru0yNCUORL29ijm2Jg4Ws2Bu8sA/viewform" target="_blank" class="btn btn-lg fw-bold" style="background: var(--school-purple); color: var(--school-gold); border-radius: 50px; padding: 12px 40px;">📝 RSVP HERE</a>
@@ -100,43 +120,54 @@
 
 <section id="calendar" class="py-5 bg-white">
   <div class="container text-center">
-    <h2>Meetings & Events</h2>
-    <iframe src="https://calendar.google.com/calendar/embed?src=fbcf3427770ee3c74ba269d485ba49d39d6ea67f45be295d849f038ba7c79497%40group.calendar.google.com&ctz=America%2FChicago" style="border:0" width="100%" height="500" frameborder="0"></iframe>
+    <h2 class="mb-4">Meetings & Events</h2>
+    <div class="ratio ratio-16x9 shadow-sm rounded mx-auto" style="max-width: 1000px; min-height: 500px;">
+      <iframe src="https://calendar.google.com/calendar/embed?src=fbcf3427770ee3c74ba269d485ba49d39d6ea67f45be295d849f038ba7c79497%40group.calendar.google.com&ctz=America%2FChicago" style="border:0" frameborder="0"></iframe>
+    </div>
   </div>
 </section>
 
-<section id="music" class="py-5">
+<section id="music" class="py-5 bg-light">
   <div class="container">
     <h2 class="mb-5">🎵 THE REUNION JUKEBOX</h2>
-    <div class="row g-4">
-      <div class="col-lg-5">
-        <h4 class="section-title-alt">Request a Song</h4>
-        <div class="music-card">
-          <iframe src="PASTE_YOUR_GOOGLE_FORM_LINK_HERE?embedded=true" width="100%" height="100%" frameborder="0">Loading…</iframe>
+    <div class="row g-4 align-items-stretch">
+      <div class="col-lg-6">
+        <div class="jukebox-card">
+          <div class="card-label">1. Request a Song</div>
+          <div class="p-3">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScy-B16a2pEvsTs6YN3HSfjkIX-AhzMbNexi42yshrfNKk7dQ/viewform?embedded=true" width="100%" height="600" frameborder="0">Loading…</iframe>
+          </div>
         </div>
       </div>
-      <div class="col-lg-7">
-        <h4 class="section-title-alt">Live Playlist</h4>
-        <div class="music-card">
-          <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT_YOUR_PUBLISHED_ID/pubhtml?widget=true&headers=false" width="100%" height="100%" frameborder="0"></iframe>
+      <div class="col-lg-6">
+        <div class="jukebox-card d-flex flex-column justify-content-center text-center p-5">
+          <div class="mb-3"><span style="font-size: 5rem;">📜</span></div>
+          <h3 class="fw-bold">2. See the Live List</h3>
+          <p class="text-muted mb-4">Click below to see the full playlist of hits from '72-'76 that our classmates have requested.</p>
+          <div>
+            <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vS-NfWw_tYyO38p1_8O_u0t_z8T-p_P3N-O_qE9t4yR5R_y0Wk16D7N8q0_J-mY3C0B6m9E4T0r9Y7Z8D9Q4R2W1L0/pubhtml" target="_blank" class="btn-playlist shadow">VIEW FULL PLAYLIST</a>
+          </div>
+          <div class="mt-5 p-3 small border rounded bg-white">
+            <strong>Note:</strong> Patrick Prescott will use this list to build our reunion setlist!
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="photos" class="py-5 bg-light text-center">
+<section id="photos" class="py-5 bg-white text-center">
   <div class="container">
-    <h2>Memories</h2>
-    <a href="gallery.html" class="btn btn-lg shadow" style="background: var(--school-gold); color: var(--deep-purple); font-weight: bold; border-radius: 50px; border: 2px solid var(--school-purple);">📸 VIEW PHOTO GALLERY</a>
+    <h2 class="mb-4">Memories</h2>
+    <a href="gallery.html" class="btn btn-lg shadow" style="background: var(--school-gold); color: var(--deep-purple); font-weight: bold; border-radius: 50px; border: 2px solid var(--school-purple); padding: 15px 40px;">📸 VIEW PHOTO GALLERY</a>
   </div>
 </section>
 
-<section id="tasks" class="py-5 bg-white">
+<section id="tasks" class="py-5 bg-light">
   <div class="container">
-    <h2>Task Tracker</h2>
+    <h2 class="mb-4">Task Tracker</h2>
     <div class="table-responsive shadow-sm mx-auto" style="max-width: 1050px;">
-      <table class="table table-hover align-middle">
+      <table class="table table-hover align-middle bg-white rounded overflow-hidden">
         <thead style="background: var(--deep-purple); color: white;">
           <tr><th class="p-3">Task</th><th>Who</th><th>When</th><th>Status</th></tr>
         </thead>
@@ -147,17 +178,10 @@
 </section>
 
 <section id="memorial" class="py-5 bg-white border-top">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-4 text-center">
-        <img src="empty chair.png" alt="Memory" class="img-fluid mb-3" style="max-height: 150px;">
-        <h3 class="fw-bold" style="color: #4a148c;">IN LOVING MEMORY</h3>
-      </div>
-      <div class="col-lg-8">
-        <div class="row row-cols-3 memorial-list" id="memorialGrid">
-          </div>
-      </div>
-    </div>
+  <div class="container text-center">
+    <img src="empty chair.png" alt="Memory" class="img-fluid mb-4" style="max-height: 150px;">
+    <h3 class="fw-bold" style="color: #4a148c;">IN LOVING MEMORY</h3>
+    <div class="row row-cols-2 row-cols-md-3 memorial-list mt-5 text-start" id="memorialGrid"></div>
   </div>
 </section>
 
@@ -169,16 +193,29 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+  // COUNTDOWN TIMER (Updated to June 26, 2026)
+  const targetDate = new Date("June 26, 2026 18:00:00").getTime();
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const diff = targetDate - now;
+    if (diff > 0) {
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      document.getElementById("countdown").innerHTML = days + " Days & " + hours + " Hours Until the 50th!";
+    } else {
+      document.getElementById("countdown").innerHTML = "The Celebration has Begun!";
+    }
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 60000);
+
   // TASK DATA
   const myTasks = [
-    { task: "Finalize website & Music Jukebox", who: "Kevin Wiltz", when: "Feb 18, 2026", status: "Done" },
+    { task: "Launch Jukebox & Countdown", who: "Kevin Wiltz", when: "Feb 18, 2026", status: "Done" },
     { task: "Collect music requests", who: "Patrick Prescott", when: "Ongoing", status: "In Progress" },
     { task: "Catering estimates & T-shirt sample", who: "Sadie Fontenot", when: "Feb 17, 2026", status: "In Progress" },
     { task: "Bank account & confirm signers", who: "Madelyn Phillips", when: "March 15, 2026", status: "In Progress" },
-    { task: "Confirm private room & fees", who: "Sandra Knatt", when: "March 15, 2026", status: "In Progress" },
-    { task: "Prepare classmate contact lists", who: "Shantley Guidry", when: "March 31, 2026", status: "In Progress" },
-    { task: "Research hotel pricing", who: "Lolly Alexander", when: "March 31, 2026", status: "In Progress" },
-    { task: "Decorations & Theme planning", who: "Committee", when: "April 15, 2026", status: "In Progress" }
+    { task: "Confirm private room & fees", who: "Sandra Knatt", when: "March 15, 2026", status: "In Progress" }
   ];
 
   function renderTasks() {
@@ -190,35 +227,17 @@
   }
   renderTasks();
 
-  // MEMORIAL DATA (Alphabetized)
-  const memorialNames = [
-    "Vernon Abbott", "Roland Allen", "Jody Anthony", "Debra Batiste", "Linda Batiste", "Rickey Batiste", 
-    "Terry Benjamin", "Linda Bonhomme", "Tyrone Bowles", "B. McGraw Charles", "Gary Charles", "Jules Charles",
-    "Nolan Charles Jr.", "Evelyn Drake", "Chris Faulk", "Linda George", "Gary Guidry", "Lois Gulliam",
-    "Sherman Hypolite", "Ernest Joseph", "Kenneth Lastrappe", "Mary Joyce Leon", "Manuel Mallery", "Ray Marshall",
-    "Richard Marshall", "Wanda James Minor", "Mark Mitchell", "Stella Orphe", "Annette Pierre", "Perry Pierre",
-    "Chris Robertson", "Samuel Savoy", "Brenda Sias", "Walter Lanky Stewart", "Lee Williams", "Phyllis Williams"
-  ];
-
+  // MEMORIAL DATA
+  const memorialNames = ["Vernon Abbott", "Roland Allen", "Jody Anthony", "Debra Batiste", "Linda Batiste", "Rickey Batiste", "Terry Benjamin", "Linda Bonhomme", "Tyrone Bowles", "Gary Charles", "Jules Charles", "Nolan Charles Jr.", "Evelyn Drake", "Chris Faulk", "Linda George", "Gary Guidry", "Lois Gulliam", "Sherman Hypolite", "Ernest Joseph", "Kenneth Lastrappe", "Mary Joyce Leon", "Manuel Mallery", "Ray Marshall", "Richard Marshall", "Mark Mitchell", "Stella Orphe", "Annette Pierre", "Perry Pierre", "Chris Robertson", "Samuel Savoy", "Brenda Sias", "Walter Lanky Stewart", "Lee Williams", "Phyllis Williams"];
   function renderMemorial() {
     const grid = document.getElementById('memorialGrid');
-    // Splitting into 3 columns
-    let colSize = Math.ceil(memorialNames.length / 3);
-    for (let i = 0; i < 3; i++) {
-      let colDiv = document.createElement('div');
-      colDiv.className = "col";
-      let ul = document.createElement('ul');
-      ul.className = "list-unstyled";
-      memorialNames.slice(i * colSize, (i + 1) * colSize).forEach(name => {
-        ul.innerHTML += `<li class="reveal-item">🕊️ ${name}</li>`;
-      });
-      colDiv.appendChild(ul);
-      grid.appendChild(colDiv);
-    }
+    memorialNames.forEach(name => {
+      grid.innerHTML += `<div class="col mb-2 reveal-item">🕊️ ${name}</div>`;
+    });
   }
   renderMemorial();
 
-  // RSVP DATA LOAD (Google App Script)
+  // RSVP DATA LOAD
   const API_URL = 'https://script.google.com/macros/s/AKfycbxoIJZz2RDDkaW9V4K_Vz8w9GT2Gfaj_RZYWY84FyJfJ6elgq2IeNHkOE0jz3x4g5y6hw/exec';
   async function loadData() {
     try {
@@ -235,19 +254,15 @@
 
   // Scroll Animations
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => { entry.target.classList.add('visible'); }, index * 30);
-      }
-    });
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal-item').forEach((el) => observer.observe(el));
 
   // Back to top
   let mybutton = document.getElementById("btn-back-to-top");
   window.onscroll = function () {
-    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) { mybutton.style.display = "block"; } 
-    else { mybutton.style.display = "none"; }
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) mybutton.style.display = "block";
+    else mybutton.style.display = "none";
   };
   mybutton.onclick = function() { window.scrollTo({top: 0, behavior: 'smooth'}); };
 </script>
