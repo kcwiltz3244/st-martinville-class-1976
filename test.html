@@ -8,120 +8,55 @@
 
   <style>
     :root { --school-purple:#4b0082; --school-gold:#ffd700; --deep-purple: #2a004a; }
-    body { background:#f4f4f9; color:#333; font-family: 'Segoe UI', Arial, sans-serif; overflow-x: hidden; }
+    body { background:#fafafa; color:#333; font-family: 'Segoe UI', Arial, sans-serif; overflow-x: hidden; }
     
     /* Navigation */
-    .navbar { background-color:var(--school-purple); border-bottom: 3px solid var(--school-gold); padding: 1rem; }
-    .navbar-brand { color: var(--school-gold) !important; font-weight: bold; letter-spacing: 1px; }
+    .navbar { background-color:var(--school-purple); border-bottom: 2px solid var(--school-gold); }
+    .navbar a.nav-link { color:white !important; font-weight:bold; }
+    .navbar a.nav-link:hover { color: var(--school-gold) !important; }
     
-    /* Header & Countdown */
+    /* Header */
     header {
       position:relative;
       background:url("tiger.png") center/cover no-repeat;
       color:var(--school-gold);
       text-align:center;
-      padding:6rem 1rem;
+      padding:5rem 1rem;
     }
     header::after {
       content:""; position:absolute; top:0; left:0; width:100%; height:100%;
-      background:rgba(30,0,60,0.7); z-index:0;
+      background:rgba(30,0,60,0.6); z-index:0;
     }
     header .container { position:relative; z-index:1; }
-    
-    #countdown { 
-      background: rgba(75, 0, 130, 0.8); 
-      backdrop-filter: blur(8px);
-      color: var(--school-gold); 
-      font-weight: bold; 
-      padding: 15px 30px; 
-      border: 2px solid var(--school-gold);
-      border-radius: 50px; 
-      display: inline-block; 
-      margin-top: 25px; 
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      font-family: 'Courier New', monospace;
-      font-size: 1.4rem;
-    }
 
-    /* AESTHETIC JUKEBOX SECTION */
-    .jukebox-area {
-      background: linear-gradient(135deg, var(--deep-purple) 0%, #4b0082 100%);
-      color: white;
-      border-radius: 30px;
-      padding: 60px 20px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    }
-    .music-btn {
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      border-radius: 50px;
-      padding: 18px 40px;
-      font-weight: 800;
-      text-transform: uppercase;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      min-width: 280px;
-      margin: 15px;
-      font-size: 1.1rem;
-      border: 3px solid transparent;
-    }
-    .btn-request { 
-      background: var(--school-gold); color: var(--deep-purple); 
-      box-shadow: 0 10px 20px rgba(255,215,0,0.3);
-    }
-    .btn-list { 
-      background: transparent; color: var(--school-gold); 
-      border-color: var(--school-gold); 
-    }
-    .music-btn:hover { transform: translateY(-10px) scale(1.05); color: white; box-shadow: 0 15px 30px rgba(0,0,0,0.4); }
+    /* Countdown */
+    #countdown { background: var(--deep-purple); color: white; padding: 25px 0; border-bottom: 4px solid var(--school-gold); }
+    .countdown-number { display: block; font-size: 2.2rem; font-weight: bold; color: var(--school-gold); }
+    .countdown-label { font-size: 0.75rem; text-transform: uppercase; color: #bbb; }
 
-    /* AESTHETIC PHOTO SECTION */
-    .photo-stack {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      flex-wrap: wrap;
-      padding: 40px 0;
-    }
-    .polaroid {
-      background: white;
-      padding: 12px 12px 35px 12px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-      transform: rotate(-3deg);
-      transition: 0.4s;
-      width: 220px;
-    }
-    .polaroid img { width: 100%; height: 160px; object-fit: cover; background: #eee; border: 1px solid #ddd; }
-    .polaroid:nth-child(2) { transform: rotate(4deg); margin-top: -15px; }
-    .polaroid:hover { transform: rotate(0deg) scale(1.15); z-index: 10; cursor: pointer; }
+    /* RSVP Grid */
+    #yesListContainer { border-radius: 12px; background: #f8f9fa; border: 1px solid #dee2e6; max-height: 280px; overflow-y: auto; }
+    .rsvp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+    @media (min-width: 768px) { .rsvp-grid { grid-template-columns: repeat(4, 1fr); } }
+    @media (min-width: 992px) { .rsvp-grid { grid-template-columns: repeat(6, 1fr); } }
+    .attendee-name { font-size: 0.82rem; padding: 4px 6px; background: white; border: 1px solid #e9ecef; border-radius: 4px; text-align: center; color: var(--deep-purple); }
 
-    /* MEMORIAL SECTION */
-    .memorial-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 15px;
-      text-align: left;
-      font-family: 'Georgia', serif;
-      font-style: italic;
-    }
-    .reveal-item { opacity: 0; transform: translateY(20px); transition: 0.8s all ease; }
+    /* Animations */
+    .reveal-item { opacity: 0; transform: translateY(20px); transition: all 0.8s ease-out; }
     .reveal-item.visible { opacity: 1; transform: translateY(0); }
 
-    /* RSVP & CARDS */
-    .custom-card { 
-      background: white; 
-      border-radius: 25px; 
-      padding: 40px; 
-      box-shadow: 0 15px 45px rgba(0,0,0,0.05); 
-      border: none;
+    /* Memorial Style */
+    .memorial-list { font-family: 'Georgia', serif; color: #4a148c; line-height: 1.4; }
+    @media (max-width: 768px) {
+      .memorial-list { font-size: 0.65rem !important; }
+      .memorial-list li { margin-bottom: 4px !important; }
     }
-    .attendee-tag { 
-      background: #f0e6ff; color: var(--school-purple); 
-      border-radius: 50px; padding: 8px 18px; 
-      font-weight: bold; font-size: 0.9rem;
-      border: 1px solid #dcd0ff;
+
+    h2 { color:var(--school-purple); font-weight: bold; margin-bottom: 1.5rem; text-align: center; }
+    #btn-back-to-top {
+      position: fixed; bottom: 20px; right: 20px; display: none; z-index: 1000;
+      background: var(--school-purple); color: var(--school-gold);
+      border: 2px solid var(--school-gold); width: 45px; height: 45px;
     }
   </style> 
 </head>
@@ -130,122 +65,245 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
   <div class="container">
-    <a class="navbar-brand" href="#">SMSH CLASS OF '76</a>
-    <div class="navbar-nav ms-auto d-none d-lg-flex">
-      <a class="nav-link mx-2" href="#rsvp">RSVP</a>
-      <a class="nav-link mx-2" href="#music">Music</a>
-      <a class="nav-link mx-2" href="#photos">Photos</a>
-      <a class="nav-link mx-2" href="#memorial">Memorial</a>
+    <a class="navbar-brand" href="#" style="color: var(--school-gold) !important;">SMSH '76 REUNION</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto fw-bold text-uppercase" style="font-size: 0.9rem;">
+        <li class="nav-item"><a class="nav-link px-3" href="#rsvp">Who's Coming</a></li>
+        <li class="nav-item"><a class="nav-link px-3" href="#calendar">Meetings</a></li>
+        <li class="nav-item"><a class="nav-link px-3" href="#photos">Photos</a></li>
+        <li class="nav-item"><a class="nav-link px-3" href="#tasks">Tasks</a></li>
+        <li class="nav-item"><a class="nav-link px-3" href="#memorial">Memorial</a></li>
+      </ul>
     </div>
   </div>
 </nav>
 
 <header>
-  <div class="container">
-    <h1 class="fw-bold display-3">ST. MARTINVILLE SENIOR HIGH</h1>
-    <h2 class="display-6" style="color:var(--school-gold);">50th Year Reunion</h2>
-    <div id="countdown">Loading Timer...</div>
+  <div class="container text-center">
+    <h1 class="fw-bold display-4 text-uppercase">St. Martinville Senior High</h1>
+    <h2 class="mt-2" style="color:var(--school-gold); border:none;">Class of 1976 — 50th Year Reunion</h2>
   </div>
 </header>
 
-<section id="rsvp" class="py-5">
+<section id="countdown">
   <div class="container text-center">
-    <div class="custom-card">
-      <h2 class="fw-bold mb-4" style="color: var(--deep-purple)">Classmates Attending</h2>
-      <div class="alert shadow-sm mb-4 mx-auto" style="background: var(--school-gold); max-width: 300px; border-radius: 50px;">
-        <h4 class="mb-0 fw-bold"><span id="finalTotal">0</span> Confirmed!</h4>
-      </div>
-      <div class="d-flex flex-wrap justify-content-center gap-3 mb-5" id="attendeeGrid"></div>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNH2rLwb6w9zvIE113HT4Ru0yNCUORL29ijm2Jg4Ws2Bu8sA/viewform" target="_blank" class="btn btn-dark btn-lg px-5 rounded-pill shadow-lg" style="background: var(--school-purple);">📝 RSVP FOR THE REUNION</a>
+    <h6 class="mb-3" style="letter-spacing: 3px; color: var(--school-gold);">TIME UNTIL CELEBRATION</h6>
+    <div class="d-flex justify-content-center gap-3">
+      <div class="text-center"><span class="countdown-number" id="days">00</span><span class="countdown-label">Days</span></div>
+      <div class="text-center"><span class="countdown-number" id="hours">00</span><span class="countdown-label">Hrs</span></div>
+      <div class="text-center"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">Min</span></div>
+      <div class="text-center"><span class="countdown-number" id="seconds">00</span><span class="countdown-label">Sec</span></div>
     </div>
   </div>
 </section>
 
-<section id="music" class="py-5">
+<section id="rsvp" class="py-5 bg-light">
+  <div class="container text-center">
+    <h2 class="mb-4">Who's Coming?</h2>
+    <div class="alert shadow mb-4" style="background: var(--deep-purple); border: 2px solid var(--school-gold); border-radius: 15px;">
+      <h4 class="mb-0 fw-bold" style="color: var(--school-gold); letter-spacing: 1px;">
+        <span id="finalTotal">...</span> Classmates & Guests Confirmed!
+      </h4>
+    </div>
+    <div class="mb-5">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNH2rLwb6w9zvIE113HT4Ru0yNCUORL29ijm2Jg4Ws2Bu8sA/viewform" target="_blank" class="btn btn-lg shadow-sm" style="background-color: var(--school-purple); color: var(--school-gold); border: 2px solid var(--school-gold); padding: 12px 35px; font-weight: bold; border-radius: 50px;">
+        📝 Click Here to RSVP
+      </a>
+    </div>
+    <div id="yesListContainer" class="p-3">
+        <div class="rsvp-grid" id="attendeeGrid">
+          <p class="text-muted w-100 py-3">Loading confirmed attendees...</p>
+        </div>
+    </div>
+  </div>
+</section>
+
+<section id="calendar" class="py-5 bg-white border-bottom">
+  <div class="container text-center">
+    <h2 class="mb-4">Meetings & Events</h2>
+    <div class="mx-auto shadow-sm border rounded overflow-hidden mb-4" style="max-width: 1050px; height: 600px; background: #f8f9fa;">
+      <iframe src="https://calendar.google.com/calendar/embed?src=fbcf3427770ee3c74ba269d485ba49d39d6ea67f45be295d849f038ba7c79497%40group.calendar.google.com&ctz=America%2FChicago" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
+    </div>
+    <div class="mx-auto" style="max-width: 1050px;">
+      <a href="https://docs.google.com/document/d/1IA0RBRPbgjZej4OG0shiXa8227rz6dZ7DadP4rqmiz0/edit?usp=sharing" target="_blank" class="d-flex justify-content-between align-items-center p-3 shadow-sm border rounded hover-shadow bg-white" style="border-left: 8px solid var(--school-gold) !important; text-decoration: none; transition: 0.3s;">
+        <div class="d-flex align-items-center text-start">
+          <span style="font-size: 1.5rem;" class="me-3">📂</span>
+          <div>
+            <h5 class="mb-0 fw-bold" style="color: var(--deep-purple);">Latest Meeting Minutes</h5>
+            <small class="text-muted">Click to view notes from our last planning session</small>
+          </div>
+        </div>
+        <span class="btn fw-bold px-3" style="background-color: var(--school-purple); color: var(--school-gold); border: 1px solid var(--school-gold);">VIEW NOTES</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="photos" class="py-5 bg-light text-center">
   <div class="container">
-    <div class="jukebox-area text-center">
-      <h2 class="display-5 fw-bold mb-3" style="color: var(--school-gold)">The Reunion Jukebox</h2>
-      <p class="lead mb-5 opacity-75">Submit your favorite hits from 1972-1976!</p>
-      
-      <div class="d-flex flex-wrap justify-content-center">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLScy-B16a2pEvsTs6YN3HSfjkIX-AhzMbNexi42yshrfNKk7dQ/viewform" target="_blank" class="music-btn btn-request">
-          🎤 Request a Song
-        </a>
-        <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSE8lLV2Op7eMchISLz22rowMK7YJF6yy4UwmC0ys7Cok6ZFh8uYw-koCOQoWHOm8MgfPNnQGL74Wki/pubhtml?gid=1803881201&single=true" target="_blank" class="music-btn btn-list">
-          📜 View Playlist
-        </a>
+    <h2 class="fw-bold" style="color: var(--school-purple);">MEMORIES THROUGH THE YEARS</h2>
+    <p class="text-muted">Take a walk down memory lane with photos from high school and past reunions.</p>
+    <a href="gallery.html" class="btn btn-lg shadow reveal-item" style="background-color: var(--school-gold); color: var(--deep-purple); font-weight: bold; border-radius: 50px; padding: 15px 40px; border: 2px solid var(--school-purple);">
+      📸 CLICK HERE TO VIEW PHOTOS
+    </a>
+  </div>
+</section>
+
+<section id="tasks" class="py-5 bg-white">
+  <div class="container">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">Task Tracker</h2>
+      <p class="text-muted">Current progress and upcoming deadlines</p>
+    </div>
+    <div class="table-responsive shadow-sm bg-white rounded mx-auto" style="max-width: 1050px;">
+      <table class="table table-hover align-middle mb-0">
+        <thead style="background-color: var(--deep-purple); color: white;">
+          <tr><th class="p-3">Task</th><th>Who</th><th>When</th><th>Status</th></tr>
+        </thead>
+        <tbody id="taskTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="memorial" class="py-5 bg-white border-top">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-4 text-center">
+        <img src="empty chair.png" alt="In Loving Memory" class="img-fluid rounded-3 mb-3" style="max-height: 200px;">
+        <h2 class="fw-bold" style="color: #4a148c; font-size: 1.5rem;">IN LOVING MEMORY</h2>
+        <p style="font-family: 'Brush Script MT', cursive; font-size: 1.5rem; color: #6a1b9a;">"We haven't forgotten about you."</p>
+      </div>
+      <div class="col-lg-8">
+        <div class="row row-cols-3 gx-1 memorial-list">
+          <div class="col">
+            <ul class="list-unstyled">
+              <li class="reveal-item">🕊️ Vernon Abbott</li>
+              <li class="reveal-item">🕊️ Roland Allen</li>
+              <li class="reveal-item">🕊️ Jody Anthony</li>
+              <li class="reveal-item">🕊️ Debra Batiste</li>
+              <li class="reveal-item">🕊️ Linda Batiste</li>
+              <li class="reveal-item">🕊️ Rickey Batiste</li>
+              <li class="reveal-item">🕊️ Terry Benjamin</li>
+              <li class="reveal-item">🕊️ Linda Bonhomme</li>
+              <li class="reveal-item">🕊️ Tyrone Bowles</li>
+              <li class="reveal-item">🕊️ B. "McGraw" Charles</li>
+              <li class="reveal-item">🕊️ Gary Charles</li>
+              <li class="reveal-item">🕊️ Jules Charles</li>
+            </ul>
+          </div>
+          <div class="col">
+            <ul class="list-unstyled">
+              <li class="reveal-item">🕊️ Nolan Charles Jr.</li>
+              <li class="reveal-item">🕊️ Evelyn Drake</li>
+              <li class="reveal-item">🕊️ Chris Faulk</li>
+              <li class="reveal-item">🕊️ Linda George</li>
+              <li class="reveal-item">🕊️ Gary Guidry</li>
+              <li class="reveal-item">🕊️ Lois Gulliam</li>
+              <li class="reveal-item">🕊️ Sherman Hypolite</li>
+              <li class="reveal-item">🕊️ Ernest Joseph</li>
+              <li class="reveal-item">🕊️ Kenneth Lastrappe</li>
+              <li class="reveal-item">🕊️ Mary Joyce Leon</li>
+              <li class="reveal-item">🕊️ Manuel Mallery</li>
+              <li class="reveal-item">🕊️ Ray Marshall</li>
+            </ul>
+          </div>
+          <div class="col">
+            <ul class="list-unstyled">
+              <li class="reveal-item">🕊️ Richard Marshall</li>
+              <li class="reveal-item">🕊️ Wanda James Minor</li>
+              <li class="reveal-item">🕊️ Mark Mitchell</li>
+              <li class="reveal-item">🕊️ Stella Orphe</li>
+              <li class="reveal-item">🕊️ Annette Pierre</li>
+              <li class="reveal-item">🕊️ Perry Pierre</li>
+              <li class="reveal-item">🕊️ Chris Robertson</li>
+              <li class="reveal-item">🕊️ Samuel Savoy</li>
+              <li class="reveal-item">🕊️ Brenda Sias</li>
+              <li class="reveal-item">🕊️ Walter "Lanky" Stewart</li>
+              <li class="reveal-item">🕊️ Lee Williams</li>
+              <li class="reveal-item">🕊️ Phyllis Williams</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="photos" class="py-5 bg-white">
-  <div class="container text-center">
-    <h2 class="fw-bold display-6" style="color: var(--deep-purple)">Memories Over the Years</h2>
-    <div class="photo-stack">
-      <div class="polaroid"><img src="grad1.jpg" alt="1976"></div>
-      <div class="polaroid"><img src="grad2.jpg" alt="1976"></div>
-      <div class="polaroid"><img src="grad3.jpg" alt="1976"></div>
-    </div>
-    <a href="gallery.html" class="btn btn-outline-primary btn-lg px-5 rounded-pill mt-3">📸 OPEN FULL GALLERY</a>
-  </div>
-</section>
-
-<section id="memorial" class="py-5">
-  <div class="container text-center">
-    <div class="custom-card">
-      <img src="empty chair.png" alt="Memory" class="mb-4" style="max-height: 120px; opacity: 0.8;">
-      <h2 class="fw-bold mb-5" style="color: #4a148c; border-bottom: 2px solid #eee; display: inline-block; padding-bottom: 10px;">In Loving Memory</h2>
-      <div class="memorial-grid mt-4" id="memorialGrid"></div>
-    </div>
-  </div>
-</section>
-
-<footer class="py-5 text-center" style="background: var(--deep-purple); color: var(--school-gold);">
-  <p class="mb-0 fw-bold">© 2026 SMSH Class of 1976 — 50th Reunion Committee</p>
+<footer class="py-4 text-center" style="background: #1e003c; border-top: 1px solid rgba(255,255,255,0.1);">
+  <p class="mb-0" style="color: var(--school-gold); font-weight: bold;">&copy; 2026 SMSH – Class of 1976</p>
 </footer>
 
-<script>
-  // COUNTDOWN
-  const targetDate = new Date("June 26, 2026 18:00:00").getTime();
-  setInterval(() => {
-    const now = new Date().getTime();
-    const diff = targetDate - now;
-    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const s = Math.floor((diff % (1000 * 60)) / 1000);
-    document.getElementById("countdown").innerHTML = `${d}d : ${h}h : ${m}m : ${s}s`;
-  }, 1000);
+<button type="button" class="btn rounded-circle shadow" id="btn-back-to-top">↑</button>
 
-  // RSVP FETCH
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // TIMER LOGIC
+  const targetDate = new Date("June 26, 2026 00:00:00").getTime();
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+    document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+    document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
+  }
+  setInterval(updateCountdown, 1000); updateCountdown();
+
+  // RSVP DATA LOAD
   const API_URL = 'https://script.google.com/macros/s/AKfycbxoIJZz2RDDkaW9V4K_Vz8w9GT2Gfaj_RZYWY84FyJfJ6elgq2IeNHkOE0jz3x4g5y6hw/exec';
   async function loadData() {
     try {
-      const res = await fetch(API_URL);
-      const data = await res.json();
-      document.getElementById('finalTotal').textContent = data.total;
-      document.getElementById('attendeeGrid').innerHTML = data.attendees.map(a => `<span class="attendee-tag">${a.name}</span>`).join('');
-    } catch (e) { console.log("Data Load Error"); }
+      const response = await fetch(API_URL);
+      const data = await response.json();
+      document.getElementById('finalTotal').textContent = data.total || 0;
+      const grid = document.getElementById('attendeeGrid');
+      if (data.attendees) {
+        grid.innerHTML = data.attendees.map(p => `<div class="attendee-name"><strong>${p.name}</strong></div>`).join('');
+      }
+    } catch (e) { console.error(e); }
   }
   loadData();
 
-  // MEMORIAL RENDER
-  const names = ["Vernon Abbott", "Roland Allen", "Jody Anthony", "Debra Batiste", "Linda Batiste", "Rickey Batiste", "Terry Benjamin", "Linda Bonhomme", "Tyrone Bowles", "Gary Charles", "Jules Charles", "Nolan Charles Jr.", "Evelyn Drake", "Chris Faulk", "Linda George", "Gary Guidry", "Lois Gulliam", "Sherman Hypolite", "Ernest Joseph", "Kenneth Lastrappe", "Mary Joyce Leon", "Manuel Mallery", "Ray Marshall", "Richard Marshall", "Mark Mitchell", "Stella Orphe", "Annette Pierre", "Perry Pierre", "Chris Robertson", "Samuel Savoy", "Brenda Sias", "Walter Lanky Stewart", "Lee Williams", "Phyllis Williams"];
-  const mGrid = document.getElementById('memorialGrid');
-  names.forEach(n => {
-    const div = document.createElement('div');
-    div.className = 'reveal-item';
-    div.innerHTML = `🕊️ ${n}`;
-    mGrid.appendChild(div);
-  });
-
-  // Scroll Animation
+  // REVEAL ANIMATION SCRIPT
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => { entry.target.classList.add('visible'); }, index * 50);
+      }
+    });
   }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal-item').forEach(el => observer.observe(el));
-</script>
+  document.querySelectorAll('.reveal-item').forEach((el) => observer.observe(el));
 
+  // BACK TO TOP BUTTON
+  let mybutton = document.getElementById("btn-back-to-top");
+  window.onscroll = function () {
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) { mybutton.style.display = "block"; } 
+    else { mybutton.style.display = "none"; }
+  };
+  mybutton.addEventListener("click", () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+  // TASK TRACKER DATA
+  const myTasks = [
+    { task: "Bank account & confirm signers", who: "Madelyn Phillips", when: "March 15, 2026", status: "In Progress" },
+    { task: "Confirm private room & fees", who: "Sandra Knatt", when: "March 15, 2026", status: "In Progress" },
+    { task: "Catering estimates & T-shirt sample", who: "Sadie Fontenot", when: "Feb 17, 2026", status: "In Progress" },
+    { task: "Prepare classmate contact lists", who: "Shantley Guidry", when: "March 31, 2026", status: "In Progress" },
+    { task: "Research hotel pricing", who: "Lolly Alexander", when: "March 31, 2026", status: "In Progress" },
+    { task: "Collect music requests", who: "Patrick Prescott", when: "March 31, 2026", status: "In Progress" },
+    { task: "Finalize and distribute website", who: "Kevin Wiltz", when: "Feb 11, 2026", status: "Done" }
+  ];
+  function renderTasks() {
+    const tableBody = document.getElementById('taskTableBody');
+    tableBody.innerHTML = myTasks.map(item => {
+      let badgeClass = item.status === "Done" ? "bg-success" : "bg-warning text-dark";
+      return `<tr><td class="p-3 fw-bold">${item.task}</td><td>${item.who}</td><td>${item.when}</td><td><span class="badge ${badgeClass}">${item.status}</span></td></tr>`;
+    }).join('');
+  }
+  renderTasks();
+</script>
 </body>
 </html>
