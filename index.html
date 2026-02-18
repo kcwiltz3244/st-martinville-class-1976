@@ -181,13 +181,14 @@
 
   // FULL ACTIVE TASK LIST RESTORED
   const myTasks = [
-    { task: "Launch Jukebox & Countdown", who: "Kevin Wiltz", when: "Feb 18, 2026", status: "Done" },
-    { task: "Collect music requests", who: "Patrick Prescott", when: "Ongoing", status: "In Progress" },
-    { task: "Catering estimates", who: "Sadie Fontenot", when: "Feb 17, 2026", status: "In Progress" },
-    { task: "Outreach & Invitations", who: "Madelyn Phillips", when: "Ongoing", status: "In Progress" },
-    { task: "Venue Logistics", who: "Sandra Knatt", when: "Feb 20, 2026", status: "In Progress" },
-    { task: "Memorial Coordination", who: "Lolly Alexander", when: "Ongoing", status: "In Progress" }
-  ];
+      { task: "Establish bank account and confirm signers", who: "Madelyn Phillips", when: "March 15, 2026", status: "In Progress" },
+      { task: "Confirm private room availability and fees", who: "Sandra Knatt", when: "March 15, 2026", status: "In Progress" },
+      { task: "Obtain catering estimates and provide T-shirt sample", who: "Sadie Fontenot", when: "Feb 17, 2026", status: "In Progress" },
+      { task: "Prepare classmate contact lists", who: "Shantley Guidry", when: "March 31, 2026", status: "In Progress" },
+      { task: "Research hotel pricing", who: "Lolly Alexander", when: "March 31, 2026", status: "In Progress" },
+      { task: "Collect music requests", who: "Patrick Prescott", when: "March 31, 2026", status: "In Progress" },
+      { task: "Finalize and distribute website link", who: "Kevin Wiltz", when: "Feb. 11, 2026", status: "Done" }
+    ];
 
   document.getElementById('taskTableBody').innerHTML = myTasks.map(item => `
     <tr><td class="p-3 fw-bold">${item.task}</td><td>${item.who}</td><td>${item.when}</td><td><span class="badge ${item.status==='Done'?'bg-success':'bg-warning text-dark'}">${item.status}</span></td></tr>`).join('');
