@@ -11,13 +11,7 @@
       --school-gold: #ffd700; 
       --deep-purple: #2a004a; 
     }
-    body { 
-      background: #fafafa; 
-      font-family: 'Segoe UI', Arial, sans-serif; 
-      color: #333;
-    }
-    
-    /* Header Section */
+    body { background: #fafafa; font-family: 'Segoe UI', Arial, sans-serif; color: #333; }
     .music-header { 
       background: var(--school-purple); 
       color: var(--school-gold); 
@@ -25,8 +19,6 @@
       border-bottom: 5px solid var(--school-gold); 
       text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     }
-    
-    /* Cards for Form and List */
     .jukebox-card { 
       background: white; 
       border-radius: 20px; 
@@ -34,6 +26,7 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
       overflow: hidden;
       margin-bottom: 30px;
+      height: 100%;
     }
     .card-label {
       background: var(--deep-purple);
@@ -44,54 +37,68 @@
       letter-spacing: 1px;
       text-align: center;
     }
-
-    /* Button Style */
+    .btn-action { 
+      background: var(--school-purple); 
+      color: var(--school-gold); 
+      font-weight: bold; 
+      border-radius: 50px; 
+      padding: 15px 30px; 
+      text-decoration: none; 
+      border: 2px solid var(--school-gold);
+      display: inline-block;
+      transition: 0.3s;
+    }
+    .btn-action:hover { background: var(--school-gold); color: var(--deep-purple); transform: scale(1.05); }
+    
     .btn-home { 
       background: var(--school-gold); 
       color: var(--deep-purple); 
       font-weight: bold; 
       border-radius: 50px; 
-      padding: 12px 35px; 
+      padding: 10px 25px; 
       text-decoration: none; 
-      border: 2px solid var(--school-purple);
-      transition: 0.3s;
     }
-    .btn-home:hover { 
-      background: white; 
-      color: var(--school-purple); 
-    }
-
-    iframe { width: 100%; border: none; }
+    iframe { width: 100%; border: none; min-height: 700px; }
   </style>
 </head>
 <body>
 
 <div class="music-header text-center">
   <div class="container">
-    <h1 class="fw-bold display-4">🎵 THE REUNION JUKEBOX</h1>
-    <p class="lead mb-4">What songs remind you of 1972 - 1976? Add them to our 50th Reunion Playlist!</p>
+    <h1 class="fw-bold display-4">🎵 REUNION JUKEBOX</h1>
+    <p class="lead mb-4">Request your favorites from 1972 - 1976!</p>
     <a href="test.html" class="btn-home">← BACK TO HOME</a>
   </div>
 </div>
 
 <div class="container py-5">
-  <div class="row g-4">
+  <div class="row g-4 align-items-stretch">
     
-    <div class="col-lg-5">
+    <div class="col-lg-6">
       <div class="jukebox-card">
         <div class="card-label">1. Submit Your Song</div>
         <div class="p-3">
-          <iframe src="YOUR_GOOGLE_FORM_LINK_HERE?embedded=true" height="700">Loading…</iframe>
+          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScy-B16a2pEvsTs6YN3HSfjkIX-AhzMbNexi42yshrfNKk7dQ/viewform?embedded=true">Loading…</iframe>
         </div>
       </div>
     </div>
 
-    <div class="col-lg-7">
-      <div class="jukebox-card">
-        <div class="card-label">2. Current Requests</div>
-        <div class="p-3">
-          <p class="text-center text-muted small">Scroll down to see all songs requested so far.</p>
-          <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT_YOUR_PUBLISHED_ID/pubhtml?widget=true&headers=false" height="660"></iframe>
+    <div class="col-lg-6">
+      <div class="jukebox-card d-flex flex-column justify-content-center text-center p-5" style="background: linear-gradient(135deg, #ffffff 0%, #fdf9e6 100%);">
+        <div class="mb-4">
+           <span style="font-size: 5rem;">📜</span>
+        </div>
+        <h2 class="fw-bold" style="color: var(--deep-purple);">See the Playlist</h2>
+        <p class="text-muted mb-4">Click the button below to see a live list of every song requested by our classmates so far.</p>
+        
+        <div class="mt-2">
+          <a href="https://docs.google.com/spreadsheets/d/1wOicgy4tiMKMqUy799Fjobbi9jXxEArte1DqnxZAPl4/pubhtml?widget=true&headers=false" target="_blank" class="btn-action shadow">
+            VIEW FULL PLAYLIST
+          </a>
+        </div>
+        
+        <div class="mt-5 p-3 border rounded bg-white">
+          <small class="text-muted"><strong>Note:</strong> After you submit a song on the left, it may take a minute to show up on the live list.</small>
         </div>
       </div>
     </div>
@@ -100,10 +107,7 @@
 </div>
 
 <footer class="py-5 text-center" style="background: var(--deep-purple); color: var(--school-gold);">
-  <div class="container">
-    <p class="mb-0 fw-bold">St. Martinville Senior High — Class of 1976</p>
-    <small class="opacity-75">50th Reunion Planning Committee</small>
-  </div>
+  <p class="mb-0 fw-bold">&copy; 2026 SMSH – Class of 1976</p>
 </footer>
 
 </body>
