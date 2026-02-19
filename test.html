@@ -190,7 +190,7 @@
       </div>
 
       <div class="col-lg-7">
-        <div class="row row-cols-3 memorial-list" id="memorialGrid">
+        <div class="row memorial-list" id="memorialGrid">
           </div>
       </div>
     </div>
@@ -250,32 +250,28 @@
     const grid = document.getElementById('memorialGrid');
     grid.innerHTML = ''; 
     
-    // We detect if the screen is small (phone)
     const isMobile = window.innerWidth < 768;
-    const columnCount = isMobile ? 2 : 3; // 2 columns for phone, 3 for computer
+    const columnCount = isMobile ? 2 : 3;
     const itemsPerCol = Math.ceil(memorialNames.length / columnCount);
 
     for (let i = 0; i < columnCount; i++) {
       let colDiv = document.createElement('div');
-      // 'col-6' means 2 columns on phone, 'col-md-4' means 3 columns on computer
-      colDiv.className = "col-6 col-md-4"; 
+      colDiv.className = isMobile ? "col-6" : "col-4"; 
       let ul = document.createElement('ul');
       ul.className = "list-unstyled";
       
       memorialNames.slice(i * itemsPerCol, (i + 1) * itemsPerCol).forEach(name => {
-        // Reduced font size slightly to 0.85rem to ensure no wrapping
         ul.innerHTML += `<li class="reveal-item mb-2" style="color: var(--school-purple); font-size: 0.85rem; white-space: nowrap;">🕊️ ${name}</li>`;
       });
       
       colDiv.appendChild(ul);
       grid.appendChild(colDiv);
     }
-}
-// Run once on load
-renderMemorial();
-// Update if the user rotates their phone
-window.addEventListener('resize', renderMemorial);
-
+    // Re-trigger the animation for new items
+    document.querySelectorAll('.reveal-item').forEach((el) => observer.observe(el));
+  }
+  
+  // Set up Observer for animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, index) => {
       if (entry.isIntersecting) {
@@ -283,7 +279,9 @@ window.addEventListener('resize', renderMemorial);
       }
     });
   }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal-item').forEach((el) => observer.observe(el));
+
+  renderMemorial();
+  window.addEventListener('resize', renderMemorial);
 
   window.onscroll = () => { document.getElementById("btn-back-to-top").style.display = (window.scrollY > 200) ? "block" : "none"; };
   document.getElementById("btn-back-to-top").onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
