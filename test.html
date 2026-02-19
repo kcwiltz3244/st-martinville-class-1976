@@ -10,9 +10,12 @@
     :root { --school-purple:#4b0082; --school-gold:#ffd700; --deep-purple: #2a004a; }
     body { background:#fafafa; color:#333; font-family: 'Segoe UI', Arial, sans-serif; overflow-x: hidden; }
     
+    /* Navigation */
     .navbar { background-color:var(--school-purple); border-bottom: 2px solid var(--school-gold); }
-    .navbar a.nav-link { color:white !important; font-weight:bold; text-transform: uppercase; font-size: 0.8rem; }
+    .navbar a.nav-link { color:white !important; font-weight:bold; }
+    .navbar a.nav-link:hover { color: var(--school-gold) !important; }
     
+    /* Header */
     header {
       position:relative;
       background:url("tiger.png") center/cover no-repeat;
@@ -22,56 +25,54 @@
     }
     header::after {
       content:""; position:absolute; top:0; left:0; width:100%; height:100%;
-      background:rgba(30,0,60,0.5); z-index:0;
+      background:rgba(30,0,60,0.6); z-index:0;
     }
     header .container { position:relative; z-index:1; }
+
+    /* Countdown */
+    #countdown { background: var(--deep-purple); color: white; padding: 25px 0; border-bottom: 4px solid var(--school-gold); }
+    .countdown-number { display: block; font-size: 2.2rem; font-weight: bold; color: var(--school-gold); }
+    .countdown-label { font-size: 0.75rem; text-transform: uppercase; color: #bbb; }
+
+    /* Memorial List - FIXED FOR MOBILE */
+    .memorial-list { font-family: 'Georgia', serif; color: #4a148c; }
+    .memorial-list ul { padding: 0; list-style: none; }
+    .memorial-list li { 
+      margin-bottom: 10px; 
+      font-size: 1.05rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     
-    .timer-band {
-      background: var(--deep-purple);
-      color: white;
-      padding: 20px 0;
-      text-align: center;
-      border-top: 4px solid var(--school-gold);
-      border-bottom: 4px solid var(--school-gold);
+    @media (max-width: 768px) {
+      .memorial-list li { font-size: 0.75rem !important; margin-bottom: 6px; }
+      .row-cols-mobile-2 { display: flex; flex-wrap: wrap; }
+      .row-cols-mobile-2 .col { width: 50% !important; flex: 0 0 50%; }
     }
-    .countdown-flex { display: flex; justify-content: center; gap: 25px; font-weight: bold; }
-    .unit-num { font-size: 2.5rem; display: block; line-height: 1; }
-    .unit-label { font-size: 0.7rem; text-transform: uppercase; color: var(--school-gold); }
 
-    .rsvp-status-pill { 
-        background: var(--deep-purple); 
-        color: var(--school-gold); 
-        border: 2px solid var(--school-gold); 
-        border-radius: 50px; 
-        padding: 15px 40px; 
-        display: inline-block;
-        margin-bottom: 20px;
+    #btn-back-to-top {
+      position: fixed; bottom: 20px; right: 20px; display: none; z-index: 1000;
+      background: var(--school-purple); color: var(--school-gold);
+      border: 2px solid var(--school-gold); width: 45px; height: 45px;
     }
-    #yesListContainer { border-radius: 12px; background: white; border: 1px solid #dee2e6; max-height: 280px; overflow-y: auto; }
-    .rsvp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
-    @media (min-width: 768px) { .rsvp-grid { grid-template-columns: repeat(5, 1fr); } }
-    .attendee-name { font-size: 0.82rem; padding: 4px; background: #f8f9fa; border: 1px solid #eee; border-radius: 4px; text-align: center; font-weight: bold; color: var(--deep-purple); }
-
-    .memorial-list { font-family: 'Georgia', serif; color: #4a148c; line-height: 1.4; font-size: 1.1rem; }
-    .reveal-item { opacity: 0; transform: translateY(15px); transition: all 0.6s ease-out; list-style: none; margin-bottom: 5px; }
-    .reveal-item.visible { opacity: 1; transform: translateY(0); }
-
-    #btn-back-to-top { position: fixed; bottom: 20px; right: 20px; display: none; z-index: 1000; background: var(--school-purple); color: var(--school-gold); border: 2px solid var(--school-gold); width: 45px; height: 45px; border-radius: 50%; }
   </style> 
 </head>
 
-<body id="top">
+<body>
 
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
   <div class="container">
-    <a class="navbar-brand" href="#" style="color: var(--school-gold) !important;">SMSH '76</a>
+    <a class="navbar-brand" href="#" style="color: var(--school-gold) !important;">SMSH '76 REUNION</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link px-2" href="#rsvp">Who's Coming</a></li>
+      <ul class="navbar-nav ms-auto fw-bold text-uppercase" style="font-size: 0.85rem;">
+        <li class="nav-item"><a class="nav-link px-2" href="#rsvp">RSVP</a></li>
+        <li class="nav-item"><a class="nav-link px-2" href="#payments">Pay Dues</a></li>
         <li class="nav-item"><a class="nav-link px-2" href="#calendar">Meetings</a></li>
-        <li class="nav-item"><a class="nav-link px-2" href="#music">Music</a></li>
         <li class="nav-item"><a class="nav-link px-2" href="#photos">Photos</a></li>
-        <li class="nav-item"><a class="nav-link px-2" href="#tasks">Tasks</a></li>
         <li class="nav-item"><a class="nav-link px-2" href="#memorial">Memorial</a></li>
       </ul>
     </div>
@@ -79,181 +80,120 @@
 </nav>
 
 <header>
-  <div class="container text-center">
-    <h1 class="fw-bold display-4">ST. MARTINVILLE SENIOR HIGH</h1>
-    <h2 style="color:var(--school-gold);">Class of 1976 — 50th Reunion</h2>
+  <div class="container">
+    <h1 class="fw-bold display-4">St. Martinville Senior High</h1>
+    <h2 class="mt-2" style="color:var(--school-gold); border:none;">Class of 1976 — 50th Year Reunion</h2>
   </div>
 </header>
 
-<section class="timer-band">
-  <div class="container">
-    <div class="countdown-flex">
-      <div><span class="unit-num" id="days">00</span><span class="unit-label">Days</span></div>
-      <div><span class="unit-num" id="hours">00</span><span class="unit-label">Hrs</span></div>
-      <div><span class="unit-num" id="mins">00</span><span class="unit-label">Min</span></div>
-      <div><span class="unit-num" id="secs">00</span><span class="unit-label">Sec</span></div>
-    </div>
-  </div>
-</section>
-
-<section id="rsvp" class="py-5 bg-light border-bottom">
+<section id="countdown">
   <div class="container text-center">
-    <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Who's Coming?</h2>
-    <div class="rsvp-status-pill shadow">
-      <h4 class="mb-0 fw-bold"><span id="finalTotal">...</span> Classmates & Guests Confirmed!</h4>
-    </div>
-    <div class="mb-4 text-center">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNH2rLwb6w9zvIE113HT4Ru0yNCUORL29ijm2Jg4Ws2Bu8sA/viewform" target="_blank" class="btn btn-lg fw-bold" style="background: var(--school-purple); color: var(--school-gold); border-radius: 50px; padding: 12px 40px;">📝 RSVP HERE</a>
-    </div>
-    <div id="yesListContainer" class="p-3 shadow-sm mx-auto" style="max-width: 1000px;">
-        <div class="rsvp-grid" id="attendeeGrid"></div>
+    <h6 class="mb-3" style="letter-spacing: 3px; color: var(--school-gold);">TIME UNTIL CELEBRATION</h6>
+    <div class="d-flex justify-content-center gap-3">
+      <div class="text-center"><span class="countdown-number" id="days">00</span><span class="countdown-label">Days</span></div>
+      <div class="text-center"><span class="countdown-number" id="hours">00</span><span class="countdown-label">Hrs</span></div>
+      <div class="text-center"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">Min</span></div>
+      <div class="text-center"><span class="countdown-number" id="seconds">00</span><span class="countdown-label">Sec</span></div>
     </div>
   </div>
 </section>
 
-<section id="calendar" class="py-5 bg-white border-bottom">
+<section id="payments" class="py-5 bg-white border-bottom">
   <div class="container text-center">
-    <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Meetings & Events</h2>
-    <div class="ratio ratio-16x9 shadow-sm rounded mx-auto" style="max-width: 1000px; min-height: 500px;">
-      <iframe src="https://calendar.google.com/calendar/embed?src=fbcf3427770ee3c74ba269d485ba49d39d6ea67f45be295d849f038ba7c79497%40group.calendar.google.com&ctz=America%2FChicago" style="border:0" frameborder="0"></iframe>
-    </div>
-  </div>
-</section>
+    <h2 class="fw-bold mb-4">Registration & Fees</h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-5">
+        <div class="card shadow border-0 rounded-4 p-4" style="background: #fdfdfd; border-top: 6px solid #6d1ed1 !important;">
+          <img src="https://www.zellepay.com/sites/default/files/2021-09/Zelle_Logo_RGB.png" alt="Zelle" class="mx-auto mb-3" style="height: 35px;">
+          <h4 class="fw-bold mb-3" style="color: #6d1ed1;">Pay with Zelle</h4>
+          
+          <div class="p-3 mb-4 rounded-3 shadow-sm bg-white border">
+            <p class="mb-1 text-muted small text-uppercase fw-bold">Send Payment To:</p>
+            <h5 class="fw-bold mb-0 text-break">PendingAccount@gmail.com</h5>
+          </div>
 
-<section id="music" class="py-5 bg-light text-center border-bottom">
-  <div class="container">
-    <h3 class="fw-bold" style="color: var(--school-purple);">🎵 THE REUNION JUKEBOX</h3>
-    <p class="text-muted mb-4">Request your favorite hits from the 70s!</p>
-    <div class="d-flex flex-wrap justify-content-center gap-3">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLScy-B16a2pEvsTs6YN3HSfjkIX-AhzMbNexi42yshrfNKk7dQ/viewform" target="_blank" class="btn fw-bold shadow-sm" style="background: var(--school-purple); color: var(--school-gold); border-radius: 30px; padding: 10px 25px;">🎤 Request a Song</a>
-        <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSE8lLV2Op7eMchISLz22rowMK7YJF6yy4UwmC0ys7Cok6ZFh8uYw-koCOQoWHOm8MgfPNnQGL74Wki/pubhtml?gid=1803881201&single=true" target="_blank" class="btn fw-bold shadow-sm" style="border: 2px solid var(--school-purple); color: var(--school-purple); border-radius: 30px; padding: 10px 25px;">📜 View Playlist</a>
-    </div>
-  </div>
-</section>
+          <div class="mb-4 text-center">
+            <div class="d-inline-block p-2 border rounded bg-white shadow-sm">
+              <img src="https://via.placeholder.com/150?text=Zelle+QR+Code" alt="QR Barcode" class="img-fluid" style="max-width: 150px;">
+            </div>
+            <p class="mt-2 small text-muted">Scan to pay instantly</p>
+          </div>
 
-<section id="photos" class="py-5 bg-white text-center border-bottom">
-  <div class="container">
-    <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Photo Gallery</h2>
-    <div class="p-5 border border-3 border-dashed rounded-4 mx-auto bg-light" style="max-width: 800px; border-style: dashed !important;">
-      <h1 class="display-1">🚧</h1>
-      <h4 class="fw-bold text-muted">UNDER CONSTRUCTION</h4>
-      <p class="text-secondary mb-3">We are currently gathering memories. This section will launch soon!</p>
-      <div class="p-3 rounded-3 mx-auto" style="background: #e9ecef; border: 1px solid #ced4da; max-width: 500px;">
-          <p class="mb-1 fw-bold">📸 Share Your Photos</p>
-          <a href="mailto:smshclassof76photos@gmail.com" style="color: var(--school-purple); font-weight: bold; text-decoration: underline;">smshclassof76photos@gmail.com</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="tasks" class="py-5 bg-light border-bottom">
-  <div class="container">
-    <h2 class="text-center mb-4 fw-bold" style="color: var(--school-purple);">Task Tracker</h2>
-    <div class="table-responsive shadow-sm mx-auto" style="max-width: 1050px;">
-      <table class="table table-hover align-middle bg-white rounded overflow-hidden">
-        <thead style="background: var(--deep-purple); color: white;">
-          <tr><th class="p-3">Task</th><th>Who</th><th>When</th><th>Status</th></tr>
-        </thead>
-        <tbody id="taskTableBody"></tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<section id="memorial" class="py-5 bg-white">
-  <div class="container">
-    <div class="row align-items-center g-4">
-      <div class="col-lg-5 text-center">
-        <img src="empty chair.png" alt="In Loving Memory" class="img-fluid rounded-3 mb-3" style="max-height: 250px;">
-        <h2 class="fw-bold" style="color: #4a148c;">IN LOVING MEMORY</h2>
-        <p style="font-family: 'Brush Script MT', cursive; font-size: 1.8rem; color: #6a1b9a;">"We haven't forgotten about you."</p>
-      </div>
-      <div class="col-lg-7">
-        <div class="row row-cols-1 row-cols-md-3 memorial-list" id="memorialGrid">
+          <div class="text-start small p-3 rounded shadow-sm bg-light">
+            <p class="mb-1"><strong>How to pay:</strong></p>
+            <ul class="ps-3 mb-0">
+              <li>Open your banking app.</li>
+              <li>Scan the code or enter the email.</li>
+              <li><strong>Memo:</strong> Put your full name!</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<footer class="py-4 text-center" style="background: #1e003c; color: var(--school-gold);">
-  <p class="mb-0 fw-bold">&copy; 2026 SMSH – Class of 1976</p>
+<section id="memorial" class="py-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-5">
+        <img src="empty chair.png" alt="In Loving Memory" class="img-fluid rounded-3 mb-3" style="max-height: 180px;">
+        <h2 class="fw-bold" style="color: #4a148c;">IN LOVING MEMORY</h2>
+        <p style="font-family: 'Brush Script MT', cursive; font-size: 1.8rem; color: #6a1b9a;">"We haven't forgotten about you."</p>
+    </div>
+
+    <div class="row row-cols-2 row-cols-md-4 gx-2 row-cols-mobile-2 memorial-list">
+      <div class="col">
+        <ul>
+          <li>🕊️ Vernon Abbott</li><li>🕊️ Roland Allen</li><li>🕊️ Jody Anthony</li><li>🕊️ Debra Batiste</li><li>🕊️ Linda Batiste</li><li>🕊️ Rickey Batiste</li><li>🕊️ Terry Benjamin</li><li>🕊️ Tyrone Bowles</li><li>🕊️ Larry Broussard</li><li>🕊️ Gary Charles</li><li>🕊️ Jules Charles</li>
+        </ul>
+      </div>
+      <div class="col">
+        <ul>
+          <li>🕊️ B. "McGraw" Charles</li><li>🕊️ Nolan Charles Jr.</li><li>🕊️ Horace Cole</li><li>🕊️ Evelyn Drake</li><li>🕊️ Chris Faulk</li><li>🕊️ Linda George</li><li>🕊️ Lois Gulliam</li><li>🕊️ Sherman Hypolite</li><li>🕊️ Ernest Joseph</li><li>🕊️ Kenneth Lastrappe</li><li>🕊️ Manuel Mallery</li>
+        </ul>
+      </div>
+      <div class="col">
+        <ul>
+          <li>🕊️ Ray Marshall</li><li>🕊️ Richard Marshall</li><li>🕊️ Wanda J. Minor</li><li>🕊️ Mark Mitchell</li><li>🕊️ Stella Orphe</li><li>🕊️ Glenn Perrodin</li><li>🕊️ Perry Pierre</li><li>🕊️ Chris Robertson</li><li>🕊️ Mary Alice Sam</li><li>🕊️ Samuel Savoy</li><li>🕊️ Brenda Sias</li>
+        </ul>
+      </div>
+      <div class="col">
+        <ul>
+          <li>🕊️ Fredrick Skipper</li><li>🕊️ Walter "Lanky" Stewart</li><li>🕊️ Lee Williams</li><li>🕊️ Phyllis Williams</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="py-4" style="background: #1e003c; border-top: 1px solid rgba(255,255,255,0.1);">
+  <div class="container text-center">
+    <p class="mb-0" style="color: var(--school-gold); font-weight: bold;">&copy; 2026 St. Martinville Sr. High – Class of 1976</p>
+  </div>
 </footer>
 
-<button type="button" id="btn-back-to-top">↑</button>
+<button type="button" class="btn rounded-circle shadow" id="btn-back-to-top">↑</button>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  function updateTimer() {
-    const targetDate = new Date("June 26, 2026 18:00:00").getTime();
+  // Same logic for Timer, RSVP Load, and Back-to-top as previous versions
+  const targetDate = new Date("June 26, 2026 00:00:00").getTime();
+  function updateCountdown() {
     const now = new Date().getTime();
-    const diff = targetDate - now;
-    document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-    document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    document.getElementById("mins").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    document.getElementById("secs").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+    const distance = targetDate - now;
+    document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+    document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
   }
-  setInterval(updateTimer, 1000); updateTimer();
+  setInterval(updateCountdown, 1000); updateCountdown();
 
-  const API_URL = 'https://script.google.com/macros/s/AKfycbxoIJZz2RDDkaW9V4K_Vz8w9GT2Gfaj_RZYWY84FyJfJ6elgq2IeNHkOE0jz3x4g5y6hw/exec';
-  async function loadData() {
-    try {
-      const res = await fetch(API_URL);
-      const data = await res.json();
-      document.getElementById('finalTotal').textContent = data.total || "0";
-      document.getElementById('attendeeGrid').innerHTML = data.attendees.map(a => `<div class="attendee-name">${a.name}</div>`).join('');
-    } catch (e) { document.getElementById('finalTotal').textContent = "??"; }
-  }
-  loadData();
-
-  const myTasks = [
-    { task: "Establish bank account and confirm signers", who: "Madelyn Phillips", when: "March 15, 2026", status: "In Progress" },
-    { task: "Confirm private room availability and fees", who: "Sandra Knatt", when: "March 15, 2026", status: "In Progress" },
-    { task: "Obtain catering estimates and provide T-shirt sample", who: "Sadie Fontenot", when: "Feb 17, 2026", status: "In Progress" },
-    { task: "Prepare classmate contact lists", who: "Shantley Guidry", when: "March 31, 2026", status: "In Progress" },
-    { task: "Research hotel pricing", who: "Lolly Alexander", when: "March 31, 2026", status: "In Progress" },
-    { task: "Collect music requests", who: "Patrick Prescott", when: "March 31, 2026", status: "In Progress" },
-    { task: "Finalize and distribute website link", who: "Kevin Wiltz", when: "Feb. 11, 2026", status: "Done" }
-  ];
-  document.getElementById('taskTableBody').innerHTML = myTasks.map(item => `<tr><td class="p-3 fw-bold">${item.task}</td><td>${item.who}</td><td>${item.when}</td><td><span class="badge ${item.status==='Done'?'bg-success':'bg-warning text-dark'}">${item.status}</span></td></tr>`).join('');
-
-  const memorialNames = [
-    "Vernon Abbott", "Roland Allen", "Jody Anthony", "Debra Batiste", "Linda Batiste", "Rickey Batiste", 
-    "Terry Benjamin", "Linda Bonhomme", "Tyrone Bowles", "B. McGraw Charles", "Gary Charles", "Jules Charles",
-    "Nolan Charles Jr.", "Evelyn Drake", "Chris Faulk", "Linda George", "Gary Guidry", "Lois Gulliam",
-    "Sherman Hypolite", "Ernest Joseph", "Kenneth Lastrappe", "Mary Joyce Leon", "Manuel Mallery", "Ray Marshall",
-    "Richard Marshall", "Wanda James Minor", "Mark Mitchell", "Stella Orphe", "Annette Pierre", "Perry Pierre",
-    "Chris Robertson", "Samuel Savoy", "Brenda Sias", "Walter Lanky Stewart", "Lee Williams", "Phyllis Williams"
-  ];
-
-  function renderMemorial() {
-    const grid = document.getElementById('memorialGrid');
-    let colSize = Math.ceil(memorialNames.length / 3);
-    for (let i = 0; i < 3; i++) {
-      let colDiv = document.createElement('div');
-      colDiv.className = "col";
-      let ul = document.createElement('ul');
-      ul.className = "list-unstyled";
-      memorialNames.slice(i * colSize, (i + 1) * colSize).forEach(name => {
-        ul.innerHTML += `<li class="reveal-item">🕊️ ${name}</li>`;
-      });
-      colDiv.appendChild(ul);
-      grid.appendChild(colDiv);
-    }
-  }
-  renderMemorial();
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => { entry.target.classList.add('visible'); }, index * 30);
-      }
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal-item').forEach((el) => observer.observe(el));
-
-  window.onscroll = () => { document.getElementById("btn-back-to-top").style.display = (window.scrollY > 200) ? "block" : "none"; };
-  document.getElementById("btn-back-to-top").onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
+  let mybutton = document.getElementById("btn-back-to-top");
+  window.onscroll = function () {
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) { mybutton.style.display = "block"; } 
+    else { mybutton.style.display = "none"; }
+  };
+  mybutton.addEventListener("click", () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 </script>
 </body>
 </html>
