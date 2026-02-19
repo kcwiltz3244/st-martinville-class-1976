@@ -251,27 +251,33 @@
     grid.innerHTML = ''; 
     
     const isMobile = window.innerWidth < 768;
-    const columnCount = isMobile ? 2 : 3;
-    const itemsPerCol = Math.ceil(memorialNames.length / columnCount);
-
-    for (let i = 0; i < columnCount; i++) {
-      let colDiv = document.createElement('div');
-      colDiv.className = isMobile ? "col-6" : "col-4"; 
-      let ul = document.createElement('ul');
-      ul.className = "list-unstyled";
-      
-      memorialNames.slice(i * itemsPerCol, (i + 1) * itemsPerCol).forEach(name => {
-        ul.innerHTML += `<li class="reveal-item mb-2" style="color: var(--school-purple); font-size: 0.85rem; white-space: nowrap;">🕊️ ${name}</li>`;
-      });
-      
-      colDiv.appendChild(ul);
-      grid.appendChild(colDiv);
+    const numCols = isMobile ? 2 : 3;
+    
+    // Create the columns first
+    const columns = [];
+    for (let i = 0; i < numCols; i++) {
+        let colDiv = document.createElement('div');
+        colDiv.className = isMobile ? "col-6" : "col-4";
+        let ul = document.createElement('ul');
+        ul.className = "list-unstyled";
+        colDiv.appendChild(ul);
+        columns.push(ul);
+        grid.appendChild(colDiv);
     }
-    // Re-trigger the animation for new items
+
+    // Distribute ALL names across the columns
+    memorialNames.forEach((name, index) => {
+        const colIndex = Math.floor(index / Math.ceil(memorialNames.length / numCols));
+        // Fallback for any remainder names to the last column
+        const targetCol = columns[colIndex] || columns[columns.length - 1];
+        
+        targetCol.innerHTML += `<li class="reveal-item mb-2" style="color: var(--school-purple); font-size: 0.85rem; white-space: nowrap;">🕊️ ${name}</li>`;
+    });
+
+    // Re-observe for animations
     document.querySelectorAll('.reveal-item').forEach((el) => observer.observe(el));
   }
   
-  // Set up Observer for animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, index) => {
       if (entry.isIntersecting) {
