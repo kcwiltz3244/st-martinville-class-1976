@@ -48,6 +48,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
   <div class="container">
     <a class="navbar-brand" href="#" style="color: var(--school-gold) !important;">SMSH '76</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link px-2" href="#rsvp">Who's Coming</a></li>
@@ -187,7 +190,7 @@
       </div>
 
       <div class="col-lg-7">
-        <div class="row row-cols-2 row-cols-md-3 memorial-list" id="memorialGrid">
+        <div class="row row-cols-3 memorial-list" id="memorialGrid">
           </div>
       </div>
     </div>
@@ -241,31 +244,28 @@
     "Manuel Mallery", "Ray Marshall", "Richard Marshall", "Wanda James Minor", "Mark Mitchell", "Stella Orphe", 
     "Glenn Perrodin", "Annette Pierre", "Perry Pierre", "Chris Robertson", "Mary Alice Sam", "Samuel Savoy", 
     "Brenda Sias", "Fredrick Skipper", "Walter Lanky Stewart", "Lee Williams", "Phyllis Williams"
-  ].sort(); // This alphabetizes the list automatically
+  ].sort(); 
 
-function renderMemorial() {
+  function renderMemorial() {
     const grid = document.getElementById('memorialGrid');
+    grid.innerHTML = ''; 
     const itemsPerCol = Math.ceil(memorialNames.length / 3);
-    
-    // Clear the grid first to avoid duplicates
-    grid.innerHTML = '';
 
     for (let i = 0; i < 3; i++) {
       let colDiv = document.createElement('div');
-      colDiv.className = "col";
+      colDiv.className = "col-4"; 
       let ul = document.createElement('ul');
       ul.className = "list-unstyled";
       
       memorialNames.slice(i * itemsPerCol, (i + 1) * itemsPerCol).forEach(name => {
-        // Keeps the bird icon and makes the name purple
-        ul.innerHTML += `<li class="reveal-item mb-2" style="color: var(--school-purple);">🕊️ ${name}</li>`;
+        ul.innerHTML += `<li class="reveal-item mb-2" style="color: var(--school-purple); font-size: 0.9rem;">🕊️ ${name}</li>`;
       });
       
       colDiv.appendChild(ul);
       grid.appendChild(colDiv);
     }
-}
-renderMemorial();
+  }
+  renderMemorial();
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, index) => {
