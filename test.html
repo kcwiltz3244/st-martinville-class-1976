@@ -249,23 +249,32 @@
   function renderMemorial() {
     const grid = document.getElementById('memorialGrid');
     grid.innerHTML = ''; 
-    const itemsPerCol = Math.ceil(memorialNames.length / 3);
+    
+    // We detect if the screen is small (phone)
+    const isMobile = window.innerWidth < 768;
+    const columnCount = isMobile ? 2 : 3; // 2 columns for phone, 3 for computer
+    const itemsPerCol = Math.ceil(memorialNames.length / columnCount);
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < columnCount; i++) {
       let colDiv = document.createElement('div');
-      colDiv.className = "col-4"; 
+      // 'col-6' means 2 columns on phone, 'col-md-4' means 3 columns on computer
+      colDiv.className = "col-6 col-md-4"; 
       let ul = document.createElement('ul');
       ul.className = "list-unstyled";
       
       memorialNames.slice(i * itemsPerCol, (i + 1) * itemsPerCol).forEach(name => {
-        ul.innerHTML += `<li class="reveal-item mb-2" style="color: var(--school-purple); font-size: 0.9rem;">🕊️ ${name}</li>`;
+        // Reduced font size slightly to 0.85rem to ensure no wrapping
+        ul.innerHTML += `<li class="reveal-item mb-2" style="color: var(--school-purple); font-size: 0.85rem; white-space: nowrap;">🕊️ ${name}</li>`;
       });
       
       colDiv.appendChild(ul);
       grid.appendChild(colDiv);
     }
-  }
-  renderMemorial();
+}
+// Run once on load
+renderMemorial();
+// Update if the user rotates their phone
+window.addEventListener('resize', renderMemorial);
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, index) => {
