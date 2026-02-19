@@ -25,7 +25,9 @@
     .unit-num { font-size: 2.5rem; display: block; line-height: 1; color: var(--school-gold); }
     .unit-label { font-size: 0.7rem; text-transform: uppercase; }
 
-    .zelle-card { border-top: 6px solid #6d1ed1 !important; border-radius: 15px; background: white; max-width: 450px; margin: 0 auto; }
+    /* Button Styling */
+    .btn-zelle { background: #6d1ed1; color: white !important; border-radius: 50px; padding: 12px 30px; font-weight: bold; border: 2px solid white; transition: 0.3s; }
+    .btn-zelle:hover { background: #4b0082; transform: scale(1.05); }
 
     .rsvp-status-pill { background: var(--deep-purple); color: var(--school-gold); border: 2px solid var(--school-gold); border-radius: 50px; padding: 15px 40px; display: inline-block; margin-bottom: 20px; }
     #yesListContainer { border-radius: 12px; background: white; border: 1px solid #dee2e6; max-height: 280px; overflow-y: auto; }
@@ -33,7 +35,7 @@
     @media (min-width: 768px) { .rsvp-grid { grid-template-columns: repeat(5, 1fr); } }
     .attendee-name { font-size: 0.82rem; padding: 4px; background: #f8f9fa; border: 1px solid #eee; border-radius: 4px; text-align: center; font-weight: bold; color: var(--deep-purple); }
 
-    /* FIXED MEMORIAL LAYOUT */
+    /* MEMORIAL LAYOUT */
     .memorial-list { list-style: none; padding: 0; margin: 0; }
     .memorial-list li { margin-bottom: 10px; font-size: 1rem; white-space: nowrap; font-family: 'Georgia', serif; color: #4b0082; }
     @media (max-width: 768px) {
@@ -81,21 +83,6 @@
   </div>
 </section>
 
-<section id="payments" class="py-5 bg-white border-bottom">
-  <div class="container text-center">
-    <div class="card zelle-card shadow-sm p-4">
-        <img src="https://www.zellepay.com/sites/default/files/2021-09/Zelle_Logo_RGB.png" height="30" class="mx-auto mb-3" alt="Zelle">
-        <h4 class="fw-bold mb-3" style="color:#6d1ed1;">Pay Registration & Dues</h4>
-        <div class="bg-light p-3 mb-3 border rounded">
-            <small class="text-muted fw-bold">ZELLE EMAIL:</small><br>
-            <span class="h5 fw-bold text-dark">PendingAccount@gmail.com</span>
-        </div>
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=ZellePayment" class="border p-2 bg-white mx-auto" style="max-width:150px;" alt="QR Code">
-        <p class="small text-muted mt-2">Scan in your bank app to pay</p>
-    </div>
-  </div>
-</section>
-
 <section id="rsvp" class="py-5 bg-light border-bottom">
   <div class="container text-center">
     <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Who's Coming?</h2>
@@ -108,6 +95,23 @@
     <div id="yesListContainer" class="p-3 shadow-sm mx-auto" style="max-width: 1000px;">
         <div class="rsvp-grid" id="attendeeGrid"></div>
     </div>
+  </div>
+</section>
+
+<section id="payments" class="py-5 bg-white border-bottom shadow-sm">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-4" style="color: var(--school-purple);">Registration & Dues</h2>
+    <p class="text-muted">Ready to finalize your spot? Send your dues securely via Zelle.</p>
+    <div class="d-flex flex-wrap justify-content-center gap-3 mt-3">
+        <div class="p-3 border rounded bg-light d-flex align-items-center">
+            <img src="https://www.zellepay.com/sites/default/files/2021-09/Zelle_Logo_RGB.png" height="20" class="me-3" alt="Zelle">
+            <span class="fw-bold">PendingAccount@gmail.com</span>
+        </div>
+        <a href="#payments" class="btn btn-zelle shadow-sm d-flex align-items-center">
+           <span>Pay with Zelle</span>
+        </a>
+    </div>
+    <p class="small text-muted mt-3"><em>Please include your name in the Zelle memo field.</em></p>
   </div>
 </section>
 
@@ -153,22 +157,22 @@
     <div class="row mobile-cols g-3">
         <div class="col-6 col-md-3 mobile-half">
             <ul class="memorial-list">
-                <li>🕊️ Vernon Abbott</li><li>🕊️ Roland Allen</li><li>🕊️ Jody Anthony</li><li>🕊️ Debra Batiste</li><li>🕊️ Linda Batiste</li><li>🕊️ Rickey Batiste</li><li>🕊️ Terry Benjamin</li><li>🕊️ Linda Bonhomme</li><li>🕊️ Tyrone Bowles</li>
+                <li>🕊️ Vernon Abbott</li><li>🕊️ Roland Allen</li><li>🕊️ Jody Anthony</li><li>🕊️ Debra Batiste</li><li>🕊️ Linda Batiste</li><li>🕊️ Rickey Batiste</li><li>🕊️ Terry Benjamin</li><li>🕊️ Linda Bonhomme</li><li>🕊️ Tyrone Bowles</li><li>🕊️ Larry Broussard</li><li>🕊️ Gary Charles</li>
             </ul>
         </div>
         <div class="col-6 col-md-3 mobile-half">
             <ul class="memorial-list">
-                <li>🕊️ B. McGraw Charles</li><li>🕊️ Gary Charles</li><li>🕊️ Jules Charles</li><li>🕊️ Nolan Charles Jr.</li><li>🕊️ Evelyn Drake</li><li>🕊️ Chris Faulk</li><li>🕊️ Linda George</li><li>🕊️ Gary Guidry</li><li>🕊️ Lois Gulliam</li>
+                <li>🕊️ Jules Charles</li><li>🕊️ B. McGraw Charles</li><li>🕊️ Nolan Charles Jr.</li><li>🕊️ Horace Cole</li><li>🕊️ Evelyn Drake</li><li>🕊️ Chris Faulk</li><li>🕊️ Linda George</li><li>🕊️ Gary Guidry</li><li>🕊️ Lois Gulliam</li><li>🕊️ Sherman Hypolite</li><li>🕊️ Ernest Joseph</li>
             </ul>
         </div>
         <div class="col-6 col-md-3 mobile-half">
             <ul class="memorial-list">
-                <li>🕊️ Sherman Hypolite</li><li>🕊️ Ernest Joseph</li><li>🕊️ Kenneth Lastrappe</li><li>🕊️ Mary Joyce Leon</li><li>🕊️ Manuel Mallery</li><li>🕊️ Ray Marshall</li><li>🕊️ Richard Marshall</li><li>🕊️ Wanda J. Minor</li><li>🕊️ Mark Mitchell</li>
+                <li>🕊️ Kenneth Lastrappe</li><li>🕊️ Mary Joyce Leon</li><li>🕊️ Manuel Mallery</li><li>🕊️ Ray Marshall</li><li>🕊️ Richard Marshall</li><li>🕊️ Wanda J. Minor</li><li>🕊️ Mark Mitchell</li><li>🕊️ Stella Orphe</li><li>🕊️ Annette Pierre</li><li>🕊️ Perry Pierre</li><li>🕊️ Glenn Perrodin</li>
             </ul>
         </div>
         <div class="col-6 col-md-3 mobile-half">
             <ul class="memorial-list">
-                <li>🕊️ Stella Orphe</li><li>🕊️ Annette Pierre</li><li>🕊️ Perry Pierre</li><li>🕊️ Chris Robertson</li><li>🕊️ Samuel Savoy</li><li>🕊️ Brenda Sias</li><li>🕊️ Walter Stewart</li><li>🕊️ Lee Williams</li><li>🕊️ Phyllis Williams</li>
+                <li>🕊️ Chris Robertson</li><li>🕊️ Mary Alice Sam</li><li>🕊️ Samuel Savoy</li><li>🕊️ Brenda Sias</li><li>🕊️ Fredrick Skipper</li><li>🕊️ Walter Stewart</li><li>🕊️ Lee Williams</li><li>🕊️ Phyllis Williams</li><li>🕊️ Gary Guidry</li><li>🕊️ Linda George</li><li>🕊️ Chris Faulk</li>
             </ul>
         </div>
     </div>
