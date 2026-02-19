@@ -25,7 +25,6 @@
     .unit-num { font-size: 2.5rem; display: block; line-height: 1; color: var(--school-gold); }
     .unit-label { font-size: 0.7rem; text-transform: uppercase; }
 
-    /* Button Styling */
     .btn-zelle { background: #6d1ed1; color: white !important; border-radius: 50px; padding: 15px 45px; font-weight: bold; border: 2px solid white; transition: 0.3s; text-decoration: none; display: inline-flex; align-items: center; font-size: 1.2rem; }
     .btn-zelle:hover { background: #4b0082; transform: scale(1.05); color: var(--school-gold) !important; }
 
@@ -38,7 +37,6 @@
     @media (min-width: 768px) { .rsvp-grid { grid-template-columns: repeat(5, 1fr); } }
     .attendee-name { font-size: 0.82rem; padding: 4px; background: #f8f9fa; border: 1px solid #eee; border-radius: 4px; text-align: center; font-weight: bold; color: var(--deep-purple); }
 
-    /* MEMORIAL LAYOUT */
     .memorial-list { list-style: none; padding: 0; margin: 0; }
     .memorial-list li { margin-bottom: 8px; font-size: 0.95rem; white-space: nowrap; font-family: 'Georgia', serif; color: #4b0082; }
     @media (max-width: 768px) {
@@ -105,3 +103,56 @@
   <div class="container">
     <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Meetings & Events</h2>
     <a href="#" target="_blank" class="btn-notes shadow-sm">📋 View Meeting Notes</a>
+    <div class="ratio ratio-16x9 shadow-sm rounded mx-auto" style="max-width: 1000px; min-height: 500px;">
+      <iframe src="https://calendar.google.com/calendar/embed?src=fbcf3427770ee3c74ba269d485ba49d39d6ea67f45be295d849f038ba7c79497%40group.calendar.google.com&ctz=America%2FChicago" style="border:0" frameborder="0"></iframe>
+    </div>
+  </div>
+</section>
+
+<section id="payments" class="py-5 bg-white border-bottom">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-4" style="color: var(--school-purple);">Reunion Dues</h2>
+    <div class="d-flex justify-content-center">
+        <a href="#" target="_blank" class="btn btn-zelle shadow-sm">
+           <img src="https://www.zellepay.com/sites/default/files/2021-09/Zelle_Logo_RGB.png" height="22" class="me-3" alt="Zelle">
+           Pay Dues via Zelle
+        </a>
+    </div>
+    <p class="small text-muted mt-4"><em>Clicking the button will open our payment verification form and Zelle instructions.</em></p>
+  </div>
+</section>
+
+<section id="music" class="py-5 bg-light text-center border-bottom">
+  <div class="container">
+    <h3 class="fw-bold" style="color: var(--school-purple);">🎵 THE REUNION JUKEBOX</h3>
+    <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScy-B16a2pEvsTs6YN3HSfjkIX-AhzMbNexi42yshrfNKk7dQ/viewform" target="_blank" class="btn fw-bold shadow-sm" style="background: var(--school-purple); color: var(--school-gold); border-radius: 30px; padding: 10px 25px;">🎤 Request a Song</a>
+        <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSE8lLV2Op7eMchISLz22rowMK7YJF6yy4UwmC0ys7Cok6ZFh8uYw-koCOQoWHOm8MgfPNnQGL74Wki/pubhtml?gid=1803881201&single=true" target="_blank" class="btn fw-bold shadow-sm" style="border: 2px solid var(--school-purple); color: var(--school-purple); border-radius: 30px; padding: 10px 25px;">📜 View Playlist</a>
+    </div>
+  </div>
+</section>
+
+<section id="tasks" class="py-5 bg-white border-bottom">
+  <div class="container">
+    <h2 class="text-center mb-4 fw-bold" style="color: var(--school-purple);">Task Tracker</h2>
+    <div class="table-responsive shadow-sm mx-auto" style="max-width: 1050px;">
+      <table class="table table-hover align-middle bg-white rounded">
+        <thead style="background: var(--deep-purple); color: white;">
+          <tr><th class="p-3">Task</th><th>Who</th><th>Status</th></tr>
+        </thead>
+        <tbody id="taskTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="memorial" class="py-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold" style="color: #4a148c;">IN LOVING MEMORY</h2>
+        <p style="font-family: 'Brush Script MT', cursive; font-size: 1.8rem; color: #6a1b9a;">"We haven't forgotten about you."</p>
+    </div>
+    <div class="row g-3 text-start">
+        <div class="col-6 col-md-3 mobile-half"><ul class="memorial-list"><li>🕊️ Vernon Abbott</li><li>🕊️ Roland Allen</li><li>🕊️ Jody Anthony</li><li>🕊️ Debra Batiste</li><li>🕊️ Linda Batiste</li><li>🕊️ Rickey Batiste</li><li>🕊️ Terry Benjamin</li><li>🕊️ Linda Bonhomme</li><li>🕊️ Tyrone Bowles</li><li>🕊️ Larry Broussard</li><li>🕊️ B. "McGraw" Charles</li></ul></div>
+        <div class="col-6 col-md-3 mobile-half"><ul class="memorial-list"><li>🕊️ Gary Charles</li><li>🕊️ Jules Charles</li><li>🕊️ Nolan Charles Jr.</li><li>🕊️ Horace Cole</li><li>🕊️ Evelyn Drake</li><li>🕊️ Chris Faulk</li><li>🕊️ Linda George</li><li>🕊️ Gary Guidry</li><li>🕊️ Lois Gulliam</li><li>🕊️ Sherman Hypolite</li><li>🕊️ Ernest Joseph</li></ul></div>
+        <div class="col-6 col-md-3 mobile-half"><ul class="memorial-list"><li>🕊️ Kenneth Lastrappe</li><li>🕊️ Mary Joyce Leon</li>
