@@ -29,7 +29,7 @@
     .btn-zelle { background: #6d1ed1; color: white !important; border-radius: 50px; padding: 15px 45px; font-weight: bold; border: 2px solid white; transition: 0.3s; text-decoration: none; display: inline-flex; align-items: center; font-size: 1.2rem; }
     .btn-zelle:hover { background: #4b0082; transform: scale(1.05); color: var(--school-gold) !important; }
 
-    .btn-notes { border: 2px solid var(--school-purple); color: var(--school-purple); border-radius: 30px; padding: 10px 25px; font-weight: bold; text-decoration: none; transition: 0.3s; }
+    .btn-notes { border: 2px solid var(--school-purple); color: var(--school-purple); border-radius: 30px; padding: 10px 25px; font-weight: bold; text-decoration: none; transition: 0.3s; display: inline-block; margin-bottom: 20px; }
     .btn-notes:hover { background: var(--school-purple); color: white !important; }
 
     .rsvp-status-pill { background: var(--deep-purple); color: var(--school-gold); border: 2px solid var(--school-gold); border-radius: 50px; padding: 15px 40px; display: inline-block; margin-bottom: 20px; }
@@ -62,4 +62,46 @@
         <li class="nav-item"><a class="nav-link px-2" href="#payments">Dues</a></li>
         <li class="nav-item"><a class="nav-link px-2" href="#music">Music</a></li>
         <li class="nav-item"><a class="nav-link px-2" href="#tasks">Tasks</a></li>
-        <li class="
+        <li class="nav-item"><a class="nav-link px-2" href="#memorial">Memorial</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="container text-center">
+    <h1 class="fw-bold display-4">ST. MARTINVILLE SENIOR HIGH</h1>
+    <h2 style="color:var(--school-gold);">Class of 1976 — 50th Reunion</h2>
+  </div>
+</header>
+
+<section class="timer-band">
+  <div class="container">
+    <div class="countdown-flex">
+      <div><span class="unit-num" id="days">00</span><span class="unit-label">Days</span></div>
+      <div><span class="unit-num" id="hours">00</span><span class="unit-label">Hrs</span></div>
+      <div><span class="unit-num" id="mins">00</span><span class="unit-label">Min</span></div>
+      <div><span class="unit-num" id="secs">00</span><span class="unit-label">Sec</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="rsvp" class="py-5 bg-light border-bottom">
+  <div class="container text-center">
+    <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Who's Coming?</h2>
+    <div class="rsvp-status-pill shadow">
+      <h4 class="mb-0 fw-bold"><span id="finalTotal">...</span> Classmates & Guests Confirmed!</h4>
+    </div>
+    <div class="mb-4 text-center">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNH2rLwb6w9zvIE113HT4Ru0yNCUORL29ijm2Jg4Ws2Bu8sA/viewform" target="_blank" class="btn btn-lg fw-bold" style="background: var(--school-purple); color: var(--school-gold); border-radius: 50px; padding: 12px 40px;">📝 RSVP HERE</a>
+    </div>
+    <div id="yesListContainer" class="p-3 shadow-sm mx-auto" style="max-width: 1000px;">
+        <div class="rsvp-grid" id="attendeeGrid"></div>
+    </div>
+  </div>
+</section>
+
+<section id="calendar" class="py-5 bg-white border-bottom text-center">
+  <div class="container">
+    <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Meetings & Events</h2>
+    <a href="#" target="_blank" class="btn-notes shadow-sm">📋 View Meeting Notes</a>
