@@ -248,22 +248,29 @@
     "Brenda Sias", "Fredrick Skipper", "Walter Lanky Stewart", "Lee Williams", "Phyllis Williams"
   ].sort(); // This alphabetizes the list automatically
 
-  function renderMemorial() {
+function renderMemorial() {
     const grid = document.getElementById('memorialGrid');
     const itemsPerCol = Math.ceil(memorialNames.length / 3);
+    
+    // Clear the grid first to avoid duplicates
+    grid.innerHTML = '';
+
     for (let i = 0; i < 3; i++) {
       let colDiv = document.createElement('div');
       colDiv.className = "col";
       let ul = document.createElement('ul');
       ul.className = "list-unstyled";
+      
       memorialNames.slice(i * itemsPerCol, (i + 1) * itemsPerCol).forEach(name => {
-        ul.innerHTML += `<li class="reveal-item">🕊️ ${name}</li>`;
+        // Keeps the bird icon and makes the name purple
+        ul.innerHTML += `<li class="reveal-item mb-2" style="color: var(--school-purple);">🕊️ ${name}</li>`;
       });
+      
       colDiv.appendChild(ul);
       grid.appendChild(colDiv);
     }
-  }
-  renderMemorial();
+}
+renderMemorial();
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, index) => {
