@@ -15,11 +15,14 @@
     
     header {
       position:relative; background:url("tiger.png") center/cover no-repeat;
-      color:var(--school-gold); text-align:center; padding:5rem 1rem;
+      text-align:center; padding:5rem 1rem;
     }
     header::after { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(30,0,60,0.5); z-index:0; }
     header .container { position:relative; z-index:1; }
     
+    /* Header Gold Text */
+    header h1, header h2, header h3 { color: var(--school-gold) !important; font-weight: bold; }
+
     .timer-band { background: var(--deep-purple); color: white; padding: 20px 0; text-align: center; border-top: 4px solid var(--school-gold); border-bottom: 4px solid var(--school-gold); }
     .countdown-flex { display: flex; justify-content: center; gap: 25px; font-weight: bold; }
     .unit-num { font-size: 2.5rem; display: block; line-height: 1; color: var(--school-gold); }
@@ -61,9 +64,9 @@
 
 <header>
   <div class="container text-center">
-    <h1 class="fw-bold display-4" style="color: var(--school-gold);">ST. MARTINVILLE SENIOR HIGH</h1>
-    <h2 style="color: var(--school-gold); text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Class of 1976 — 50th Reunion</h2>
-    <h3 class="fw-bold" style="color: var(--school-gold); letter-spacing: 2px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);">June 26-27, 2026</h3>
+    <h1 class="display-4">ST. MARTINVILLE SENIOR HIGH</h1>
+    <h2 class="shadow-sm">Class of 1976 — 50th Reunion</h2>
+    <h3 class="mt-2" style="letter-spacing: 2px;">June 26-27, 2026</h3>
   </div>
 </header>
 
@@ -74,6 +77,15 @@
       <div><span class="unit-num" id="hours">00</span><span class="unit-label">Hrs</span></div>
       <div><span class="unit-num" id="mins">00</span><span class="unit-label">Min</span></div>
       <div><span class="unit-num" id="secs">00</span><span class="unit-label">Sec</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="calendar" class="py-5 bg-white border-bottom">
+  <div class="container text-center">
+    <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Meetings & Events</h2>
+    <div class="ratio ratio-16x9 shadow-sm rounded mx-auto" style="max-width: 1000px; min-height: 500px; border: 2px solid #eee;">
+      <iframe src="https://calendar.google.com/calendar/embed?src=fbcf3427770ee3c74ba269d485ba49d39d6ea67f45be295d849f038ba7c79497%40group.calendar.google.com&ctz=America%2FChicago" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
     </div>
   </div>
 </section>
@@ -93,16 +105,7 @@
   </div>
 </section>
 
-<section id="calendar" class="py-5 bg-white border-bottom">
-  <div class="container text-center">
-    <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Meetings & Events</h2>
-    <div class="ratio ratio-16x9 shadow-sm rounded mx-auto" style="max-width: 1000px; min-height: 500px;">
-      <iframe src="https://calendar.google.com/calendar/embed?src=fbcf3427770ee3c74ba269d485ba49d39d6ea67f45be295d849f038ba7c79497%40group.calendar.google.com&ctz=America%2FChicago" style="border:0" frameborder="0"></iframe>
-    </div>
-  </div>
-</section>
-
-<section id="music" class="py-5 bg-light text-center border-bottom">
+<section id="music" class="py-5 bg-white text-center border-bottom">
   <div class="container">
     <h3 class="fw-bold" style="color: var(--school-purple);">🎵 THE REUNION JUKEBOX</h3>
     <p class="text-muted mb-4">Request your favorite hits from the 70s!</p>
@@ -113,21 +116,21 @@
   </div>
 </section>
 
-<section id="photos" class="py-5 bg-white text-center border-bottom">
+<section id="photos" class="py-5 bg-light text-center border-bottom">
   <div class="container">
     <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Photo Gallery</h2>
-    <div class="p-5 border border-3 border-dashed rounded-4 mx-auto bg-light" style="max-width: 800px; border-style: dashed !important;">
+    <div class="p-5 border border-3 border-dashed rounded-4 mx-auto bg-white" style="max-width: 800px; border-style: dashed !important;">
       <h1 class="display-1">📸</h1>
       <h4 class="fw-bold text-muted">SEND US YOUR PHOTOS</h4>
       <p class="text-secondary mb-3">We are gathering memories for our 50th slideshow!</p>
-      <div class="p-3 rounded-3 mx-auto" style="background: #e9ecef; border: 1px solid #ced4da; max-width: 500px;">
+      <div class="p-3 rounded-3 mx-auto" style="background: #f8f9fa; border: 1px solid #ced4da; max-width: 500px;">
           <a href="mailto:smshclassof76photos@gmail.com" style="color: var(--school-purple); font-weight: bold; text-decoration: underline;">smshclassof76photos@gmail.com</a>
       </div>
     </div>
   </div>
 </section>
 
-<section id="tasks" class="py-5 bg-light border-bottom">
+<section id="tasks" class="py-5 bg-white border-bottom">
   <div class="container">
     <h2 class="text-center mb-4 fw-bold" style="color: var(--school-purple);">Task Tracker</h2>
     <div class="table-responsive shadow-sm mx-auto" style="max-width: 1050px;">
@@ -141,7 +144,7 @@
   </div>
 </section>
 
-<section id="memorial" class="py-5 bg-white">
+<section id="memorial" class="py-5 bg-light">
   <div class="container">
     <div class="row align-items-center g-4">
       <div class="col-lg-5 text-center">
@@ -150,8 +153,7 @@
         <p style="font-family: 'Brush Script MT', cursive; font-size: 1.8rem; color: #6a1b9a;">"We haven't forgotten about you."</p>
       </div>
       <div class="col-lg-7">
-        <div class="row memorial-list" id="memorialGrid">
-          </div>
+        <div class="row memorial-list" id="memorialGrid"></div>
       </div>
     </div>
   </div>
@@ -209,6 +211,14 @@
     "Stella Orphe", "Terry Benjamin", "Tyrone Bowles", "Vernon Abbott", "Walter Lanky Stewart", "Wanda James Minor"
   ].sort(); 
 
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => { entry.target.classList.add('visible'); }, index * 30);
+      }
+    });
+  }, { threshold: 0.1 });
+
   function renderMemorial() {
     const grid = document.getElementById('memorialGrid');
     grid.innerHTML = ''; 
@@ -229,16 +239,9 @@
         colDiv.appendChild(ul);
         grid.appendChild(colDiv);
     }
+    // Re-attach observer after rendering
     document.querySelectorAll('.reveal-item').forEach((el) => observer.observe(el));
   }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => { entry.target.classList.add('visible'); }, index * 30);
-      }
-    });
-  }, { threshold: 0.1 });
 
   renderMemorial();
   window.addEventListener('resize', renderMemorial);
