@@ -28,7 +28,6 @@
     .unit-num { font-size: 2.5rem; display: block; line-height: 1; color: var(--school-gold); }
     .unit-label { font-size: 0.7rem; text-transform: uppercase; }
 
-    /* RSVP Styles */
     .rsvp-status-pill { background: var(--deep-purple); color: var(--school-gold); border: 2px solid var(--school-gold); border-radius: 50px; padding: 15px 40px; display: inline-block; margin-bottom: 20px; }
     #yesListContainer { border-radius: 12px; background: white; border: 1px solid #dee2e6; max-height: 280px; overflow-y: auto; }
     .rsvp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
@@ -106,7 +105,21 @@
   </div>
 </section>
 
-<section id="music" class="py-5 bg-light text-center border-bottom">
+<section id="tasks" class="py-5 bg-light border-bottom">
+  <div class="container">
+    <h2 class="text-center mb-4 fw-bold" style="color: var(--school-purple);">Committee Meeting Notes & Tasks</h2>
+    <div class="table-responsive shadow-sm mx-auto" style="max-width: 1050px;">
+      <table class="table table-hover align-middle bg-white rounded overflow-hidden">
+        <thead style="background: var(--deep-purple); color: white;">
+          <tr><th class="p-3">Task</th><th>Who</th><th>When</th><th>Status</th></tr>
+        </thead>
+        <tbody id="taskTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="music" class="py-5 bg-white text-center border-bottom">
   <div class="container">
     <h3 class="fw-bold" style="color: var(--school-purple);">🎵 THE REUNION JUKEBOX</h3>
     <p class="text-muted mb-4">Request your favorite hits from the 70s!</p>
@@ -117,30 +130,16 @@
   </div>
 </section>
 
-<section id="photos" class="py-5 bg-white text-center border-bottom">
+<section id="photos" class="py-5 bg-light text-center border-bottom">
   <div class="container">
     <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Photo Gallery</h2>
-    <div class="p-5 border border-3 border-dashed rounded-4 mx-auto bg-light" style="max-width: 800px; border-style: dashed !important;">
+    <div class="p-5 border border-3 border-dashed rounded-4 mx-auto bg-white" style="max-width: 800px; border-style: dashed !important;">
       <h1 class="display-1">📸</h1>
       <h4 class="fw-bold text-muted">SEND US YOUR PHOTOS</h4>
       <p class="text-secondary mb-3">We are gathering memories for our 50th slideshow!</p>
-      <div class="p-3 rounded-3 mx-auto" style="background: #e9ecef; border: 1px solid #ced4da; max-width: 500px;">
+      <div class="p-3 rounded-3 mx-auto" style="background: #f8f9fa; border: 1px solid #ced4da; max-width: 500px;">
           <a href="mailto:smshclassof76photos@gmail.com" style="color: var(--school-purple); font-weight: bold; text-decoration: underline;">smshclassof76photos@gmail.com</a>
       </div>
-    </div>
-  </div>
-</section>
-
-<section id="tasks" class="py-5 bg-light border-bottom">
-  <div class="container">
-    <h2 class="text-center mb-4 fw-bold" style="color: var(--school-purple);">Task Tracker</h2>
-    <div class="table-responsive shadow-sm mx-auto" style="max-width: 1050px;">
-      <table class="table table-hover align-middle bg-white rounded overflow-hidden">
-        <thead style="background: var(--deep-purple); color: white;">
-          <tr><th class="p-3">Task</th><th>Who</th><th>When</th><th>Status</th></tr>
-        </thead>
-        <tbody id="taskTableBody"></tbody>
-      </table>
     </div>
   </div>
 </section>
@@ -180,6 +179,7 @@
   }
   setInterval(updateTimer, 1000); updateTimer();
 
+  // ORIGINAL DATA API LINK
   const API_URL = 'https://script.google.com/macros/s/AKfycbxoIJZz2RDDkaW9V4K_Vz8w9GT2Gfaj_RZYWY84FyJfJ6elgq2IeNHkOE0jz3x4g5y6hw/exec';
   async function loadData() {
     try {
