@@ -62,8 +62,8 @@
 <header>
   <div class="container text-center">
     <h1 class="fw-bold display-4">ST. MARTINVILLE SENIOR HIGH</h1>
-    <h2 style="color:var(--school-gold);">Class of 1976 — 50th Reunion</h2>
-    <h3 class="fw-bold" style="color: white; letter-spacing: 2px;">June 26-27, 2026</h3>
+    <h2 style="color:white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Class of 1976 — 50th Reunion</h2>
+    <h3 class="fw-bold" style="color: var(--school-gold); letter-spacing: 2px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);">June 26-27, 2026</h3>
   </div>
 </header>
 
@@ -200,14 +200,14 @@
   document.getElementById('taskTableBody').innerHTML = myTasks.map(item => `<tr><td class="p-3 fw-bold">${item.task}</td><td>${item.who}</td><td>${item.when}</td><td><span class="badge ${item.status==='Done'?'bg-success':'bg-warning text-dark'}">${item.status}</span></td></tr>`).join('');
 
   const memorialNames = [
-    "Vernon Abbott", "Roland Allen", "Jody Anthony", "Debra Batiste", "Linda Batiste", "Rickey Batiste", 
-    "Terry Benjamin", "Linda Bonhomme", "Tyrone Bowles", "Larry Broussard", "B. McGraw Charles", "Gary Charles", 
-    "Jules Charles", "Nolan Charles Jr.", "Horace Cole", "Evelyn Drake", "Chris Faulk", "Linda George", 
-    "Gary Guidry", "Lois Gulliam", "Sherman Hypolite", "Ernest Joseph", "Kenneth Lastrappe", "Mary Joyce Leon", 
-    "Manuel Mallery", "Ray Marshall", "Richard Marshall", "Wanda James Minor", "Mark Mitchell", "Stella Orphe", 
-    "Glenn Perrodin", "Annette Pierre", "Perry Pierre", "Chris Robertson", "Mary Alice Sam", "Samuel Savoy", 
-    "Brenda Sias", "Fredrick Skipper", "Walter Lanky Stewart", "Lee Williams", "Phyllis Williams"
-  ].sort(); 
+    "Annette Pierre", "B. McGraw Charles", "Brenda Sias", "Chris Faulk", "Chris Robertson", "Debra Batiste", 
+    "Edward Raymond", "Ernest Joseph", "Evelyn Drake", "Fredrick Skipper", "Gary Charles", "Gary Guidry", 
+    "Glenn Perrodin", "Horace Cole", "Jody Anthony", "Jules Charles", "Kenneth Lastrappe", "Larry Broussard", 
+    "Lee Williams", "Linda Batiste", "Linda Bonhomme", "Linda George", "Lois Gulliam", "Manuel Mallery", 
+    "Mark Mitchell", "Mary Alice Sam", "Mary Joyce Leon", "Nolan Charles Jr.", "Perry Pierre", "Phyllis Williams", 
+    "Ray Marshall", "Richard Marshall", "Rickey Batiste", "Roland Allen", "Samuel Savoy", "Sherman Hypolite", 
+    "Stella Orphe", "Terry Benjamin", "Tyrone Bowles", "Vernon Abbott", "Walter Lanky Stewart", "Wanda James Minor"
+  ].sort();
 
   function renderMemorial() {
     const grid = document.getElementById('memorialGrid');
