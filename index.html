@@ -14,45 +14,23 @@
     .navbar a.nav-link { color:white !important; font-weight:bold; text-transform: uppercase; font-size: 0.8rem; }
     
     header {
-      position:relative;
-      background:url("tiger.png") center/cover no-repeat;
-      color:var(--school-gold);
-      text-align:center;
-      padding:5rem 1rem;
+      position:relative; background:url("tiger.png") center/cover no-repeat;
+      color:var(--school-gold); text-align:center; padding:5rem 1rem;
     }
-    header::after {
-      content:""; position:absolute; top:0; left:0; width:100%; height:100%;
-      background:rgba(30,0,60,0.5); z-index:0;
-    }
+    header::after { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(30,0,60,0.5); z-index:0; }
     header .container { position:relative; z-index:1; }
     
-    .timer-band {
-      background: var(--deep-purple);
-      color: white;
-      padding: 20px 0;
-      text-align: center;
-      border-top: 4px solid var(--school-gold);
-      border-bottom: 4px solid var(--school-gold);
-    }
+    .timer-band { background: var(--deep-purple); color: white; padding: 20px 0; text-align: center; border-top: 4px solid var(--school-gold); border-bottom: 4px solid var(--school-gold); }
     .countdown-flex { display: flex; justify-content: center; gap: 25px; font-weight: bold; }
-    .unit-num { font-size: 2.5rem; display: block; line-height: 1; }
-    .unit-label { font-size: 0.7rem; text-transform: uppercase; color: var(--school-gold); }
+    .unit-num { font-size: 2.5rem; display: block; line-height: 1; color: var(--school-gold); }
+    .unit-label { font-size: 0.7rem; text-transform: uppercase; }
 
-    .rsvp-status-pill { 
-        background: var(--deep-purple); 
-        color: var(--school-gold); 
-        border: 2px solid var(--school-gold); 
-        border-radius: 50px; 
-        padding: 15px 40px; 
-        display: inline-block;
-        margin-bottom: 20px;
-    }
+    .rsvp-status-pill { background: var(--deep-purple); color: var(--school-gold); border: 2px solid var(--school-gold); border-radius: 50px; padding: 15px 40px; display: inline-block; margin-bottom: 20px; }
     #yesListContainer { border-radius: 12px; background: white; border: 1px solid #dee2e6; max-height: 280px; overflow-y: auto; }
     .rsvp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
     @media (min-width: 768px) { .rsvp-grid { grid-template-columns: repeat(5, 1fr); } }
     .attendee-name { font-size: 0.82rem; padding: 4px; background: #f8f9fa; border: 1px solid #eee; border-radius: 4px; text-align: center; font-weight: bold; color: var(--deep-purple); }
 
-    .memorial-list { font-family: 'Georgia', serif; color: #4a148c; line-height: 1.4; font-size: 1.1rem; }
     .reveal-item { opacity: 0; transform: translateY(15px); transition: all 0.6s ease-out; list-style: none; margin-bottom: 5px; }
     .reveal-item.visible { opacity: 1; transform: translateY(0); }
 
@@ -65,6 +43,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
   <div class="container">
     <a class="navbar-brand" href="#" style="color: var(--school-gold) !important;">SMSH '76</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link px-2" href="#rsvp">Who's Coming</a></li>
@@ -82,6 +63,7 @@
   <div class="container text-center">
     <h1 class="fw-bold display-4">ST. MARTINVILLE SENIOR HIGH</h1>
     <h2 style="color:var(--school-gold);">Class of 1976 — 50th Reunion</h2>
+    <h3 class="fw-bold" style="color: white; letter-spacing: 2px;">June 26-27, 2026</h3>
   </div>
 </header>
 
@@ -135,11 +117,10 @@
   <div class="container">
     <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Photo Gallery</h2>
     <div class="p-5 border border-3 border-dashed rounded-4 mx-auto bg-light" style="max-width: 800px; border-style: dashed !important;">
-      <h1 class="display-1">🚧</h1>
-      <h4 class="fw-bold text-muted">UNDER CONSTRUCTION</h4>
-      <p class="text-secondary mb-3">We are currently gathering memories. This section will launch soon!</p>
+      <h1 class="display-1">📸</h1>
+      <h4 class="fw-bold text-muted">SEND US YOUR PHOTOS</h4>
+      <p class="text-secondary mb-3">We are gathering memories for our 50th slideshow!</p>
       <div class="p-3 rounded-3 mx-auto" style="background: #e9ecef; border: 1px solid #ced4da; max-width: 500px;">
-          <p class="mb-1 fw-bold">📸 Share Your Photos</p>
           <a href="mailto:smshclassof76photos@gmail.com" style="color: var(--school-purple); font-weight: bold; text-decoration: underline;">smshclassof76photos@gmail.com</a>
       </div>
     </div>
@@ -169,8 +150,8 @@
         <p style="font-family: 'Brush Script MT', cursive; font-size: 1.8rem; color: #6a1b9a;">"We haven't forgotten about you."</p>
       </div>
       <div class="col-lg-7">
-        <div class="row row-cols-3 memorial-list" id="memorialGrid">
-        </div>
+        <div class="row memorial-list" id="memorialGrid">
+          </div>
       </div>
     </div>
   </div>
@@ -188,6 +169,7 @@
     const targetDate = new Date("June 26, 2026 18:00:00").getTime();
     const now = new Date().getTime();
     const diff = targetDate - now;
+    if (diff <= 0) return;
     document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
     document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     document.getElementById("mins").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
@@ -202,7 +184,7 @@
       const data = await res.json();
       document.getElementById('finalTotal').textContent = data.total || "0";
       document.getElementById('attendeeGrid').innerHTML = data.attendees.map(a => `<div class="attendee-name">${a.name}</div>`).join('');
-    } catch (e) { document.getElementById('finalTotal').textContent = "??"; }
+    } catch (e) { document.getElementById('finalTotal').textContent = "0"; }
   }
   loadData();
 
@@ -219,29 +201,36 @@
 
   const memorialNames = [
     "Vernon Abbott", "Roland Allen", "Jody Anthony", "Debra Batiste", "Linda Batiste", "Rickey Batiste", 
-    "Terry Benjamin", "Linda Bonhomme", "Tyrone Bowles", "B. McGraw Charles", "Gary Charles", "Jules Charles",
-    "Nolan Charles Jr.", "Evelyn Drake", "Chris Faulk", "Linda George", "Gary Guidry", "Lois Gulliam",
-    "Sherman Hypolite", "Ernest Joseph", "Kenneth Lastrappe", "Mary Joyce Leon", "Manuel Mallery", "Ray Marshall",
-    "Richard Marshall", "Wanda James Minor", "Mark Mitchell", "Stella Orphe", "Annette Pierre", "Perry Pierre",
-    "Chris Robertson", "Samuel Savoy", "Brenda Sias", "Walter Lanky Stewart", "Lee Williams", "Phyllis Williams"
-  ];
+    "Terry Benjamin", "Linda Bonhomme", "Tyrone Bowles", "Larry Broussard", "B. McGraw Charles", "Gary Charles", 
+    "Jules Charles", "Nolan Charles Jr.", "Horace Cole", "Evelyn Drake", "Chris Faulk", "Linda George", 
+    "Gary Guidry", "Lois Gulliam", "Sherman Hypolite", "Ernest Joseph", "Kenneth Lastrappe", "Mary Joyce Leon", 
+    "Manuel Mallery", "Ray Marshall", "Richard Marshall", "Wanda James Minor", "Mark Mitchell", "Stella Orphe", 
+    "Glenn Perrodin", "Annette Pierre", "Perry Pierre", "Chris Robertson", "Mary Alice Sam", "Samuel Savoy", 
+    "Brenda Sias", "Fredrick Skipper", "Walter Lanky Stewart", "Lee Williams", "Phyllis Williams"
+  ].sort(); 
 
   function renderMemorial() {
     const grid = document.getElementById('memorialGrid');
-    let colSize = Math.ceil(memorialNames.length / 3);
-    for (let i = 0; i < 3; i++) {
-      let colDiv = document.createElement('div');
-      colDiv.className = "col";
-      let ul = document.createElement('ul');
-      ul.className = "list-unstyled";
-      memorialNames.slice(i * colSize, (i + 1) * colSize).forEach(name => {
-        ul.innerHTML += `<li class="reveal-item">🕊️ ${name}</li>`;
-      });
-      colDiv.appendChild(ul);
-      grid.appendChild(colDiv);
+    grid.innerHTML = ''; 
+    const isMobile = window.innerWidth < 768;
+    const numCols = isMobile ? 2 : 3;
+    const itemsPerCol = Math.ceil(memorialNames.length / numCols);
+
+    for (let i = 0; i < numCols; i++) {
+        let colDiv = document.createElement('div');
+        colDiv.className = isMobile ? "col-6" : "col-4";
+        let ul = document.createElement('ul');
+        ul.className = "list-unstyled memorial-list";
+        
+        memorialNames.slice(i * itemsPerCol, (i + 1) * itemsPerCol).forEach(name => {
+            ul.innerHTML += `<li class="reveal-item mb-2" style="color: var(--school-purple); font-size: 0.85rem; white-space: nowrap;">🕊️ ${name}</li>`;
+        });
+        
+        colDiv.appendChild(ul);
+        grid.appendChild(colDiv);
     }
+    document.querySelectorAll('.reveal-item').forEach((el) => observer.observe(el));
   }
-  renderMemorial();
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, index) => {
@@ -250,7 +239,9 @@
       }
     });
   }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal-item').forEach((el) => observer.observe(el));
+
+  renderMemorial();
+  window.addEventListener('resize', renderMemorial);
 
   window.onscroll = () => { document.getElementById("btn-back-to-top").style.display = (window.scrollY > 200) ? "block" : "none"; };
   document.getElementById("btn-back-to-top").onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
