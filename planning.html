@@ -1,28 +1,296 @@
-// TASK TRACKER DATA - FULL COMMITTEE LIST
-  const myTasks = [
-    { task: "Finalize and distribute website", who: "Kevin Wiltz", when: "Feb 11, 2026", status: "Done" },
-    { task: "Catering estimates & T-shirt sample", who: "Sadie Fontenot", when: "Feb 17, 2026", status: "In Progress" },
-    { task: "Bank account & confirm signers", who: "Madelyn Phillips", when: "March 15, 2026", status: "In Progress" },
-    { task: "Confirm private room & fees", who: "Sandra Knatt", when: "March 15, 2026", status: "In Progress" },
-    { task: "Prepare classmate contact lists", who: "Shantley Guidry", when: "March 31, 2026", status: "In Progress" },
-    { task: "Research hotel pricing", who: "Lolly Alexander", when: "March 31, 2026", status: "In Progress" },
-    { task: "Collect music requests", who: "Patrick Prescott", when: "March 31, 2026", status: "In Progress" },
-    { task: "Decorations & Theme planning", who: "Committee", when: "April 15, 2026", status: "In Progress" },
-    { task: "Finalize T-shirt order counts", who: "Sadie Fontenot", when: "May 01, 2026", status: "In Progress" },
-    { task: "Design Memorial program", who: "Kevin Wiltz", when: "May 15, 2026", status: "In Progress" }
-  ];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Class of 1976 - 50th Reunion</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  function renderTasks() {
-    const tableBody = document.getElementById('taskTableBody');
-    tableBody.innerHTML = myTasks.map(item => {
-      let badgeClass = item.status === "Done" ? "bg-success" : "bg-warning text-dark";
-      return `
-        <tr>
-          <td class="p-3 fw-bold">${item.task}</td>
-          <td>${item.who}</td>
-          <td>${item.when}</td>
-          <td><span class="badge ${badgeClass}">${item.status}</span></td>
-        </tr>`;
-    }).join('');
+  <style>
+    :root { --school-purple:#4b0082; --school-gold:#ffd700; --deep-purple: #2a004a; }
+    body { background:#fafafa; color:#333; font-family: 'Segoe UI', Arial, sans-serif; overflow-x: hidden; }
+    
+    .navbar { background-color:var(--school-purple); border-bottom: 2px solid var(--school-gold); }
+    .navbar a.nav-link { color:white !important; font-weight:bold; text-transform: uppercase; font-size: 0.8rem; }
+    
+    header {
+      position:relative; background:url("tiger.png") center/cover no-repeat;
+      color:var(--school-gold); text-align:center; padding:5rem 1rem;
+    }
+    header::after { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(30,0,60,0.5); z-index:0; }
+    header .container { position:relative; z-index:1; }
+    
+    .timer-band { background: var(--deep-purple); color: white; padding: 20px 0; text-align: center; border-top: 4px solid var(--school-gold); border-bottom: 4px solid var(--school-gold); }
+    .countdown-flex { display: flex; justify-content: center; gap: 25px; font-weight: bold; }
+    .unit-num { font-size: 2.5rem; display: block; line-height: 1; color: var(--school-gold); }
+    .unit-label { font-size: 0.7rem; text-transform: uppercase; }
+
+    /* Buttons */
+    .btn-purple { background: var(--school-purple); color: white !important; border-radius: 50px; padding: 12px 35px; font-weight: bold; border: 2px solid white; transition: 0.3s; text-decoration: none; display: inline-flex; align-items: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    .btn-purple:hover { background: var(--deep-purple); transform: scale(1.05); color: var(--school-gold) !important; }
+
+    .rsvp-status-pill { background: var(--deep-purple); color: var(--school-gold); border: 2px solid var(--school-gold); border-radius: 50px; padding: 15px 40px; display: inline-block; margin-bottom: 20px; }
+    #yesListContainer { border-radius: 12px; background: white; border: 1px solid #dee2e6; max-height: 280px; overflow-y: auto; }
+    .rsvp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+    @media (min-width: 768px) { .rsvp-grid { grid-template-columns: repeat(5, 1fr); } }
+    .attendee-name { font-size: 0.82rem; padding: 4px; background: #f8f9fa; border: 1px solid #eee; border-radius: 4px; text-align: center; font-weight: bold; color: var(--deep-purple); }
+
+    .-list { font-family: 'Georgia', serif; color: #4a148c; line-height: 1.4; font-size: 1.1rem; }
+    .reveal-item { opacity: 0; transform: translateY(15px); transition: all 0.6s ease-out; list-style: none; margin-bottom: 5px; }
+    .reveal-item.visible { opacity: 1; transform: translateY(0); }
+
+    #btn-back-to-top { position: fixed; bottom: 20px; right: 20px; display: none; z-index: 1000; background: var(--school-purple); color: var(--school-gold); border: 2px solid var(--school-gold); width: 45px; height: 45px; border-radius: 50%; }
+  </style> 
+</head>
+
+<body id="top">
+
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="#" style="color: var(--school-gold) !important;">SMSH '76</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link px-2" href="#rsvp">Who's Coming</a></li>
+        <li class="nav-item"><a class="nav-link px-2" href="#calendar">Meetings</a></li>
+        <li class="nav-item"><a class="nav-link px-2" href="#payments">Dues</a></li>
+        <li class="nav-item"><a class="nav-link px-2" href="#music">Music</a></li>
+        <li class="nav-item"><a class="nav-link px-2" href="#photos">Photos</a></li>
+        <li class="nav-item"><a class="nav-link px-2" href="#tasks">Tasks</a></li>
+        <li class="nav-item"><a class="nav-link px-2" href="#memorial">Memorial</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="container text-center">
+    <h1 class="fw-bold display-4">ST. MARTINVILLE SENIOR HIGH</h1>
+    <h2 style="color:var(--school-gold);">Class of 1976 — 50th Reunion</h2>
+  </div>
+</header>
+
+<section class="timer-band">
+  <div class="container">
+    <div class="countdown-flex">
+      <div><span class="unit-num" id="days">00</span><span class="unit-label">Days</span></div>
+      <div><span class="unit-num" id="hours">00</span><span class="unit-label">Hrs</span></div>
+      <div><span class="unit-num" id="mins">00</span><span class="unit-label">Min</span></div>
+      <div><span class="unit-num" id="secs">00</span><span class="unit-label">Sec</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="rsvp" class="py-5 bg-light border-bottom">
+  <div class="container text-center">
+    <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Who's Coming?</h2>
+    <div class="rsvp-status-pill shadow">
+      <h4 class="mb-0 fw-bold"><span id="finalTotal">...</span> Classmates & Guests Confirmed!</h4>
+    </div>
+    <div class="mb-4 text-center">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNH2rLwb6w9zvIE113HT4Ru0yNCUORL29ijm2Jg4Ws2Bu8sA/viewform" target="_blank" class="btn btn-lg fw-bold" style="background: var(--school-purple); color: var(--school-gold); border-radius: 50px; padding: 12px 40px;">📝 RSVP HERE</a>
+    </div>
+    <div id="yesListContainer" class="p-3 shadow-sm mx-auto" style="max-width: 1000px;">
+        <div class="rsvp-grid" id="attendeeGrid"></div>
+    </div>
+  </div>
+</section>
+
+<section id="calendar" class="py-5 bg-white border-bottom text-center">
+  <div class="container">
+    <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Meetings & Events</h2>
+    
+    <div class="ratio ratio-16x9 shadow-sm rounded mx-auto mb-5" style="max-width: 1000px; min-height: 500px;">
+      <iframe src="https://calendar.google.com/calendar/embed?src=fbcf3427770ee3c74ba269d485ba49d39d6ea67f45be295d849f038ba7c79497%40group.calendar.google.com&ctz=America%2FChicago" style="border:0" frameborder="0"></iframe>
+    </div>
+
+    <div class="mt-2">
+      <h3 class="fw-bold mb-3" style="color: var(--school-purple);">📋 MEETING NOTES</h3>
+      <a href="https://docs.google.com/document/d/1IA0RBRPbgjZej4OG0shiXa8227rz6dZ7DadP4rqmiz0/edit?usp=sharing=" target="_blank" class="btn-purple">View Meeting Notes</a>
+    </div>
+  </div>
+</section>
+
+<section id="payments" class="py-5 bg-light border-bottom text-center">
+  <div class="container">
+    <h2 class="fw-bold mb-4" style="color: var(--school-purple);">REUNION DUES</h2>
+    
+    <div class="mb-4">
+      <p class="text-muted">Click the button below to submit your payment details.</p>
+      
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScWvxAmVVgJ-OCk6cl6qLoEaan6HZzxqS3YsF7V0Gq9-jWnpA/viewform?usp=dialog" target="_blank" class="btn-purple">
+         <img src="https://www.zellepay.com/sites/default/files/2021-09/Zelle_Logo_RGB.png" height="22" class="me-3" alt="Zelle">
+         Submit Zelle Payment
+      </a>
+    </div>
+
+    <p class="small text-secondary mt-3">
+      <em>Note: Please copy the email or scan the barcode as shown on the form to complete the transfer.</em>
+    </p>
+  </div>
+</section>
+
+<section id="music" class="py-5 bg-white text-center border-bottom">
+  <div class="container">
+    <h3 class="fw-bold" style="color: var(--school-purple);">🎵 THE REUNION JUKEBOX</h3>
+    <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScy-B16a2pEvsTs6YN3HSfjkIX-AhzMbNexi42yshrfNKk7dQ/viewform" target="_blank" class="btn-purple" style="padding: 10px 25px;">🎤 Request a Song</a>
+        <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSE8lLV2Op7eMchISLz22rowMK7YJF6yy4UwmC0ys7Cok6ZFh8uYw-koCOQoWHOm8MgfPNnQGL74Wki/pubhtml?gid=1803881201&single=true" target="_blank" class="btn fw-bold" style="border: 2px solid var(--school-purple); color: var(--school-purple); border-radius: 30px; padding: 10px 25px;">📜 View Playlist</a>
+    </div>
+  </div>
+</section>
+
+<section id="photos" class="py-5 bg-light text-center border-bottom">
+  <div class="container">
+    <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">PHOTO GALLERY</h2>
+    
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+        <a href="https://docs.google.com/document/d/YOUR_GOOGLE_DOC_LINK_HERE" target="_blank" class="btn-purple">
+            📸 Submit Your Photos
+        </a>
+        
+        <a href="#" target="_blank" class="btn-purple">
+            🖼️ View Photo Gallery
+        </a>
+    </div>
+
+    <p class="text-muted mt-4 small">
+      Have old prints? Email them to <a href="mailto:smshclassof76photos@gmail.com" style="color: var(--school-purple); font-weight: bold; text-decoration: none;">smshclassof76photos@gmail.com</a>
+    </p>
+  </div>
+</section>
+
+<section id="tasks" class="py-5 bg-white border-bottom">
+  <div class="container">
+    <h2 class="text-center mb-4 fw-bold" style="color: var(--school-purple);">TASK TRACKER</h2>
+    <div class="table-responsive shadow-sm mx-auto" style="max-width: 1050px;">
+      <table class="table table-hover align-middle bg-white rounded overflow-hidden">
+        <thead style="background: var(--deep-purple); color: white;">
+          <tr><th class="p-3">Task</th><th>Who</th><th>Status</th></tr>
+        </thead>
+        <tbody id="taskTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="memorial" class="py-5 bg-light border-bottom">
+  <div class="container">
+    <h2 class="text-center mb-5 fw-bold" style="color: var(--school-purple);">MEMORIAL TRIBUTE</h2>
+
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-5 text-center">
+        <div class="mb-3"> 
+          <h4 class="fw-bold mb-1" style="color: var(--school-purple); font-size: 1.1rem;">🕊️ IN LOVING MEMORY</h4>
+          <p style="font-family: 'Brush Script MT', cursive; font-size: 1.4rem; color: #6a1b9a;">"We haven't forgotten about you."</p>
+        </div>
+        <img src="empty chair.png" alt="In Loving Memory" class="img-fluid rounded-3 shadow-sm" style="max-height: 280px;">
+      </div>
+
+      <div class="col-lg-7">
+        <div class="row memorial-list" id="memorialGrid">
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="py-4 text-center" style="background: #1e003c; color: var(--school-gold);">
+  <p class="mb-0 fw-bold">&copy; 2026 SMSH – Class of 1976</p>
+</footer>
+
+<button type="button" id="btn-back-to-top">↑</button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function updateTimer() {
+    const targetDate = new Date("June 26, 2026 18:00:00").getTime();
+    const now = new Date().getTime();
+    const diff = targetDate - now;
+    if (diff <= 0) return;
+    document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+    document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    document.getElementById("mins").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    document.getElementById("secs").innerText = Math.floor((diff % (1000 * 60)) / 1000);
   }
-  renderTasks();
+  setInterval(updateTimer, 1000); updateTimer();
+
+  const API_URL = 'https://script.google.com/macros/s/AKfycbxoIJZz2RDDkaW9V4K_Vz8w9GT2Gfaj_RZYWY84FyJfJ6elgq2IeNHkOE0jz3x4g5y6hw/exec';
+  async function loadData() {
+    try {
+      const res = await fetch(API_URL);
+      const data = await res.json();
+      document.getElementById('finalTotal').textContent = data.total || "0";
+      document.getElementById('attendeeGrid').innerHTML = data.attendees.map(a => `<div class="attendee-name">${a.name}</div>`).join('');
+    } catch (e) { document.getElementById('finalTotal').textContent = "0"; }
+  }
+  loadData();
+
+  const myTasks = [
+    { task: "Establish bank account", who: "Madelyn P.", status: "In Progress" },
+    { task: "Obtain catering estimates", who: "Sadie F.", status: "In Progress" },
+    { task: "Prepare classmate lists", who: "Shantley G.", status: "In Progress" },
+    { task: "Finalize website link", who: "Kevin W.", status: "Done" }
+  ];
+  document.getElementById('taskTableBody').innerHTML = myTasks.map(item => `<tr><td class="p-3 fw-bold">${item.task}</td><td>${item.who}</td><td><span class="badge ${item.status==='Done'?'bg-success':'bg-warning text-dark'}">${item.status}</span></td></tr>`).join('');
+
+  const memorialNames = [
+    "Vernon Abbott", "Roland Allen", "Jody Anthony", "Debra Batiste", "Linda Batiste", "Rickey Batiste", 
+    "Terry Benjamin", "Linda Bonhomme", "Tyrone Bowles", "Larry Broussard", "B. McGraw Charles", "Gary Charles", 
+    "Jules Charles", "Nolan Charles Jr.", "Horace Cole", "Evelyn Drake", "Chris Faulk", "Linda George", 
+    "Gary Guidry", "Lois Gulliam", "Sherman Hypolite", "Ernest Joseph", "Kenneth Lastrappe", "Mary Joyce Leon", 
+    "Manuel Mallery", "Ray Marshall", "Richard Marshall", "Wanda James Minor", "Mark Mitchell", "Stella Orphe", 
+    "Glenn Perrodin", "Annette Pierre", "Perry Pierre", "Chris Robertson", "Mary Alice Sam", "Samuel Savoy", 
+    "Brenda Sias", "Fredrick Skipper", "Walter Lanky Stewart", "Lee Williams", "Phyllis Williams"
+  ].sort(); 
+
+  function renderMemorial() {
+    const grid = document.getElementById('memorialGrid');
+    grid.innerHTML = ''; 
+    
+    const isMobile = window.innerWidth < 768;
+    const numCols = isMobile ? 2 : 3;
+    
+    // Create the columns first
+    const columns = [];
+    for (let i = 0; i < numCols; i++) {
+        let colDiv = document.createElement('div');
+        colDiv.className = isMobile ? "col-6" : "col-4";
+        let ul = document.createElement('ul');
+        ul.className = "list-unstyled";
+        colDiv.appendChild(ul);
+        columns.push(ul);
+        grid.appendChild(colDiv);
+    }
+
+    // Distribute ALL names across the columns
+    memorialNames.forEach((name, index) => {
+        const colIndex = Math.floor(index / Math.ceil(memorialNames.length / numCols));
+        // Fallback for any remainder names to the last column
+        const targetCol = columns[colIndex] || columns[columns.length - 1];
+        
+        targetCol.innerHTML += `<li class="reveal-item mb-2" style="color: var(--school-purple); font-size: 0.85rem; white-space: nowrap;">🕊️ ${name}</li>`;
+    });
+
+    // Re-observe for animations
+    document.querySelectorAll('.reveal-item').forEach((el) => observer.observe(el));
+  }
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => { entry.target.classList.add('visible'); }, index * 30);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  renderMemorial();
+  window.addEventListener('resize', renderMemorial);
+
+  window.onscroll = () => { document.getElementById("btn-back-to-top").style.display = (window.scrollY > 200) ? "block" : "none"; };
+  document.getElementById("btn-back-to-top").onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
+</script>
+</body>
+</html>
