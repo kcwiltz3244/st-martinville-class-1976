@@ -105,9 +105,22 @@
   </div>
 </section>
 
-<section id="tasks" class="py-5 bg-light border-bottom">
-  <div class="container">
-    <h2 class="text-center mb-4 fw-bold" style="color: var(--school-purple);">Committee Meeting Notes & Tasks</h2>
+<section id="meeting-notes" class="py-5 bg-light border-bottom">
+  <div class="container text-center">
+    <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Committee Meeting Notes</h2>
+    <div class="p-5 border border-2 rounded-4 mx-auto bg-white shadow-sm mb-5" style="max-width: 700px;">
+      <h3 class="mb-3">📄</h3>
+      <!--h4 class="fw-bold">Official Mee</h4-->
+      <p class="text-muted mb-4">Click the button below to view the detailed notes and archives from our committee planning sessions.</p>
+      <a href="https://docs.google.com/document/d/1IA0RBRPbgjZej4OG0shiXa8227rz6dZ7DadP4rqmiz0/edit?usp=sharing" 
+         target="_blank" 
+         class="btn btn-lg fw-bold shadow-sm" 
+         style="background: var(--school-purple); color: var(--school-gold); border-radius: 50px; padding: 15px 40px;">
+         VIEW MEETING NOTES
+      </a>
+    </div>
+
+    <h2 class="text-center mb-4 fw-bold" style="color: var(--school-purple);">Current Tasks</h2>
     <div class="table-responsive shadow-sm mx-auto" style="max-width: 1050px;">
       <table class="table table-hover align-middle bg-white rounded overflow-hidden">
         <thead style="background: var(--deep-purple); color: white;">
@@ -133,12 +146,29 @@
 <section id="photos" class="py-5 bg-light text-center border-bottom">
   <div class="container">
     <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Photo Gallery</h2>
-    <div class="p-5 border border-3 border-dashed rounded-4 mx-auto bg-white" style="max-width: 800px; border-style: dashed !important;">
-      <h1 class="display-1">📸</h1>
-      <h4 class="fw-bold text-muted">SEND US YOUR PHOTOS</h4>
-      <p class="text-secondary mb-3">We are gathering memories for our 50th slideshow!</p>
+    
+    <div class="p-5 border border-3 rounded-4 mx-auto bg-white shadow-sm" style="max-width: 800px; border-style: dashed !important; border-color: var(--school-gold) !important;">
+      <div class="mb-3">
+        <span style="font-size: 4rem;">🚧</span>
+      </div>
+      <h3 class="fw-bold" style="color: var(--deep-purple);">UNDER CONSTRUCTION</h3>
+      <p class="lead text-secondary mb-4">We are currently building our digital memory lane!</p>
+      
+      <div class="progress mx-auto mb-4" style="height: 25px; max-width: 500px; border-radius: 50px; background-color: #e9ecef;">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" 
+             role="progressbar" 
+             style="width: 65%; background-color: var(--school-purple); color: var(--school-gold); font-weight: bold;">
+             Loading Memories... 65%
+        </div>
+      </div>
+
+      <p class="text-muted">In the meantime, please help us fill the gallery!</p>
+      <h5 class="fw-bold mb-3">Email your high school photos to:</h5>
+      
       <div class="p-3 rounded-3 mx-auto" style="background: #f8f9fa; border: 1px solid #ced4da; max-width: 500px;">
-          <a href="mailto:smshclassof76photos@gmail.com" style="color: var(--school-purple); font-weight: bold; text-decoration: underline;">smshclassof76photos@gmail.com</a>
+          <a href="mailto:smshclassof76photos@gmail.com" class="fs-5" style="color: var(--school-purple); font-weight: bold; text-decoration: underline;">
+            smshclassof76photos@gmail.com
+          </a>
       </div>
     </div>
   </div>
@@ -179,7 +209,6 @@
   }
   setInterval(updateTimer, 1000); updateTimer();
 
-  // ORIGINAL DATA API LINK
   const API_URL = 'https://script.google.com/macros/s/AKfycbxoIJZz2RDDkaW9V4K_Vz8w9GT2Gfaj_RZYWY84FyJfJ6elgq2IeNHkOE0jz3x4g5y6hw/exec';
   async function loadData() {
     try {
