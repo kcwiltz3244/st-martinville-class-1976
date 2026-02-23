@@ -37,9 +37,6 @@
     .reveal-item.visible { opacity: 1; transform: translateY(0); }
 
     #btn-back-to-top { position: fixed; bottom: 20px; right: 20px; display: none; z-index: 1000; background: var(--school-purple); color: var(--school-gold); border: 2px solid var(--school-gold); width: 45px; height: 45px; border-radius: 50%; }
-    
-    /* Improved Section Heading Styles */
-    .section-title { font-weight: bold; color: var(--school-purple); margin-bottom: 1.5rem; }
   </style> 
 </head>
 
@@ -86,7 +83,7 @@
 
 <section id="rsvp" class="py-5 bg-light border-bottom">
   <div class="container text-center">
-    <h2 class="section-title">Who's Coming?</h2>
+    <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Who's Coming?</h2>
     <div class="rsvp-status-pill shadow">
       <h4 class="mb-0 fw-bold"><span id="finalTotal">...</span> Classmates & Guests Confirmed!</h4>
     </div>
@@ -101,37 +98,33 @@
 
 <section id="calendar" class="py-5 bg-white border-bottom">
   <div class="container text-center">
-    <h2 class="section-title">Meetings & Events</h2>
+    <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Meetings & Events</h2>
     <div class="ratio ratio-16x9 shadow-sm rounded mx-auto" style="max-width: 1000px; min-height: 500px; border: 2px solid #eee;">
       <iframe src="https://calendar.google.com/calendar/embed?src=fbcf3427770ee3c74ba269d485ba49d39d6ea67f45be295d849f038ba7c79497%40group.calendar.google.com&ctz=America%2FChicago" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
     </div>
   </div>
 </section>
 
-<section id="zelle" class="py-5" style="background-color: #f3efff; border-bottom: 2px solid var(--school-gold);">
+<section id="meeting-notes" class="py-5 bg-light border-bottom">
   <div class="container text-center">
-    <div class="p-4 p-md-5 border border-3 rounded-4 mx-auto bg-white shadow-sm" style="max-width: 1000px; border-color: var(--school-purple) !important;">
-      <div class="mb-3">
-        <span style="font-size: 3rem;">📱</span>
-      </div>
-      <h2 class="fw-bold mb-3" style="color: var(--school-purple);">Dues & T-Shirt Payments</h2>
-      <p class="lead mb-4">We are using <strong>Zelle</strong> for secure, fee-free payments. 100% of your money goes toward the reunion!</p>
-      
-      <div class="p-3 mb-4 rounded-3" style="background-color: #f8f9fa; border: 1px dashed var(--school-purple);">
-        <p class="mb-0 text-muted">Click the button below to view the step-by-step guide on how to pay through your bank app.</p>
-      </div>
-
-      <a href="https://docs.google.com/document/d/1VMvVsC6hjaoq2kErh117EMscRjKYfV3Gc9lzK0wkMiw/edit?usp=sharing" 
-         target="_blank" 
-         class="btn btn-lg fw-bold shadow-sm" 
-         style="background: var(--school-purple); color: var(--school-gold); border-radius: 50px; padding: 15px 40px; border: 2px solid var(--school-gold);">
-         VIEW ZELLE INSTRUCTIONS
-      </a>
+    <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Committee Meeting Notes</h2>
+    <div class="p-5 border border-2 rounded-4 mx-auto bg-white shadow-sm" style="max-width: 700px;">
+      <h3 class="mb-3">📄</h3>
+      <p class="text-muted mb-4">Click the button below to view the detailed notes and archives from our committee planning sessions.</p>
+      <a href="https://docs.google.com/document/d/1IA0RBRPbgjZej4OG0shiXa8227rz6dZ7DadP4rqmiz0/edit?usp=sharing" target="_blank" class="btn btn-lg fw-bold shadow-sm" style="background: var(--school-purple); color: var(--school-gold); border-radius: 50px; padding: 15px 40px;">VIEW MEETING NOTES</a>
     </div>
   </div>
 </section>
 
-<section id="music" class="py-5 bg-white text-center border-bottom">
+<section id="zelle" class="py-5 bg-white border-bottom">
+  <div class="container text-center">
+    <div class="p-4 border border-2 rounded-4 mx-auto shadow-sm" style="max-width: 1000px; border-color: var(--school-purple) !important;">
+      <a href="https://docs.google.com/document/d/1VMvVsC6hjaoq2kErh117EMscRjKYfV3Gc9lzK0wkMiw/edit?usp=sharing" target="_blank" class="btn btn-lg fw-bold" style="background: var(--school-purple); color: var(--school-gold); border-radius: 50px; padding: 15px 40px;">Zelle Payment Instructions</a>
+    </div>
+  </div>
+</section>
+
+<section id="music" class="py-5 bg-light text-center border-bottom">
   <div class="container">
     <h3 class="fw-bold" style="color: var(--school-purple);">🎵 THE REUNION JUKEBOX</h3>
     <p class="text-muted mb-4">Request your favorite hits from the 70s!</p>
@@ -142,39 +135,30 @@
   </div>
 </section>
 
-<section id="photos" class="py-5 bg-light text-center border-bottom">
+<section id="photos" class="py-5 bg-white text-center border-bottom">
   <div class="container">
-    <h2 class="section-title">Photo Gallery</h2>
+    <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Photo Gallery</h2>
     <div class="p-4 border border-2 rounded-4 mx-auto bg-white shadow-sm" style="max-width: 1000px; border-style: dashed !important; border-color: var(--school-gold) !important;">
       <div class="row align-items-center">
         <div class="col-md-4 border-end border-md-2">
           <h1 class="display-4 mb-0">🚧</h1>
           <h4 class="fw-bold mt-2" style="color: var(--deep-purple);">UNDER CONSTRUCTION</h4>
-          <p class="small text-muted mb-0">Building our digital memory lane</p>
         </div>
-        <div class="col-md-8 px-lg-5">
+        <div class="col-md-8 px-lg-5 text-center">
           <div class="progress mb-3 mt-3 mt-md-0" style="height: 20px; border-radius: 50px; background-color: #f0f0f0;">
             <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 65%; background-color: var(--school-purple); color: var(--school-gold); font-weight: bold; font-size: 0.75rem;">MEMORIES LOADING... 65%</div>
           </div>
-          <p class="mb-2 fw-bold">Help us fill the gallery! Email high school photos to:</p>
-          <div class="p-2 rounded-3 bg-light border">
-            <a href="mailto:smshclassof76photos@gmail.com" class="fw-bold" style="color: var(--school-purple); text-decoration: underline;">smshclassof76photos@gmail.com</a>
-          </div>
+          <p class="mb-2 fw-bold">Email your high school photos to:</p>
+          <a href="mailto:smshclassof76photos@gmail.com" class="fw-bold" style="color: var(--school-purple); text-decoration: underline;">smshclassof76photos@gmail.com</a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="tasks" class="py-5 bg-white border-bottom">
+<section id="tasks" class="py-5 bg-light border-bottom">
   <div class="container text-center">
-    <h2 class="section-title">Committee Meeting Notes</h2>
-    <div class="p-5 border border-2 rounded-4 mx-auto bg-light shadow-sm mb-5" style="max-width: 700px;">
-      <h3 class="mb-3">📄</h3>
-      <p class="text-muted mb-4">View detailed archives from our planning sessions.</p>
-      <a href="https://docs.google.com/document/d/1IA0RBRPbgjZej4OG0shiXa8227rz6dZ7DadP4rqmiz0/edit?usp=sharing" target="_blank" class="btn btn-lg fw-bold shadow-sm" style="background: var(--school-purple); color: var(--school-gold); border-radius: 50px; padding: 15px 40px;">VIEW MEETING NOTES</a>
-    </div>
-    <h2 class="section-title">Current Tasks</h2>
+    <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Current Tasks</h2>
     <div class="table-responsive shadow-sm mx-auto" style="max-width: 1050px;">
       <table class="table table-hover align-middle bg-white rounded overflow-hidden">
         <thead style="background: var(--deep-purple); color: white;">
