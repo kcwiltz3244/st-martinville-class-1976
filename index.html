@@ -1,215 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Class of 1976 - 50th Reunion</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
   <style>
     :root { --school-purple:#4b0082; --school-gold:#ffd700; --deep-purple: #2a004a; }
-    body { background:#fafafa; color:#333; font-family: 'Segoe UI', Arial, sans-serif; overflow-x: hidden; }
-    
-    /* Navigation */
-    .navbar { background-color:var(--school-purple); border-bottom: 2px solid var(--school-gold); }
-    .navbar a.nav-link { color:white !important; font-weight:bold; text-transform: uppercase; font-size: 0.8rem; }
-    
-    /* Header */
-    header { position:relative; background:url("tiger.png") center/cover no-repeat; text-align:center; padding:5rem 1rem; }
-    header::after { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(30,0,60,0.5); z-index:0; }
+    body { background:#fafafa; color:#333; font-family: sans-serif; overflow-x: hidden; }
+    .navbar { background:var(--school-purple); border-bottom: 2px solid var(--school-gold); }
+    .navbar a { color:white !important; font-weight:bold; text-transform: uppercase; font-size: 0.75rem; }
+    header { position:relative; background:url("tiger.png") center/cover no-repeat; text-align:center; padding:4rem 1rem; color: var(--school-gold); }
+    header::after { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(30,0,60,0.6); z-index:0; }
     header .container { position:relative; z-index:1; }
-    header h1, header h2, header h3 { color: var(--school-gold) !important; font-weight: bold; }
-
-    /* Timer */
-    .timer-band { background: var(--deep-purple); color: white; padding: 20px 0; text-align: center; border-top: 4px solid var(--school-gold); border-bottom: 4px solid var(--school-gold); }
-    .countdown-flex { display: flex; justify-content: center; gap: 25px; font-weight: bold; }
-    .unit-num { font-size: 2.5rem; display: block; line-height: 1; color: var(--school-gold); }
-    .unit-label { font-size: 0.7rem; text-transform: uppercase; }
-
-    /* RSVP Section Fixes */
-    .rsvp-status-pill { background: var(--deep-purple); color: var(--school-gold); border: 2px solid var(--school-gold); border-radius: 50px; padding: 15px 40px; display: inline-block; margin-bottom: 20px; }
-    #yesListContainer { border-radius: 12px; background: white; border: 1px solid #dee2e6; max-height: 280px; overflow-y: auto; }
-    .rsvp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+    .timer-band { background: var(--deep-purple); color: white; padding: 15px 0; text-align: center; border-bottom: 4px solid var(--school-gold); }
+    .unit-num { font-size: 2rem; color: var(--school-gold); display: block; line-height:1; }
+    .rsvp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; }
     @media (min-width: 768px) { .rsvp-grid { grid-template-columns: repeat(5, 1fr); } }
-    .attendee-name { font-size: 0.82rem; padding: 4px; background: #f8f9fa; border: 1px solid #eee; border-radius: 4px; text-align: center; font-weight: bold; color: var(--deep-purple); }
-
-    /* Photo Gallery Fixes */
-    .photo-card { border: none; transition: transform 0.3s ease; background: white; border-radius: 8px; overflow: hidden; }
-    .img-container { overflow: hidden; cursor: pointer; height: 200px; }
+    .attendee-name { font-size: 0.8rem; padding: 4px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 4px; text-align: center; color: var(--deep-purple); font-weight: bold;}
+    .photo-card { border: none; background: white; border-radius: 8px; overflow: hidden; height: 100%; }
+    .img-container { height: 180px; overflow: hidden; cursor: pointer; }
     .gallery-img { width: 100%; height: 100%; object-fit: cover; }
-    .caption-bar { background: white; border-top: 1px solid #eee; }
-    .photo-name { color: var(--school-purple); font-weight: bold; font-size: 0.85rem; margin: 0; }
-
-    /* Memorial & Reveal */
-    .reveal-item { opacity: 0; transform: translateY(15px); transition: all 0.6s ease-out; list-style: none; margin-bottom: 5px; }
-    .reveal-item.visible { opacity: 1; transform: translateY(0); }
-    #btn-back-to-top { position: fixed; bottom: 20px; right: 20px; display: none; z-index: 1000; background: var(--school-purple); color: var(--school-gold); border: 2px solid var(--school-gold); width: 45px; height: 45px; border-radius: 50%; }
+    .photo-name { color: var(--school-purple); font-weight: bold; font-size: 0.75rem; margin: 0; padding: 6px; text-align: center; }
+    .btn-school { background: var(--school-purple); color: var(--school-gold); border-radius: 50px; font-weight: bold; }
   </style>
 </head>
+<body>
 
-<body id="top">
+<nav class="navbar navbar-expand navbar-dark sticky-top"><div class="container"><ul class="navbar-nav mx-auto">
+  <li class="nav-item"><a class="nav-link" href="#rsvp">RSVP</a></li>
+  <li class="nav-item"><a class="nav-link" href="#music">Music</a></li>
+  <li class="nav-item"><a class="nav-link" href="#photos">Photos</a></li>
+  <li class="nav-item"><a class="nav-link" href="#tasks">Tasks</a></li>
+  <li class="nav-item"><a class="nav-link" href="#memorial">Memorial</a></li>
+</ul></div></nav>
 
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-  <div class="container">
-    <a class="navbar-brand" href="#" style="color: var(--school-gold) !important;">SMSH '76</a>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link px-2" href="#rsvp">Who's Coming</a></li>
-        <li class="nav-item"><a class="nav-link px-2" href="#calendar">Meetings</a></li>
-        <li class="nav-item"><a class="nav-link px-2" href="#photos">Photos</a></li>
-        <li class="nav-item"><a class="nav-link px-2" href="#memorial">Memorial</a></li>
-      </ul>
+<header><div class="container"><h1>SMSH Class of 1976</h1><h2>50th Reunion</h2><h3>June 26-27, 2026</h3></div></header>
+
+<section class="timer-band"><div class="container"><div class="d-flex justify-content-center gap-4 fw-bold">
+  <div><span class="unit-num" id="days">00</span>Days</div><div><span class="unit-num" id="hours">00</span>Hrs</div>
+  <div><span class="unit-num" id="mins">00</span>Min</div><div><span class="unit-num" id="secs">00</span>Sec</div>
+</div></div></section>
+
+<section id="rsvp" class="py-5 bg-light border-bottom"><div class="container text-center">
+  <h2 class="fw-bold mb-4">Who's Coming?</h2>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNH2rLwb6w9zvIE113HT4Ru0yNCUORL29ijm2Jg4Ws2Bu8sA/viewform" target="_blank" class="btn btn-school px-4 py-2 mb-4">📝 RSVP HERE</a>
+  <div class="p-3 shadow-sm bg-white rounded mx-auto" style="max-width:900px"><div class="rsvp-grid" id="attendeeGrid"></div></div>
+</div></section>
+
+<section id="music" class="py-5 bg-white border-bottom"><div class="container text-center">
+  <div class="row g-4">
+    <div class="col-md-6">
+      <h3 class="fw-bold">Meeting Notes</h3>
+      <a href="https://docs.google.com/document/d/1IA0RBRPbgjZej4OG0shiXa8227rz6dZ7DadP4rqmiz0/edit?usp=sharing" target="_blank" class="btn btn-outline-dark rounded-pill px-4">View Planning Notes</a>
     </div>
-  </div>
-</nav>
-
-<header>
-  <div class="container text-center">
-    <h1 class="display-4">ST. MARTINVILLE SENIOR HIGH</h1>
-    <h2 class="shadow-sm">Class of 1976 — 50th Reunion</h2>
-    <h3 class="mt-2">June 26-27, 2026</h3>
-  </div>
-</header>
-
-<section class="timer-band">
-  <div class="container">
-    <div class="countdown-flex">
-      <div><span class="unit-num" id="days">00</span><span class="unit-label">Days</span></div>
-      <div><span class="unit-num" id="hours">00</span><span class="unit-label">Hrs</span></div>
-      <div><span class="unit-num" id="mins">00</span><span class="unit-label">Min</span></div>
-      <div><span class="unit-num" id="secs">00</span><span class="unit-label">Sec</span></div>
-    </div>
-  </div>
-</section>
-
-<section id="rsvp" class="py-5 bg-light border-bottom">
-  <div class="container text-center">
-    <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Who's Coming?</h2>
-    <div class="rsvp-status-pill shadow">
-      <h4 class="mb-0 fw-bold"><span id="finalTotal">...</span> Classmates Confirmed!</h4>
-    </div>
-    <div id="yesListContainer" class="p-3 shadow-sm mx-auto" style="max-width: 1000px;">
-        <div class="rsvp-grid" id="attendeeGrid"></div>
-    </div>
-  </div>
-</section>
-
-<section id="photos" class="py-5 bg-white">
-  <div class="container">
-    <h2 class="text-center mb-5 fw-bold" style="color: var(--school-purple);">Photo Gallery</h2>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-      <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic1.jpg', 'STATE CHAMPS')"><img src="pic1.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name">STATE CHAMPS</p></div></div></div>
-      <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic2.jpg', 'Upward Bound')"><img src="pic2.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name">Upward Bound</p></div></div></div>
-      <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic3.jpg', 'The cool kids')"><img src="pic3.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name">The cool kids</p></div></div></div>
-      
-      <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic8.jpg', '')"><img src="pic8.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name">&nbsp;</p></div></div></div>
-      <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic9.jpg', '')"><img src="pic9.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name">&nbsp;</p></div></div></div>
-      <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic10.jpg', '')"><img src="pic10.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name">&nbsp;</p></div></div></div>
-      <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic11.jpg', '')"><img src="pic11.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name">&nbsp;</p></div></div></div>
-      <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic12.jpg', '')"><img src="pic12.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name">&nbsp;</p></div></div></div>
-      <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic13.jpg', '')"><img src="pic13.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name">&nbsp;</p></div></div></div>
-      <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic14.jpg', '')"><img src="pic14.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name">&nbsp;</p></div></div></div>
-      <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic15.jpg', '')"><img src="pic15.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name">&nbsp;</p></div></div></div>
-      <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic16.jpg', '')"><img src="pic16.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name">&nbsp;</p></div></div></div>
-      <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic17.jpg', '')"><img src="pic17.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name">&nbsp;</p></div></div></div>
-      <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic18.jpg', '')"><img src="pic18.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name">&nbsp;</p></div></div></div>
-      <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic19.jpg', '')"><img src="pic19.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name">&nbsp;</p></div></div></div>
-      <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic20.jpg', '')"><img src="pic20.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name">&nbsp;</p></div></div></div>
-      <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic21.jpg', '')"><img src="pic21.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name">&nbsp;</p></div></div></div>
-      <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic22.jpg', '')"><img src="pic22.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name">&nbsp;</p></div></div></div>
-      <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic23.jpg', '')"><img src="pic23.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name">&nbsp;</p></div></div></div>
-
-      <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic4.jpg', 'Jacqueline, Kevin, Megan')"><img src="pic4.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name">Jacqueline, Kevin, Megan</p></div></div></div>
-      <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic5.jpg', 'Kevin R. at 17')"><img src="pic5.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name">Kevin R. at 17</p></div></div></div>
-      <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic6.jpg', 'Kevin, Mia, Khari')"><img src="pic6.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name">Kevin, Mia, Khari</p></div></div></div>
-    </div>
-  </div>
-</section>
-
-<section id="memorial" class="py-5 bg-white border-top">
-  <div class="container">
-    <div class="row align-items-center g-4">
-      <div class="col-lg-5 text-center">
-        <h2 class="fw-bold" style="color: #4a148c;">IN LOVING MEMORY</h2>
-        <p style="font-family: 'Brush Script MT', cursive; font-size: 1.8rem; color: #6a1b9a;">"We haven't forgotten about you."</p>
-      </div>
-      <div class="col-lg-7">
-        <div class="row memorial-list" id="memorialGrid"></div>
+    <div class="col-md-6 border-start">
+      <h3 class="fw-bold">🎵 Reunion Jukebox</h3>
+      <div class="d-flex justify-content-center gap-2">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScy-B16a2pEvsTs6YN3HSfjkIX-AhzMbNexi42yshrfNKk7dQ/viewform" target="_blank" class="btn btn-school btn-sm">Request Song</a>
+        <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSE8lLV2Op7eMchISLz22rowMK7YJF6yy4UwmC0ys7Cok6ZFh8uYw-koCOQoWHOm8MgfPNnQGL74Wki/pubhtml?gid=1803881201&single=true" target="_blank" class="btn btn-outline-primary btn-sm rounded-pill">View Playlist</a>
       </div>
     </div>
   </div>
-</section>
+</div></section>
 
-<footer class="py-4 text-center" style="background: #1e003c; color: var(--school-gold);">
-  <p class="mb-0 fw-bold">&copy; 2026 SMSH – Class of 1976</p>
-</footer>
-
-<div class="modal fade" id="photoModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content bg-transparent border-0">
-      <div class="modal-body p-0 text-center position-relative">
-        <img src="" id="lightboxImg" class="img-fluid rounded shadow-lg">
-        <div id="lightboxCaption" style="background:rgba(0,0,0,0.8); color:white; padding:10px;"></div>
-        <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal"></button>
-      </div>
-    </div>
+<section id="photos" class="py-5 bg-light"><div class="container">
+  <h2 class="text-center fw-bold mb-4">Photo Gallery</h2>
+  <div class="row g-3" id="photoGrid">
+    <script>
+      const photos = [
+        {i:'pic1.jpg', n:'STATE CHAMPS'}, {i:'pic2.jpg', n:'Upward Bound'}, {i:'pic3.jpg', n:'The cool kids'},
+        {i:'pic4.jpg', n:'Jacqueline, Kevin, Megan'}, {i:'pic5.jpg', n:'Kevin R. at 17'}, {i:'pic6.jpg', n:'Kevin, Mia, Khari'}
+      ];
+      let phtml = photos.map(p => `<div class="col-6 col-md-3"><div class="card photo-card shadow-sm"><div class="img-container" onclick="openLightbox('${p.i}','${p.n}')"><img src="${p.i}" class="gallery-img"></div><p class="photo-name">${p.n}</p></div></div>`).join('');
+      for(let i=8; i<=23; i++) { phtml += `<div class="col-6 col-md-3"><div class="card photo-card shadow-sm"><div class="img-container" onclick="openLightbox('pic${i}.jpg','')"><img src="pic${i}.jpg" class="gallery-img"></div><p class="photo-name">&nbsp;</p></div></div>`; }
+      document.write(phtml);
+    </script>
   </div>
-</div>
+</div></section>
+
+<section id="tasks" class="py-5 bg-white border-top"><div class="container">
+  <h2 class="text-center fw-bold mb-4">Current Tasks</h2>
+  <div class="table-responsive"><table class="table table-sm table-hover border">
+    <thead class="table-dark"><tr><th>Task</th><th>Who</th><th>Status</th></tr></thead>
+    <tbody id="taskTable"></tbody>
+  </table></div>
+</div></section>
+
+<section id="memorial" class="py-5 bg-light border-top"><div class="container">
+  <h2 class="text-center fw-bold mb-4">IN LOVING MEMORY</h2>
+  <div id="memorialGrid" class="row"></div>
+</div></section>
+
+<footer class="py-4 text-center bg-dark text-white">&copy; 2026 SMSH Class of 1976</footer>
+
+<div class="modal fade" id="photoModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content bg-dark border-0 text-center">
+  <img src="" id="lightboxImg" class="img-fluid"><div id="lightboxCap" class="text-white p-2"></div>
+</div></div></div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  // Timer Script
   function updateTimer() {
-    const target = new Date("June 26, 2026 18:00:00").getTime();
-    const now = new Date().getTime();
-    const diff = target - now;
+    const diff = new Date("June 26, 2026 18:00:00") - new Date();
     if (diff <= 0) return;
-    document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-    document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    document.getElementById("mins").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    document.getElementById("secs").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+    document.getElementById("days").innerText = Math.floor(diff / 864e5);
+    document.getElementById("hours").innerText = Math.floor((diff % 864e5) / 36e5);
+    document.getElementById("mins").innerText = Math.floor((diff % 36e5) / 6e4);
+    document.getElementById("secs").innerText = Math.floor((diff % 6e4) / 1000);
   }
   setInterval(updateTimer, 1000); updateTimer();
 
-  // RSVP Loader
-  const API_URL = 'https://script.google.com/macros/s/AKfycbxoIJZz2RDDkaW9V4K_Vz8w9GT2Gfaj_RZYWY84FyJfJ6elgq2IeNHkOE0jz3x4g5y6hw/exec';
-  async function loadData() {
-    try {
-      const res = await fetch(API_URL);
-      const data = await res.json();
-      document.getElementById('finalTotal').textContent = data.total || "0";
-      document.getElementById('attendeeGrid').innerHTML = data.attendees.map(a => `<div class="attendee-name">${a.name}</div>`).join('');
-    } catch (e) { document.getElementById('finalTotal').textContent = "0"; }
-  }
-  loadData();
+  fetch('https://script.google.com/macros/s/AKfycbxoIJZz2RDDkaW9V4K_Vz8w9GT2Gfaj_RZYWY84FyJfJ6elgq2IeNHkOE0jz3x4g5y6hw/exec')
+    .then(r => r.json()).then(d => { document.getElementById('attendeeGrid').innerHTML = d.attendees.map(a => `<div class="attendee-name">${a.name}</div>`).join(''); });
 
-  // Memorial Script
-  const memorialNames = ["Annette Pierre", "B. McGraw Charles", "Brenda Sias", "Chris Faulk", "Chris Robertson", "Debra Batiste", "Edward Raymond", "Ernest Joseph", "Evelyn Drake", "Fredrick Skipper", "Gary Charles", "Gary Guidry", "Glenn Perrodin", "Horace Cole", "Jody Anthony", "Jules Charles", "Kenneth Lastrappe", "Larry Broussard", "Lee Williams", "Linda Batiste", "Linda Bonhomme", "Linda George", "Lois Gulliam", "Manuel Mallery", "Mark Mitchell", "Mary Alice Sam", "Mary Joyce Leon", "Nolan Charles Jr.", "Perry Pierre", "Phyllis Williams", "Ray Marshall", "Richard Marshall", "Rickey Batiste", "Roland Allen", "Samuel Savoy", "Sherman Hypolite", "Stella Orphe", "Terry Benjamin", "Tyrone Bowles", "Vernon Abbott", "Walter Lanky Stewart", "Wanda James Minor"].sort(); 
-  function renderMemorial() {
-    const grid = document.getElementById('memorialGrid');
-    const cols = window.innerWidth < 768 ? 2 : 3;
-    const itemsPerCol = Math.ceil(memorialNames.length / cols);
-    grid.innerHTML = '';
-    for (let i = 0; i < cols; i++) {
-      let colDiv = document.createElement('div');
-      colDiv.className = cols === 2 ? "col-6" : "col-4";
-      let ul = document.createElement('ul');
-      ul.className = "list-unstyled";
-      memorialNames.slice(i * itemsPerCol, (i + 1) * itemsPerCol).forEach(name => {
-        ul.innerHTML += `<li class="visible mb-2" style="color: var(--school-purple); font-size: 0.85rem;">🕊️ ${name}</li>`;
-      });
-      colDiv.appendChild(ul);
-      grid.appendChild(colDiv);
-    }
-  }
-  renderMemorial(); window.addEventListener('resize', renderMemorial);
+  const tasks = [
+    {t:"Bank Account", w:"Madelyn", s:"Done"}, {t:"Room Fees", w:"Sandra", s:"In Progress"}, {t:"Catering", w:"Sadie", s:"In Progress"}, {t:"Contact List", w:"Shantley", s:"Done"}, {t:"Hotels", w:"Lolly", s:"In Progress"}, {t:"Website", w:"Kevin", s:"Done"}
+  ];
+  document.getElementById('taskTable').innerHTML = tasks.map(t => `<tr><td>${t.t}</td><td>${t.w}</td><td><span class="badge ${t.s=='Done'?'bg-success':'bg-warning text-dark'}">${t.s}</span></td></tr>`).join('');
 
-  // Lightbox Script
-  function openLightbox(src, name) {
-    document.getElementById('lightboxImg').src = src;
-    document.getElementById('lightboxCaption').innerText = name;
-    new bootstrap.Modal(document.getElementById('photoModal')).show();
-  }
+  const names = ["Annette Pierre", "B. McGraw Charles", "Brenda Sias", "Chris Faulk", "Chris Robertson", "Debra Batiste", "Edward Raymond", "Ernest Joseph", "Evelyn Drake", "Fredrick Skipper", "Gary Charles", "Gary Guidry", "Glenn Perrodin", "Horace Cole", "Jody Anthony", "Jules Charles", "Kenneth Lastrappe", "Larry Broussard", "Lee Williams", "Linda Batiste", "Linda Bonhomme", "Linda George", "Lois Gulliam", "Manuel Mallery", "Mark Mitchell", "Mary Alice Sam", "Mary Joyce Leon", "Nolan Charles Jr.", "Perry Pierre", "Phyllis Williams", "Ray Marshall", "Richard Marshall", "Rickey Batiste", "Roland Allen", "Samuel Savoy", "Sherman Hypolite", "Stella Orphe", "Terry Benjamin", "Tyrone Bowles", "Vernon Abbott", "Walter Lanky Stewart", "Wanda James Minor"].sort();
+  let mHtml = ''; const perCol = Math.ceil(names.length/3);
+  for(let i=0; i<3; i++) { mHtml += `<div class="col-4"><ul class="list-unstyled" style="font-size:0.75rem">` + names.slice(i*perCol, (i+1)*perCol).map(n => `<li>🕊️ ${n}</li>`).join('') + `</ul></div>`; }
+  document.getElementById('memorialGrid').innerHTML = mHtml;
+
+  function openLightbox(s, n) { document.getElementById('lightboxImg').src = s; document.getElementById('lightboxCap').innerText = n; new bootstrap.Modal(document.getElementById('photoModal')).show(); }
 </script>
 </body>
 </html>
