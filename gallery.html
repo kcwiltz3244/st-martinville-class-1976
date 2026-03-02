@@ -8,22 +8,14 @@
   <style>
     :root { --school-purple:#4b0082; --school-gold:#ffd700; }
     body { background:#f8f9fa; font-family: 'Segoe UI', Arial, sans-serif; }
-    
     .gallery-header { background: var(--school-purple); color: var(--school-gold); padding: 3rem 1rem; border-bottom: 4px solid var(--school-gold); }
-    
-    /* Polaroid Card Style */
     .photo-card { border: none; transition: transform 0.3s ease; background: white; }
     .photo-card:hover { transform: translateY(-5px); }
-    
     .img-container { overflow: hidden; cursor: pointer; height: 250px; border-radius: 8px 8px 0 0; }
     .gallery-img { width: 100%; height: 100%; object-fit: cover; }
-    
     .caption-bar { background: white; border-top: 1px solid #eee; border-radius: 0 0 8px 8px; }
     .photo-name { color: var(--school-purple); font-weight: bold; font-size: 0.9rem; margin-bottom: 0; }
-
     #btn-back { background: var(--school-gold); color: var(--school-purple); font-weight: bold; border-radius: 50px; }
-    
-    /* Lightbox Caption */
     #lightboxCaption { background: rgba(0,0,0,0.8); color: white; padding: 15px; font-weight: bold; font-size: 1.2rem; }
   </style>
 </head>
@@ -57,14 +49,14 @@
           <img src="pic2.png" class="gallery-img" alt="Memory 2">
         </div>
         <div class="card-body caption-bar text-center p-2">
-          <p class="photo-name">test</p>
+          <p class="photo-name">Pep Rally Spirit</p>
         </div>
       </div>
     </div>
 
     <div class="col">
       <div class="card photo-card shadow-sm h-100">
-        <div class="img-container" onclick="openLightbox('pic3.jpg', 'Committee Planning Meeting')">
+        <div class="img-container" onclick="openLightbox('pic3.jpg', 'The cool kids')">
           <img src="pic3.jpg" class="gallery-img" alt="Memory 3">
         </div>
         <div class="card-body caption-bar text-center p-2">
@@ -72,38 +64,42 @@
         </div>
       </div>
     </div>
-<div class="col">
+
+    <div class="col">
       <div class="card photo-card shadow-sm h-100">
-        <div class="img-container" onclick="openLightbox('FILENAME.jpg', 'PERSON NAME')">
-          <img src="pic4.jpg" class="gallery-img" alt="Memory">
+        <div class="img-container" onclick="openLightbox('pic4.jpg', 'Jacqueline, Kevin, Megan')">
+          <img src="pic4.jpg" class="gallery-img" alt="Memory 4">
         </div>
         <div class="card-body caption-bar text-center p-2">
-          <p class="photo-name">Jacqeline,Kevin,Megan.</p>
+          <p class="photo-name">Jacqueline, Kevin, Megan</p>
         </div>
       </div>
     </div>
-    </div>
-</main>
-<div class="col">
+
+    <div class="col">
       <div class="card photo-card shadow-sm h-100">
-        <div class="img-container" onclick="openLightbox('FILENAME.jpg', 'PERSON NAME')">
-          <img src="pic5.jpg" class="gallery-img" alt="Memory">
+        <div class="img-container" onclick="openLightbox('pic5.jpg', 'Kevin, Mia, Khari')">
+          <img src="pic5.jpg" class="gallery-img" alt="Memory 5">
         </div>
         <div class="card-body caption-bar text-center p-2">
-          <p class="photo-name">Kevin,Mia,Khari</p>
+          <p class="photo-name">Kevin, Mia, Khari</p>
         </div>
       </div>
     </div>
-<div class="col">
+
+    <div class="col">
       <div class="card photo-card shadow-sm h-100">
-        <div class="img-container" onclick="openLightbox('FILENAME.jpg', 'PERSON NAME')">
-          <img src="Pic6.jpg" class="gallery-img" alt="Memory">
+        <div class="img-container" onclick="openLightbox('Pic6.jpg', 'Kevin R. at 17')">
+          <img src="Pic6.jpg" class="gallery-img" alt="Memory 6">
         </div>
         <div class="card-body caption-bar text-center p-2">
           <p class="photo-name">Kevin R. at 17</p>
         </div>
       </div>
     </div>
+
+  </div> </main>
+
 <div class="modal fade" id="photoModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content bg-transparent border-0">
