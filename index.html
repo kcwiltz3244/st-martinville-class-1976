@@ -10,38 +10,27 @@
     :root { --school-purple:#4b0082; --school-gold:#ffd700; --deep-purple: #2a004a; }
     body { background:#fafafa; color:#333; font-family: 'Segoe UI', Arial, sans-serif; overflow-x: hidden; }
     
+    /* This makes the grid work */
+    .photo-card { border: none; transition: transform 0.3s ease; background: white; border-radius: 8px; overflow: hidden; }
+    .img-container { overflow: hidden; cursor: pointer; height: 200px; }
+    .gallery-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.2s; }
+    .gallery-img:hover { transform: scale(1.05); }
+    .caption-bar { background: white; border-top: 1px solid #eee; }
+    .photo-name { color: var(--school-purple); font-weight: bold; font-size: 0.85rem; margin-bottom: 0; }
+
+    /* Existing Page Styles */
     .navbar { background-color:var(--school-purple); border-bottom: 2px solid var(--school-gold); }
     .navbar a.nav-link { color:white !important; font-weight:bold; text-transform: uppercase; font-size: 0.8rem; }
-    
-    header {
-      position:relative; background:url("tiger.png") center/cover no-repeat;
-      text-align:center; padding:5rem 1rem;
-    }
+    header { position:relative; background:url("tiger.png") center/cover no-repeat; text-align:center; padding:5rem 1rem; }
     header::after { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(30,0,60,0.5); z-index:0; }
     header .container { position:relative; z-index:1; }
-    
     header h1, header h2, header h3 { color: var(--school-gold) !important; font-weight: bold; }
-
     .timer-band { background: var(--deep-purple); color: white; padding: 20px 0; text-align: center; border-top: 4px solid var(--school-gold); border-bottom: 4px solid var(--school-gold); }
     .countdown-flex { display: flex; justify-content: center; gap: 25px; font-weight: bold; }
     .unit-num { font-size: 2.5rem; display: block; line-height: 1; color: var(--school-gold); }
     .unit-label { font-size: 0.7rem; text-transform: uppercase; }
-
-    .rsvp-status-pill { background: var(--deep-purple); color: var(--school-gold); border: 2px solid var(--school-gold); border-radius: 50px; padding: 15px 40px; display: inline-block; margin-bottom: 20px; }
-    #yesListContainer { border-radius: 12px; background: white; border: 1px solid #dee2e6; max-height: 280px; overflow-y: auto; }
-    .rsvp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
-    @media (min-width: 768px) { .rsvp-grid { grid-template-columns: repeat(5, 1fr); } }
-    .attendee-name { font-size: 0.82rem; padding: 4px; background: #f8f9fa; border: 1px solid #eee; border-radius: 4px; text-align: center; font-weight: bold; color: var(--deep-purple); }
-
-    .reveal-item { opacity: 0; transform: translateY(15px); transition: all 0.6s ease-out; list-style: none; margin-bottom: 5px; }
-    .reveal-item.visible { opacity: 1; transform: translateY(0); }
-
-    #btn-back-to-top { position: fixed; bottom: 20px; right: 20px; display: none; z-index: 1000; background: var(--school-purple); color: var(--school-gold); border: 2px solid var(--school-gold); width: 45px; height: 45px; border-radius: 50%; }
-    
-    /* Gallery specific styles */
-    .gallery-img { cursor: pointer; transition: transform 0.2s; object-fit: cover; height: 200px; width: 100%; border: 2px solid #eee; }
-    .gallery-img:hover { transform: scale(1.03); border-color: var(--school-gold); }
-  </style> 
+  </style>
+</head> 
 </head>
 
 <body id="top">
