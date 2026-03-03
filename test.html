@@ -19,6 +19,7 @@
     }
     header::after { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(30,0,60,0.5); z-index:0; }
     header .container { position:relative; z-index:1; }
+    
     header h1, header h2, header h3 { color: var(--school-gold) !important; font-weight: bold; }
 
     .timer-band { background: var(--deep-purple); color: white; padding: 20px 0; text-align: center; border-top: 4px solid var(--school-gold); border-bottom: 4px solid var(--school-gold); }
@@ -36,11 +37,10 @@
     .reveal-item.visible { opacity: 1; transform: translateY(0); }
 
     #btn-back-to-top { position: fixed; bottom: 20px; right: 20px; display: none; z-index: 1000; background: var(--school-purple); color: var(--school-gold); border: 2px solid var(--school-gold); width: 45px; height: 45px; border-radius: 50%; }
-
-    /* Contact List styling */
-    .contact-card { background: white; border-radius: 10px; border-left: 5px solid var(--school-gold); transition: transform 0.2s; height: 100%; }
-    .contact-card:hover { transform: translateY(-3px); }
-    .phone-link { color: var(--school-purple); text-decoration: none; font-weight: bold; }
+    
+    .contact-item { padding: 10px; border-bottom: 1px solid #eee; }
+    .contact-name { font-weight: bold; color: var(--school-purple); }
+    .contact-phone { color: #555; text-decoration: none; }
   </style> 
 </head>
 
@@ -76,7 +76,7 @@
 
 <section class="timer-band">
   <div class="container">
-    <div class="countdown-flex" id="timer">
+    <div class="countdown-flex">
       <div><span class="unit-num" id="days">00</span><span class="unit-label">Days</span></div>
       <div><span class="unit-num" id="hours">00</span><span class="unit-label">Hrs</span></div>
       <div><span class="unit-num" id="mins">00</span><span class="unit-label">Min</span></div>
@@ -100,158 +100,50 @@
   </div>
 </section>
 
-<section id="contacts" class="py-5 bg-white border-bottom">
-  <div class="container text-center">
-    <h2 class="mb-2 fw-bold" style="color: var(--school-purple);">Reunion Contact List</h2>
-    <p class="text-muted mb-5">Planning Committee & Key Contacts</p>
-    
-    <div class="row g-3 justify-content-center text-start">
-      <div class="col-md-6 col-lg-4">
-        <div class="contact-card p-3 shadow-sm border">
-          <p class="mb-0 fw-bold text-dark">Shantley Guidry</p>
-          <a href="tel:3122135031" class="phone-link">312-213-5031</a>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="contact-card p-3 shadow-sm border">
-          <p class="mb-0 fw-bold text-dark">Lolly Jones-Alexander</p>
-          <a href="tel:3373562326" class="phone-link">337-356-2326</a>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="contact-card p-3 shadow-sm border">
-          <p class="mb-0 fw-bold text-dark">Sadie Fontenette-Mason</p>
-          <a href="tel:3372989235" class="phone-link">337-298-9235</a>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="contact-card p-3 shadow-sm border">
-          <p class="mb-0 fw-bold text-dark">Sandra Lasseigne-Knatt</p>
-          <a href="tel:3372889535" class="phone-link">337-288-9535</a>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="contact-card p-3 shadow-sm border">
-          <p class="mb-0 fw-bold text-dark">Glenn R. Etienne</p>
-          <a href="tel:7138183024" class="phone-link">713-818-3024</a>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="contact-card p-3 shadow-sm border">
-          <p class="mb-0 fw-bold text-dark">Raymond Mallery</p>
-          <a href="tel:3375019746" class="phone-link">337-501-9746</a>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="contact-card p-3 shadow-sm border">
-          <p class="mb-0 fw-bold text-dark">David James</p>
-          <a href="tel:3124019021" class="phone-link">312-401-9021</a>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="contact-card p-3 shadow-sm border">
-          <p class="mb-0 fw-bold text-dark">Kevin Wiltz</p>
-          <a href="tel:4052347386" class="phone-link">405-234-7386</a>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="contact-card p-3 shadow-sm border" style="border-left-color: var(--school-purple);">
-          <p class="mb-0 fw-bold text-dark">ADD NAME HERE</p>
-          <a href="tel:0000000000" class="phone-link">000-000-0000</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="calendar" class="py-5 bg-light border-bottom">
+<section id="calendar" class="py-5 bg-white border-bottom">
   <div class="container text-center">
     <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Meetings & Events</h2>
-    <div class="p-4 mb-4 border border-2 rounded-4 mx-auto bg-white shadow-sm" style="max-width: 700px;">
-      <p class="text-muted mb-4">Click the button below to view committee planning notes.</p>
-      <a href="https://docs.google.com/document/d/1IA0RBRPbgjZej4OG0shiXa8227rz6dZ7DadP4rqmiz0/edit?usp=sharing" target="_blank" class="btn btn-lg fw-bold shadow-sm" style="background: var(--school-purple); color: var(--school-gold); border-radius: 50px; padding: 15px 40px;">VIEW MEETING NOTES</a>
-    </div>
     <div class="ratio ratio-16x9 shadow-sm rounded mx-auto" style="max-width: 1000px; min-height: 500px; border: 2px solid #eee;">
       <iframe src="https://calendar.google.com/calendar/embed?src=fbcf3427770ee3c74ba269d485ba49d39d6ea67f45be295d849f038ba7c79497%40group.calendar.google.com&ctz=America%2FChicago" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
     </div>
   </div>
 </section>
 
-<section id="memorial" class="py-5 bg-white">
-  <div class="container">
-    <div class="row align-items-center g-4">
-      <div class="col-lg-5 text-center">
-        <img src="empty chair.png" alt="In Loving Memory" class="img-fluid rounded-3 mb-3" style="max-height: 250px;">
-        <h2 class="fw-bold" style="color: #4a148c;">IN LOVING MEMORY</h2>
-        <p style="font-family: 'Brush Script MT', cursive; font-size: 1.8rem; color: #6a1b9a;">"We haven't forgotten about you."</p>
-      </div>
-      <div class="col-lg-7">
-        <div class="row memorial-list" id="memorialGrid"></div>
-      </div>
+<section id="meeting-notes" class="py-5 bg-light border-bottom">
+  <div class="container text-center">
+    <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Committee Meeting Notes</h2>
+    <div class="p-5 border border-2 rounded-4 mx-auto bg-white shadow-sm" style="max-width: 700px;">
+      <h3 class="mb-3">📄</h3>
+      <p class="text-muted mb-4">Click the button below to view the detailed notes and archives from our committee planning sessions.</p>
+      <a href="https://docs.google.com/document/d/1IA0RBRPbgjZej4OG0shiXa8227rz6dZ7DadP4rqmiz0/edit?usp=sharing" target="_blank" class="btn btn-lg fw-bold shadow-sm" style="background: var(--school-purple); color: var(--school-gold); border-radius: 50px; padding: 15px 40px;">VIEW MEETING NOTES</a>
     </div>
   </div>
 </section>
 
-<footer class="py-4 text-center" style="background: #1e003c; color: var(--school-gold);">
-  <p class="mb-0 fw-bold">&copy; 2026 SMSH – Class of 1976</p>
-</footer>
+<section id="zelle" class="py-5 bg-white border-bottom">
+  <div class="container text-center">
+    <div class="p-4 border border-2 rounded-4 mx-auto shadow-sm" style="max-width: 1000px; border-color: var(--school-purple) !important;">
+      <a href="https://docs.google.com/document/d/1VMvVsC6hjaoq2kErh117EMscRjKYfV3Gc9lzK0wkMiw/edit?usp=sharing" target="_blank" class="btn btn-lg fw-bold" style="background: var(--school-purple); color: var(--school-gold); border-radius: 50px; padding: 15px 40px;">Zelle Payment Instructions</a>
+    </div>
+  </div>
+</section>
 
-<button type="button" id="btn-back-to-top">↑</button>
+<section id="music" class="py-5 bg-light text-center border-bottom">
+  <div class="container">
+    <h3 class="fw-bold" style="color: var(--school-purple);">🎵 THE REUNION JUKEBOX</h3>
+    <p class="text-muted mb-4">Request your favorite hits from the 70s!</p>
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScy-B16a2pEvsTs6YN3HSfjkIX-AhzMbNexi42yshrfNKk7dQ/viewform" target="_blank" class="btn fw-bold shadow-sm" style="background: var(--school-purple); color: var(--school-gold); border-radius: 30px; padding: 10px 25px;">🎤 Request a Song</a>
+        <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSE8lLV2Op7eMchISLz22rowMK7YJF6yy4UwmC0ys7Cok6ZFh8uYw-koCOQoWHOm8MgfPNnQGL74Wki/pubhtml?gid=1803881201&single=true" target="_blank" class="btn fw-bold shadow-sm" style="border: 2px solid var(--school-purple); color: var(--school-purple); border-radius: 30px; padding: 10px 25px;">📜 View Playlist</a>
+    </div>
+  </div>
+</section>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  // 1. TIMER SCRIPT
-  function updateTimer() {
-    const targetDate = new Date("June 26, 2026 18:00:00").getTime();
-    const now = new Date().getTime();
-    const diff = targetDate - now;
-    if (diff <= 0) return;
-    document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-    document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    document.getElementById("mins").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    document.getElementById("secs").innerText = Math.floor((diff % (1000 * 60)) / 1000);
-  }
-  setInterval(updateTimer, 1000); updateTimer();
-
-  // 2. RSVP DATA SCRIPT
-  const API_URL = 'https://script.google.com/macros/s/AKfycbxoIJZz2RDDkaW9V4K_Vz8w9GT2Gfaj_RZYWY84FyJfJ6elgq2IeNHkOE0jz3x4g5y6hw/exec';
-  async function loadData() {
-    try {
-      const res = await fetch(API_URL);
-      const data = await res.json();
-      document.getElementById('finalTotal').textContent = data.total || "0";
-      document.getElementById('attendeeGrid').innerHTML = data.attendees.map(a => `<div class="attendee-name">${a.name}</div>`).join('');
-    } catch (e) { document.getElementById('finalTotal').textContent = "0"; }
-  }
-  loadData();
-
-  // 3. MEMORIAL SCRIPT
-  const memorialNames = ["Annette Pierre", "B. McGraw Charles", "Brenda Sias", "Chris Faulk", "Chris Robertson", "Debra Batiste", "Edward Raymond", "Ernest Joseph", "Evelyn Drake", "Fredrick Skipper", "Gary Charles", "Gary Guidry", "Glenn Perrodin", "Horace Cole", "Jody Anthony", "Jules Charles", "Kenneth Lastrappe", "Larry Broussard", "Lee Williams", "Linda Batiste", "Linda Bonhomme", "Linda George", "Lois Gulliam", "Manuel Mallery", "Mark Mitchell", "Mary Alice Sam", "Mary Joyce Leon", "Nolan Charles Jr.", "Perry Pierre", "Phyllis Williams", "Ray Marshall", "Richard Marshall", "Rickey Batiste", "Roland Allen", "Samuel Savoy", "Sherman Hypolite", "Stella Orphe", "Terry Benjamin", "Tyrone Bowles", "Vernon Abbott", "Walter Lanky Stewart", "Wanda James Minor"].sort(); 
-
-  function renderMemorial() {
-    const grid = document.getElementById('memorialGrid');
-    if(!grid) return;
-    grid.innerHTML = ''; 
-    const isMobile = window.innerWidth < 768;
-    const numCols = isMobile ? 2 : 3;
-    const itemsPerCol = Math.ceil(memorialNames.length / numCols);
-
-    for (let i = 0; i < numCols; i++) {
-        let colDiv = document.createElement('div');
-        colDiv.className = isMobile ? "col-6" : "col-4";
-        let ul = document.createElement('ul');
-        ul.className = "list-unstyled memorial-list";
-        memorialNames.slice(i * itemsPerCol, (i + 1) * itemsPerCol).forEach(name => {
-            ul.innerHTML += `<li class="reveal-item mb-2" style="color: var(--school-purple); font-size: 0.85rem; white-space: nowrap;">🕊️ ${name}</li>`;
-        });
-        colDiv.appendChild(ul);
-        grid.appendChild(colDiv);
-    }
-  }
-  renderMemorial();
-
-  window.onscroll = () => { document.getElementById("btn-back-to-top").style.display = (window.scrollY > 200) ? "block" : "none"; };
-  document.getElementById("btn-back-to-top").onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
-</script>
-</body>
-</html>
+<section id="photos" class="py-5 bg-white text-center border-bottom">
+  <div class="container">
+    <div class="p-4 border border-2 rounded-4 mx-auto shadow-sm" style="max-width: 1000px; border-color: var(--school-purple) !important;">
+      <h2 class="mb-3 fw-bold" style="color: var(--school-purple);">Photo Gallery</h2>
+      <p class="text-muted mb-4">Click below to view a collection of memories.</p>
+      <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3">
+        <a href="gallery.html" class="btn btn-lg fw-bold" style="background: var(--school-purple); color: var(--school-gold); border-radius: 50px; padding: 12px 40px;">VIEW PHOTOS</a>
+        <div class="text-md-start">
