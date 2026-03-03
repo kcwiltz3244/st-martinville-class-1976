@@ -55,11 +55,10 @@
     }
     .btn-custom:hover { background: var(--deep-purple); color: white; transform: scale(1.02); }
 
-    .contact-item { width: 100%; padding: 6px 0; border-bottom: 1px solid #f0f0f0; font-size: 1rem; }
-    .contact-name { font-weight: bold; color: var(--school-purple); }
-    .contact-phone { color: #333; text-decoration: none; }
+    .contact-item { width: 100%; padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 1rem; color: #333; }
+    .contact-phone { color: var(--school-purple); text-decoration: none; }
 
-    /* REUSE ORIGINAL STYLES FOR RSVP/MEMORIAL */
+    /* RSVP & MEMORIAL STYLES */
     .rsvp-status-pill { background: var(--deep-purple); color: var(--school-gold); border: 2px solid var(--school-gold); border-radius: 50px; padding: 15px 40px; display: inline-block; margin-bottom: 20px; }
     #yesListContainer { border-radius: 12px; background: white; border: 1px solid #dee2e6; max-height: 280px; overflow-y: auto; }
     .rsvp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
@@ -140,19 +139,19 @@
   
   <div id="meeting-notes" class="uniform-card text-center">
     <h3>Committee Meeting Notes</h3>
-    <p class="text-muted">Detailed archives from our reunion planning sessions.</p>
+    <p class="text-muted">Archives from our planning sessions.</p>
     <a href="https://docs.google.com/document/d/1IA0RBRPbgjZej4OG0shiXa8227rz6dZ7DadP4rqmiz0/edit?usp=sharing" target="_blank" class="btn btn-custom shadow-sm">View Meeting Notes</a>
   </div>
 
   <div id="zelle" class="uniform-card text-center">
     <h3>Zelle & Payment Instructions</h3>
-    <p class="text-muted">Official guidance for submitting reunion fees via Zelle.</p>
+    <p class="text-muted">Guidance for submitting reunion fees.</p>
     <a href="https://docs.google.com/document/d/1VMvVsC6hjaoq2kErh117EMscRjKYfV3Gc9lzK0wkMiw/edit?usp=sharing" target="_blank" class="btn btn-custom shadow-sm">Payment Instructions</a>
   </div>
 
   <div id="music" class="uniform-card text-center">
     <h3>The Reunion Jukebox</h3>
-    <p class="text-muted">Request your favorite hits from the 70s for our playlist.</p>
+    <p class="text-muted">Request your favorite 70s hits.</p>
     <div class="d-flex gap-2 flex-wrap justify-content-center">
       <a href="https://docs.google.com/forms/d/e/1FAIpQLScy-B16a2pEvsTs6YN3HSfjkIX-AhzMbNexi42yshrfNKk7dQ/viewform" target="_blank" class="btn btn-custom shadow-sm">Request a Song</a>
       <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSE8lLV2Op7eMchISLz22rowMK7YJF6yy4UwmC0ys7Cok6ZFh8uYw-koCOQoWHOm8MgfPNnQGL74Wki/pubhtml?gid=1803881201&single=true" target="_blank" class="btn btn-custom shadow-sm" style="background: white; border: 2px solid var(--school-purple); color: var(--school-purple);">View Playlist</a>
@@ -161,14 +160,12 @@
 
   <div id="photos" class="uniform-card text-center">
     <h3>Photo Gallery</h3>
-    <p class="text-muted">View memories or email new photos to smshclassof76photos@gmail.com</p>
+    <p class="text-muted">Email photos to smshclassof76photos@gmail.com</p>
     <a href="gallery.html" class="btn btn-custom shadow-sm">Launch Gallery</a>
   </div>
 
-<div id="contacts" class="uniform-card">
+  <div id="contacts" class="uniform-card">
     <h3>Reunion Contact List</h3>
-    <p class="text-muted mb-4">Planning Committee & Support</p>
-    
     <div class="w-100 px-md-4 text-start">
       <div class="row g-2">
         <div class="col-md-6">
@@ -187,72 +184,6 @@
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<footer class="py-4 text-center" style="background: #1e003c; color: var(--school-gold);">
-  <p class="mb-0 fw-bold">&copy; 2026 SMSH – Class of 1976</p>
-</footer>
-
-<button type="button" id="btn-back-to-top">↑</button>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  function updateTimer() {
-    const targetDate = new Date("June 26, 2026 18:00:00").getTime();
-    const now = new Date().getTime();
-    const diff = targetDate - now;
-    if (diff <= 0) return;
-    document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-    document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    document.getElementById("mins").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    document.getElementById("secs").innerText = Math.floor((diff % (1000 * 60)) / 1000);
-  }
-  setInterval(updateTimer, 1000); updateTimer();
-
-  const API_URL = 'https://script.google.com/macros/s/AKfycbxoIJZz2RDDkaW9V4K_Vz8w9GT2Gfaj_RZYWY84FyJfJ6elgq2IeNHkOE0jz3x4g5y6hw/exec';
-  async function loadData() {
-    try {
-      const res = await fetch(API_URL);
-      const data = await res.json();
-      document.getElementById('finalTotal').textContent = data.total || "0";
-      document.getElementById('attendeeGrid').innerHTML = data.attendees.map(a => `<div class="attendee-name">${a.name}</div>`).join('');
-    } catch (e) { document.getElementById('finalTotal').textContent = "0"; }
-  }
-  loadData();
-
-  const memorialNames = ["Annette Pierre", "B. McGraw Charles", "Brenda Sias", "Chris Faulk", "Chris Robertson", "Debra Batiste", "Edward Raymond", "Ernest Joseph", "Evelyn Drake", "Fredrick Skipper", "Gary Charles", "Gary Guidry", "Glenn Perrodin", "Horace Cole", "Jody Anthony", "Jules Charles", "Kenneth Lastrappe", "Larry Broussard", "Lee Williams", "Linda Batiste", "Linda Bonhomme", "Linda George", "Lois Gulliam", "Manuel Mallery", "Mark Mitchell", "Mary Alice Sam", "Mary Joyce Leon", "Nolan Charles Jr.", "Perry Pierre", "Phyllis Williams", "Ray Marshall", "Richard Marshall", "Rickey Batiste", "Roland Allen", "Samuel Savoy", "Sherman Hypolite", "Stella Orphe", "Terry Benjamin", "Tyrone Bowles", "Vernon Abbott", "Walter Lanky Stewart", "Wanda James Minor"].sort(); 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => { entry.target.classList.add('visible'); }, index * 30);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  function renderMemorial() {
-    const grid = document.getElementById('memorialGrid');
-    if(!grid) return;
-    grid.innerHTML = ''; 
-    const isMobile = window.innerWidth < 768;
-    const numCols = isMobile ? 2 : 3;
-    const itemsPerCol = Math.ceil(memorialNames.length / numCols);
-    for (let i = 0; i < numCols; i++) {
-        let colDiv = document.createElement('div');
-        colDiv.className = isMobile ? "col-6" : "col-4";
-        let ul = document.createElement('ul');
-        ul.className = "list-unstyled memorial-list";
-        memorialNames.slice(i * itemsPerCol, (i + 1) * itemsPerCol).forEach(name => {
-            ul.innerHTML += `<li class="reveal-item mb-2" style="color: var(--school-purple); font-size: 0.85rem; white-space: nowrap;">🕊️ ${name}</li>`;
-        });
-        colDiv.appendChild(ul);
-        grid.appendChild(colDiv);
-    }
-    document.querySelectorAll('.reveal-item').forEach((el) => observer.observe(el));
-  }
-  renderMemorial();
-
-  window.onscroll = () => { document.getElementById("btn-back-to-top").style.display = (window.scrollY > 200) ? "block" : "none"; };
-  document.getElementById("btn-back-to-top").onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
-</script>
-</body>
-</html>
+<section id="memorial" class
