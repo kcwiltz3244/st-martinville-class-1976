@@ -8,11 +8,34 @@
   <style>
     :root { --school-purple:#4b0082; --school-gold:#ffd700; }
     body { background:#f8f9fa; font-family: 'Segoe UI', Arial, sans-serif; }
-    .gallery-header { background: var(--school-purple); color: var(--school-gold); padding: 3rem 1rem; border-bottom: 4px solid var(--school-gold); }
-    .info-box { height: 100%; padding: 1.5rem; background: white; border-radius: 12px; border-top: 5px solid var(--school-purple); box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center; }
+    
+    .gallery-header { background: var(--school-purple); color: var(--school-gold); padding: 2rem 1rem; border-bottom: 4px solid var(--school-gold); }
+    
+    /* Box Styling */
+    .info-box { 
+      padding: 1.2rem; 
+      background: white; 
+      border-radius: 12px; 
+      border-top: 5px solid var(--school-purple); 
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    /* Mobile Adjustments */
+    @media (max-width: 768px) {
+      .display-4 { font-size: 1.8rem; } /* Shrink title on phones */
+      .info-box h2 { font-size: 1.5rem; } /* Shrink numbers on phones */
+      .table { font-size: 0.85rem; } /* Make text smaller to fit more on screen */
+    }
+
     .btn-back { background: var(--school-gold); color: var(--school-purple); font-weight: bold; border-radius: 50px; }
     .table thead { background: var(--school-purple); color: var(--school-gold); border-bottom: 3px solid var(--school-gold); }
-    .table-responsive { border-radius: 12px; overflow: hidden; border: 1px solid #ddd; background: white; }
+    .table-responsive { border-radius: 12px; overflow-x: auto; border: 1px solid #ddd; background: white; }
+    
+    /* Force column widths so they don't squish */
+    th, td { min-width: 100px; }
+    .cat-col { min-width: 120px; }
   </style>
 </head>
 <body>
@@ -20,28 +43,28 @@
 <header class="gallery-header text-center">
   <div class="container">
     <h1 class="display-4 fw-bold">Financial Overview</h1>
-    <p class="lead">Class of 1976 Reunion Budget Tracking</p>
-    <a href="index.html" class="btn px-4 mt-2 btn-back">← Back to Home</a>
+    <p class="lead small">Class of '76 Tracking</p>
+    <a href="index.html" class="btn btn-sm px-4 btn-back">← Back</a>
   </div>
 </header>
 
-<main class="container py-5">
-  <div class="row g-4 mb-5 text-center">
-    <div class="col-md-4">
+<main class="container py-4">
+  <div class="row g-3 mb-4 text-center">
+    <div class="col-12 col-md-4">
       <div class="info-box shadow-sm">
-        <p class="text-muted fw-bold small">TOTAL DUES COLLECTED</p>
+        <p class="text-muted fw-bold small mb-1">COLLECTED</p>
         <h2 class="fw-bold" id="total-collected" style="color: var(--school-purple);">$0</h2>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-12 col-md-4">
       <div class="info-box shadow-sm">
-        <p class="text-muted fw-bold small">TOTAL EXPENSES</p>
+        <p class="text-muted fw-bold small mb-1">EXPENSES</p>
         <h2 class="fw-bold text-danger" id="total-expenses">$0</h2>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-12 col-md-4">
       <div class="info-box shadow-sm" style="border-top: 5px solid var(--school-gold) !important;">
-        <p class="text-muted fw-bold small">AVAILABLE BALANCE</p>
+        <p class="text-muted fw-bold small mb-1">BALANCE</p>
         <h2 class="fw-bold text-success" id="remaining-balance">$0</h2>
       </div>
     </div>
@@ -51,17 +74,17 @@
     <table class="table table-hover align-middle mb-0">
       <thead>
         <tr>
-          <th class="ps-4">CATEGORY</th>
-          <th>DESCRIPTION</th>
-          <th>ESTIMATED</th>
-          <th>ACTUAL PAID</th>
-          <th class="pe-4">STATUS</th>
+          <th class="ps-3 cat-col">CATEGORY</th>
+          <th>EST.</th>
+          <th>PAID</th>
+          <th class="pe-3">STATUS</th>
         </tr>
       </thead>
       <tbody id="budgetTableBody">
         </tbody>
     </table>
   </div>
+  <p class="text-muted small mt-3 text-center">Swipe left/right on the table to see all details.</p>
 </main>
 
 <script>
@@ -72,20 +95,18 @@
     .then(csvText => {
       const rows = csvText.split('\n').map(row => row.split(','));
 
-      // Summary Boxes (Rows 1-3)
+      // Populate Summary
       document.getElementById('total-collected').innerText = "$" + (rows[0][1] || "0").trim();
       document.getElementById('total-expenses').innerText = "$" + (rows[1][1] || "0").trim();
       document.getElementById('remaining-balance').innerText = "$" + (rows[2][1] || "0").trim();
 
       let tableHtml = '';
-      // We skip the header rows and specifically look for rows with content starting at index 7
+      // Start at Row 8 (Index 7)
       for (let i = 7; i < rows.length; i++) { 
         const category = (rows[i][0] || "").trim();
         
-        // This stops the "Duplicate Line" by only allowing actual categories 
-        // and skipping any row that says "Category" again
+        // Anti-duplicate filter
         if (category !== "" && category.toLowerCase() !== "category") {
-          const description = rows[i][1] || "";
           const estimated   = rows[i][2] || "0";
           const actualPaid  = rows[i][3] || "0";
           const statusText  = rows[i][4] || "Pending";
@@ -94,17 +115,16 @@
           
           tableHtml += `
             <tr>
-              <td class="ps-4 fw-bold">${category}</td>
-              <td>${description}</td>
+              <td class="ps-3 fw-bold">${category}</td>
               <td>$${estimated}</td>
               <td>$${actualPaid}</td>
-              <td class="pe-4"><span class="badge ${badgeClass}">${statusText}</span></td>
+              <td class="pe-3"><span class="badge ${badgeClass}">${statusText}</span></td>
             </tr>`;
         }
       }
       document.getElementById('budgetTableBody').innerHTML = tableHtml;
     })
-    .catch(err => console.error("Could not load spreadsheet:", err));
+    .catch(err => console.error("Load error:", err));
 </script>
 
 </body>
