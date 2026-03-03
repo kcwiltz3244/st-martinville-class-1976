@@ -8,47 +8,63 @@
   <style>
     :root { --school-purple:#4b0082; --school-gold:#ffd700; }
     body { background:#f8f9fa; font-family: 'Segoe UI', Arial, sans-serif; }
-    .budget-header { background: var(--school-purple); color: var(--school-gold); padding: 2rem 1rem; border-bottom: 4px solid var(--school-gold); }
+    
+    .budget-header { background: var(--school-purple); color: var(--school-gold); padding: 3rem 1rem; border-bottom: 4px solid var(--school-gold); }
+    
     .card { border: none; border-radius: 15px; }
     .table thead { background: var(--school-purple); color: white; }
-    .status-paid { color: green; font-weight: bold; }
-    .status-pending { color: orange; font-weight: bold; }
+    
+    .status-paid { color: #198754; font-weight: bold; }
+    .status-pending { color: #fd7e14; font-weight: bold; }
+    .status-planned { color: #6c757d; font-style: italic; }
+
     #btn-back { background: var(--school-gold); color: var(--school-purple); font-weight: bold; border-radius: 50px; }
+    .btn-sheet { background: white; color: var(--school-purple); font-weight: bold; border-radius: 50px; border: 2px solid var(--school-gold); }
+    .btn-sheet:hover { background: var(--school-gold); color: var(--school-purple); }
   </style>
 </head>
 <body>
 
 <header class="budget-header text-center">
   <div class="container">
-    <h1 class="fw-bold">Financial Overview</h1>
-    <p class="lead">Tracking our 50th Reunion Expenses</p>
-    <a href="test.html" class="btn px-4 mt-2" id="btn-back">← Back to Main Page</a>
+    <h1 class="display-4 fw-bold">Financial Overview</h1>
+    <p class="lead">Tracking our 50th Reunion Expenses & Dues</p>
+    
+    <div class="d-flex justify-content-center gap-3 mt-3">
+      <a href="test.html" class="btn px-4" id="btn-back">← Back to Main Page</a>
+      <a href="https://docs.google.com/spreadsheets/d/YOUR_LINK_HERE" target="_blank" class="btn px-4 btn-sheet">
+        📊 Open Full Google Sheet
+      </a>
+    </div>
   </div>
 </header>
 
 <main class="container py-5">
-  <div class="row">
+  
+  <div class="row text-center">
     <div class="col-md-4 mb-4">
-      <div class="card shadow-sm p-3 text-center">
-        <h5 class="text-muted">Total Funds Collected</h5>
-        <h2 class="text-success">$5,000.00</h2> </div>
+      <div class="card shadow-sm p-4">
+        <h5 class="text-muted">Total Dues Collected</h5>
+        <h2 class="text-success">$0.00</h2>
+      </div>
     </div>
     <div class="col-md-4 mb-4">
-      <div class="card shadow-sm p-3 text-center">
-        <h5 class="text-muted">Total Expenses</h5>
-        <h2 class="text-danger">$3,200.00</h2> </div>
+      <div class="card shadow-sm p-4">
+        <h5 class="text-muted">Total Expenses Paid</h5>
+        <h2 class="text-danger">$0.00</h2>
+      </div>
     </div>
     <div class="col-md-4 mb-4">
-      <div class="card shadow-sm p-3 text-center">
-        <h5 class="text-muted">Remaining Balance</h5>
-        <h2 style="color: var(--school-purple);">$1,800.00</h2>
+      <div class="card shadow-sm p-4 border-start border-4 border-warning">
+        <h5 class="text-muted">Current Balance</h5>
+        <h2 style="color: var(--school-purple);">$0.00</h2>
       </div>
     </div>
   </div>
 
   <div class="card shadow-sm mt-4">
-    <div class="card-body">
-      <h3 class="mb-4">Expense Details</h3>
+    <div class="card-body p-4">
+      <h3 class="mb-4 fw-bold" style="color: var(--school-purple);">Expense Tracker</h3>
       <div class="table-responsive">
         <table class="table table-hover align-middle">
           <thead>
@@ -63,54 +79,66 @@
           <tbody>
             <tr>
               <td><strong>Catering</strong></td>
-              <td>Dinner and drinks for banquet</td>
-              <td>$2,000.00</td>
-              <td>$500.00 (Deposit)</td>
-              <td class="status-pending">Partially Paid</td>
-            </tr>
-            <tr>
-              <td><strong>T-Shirts</strong></td>
-              <td>Commemorative Class of '76 shirts</td>
-              <td>$800.00</td>
-              <td>$800.00</td>
-              <td class="status-paid">Paid</td>
-            </tr>
-            <tr>
-              <td><strong>Entertainment</strong></td>
-              <td>DJ / Music Services</td>
-              <td>$400.00</td>
+              <td>Banquet Dinner & Drinks</td>
+              <td>$0.00</td>
               <td>$0.00</td>
               <td class="status-pending">Pending</td>
             </tr>
             <tr>
+              <td><strong>T-Shirts</strong></td>
+              <td>Class of '76 Commemorative Shirts</td>
+              <td>$0.00</td>
+              <td>$0.00</td>
+              <td class="status-planned">Planned</td>
+            </tr>
+            <tr>
+              <td><strong>Entertainment</strong></td>
+              <td>DJ / Music / Sound</td>
+              <td>$0.00</td>
+              <td>$0.00</td>
+              <td class="status-planned">Planned</td>
+            </tr>
+            <tr>
               <td><strong>Decorations</strong></td>
-              <td>Balloons, banners, purple & gold decor</td>
+              <td>Purple & Gold banners, balloons</td>
               <td>$---</td>
               <td>$---</td>
-              <td class="text-muted">Planned</td>
+              <td class="status-planned">Planned</td>
             </tr>
             <tr>
-              <td><strong>Venue Rental</strong></td>
-              <td>Hall insurance or cleaning fee</td>
+              <td><strong>Misc. Expenses</strong></td>
+              <td>Postage, Printing, Name tags</td>
               <td>$---</td>
               <td>$---</td>
-              <td class="text-muted">Planned</td>
+              <td class="status-planned">Planned</td>
             </tr>
             <tr>
-              <td><strong>Miscellaneous</strong></td>
-              <td>Postage, printing, name tags</td>
+              <td><strong>Future Slot</strong></td>
+              <td>Reserve for unexpected costs</td>
               <td>$---</td>
               <td>$---</td>
-              <td class="text-muted">Planned</td>
+              <td class="status-planned">Planned</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
   </div>
+
+  <div class="card shadow-sm mt-5 p-3">
+    <div class="card-body">
+      <h3 class="text-center mb-4">Live Spreadsheet View</h3>
+      <div class="ratio ratio-16x9">
+        <p class="text-center text-muted">
+          <em>To show your live spreadsheet here, go to File > Share > Publish to Web > Embed in Google Sheets and paste the code here.</em>
+        </p>
+      </div>
+    </div>
+  </div>
+
 </main>
 
-<footer class="text-center py-4 text-muted">
+<footer class="text-center py-5 text-muted">
   <p>&copy; 2026 SMSH Class of 1976 Reunion Committee</p>
 </footer>
 
