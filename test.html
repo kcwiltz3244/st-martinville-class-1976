@@ -19,7 +19,6 @@
     }
     header::after { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(30,0,60,0.5); z-index:0; }
     header .container { position:relative; z-index:1; }
-    
     header h1, header h2, header h3 { color: var(--school-gold) !important; font-weight: bold; }
 
     .timer-band { background: var(--deep-purple); color: white; padding: 20px 0; text-align: center; border-top: 4px solid var(--school-gold); border-bottom: 4px solid var(--school-gold); }
@@ -27,21 +26,48 @@
     .unit-num { font-size: 2.5rem; display: block; line-height: 1; color: var(--school-gold); }
     .unit-label { font-size: 0.7rem; text-transform: uppercase; }
 
+    /* UNIFORM CARD STYLING */
+    .uniform-section { max-width: 900px; margin: 0 auto; }
+    .uniform-card { 
+      background: white; 
+      border: 2px solid #eee; 
+      border-radius: 15px; 
+      padding: 30px; 
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .uniform-card h2, .uniform-card h3 { color: var(--school-purple); font-weight: bold; margin-bottom: 15px; }
+    
+    .btn-custom { 
+      background: var(--school-purple); 
+      color: var(--school-gold); 
+      border-radius: 50px; 
+      padding: 12px 35px; 
+      font-weight: bold;
+      text-transform: uppercase;
+      border: none;
+      transition: 0.3s;
+    }
+    .btn-custom:hover { background: var(--deep-purple); color: white; transform: scale(1.02); }
+
+    .contact-item { width: 100%; padding: 6px 0; border-bottom: 1px solid #f0f0f0; font-size: 1rem; }
+    .contact-name { font-weight: bold; color: var(--school-purple); }
+    .contact-phone { color: #333; text-decoration: none; }
+
+    /* REUSE ORIGINAL STYLES FOR RSVP/MEMORIAL */
     .rsvp-status-pill { background: var(--deep-purple); color: var(--school-gold); border: 2px solid var(--school-gold); border-radius: 50px; padding: 15px 40px; display: inline-block; margin-bottom: 20px; }
     #yesListContainer { border-radius: 12px; background: white; border: 1px solid #dee2e6; max-height: 280px; overflow-y: auto; }
     .rsvp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
     @media (min-width: 768px) { .rsvp-grid { grid-template-columns: repeat(5, 1fr); } }
     .attendee-name { font-size: 0.82rem; padding: 4px; background: #f8f9fa; border: 1px solid #eee; border-radius: 4px; text-align: center; font-weight: bold; color: var(--deep-purple); }
-
     .reveal-item { opacity: 0; transform: translateY(15px); transition: all 0.6s ease-out; list-style: none; margin-bottom: 5px; }
     .reveal-item.visible { opacity: 1; transform: translateY(0); }
-
     #btn-back-to-top { position: fixed; bottom: 20px; right: 20px; display: none; z-index: 1000; background: var(--school-purple); color: var(--school-gold); border: 2px solid var(--school-gold); width: 45px; height: 45px; border-radius: 50%; }
-
-    /* SIMPLE CONTACT STYLING */
-    .contact-item { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 1.05rem; }
-    .contact-name { font-weight: bold; color: var(--school-purple); }
-    .contact-phone { color: #333; text-decoration: none; margin-left: 5px; }
   </style> 
 </head>
 
@@ -110,56 +136,38 @@
   </div>
 </section>
 
-<section id="meeting-notes" class="py-5 bg-light border-bottom">
-  <div class="container text-center">
-    <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Committee Meeting Notes</h2>
-    <div class="p-5 border border-2 rounded-4 mx-auto bg-white shadow-sm" style="max-width: 700px;">
-      <h3 class="mb-3">📄</h3>
-      <p class="text-muted mb-4">Click the button below to view the detailed notes and archives from our committee planning sessions.</p>
-      <a href="https://docs.google.com/document/d/1IA0RBRPbgjZej4OG0shiXa8227rz6dZ7DadP4rqmiz0/edit?usp=sharing" target="_blank" class="btn btn-lg fw-bold shadow-sm" style="background: var(--school-purple); color: var(--school-gold); border-radius: 50px; padding: 15px 40px;">VIEW MEETING NOTES</a>
+<div class="container py-5 uniform-section">
+  
+  <div id="meeting-notes" class="uniform-card text-center">
+    <h3>Committee Meeting Notes</h3>
+    <p class="text-muted">Detailed archives from our reunion planning sessions.</p>
+    <a href="https://docs.google.com/document/d/1IA0RBRPbgjZej4OG0shiXa8227rz6dZ7DadP4rqmiz0/edit?usp=sharing" target="_blank" class="btn btn-custom shadow-sm">View Meeting Notes</a>
+  </div>
+
+  <div id="zelle" class="uniform-card text-center">
+    <h3>Zelle & Payment Instructions</h3>
+    <p class="text-muted">Official guidance for submitting reunion fees via Zelle.</p>
+    <a href="https://docs.google.com/document/d/1VMvVsC6hjaoq2kErh117EMscRjKYfV3Gc9lzK0wkMiw/edit?usp=sharing" target="_blank" class="btn btn-custom shadow-sm">Payment Instructions</a>
+  </div>
+
+  <div id="music" class="uniform-card text-center">
+    <h3>The Reunion Jukebox</h3>
+    <p class="text-muted">Request your favorite hits from the 70s for our playlist.</p>
+    <div class="d-flex gap-2 flex-wrap justify-content-center">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScy-B16a2pEvsTs6YN3HSfjkIX-AhzMbNexi42yshrfNKk7dQ/viewform" target="_blank" class="btn btn-custom shadow-sm">Request a Song</a>
+      <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSE8lLV2Op7eMchISLz22rowMK7YJF6yy4UwmC0ys7Cok6ZFh8uYw-koCOQoWHOm8MgfPNnQGL74Wki/pubhtml?gid=1803881201&single=true" target="_blank" class="btn btn-custom shadow-sm" style="background: white; border: 2px solid var(--school-purple); color: var(--school-purple);">View Playlist</a>
     </div>
   </div>
-</section>
 
-<section id="zelle" class="py-5 bg-white border-bottom">
-  <div class="container text-center">
-    <div class="p-4 border border-2 rounded-4 mx-auto shadow-sm" style="max-width: 1000px; border-color: var(--school-purple) !important;">
-      <a href="https://docs.google.com/document/d/1VMvVsC6hjaoq2kErh117EMscRjKYfV3Gc9lzK0wkMiw/edit?usp=sharing" target="_blank" class="btn btn-lg fw-bold" style="background: var(--school-purple); color: var(--school-gold); border-radius: 50px; padding: 15px 40px;">Zelle Payment Instructions</a>
-    </div>
+  <div id="photos" class="uniform-card text-center">
+    <h3>Photo Gallery</h3>
+    <p class="text-muted">View memories or email new photos to smshclassof76photos@gmail.com</p>
+    <a href="gallery.html" class="btn btn-custom shadow-sm">Launch Gallery</a>
   </div>
-</section>
 
-<section id="music" class="py-5 bg-light text-center border-bottom">
-  <div class="container">
-    <h3 class="fw-bold" style="color: var(--school-purple);">🎵 THE REUNION JUKEBOX</h3>
-    <p class="text-muted mb-4">Request your favorite hits from the 70s!</p>
-    <div class="d-flex flex-wrap justify-content-center gap-3">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLScy-B16a2pEvsTs6YN3HSfjkIX-AhzMbNexi42yshrfNKk7dQ/viewform" target="_blank" class="btn fw-bold shadow-sm" style="background: var(--school-purple); color: var(--school-gold); border-radius: 30px; padding: 10px 25px;">🎤 Request a Song</a>
-        <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSE8lLV2Op7eMchISLz22rowMK7YJF6yy4UwmC0ys7Cok6ZFh8uYw-koCOQoWHOm8MgfPNnQGL74Wki/pubhtml?gid=1803881201&single=true" target="_blank" class="btn fw-bold shadow-sm" style="border: 2px solid var(--school-purple); color: var(--school-purple); border-radius: 30px; padding: 10px 25px;">📜 View Playlist</a>
-    </div>
-  </div>
-</section>
-
-<section id="photos" class="py-5 bg-white text-center border-bottom">
-  <div class="container">
-    <div class="p-4 border border-2 rounded-4 mx-auto shadow-sm" style="max-width: 1000px; border-color: var(--school-purple) !important;">
-      <h2 class="mb-3 fw-bold" style="color: var(--school-purple);">Photo Gallery</h2>
-      <p class="text-muted mb-4">Click below to view a collection of memories.</p>
-      <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3">
-        <a href="gallery.html" class="btn btn-lg fw-bold" style="background: var(--school-purple); color: var(--school-gold); border-radius: 50px; padding: 12px 40px;">VIEW PHOTOS</a>
-        <div class="text-md-start">
-          <p class="mb-0 small fw-bold">Email photos to:</p>
-          <a href="mailto:smshclassof76photos@gmail.com" class="small" style="color: var(--school-purple); text-decoration: underline;">smshclassof76photos@gmail.com</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="contacts" class="py-5 bg-light border-bottom">
-  <div class="container text-center">
-    <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Reunion Contact List</h2>
-    <div class="mx-auto bg-white p-4 shadow-sm rounded-4 text-start" style="max-width: 500px; border: 1px solid #ddd;">
+  <div id="contacts" class="uniform-card">
+    <h3>Reunion Contact List</h3>
+    <div class="w-100 px-md-5">
       <div class="contact-item"><span class="contact-name">Shantley Guidry:</span> <a href="tel:3122135031" class="contact-phone">312-213-5031</a></div>
       <div class="contact-item"><span class="contact-name">Lolly Jones-Alexander:</span> <a href="tel:3373562326" class="contact-phone">337-356-2326</a></div>
       <div class="contact-item"><span class="contact-name">Sadie Fontenette-Mason:</span> <a href="tel:3372989235" class="contact-phone">337-298-9235</a></div>
@@ -170,8 +178,8 @@
       <div class="contact-item"><span class="contact-name">Kevin Wiltz:</span> <a href="tel:4052347386" class="contact-phone">405-234-7386</a></div>
     </div>
   </div>
-</section>
 
+</div>
 <section id="memorial" class="py-5 bg-white">
   <div class="container">
     <div class="row align-items-center g-4">
@@ -195,7 +203,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  // 1. TIMER SCRIPT
   function updateTimer() {
     const targetDate = new Date("June 26, 2026 18:00:00").getTime();
     const now = new Date().getTime();
@@ -208,7 +215,6 @@
   }
   setInterval(updateTimer, 1000); updateTimer();
 
-  // 2. RSVP LOADER
   const API_URL = 'https://script.google.com/macros/s/AKfycbxoIJZz2RDDkaW9V4K_Vz8w9GT2Gfaj_RZYWY84FyJfJ6elgq2IeNHkOE0jz3x4g5y6hw/exec';
   async function loadData() {
     try {
@@ -220,9 +226,7 @@
   }
   loadData();
 
-  // 3. MEMORIAL LIST
   const memorialNames = ["Annette Pierre", "B. McGraw Charles", "Brenda Sias", "Chris Faulk", "Chris Robertson", "Debra Batiste", "Edward Raymond", "Ernest Joseph", "Evelyn Drake", "Fredrick Skipper", "Gary Charles", "Gary Guidry", "Glenn Perrodin", "Horace Cole", "Jody Anthony", "Jules Charles", "Kenneth Lastrappe", "Larry Broussard", "Lee Williams", "Linda Batiste", "Linda Bonhomme", "Linda George", "Lois Gulliam", "Manuel Mallery", "Mark Mitchell", "Mary Alice Sam", "Mary Joyce Leon", "Nolan Charles Jr.", "Perry Pierre", "Phyllis Williams", "Ray Marshall", "Richard Marshall", "Rickey Batiste", "Roland Allen", "Samuel Savoy", "Sherman Hypolite", "Stella Orphe", "Terry Benjamin", "Tyrone Bowles", "Vernon Abbott", "Walter Lanky Stewart", "Wanda James Minor"].sort(); 
-
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, index) => {
       if (entry.isIntersecting) {
