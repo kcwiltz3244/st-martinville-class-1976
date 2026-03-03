@@ -37,11 +37,10 @@
 
     #btn-back-to-top { position: fixed; bottom: 20px; right: 20px; display: none; z-index: 1000; background: var(--school-purple); color: var(--school-gold); border: 2px solid var(--school-gold); width: 45px; height: 45px; border-radius: 50%; }
 
-    /* Contact List specific styles */
-    .contact-card { background: white; border-radius: 10px; border-left: 5px solid var(--school-gold); transition: transform 0.2s; }
+    /* Contact List styling */
+    .contact-card { background: white; border-radius: 10px; border-left: 5px solid var(--school-gold); transition: transform 0.2s; height: 100%; }
     .contact-card:hover { transform: translateY(-3px); }
     .phone-link { color: var(--school-purple); text-decoration: none; font-weight: bold; }
-    .phone-link:hover { text-decoration: underline; }
   </style> 
 </head>
 
@@ -77,7 +76,7 @@
 
 <section class="timer-band">
   <div class="container">
-    <div class="countdown-flex">
+    <div class="countdown-flex" id="timer">
       <div><span class="unit-num" id="days">00</span><span class="unit-label">Days</span></div>
       <div><span class="unit-num" id="hours">00</span><span class="unit-label">Hrs</span></div>
       <div><span class="unit-num" id="mins">00</span><span class="unit-label">Min</span></div>
@@ -86,7 +85,22 @@
   </div>
 </section>
 
-<section id="contacts" class="py-5 bg-light border-bottom">
+<section id="rsvp" class="py-5 bg-light border-bottom">
+  <div class="container text-center">
+    <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Who's Coming?</h2>
+    <div class="rsvp-status-pill shadow">
+      <h4 class="mb-0 fw-bold"><span id="finalTotal">...</span> Classmates & Guests Confirmed!</h4>
+    </div>
+    <div class="mb-4 text-center">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdNH2rLwb6w9zvIE113HT4Ru0yNCUORL29ijm2Jg4Ws2Bu8sA/viewform" target="_blank" class="btn btn-lg fw-bold shadow" style="background: var(--school-purple); color: var(--school-gold); border-radius: 50px; padding: 12px 40px;">📝 RSVP HERE</a>
+    </div>
+    <div id="yesListContainer" class="p-3 shadow-sm mx-auto" style="max-width: 1000px;">
+        <div class="rsvp-grid" id="attendeeGrid"></div>
+    </div>
+  </div>
+</section>
+
+<section id="contacts" class="py-5 bg-white border-bottom">
   <div class="container text-center">
     <h2 class="mb-2 fw-bold" style="color: var(--school-purple);">Reunion Contact List</h2>
     <p class="text-muted mb-5">Planning Committee & Key Contacts</p>
@@ -94,4 +108,150 @@
     <div class="row g-3 justify-content-center text-start">
       <div class="col-md-6 col-lg-4">
         <div class="contact-card p-3 shadow-sm border">
-          <p class="mb
+          <p class="mb-0 fw-bold text-dark">Shantley Guidry</p>
+          <a href="tel:3122135031" class="phone-link">312-213-5031</a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="contact-card p-3 shadow-sm border">
+          <p class="mb-0 fw-bold text-dark">Lolly Jones-Alexander</p>
+          <a href="tel:3373562326" class="phone-link">337-356-2326</a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="contact-card p-3 shadow-sm border">
+          <p class="mb-0 fw-bold text-dark">Sadie Fontenette-Mason</p>
+          <a href="tel:3372989235" class="phone-link">337-298-9235</a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="contact-card p-3 shadow-sm border">
+          <p class="mb-0 fw-bold text-dark">Sandra Lasseigne-Knatt</p>
+          <a href="tel:3372889535" class="phone-link">337-288-9535</a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="contact-card p-3 shadow-sm border">
+          <p class="mb-0 fw-bold text-dark">Glenn R. Etienne</p>
+          <a href="tel:7138183024" class="phone-link">713-818-3024</a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="contact-card p-3 shadow-sm border">
+          <p class="mb-0 fw-bold text-dark">Raymond Mallery</p>
+          <a href="tel:3375019746" class="phone-link">337-501-9746</a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="contact-card p-3 shadow-sm border">
+          <p class="mb-0 fw-bold text-dark">David James</p>
+          <a href="tel:3124019021" class="phone-link">312-401-9021</a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="contact-card p-3 shadow-sm border">
+          <p class="mb-0 fw-bold text-dark">Kevin Wiltz</p>
+          <a href="tel:4052347386" class="phone-link">405-234-7386</a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="contact-card p-3 shadow-sm border" style="border-left-color: var(--school-purple);">
+          <p class="mb-0 fw-bold text-dark">ADD NAME HERE</p>
+          <a href="tel:0000000000" class="phone-link">000-000-0000</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="calendar" class="py-5 bg-light border-bottom">
+  <div class="container text-center">
+    <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Meetings & Events</h2>
+    <div class="p-4 mb-4 border border-2 rounded-4 mx-auto bg-white shadow-sm" style="max-width: 700px;">
+      <p class="text-muted mb-4">Click the button below to view committee planning notes.</p>
+      <a href="https://docs.google.com/document/d/1IA0RBRPbgjZej4OG0shiXa8227rz6dZ7DadP4rqmiz0/edit?usp=sharing" target="_blank" class="btn btn-lg fw-bold shadow-sm" style="background: var(--school-purple); color: var(--school-gold); border-radius: 50px; padding: 15px 40px;">VIEW MEETING NOTES</a>
+    </div>
+    <div class="ratio ratio-16x9 shadow-sm rounded mx-auto" style="max-width: 1000px; min-height: 500px; border: 2px solid #eee;">
+      <iframe src="https://calendar.google.com/calendar/embed?src=fbcf3427770ee3c74ba269d485ba49d39d6ea67f45be295d849f038ba7c79497%40group.calendar.google.com&ctz=America%2FChicago" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+    </div>
+  </div>
+</section>
+
+<section id="memorial" class="py-5 bg-white">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-5 text-center">
+        <img src="empty chair.png" alt="In Loving Memory" class="img-fluid rounded-3 mb-3" style="max-height: 250px;">
+        <h2 class="fw-bold" style="color: #4a148c;">IN LOVING MEMORY</h2>
+        <p style="font-family: 'Brush Script MT', cursive; font-size: 1.8rem; color: #6a1b9a;">"We haven't forgotten about you."</p>
+      </div>
+      <div class="col-lg-7">
+        <div class="row memorial-list" id="memorialGrid"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="py-4 text-center" style="background: #1e003c; color: var(--school-gold);">
+  <p class="mb-0 fw-bold">&copy; 2026 SMSH – Class of 1976</p>
+</footer>
+
+<button type="button" id="btn-back-to-top">↑</button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // 1. TIMER SCRIPT
+  function updateTimer() {
+    const targetDate = new Date("June 26, 2026 18:00:00").getTime();
+    const now = new Date().getTime();
+    const diff = targetDate - now;
+    if (diff <= 0) return;
+    document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+    document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    document.getElementById("mins").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    document.getElementById("secs").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+  }
+  setInterval(updateTimer, 1000); updateTimer();
+
+  // 2. RSVP DATA SCRIPT
+  const API_URL = 'https://script.google.com/macros/s/AKfycbxoIJZz2RDDkaW9V4K_Vz8w9GT2Gfaj_RZYWY84FyJfJ6elgq2IeNHkOE0jz3x4g5y6hw/exec';
+  async function loadData() {
+    try {
+      const res = await fetch(API_URL);
+      const data = await res.json();
+      document.getElementById('finalTotal').textContent = data.total || "0";
+      document.getElementById('attendeeGrid').innerHTML = data.attendees.map(a => `<div class="attendee-name">${a.name}</div>`).join('');
+    } catch (e) { document.getElementById('finalTotal').textContent = "0"; }
+  }
+  loadData();
+
+  // 3. MEMORIAL SCRIPT
+  const memorialNames = ["Annette Pierre", "B. McGraw Charles", "Brenda Sias", "Chris Faulk", "Chris Robertson", "Debra Batiste", "Edward Raymond", "Ernest Joseph", "Evelyn Drake", "Fredrick Skipper", "Gary Charles", "Gary Guidry", "Glenn Perrodin", "Horace Cole", "Jody Anthony", "Jules Charles", "Kenneth Lastrappe", "Larry Broussard", "Lee Williams", "Linda Batiste", "Linda Bonhomme", "Linda George", "Lois Gulliam", "Manuel Mallery", "Mark Mitchell", "Mary Alice Sam", "Mary Joyce Leon", "Nolan Charles Jr.", "Perry Pierre", "Phyllis Williams", "Ray Marshall", "Richard Marshall", "Rickey Batiste", "Roland Allen", "Samuel Savoy", "Sherman Hypolite", "Stella Orphe", "Terry Benjamin", "Tyrone Bowles", "Vernon Abbott", "Walter Lanky Stewart", "Wanda James Minor"].sort(); 
+
+  function renderMemorial() {
+    const grid = document.getElementById('memorialGrid');
+    if(!grid) return;
+    grid.innerHTML = ''; 
+    const isMobile = window.innerWidth < 768;
+    const numCols = isMobile ? 2 : 3;
+    const itemsPerCol = Math.ceil(memorialNames.length / numCols);
+
+    for (let i = 0; i < numCols; i++) {
+        let colDiv = document.createElement('div');
+        colDiv.className = isMobile ? "col-6" : "col-4";
+        let ul = document.createElement('ul');
+        ul.className = "list-unstyled memorial-list";
+        memorialNames.slice(i * itemsPerCol, (i + 1) * itemsPerCol).forEach(name => {
+            ul.innerHTML += `<li class="reveal-item mb-2" style="color: var(--school-purple); font-size: 0.85rem; white-space: nowrap;">🕊️ ${name}</li>`;
+        });
+        colDiv.appendChild(ul);
+        grid.appendChild(colDiv);
+    }
+  }
+  renderMemorial();
+
+  window.onscroll = () => { document.getElementById("btn-back-to-top").style.display = (window.scrollY > 200) ? "block" : "none"; };
+  document.getElementById("btn-back-to-top").onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
+</script>
+</body>
+</html>
