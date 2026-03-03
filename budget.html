@@ -8,32 +8,133 @@
   <style>
     :root { --school-purple:#4b0082; --school-gold:#ffd700; }
     body { background:#f8f9fa; font-family: 'Segoe UI', Arial, sans-serif; }
-    .budget-header { background: var(--school-purple); color: var(--school-gold); padding: 2rem 1rem; border-bottom: 4px solid var(--school-gold); }
-    #btn-back { background: var(--school-gold); color: var(--school-purple); font-weight: bold; border-radius: 50px; }
-    .sheet-container { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    
+    /* Header styling from your photo */
+    .budget-header { background: var(--school-purple); color: var(--school-gold); padding: 3rem 1rem; border-bottom: 4px solid var(--school-gold); }
+    
+    /* Summary Card Styling */
+    .summary-card { border: none; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center; padding: 1.5rem; background: white; }
+    .summary-card h5 { color: #6c757d; font-size: 1rem; margin-bottom: 0.5rem; }
+    .summary-card h2 { font-weight: bold; margin-bottom: 0; }
+    
+    /* Button Styling */
+    #btn-back { background: var(--school-gold); color: var(--school-purple); font-weight: bold; border-radius: 50px; padding: 0.5rem 2rem; }
+    
+    /* Table Styling */
+    .table-container { background: white; border-radius: 15px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-top: 2rem; }
+    .table thead th { border-top: none; color: #333; font-weight: 700; }
+    .status-text { font-weight: bold; }
   </style>
 </head>
 <body>
 
 <header class="budget-header text-center">
   <div class="container">
-    <h1 class="fw-bold">Financial Overview</h1>
-    <p class="lead">Live tracking for our 50th Reunion Budget</p>
-    <a href="test.html" class="btn px-4 mt-2" id="btn-back">← Back to Main Page</a>
+    <h1 class="display-5 fw-bold">Financial Overview</h1>
+    <p class="lead">Tracking our 50th Reunion Expenses</p>
+    <a href="test.html" class="btn mt-2" id="btn-back">← Back to Main Page</a>
   </div>
 </header>
 
 <main class="container py-5">
-  <div class="sheet-container">
-    <div class="ratio ratio-16x9" style="min-height: 800px;">
-      <iframe src="https://docs.google.com/spreadsheets/d/1Y0le9ZwhUSRqcxjXqIE7RxMxHNBRpmf6nd9DA2DAoAA/edit?usp=sharing"></iframe>
+  
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="summary-card">
+        <h5>Total Funds Collected</h5>
+        <h2 id="total-funds" class="text-success">$0.00</h2>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="summary-card">
+        <h5>Total Expenses</h5>
+        <h2 id="total-expenses" class="text-danger">$0.00</h2>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="summary-card">
+        <h5>Remaining Balance</h5>
+        <h2 id="balance" style="color: var(--school-purple);">$0.00</h2>
+      </div>
     </div>
   </div>
+
+  <div class="table-container">
+    <h3 class="mb-4 fw-bold">Expense Details</h3>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Estimated Cost</th>
+            <th>Actual Paid</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="expense-body">
+          <tr><td colspan="5" class="text-center text-muted">Loading budget data...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
 </main>
 
-<footer class="text-center py-4 text-muted">
+<footer class="text-center py-5 text-muted">
   <p>&copy; 2026 SMSH Class of 1976 Reunion Committee</p>
 </footer>
+
+<script>
+  // Your Live CSV Link
+  const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRtTwQGFMfz_ZLxnoD_U7crGvvjxMkRMsolyXCC3t3OL_dPtno6dxKhhn8Gr6LZPXT8X61QC_ZOP5It/pub?output=csv';
+
+  async function loadBudget() {
+    try {
+      const response = await fetch(sheetUrl);
+      const csvText = await response.text();
+      
+      // Parse CSV rows
+      const rows = csvText.split('\n').map(row => row.split(','));
+
+      // 1. Update the Summary Boxes (B1, B2, B3)
+      // We assume your sheet has 'Total Funds Collected' in A1 and value in B1
+      document.getElementById('total-funds').innerText = rows[0][1] || '$0.00';
+      document.getElementById('total-expenses').innerText = rows[1][1] || '$0.00';
+      document.getElementById('balance').innerText = rows[2][1] || '$0.00';
+
+      // 2. Build the Expense Table (Starting from Row 8)
+      let tableHtml = '';
+      // We start at index 7 (Row 8)
+      for (let i = 7; i < rows.length; i++) {
+        const category = rows[i][0];
+        const description = rows[i][1];
+        const status = rows[i][2];
+        const estimated = rows[i][3];
+        const actual = rows[i][4];
+
+        if (category && category.trim() !== "") {
+          tableHtml += `
+            <tr>
+              <td><strong>${category}</strong></td>
+              <td>${description || ''}</td>
+              <td>${estimated || '$0.00'}</td>
+              <td>${actual || '$0.00'}</td>
+              <td class="status-text">${status || 'Planned'}</td>
+            </tr>`;
+        }
+      }
+      document.getElementById('expense-body').innerHTML = tableHtml;
+      
+    } catch (error) {
+      console.error("Error loading CSV:", error);
+      document.getElementById('expense-body').innerHTML = '<tr><td colspan="5" class="text-center text-danger">Error loading data. Check spreadsheet sharing settings.</td></tr>';
+    }
+  }
+
+  // Run the function when the page loads
+  loadBudget();
+</script>
 
 </body>
 </html>
