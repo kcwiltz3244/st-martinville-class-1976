@@ -35,7 +35,7 @@
     </div>
     <div class="col-md-4">
       <div class="info-box shadow-sm">
-        <p class="text-muted fw-bold small">TOTAL EXPEMSES</p>
+        <p class="text-muted fw-bold small">TOTAL EXPENSES</p>
         <h2 class="fw-bold text-danger" id="total-expenses">$0</h2>
       </div>
     </div>
@@ -65,30 +65,30 @@
 </main>
 
 <script>
-  // STEP 1: Paste your "Publish to Web" CSV link here
   const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRtTwQGFMfz_ZLxnoD_U7crGvvjxMkRMsolyXCC3t3OL_dPtno6dxKhhn8Gr6LZPXT8X61QC_ZOP5It/pub?gid=0&single=true&output=csv';
 
   fetch(csvUrl)
     .then(res => res.text())
     .then(csvText => {
-      // Split the CSV into rows
       const rows = csvText.split('\n').map(row => row.split(','));
 
-      // STEP 2: Fill the top boxes (Rows 1, 2, 3)
-      // These pull from Column B (Index 1)
+      // Summary Boxes (Rows 1-3)
       document.getElementById('total-collected').innerText = "$" + (rows[0][1] || "0").trim();
       document.getElementById('total-expenses').innerText = "$" + (rows[1][1] || "0").trim();
       document.getElementById('remaining-balance').innerText = "$" + (rows[2][1] || "0").trim();
 
-      // STEP 3: Fill the table (Rows 8 to 12)
       let tableHtml = '';
-      for (let i = 7; i <= 11; i++) { 
-        if (rows[i] && rows[i][0] && rows[i][0].trim() !== "") {
-          const category    = rows[i][0]; // Column A
-          const description = rows[i][1]; // Column B
-          const estimated   = rows[i][2]; // Column C
-          const actualPaid  = rows[i][3]; // Column D
-          const statusText  = rows[i][4]; // Column E (Only takes the first status column)
+      // We skip the header rows and specifically look for rows with content starting at index 7
+      for (let i = 7; i < rows.length; i++) { 
+        const category = (rows[i][0] || "").trim();
+        
+        // This stops the "Duplicate Line" by only allowing actual categories 
+        // and skipping any row that says "Category" again
+        if (category !== "" && category.toLowerCase() !== "category") {
+          const description = rows[i][1] || "";
+          const estimated   = rows[i][2] || "0";
+          const actualPaid  = rows[i][3] || "0";
+          const statusText  = rows[i][4] || "Pending";
           
           const badgeClass = statusText.toLowerCase().includes('paid') ? 'bg-success' : 'bg-warning text-dark';
           
