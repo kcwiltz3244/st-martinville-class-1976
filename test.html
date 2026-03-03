@@ -1,111 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reunion Budget - SMSH Class of '76</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Class of 1976 - 50th Reunion</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    :root { --school-purple:#4b0082; --school-gold:#ffd700; }
-    body { background:#f8f9fa; font-family: 'Segoe UI', Arial, sans-serif; }
-    .gallery-header { background: var(--school-purple); color: var(--school-gold); padding: 3rem 1rem; border-bottom: 4px solid var(--school-gold); }
-    .info-box { height: 100%; padding: 1.5rem; background: white; border-radius: 12px; border-top: 5px solid var(--school-purple); box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center; }
-    .btn-back { background: var(--school-gold); color: var(--school-purple); font-weight: bold; border-radius: 50px; }
-    .table thead { background: var(--school-purple); color: var(--school-gold); border-bottom: 3px solid var(--school-gold); }
-    .table-responsive { border-radius: 12px; overflow: hidden; border: 1px solid #ddd; background: white; }
-  </style>
-</head>
-<body>
 
-<header class="gallery-header text-center">
+  <style>
+    :root { --school-purple:#4b0082; --school-gold:#ffd700; --deep-purple: #2a004a; }
+    body { background:#fafafa; color:#333; font-family: 'Segoe UI', Arial, sans-serif; overflow-x: hidden; }
+    
+    .navbar { background-color:var(--school-purple); border-bottom: 2px solid var(--school-gold); }
+    .navbar a.nav-link { color:white !important; font-weight:bold; text-transform: uppercase; font-size: 0.8rem; }
+    
+    header {
+      position:relative; background:url("tiger.png") center/cover no-repeat;
+      text-align:center; padding:5rem 1rem;
+    }
+    header::after { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(30,0,60,0.5); z-index:0; }
+    header .container { position:relative; z-index:1; }
+    header h1, header h2, header h3 { color: var(--school-gold) !important; font-weight: bold; }
+
+    .timer-band { background: var(--deep-purple); color: white; padding: 20px 0; text-align: center; border-top: 4px solid var(--school-gold); border-bottom: 4px solid var(--school-gold); }
+    .countdown-flex { display: flex; justify-content: center; gap: 25px; font-weight: bold; }
+    .unit-num { font-size: 2.5rem; display: block; line-height: 1; color: var(--school-gold); }
+    .unit-label { font-size: 0.7rem; text-transform: uppercase; }
+
+    .rsvp-status-pill { background: var(--deep-purple); color: var(--school-gold); border: 2px solid var(--school-gold); border-radius: 50px; padding: 15px 40px; display: inline-block; margin-bottom: 20px; }
+    #yesListContainer { border-radius: 12px; background: white; border: 1px solid #dee2e6; max-height: 280px; overflow-y: auto; }
+    .rsvp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+    @media (min-width: 768px) { .rsvp-grid { grid-template-columns: repeat(5, 1fr); } }
+    .attendee-name { font-size: 0.82rem; padding: 4px; background: #f8f9fa; border: 1px solid #eee; border-radius: 4px; text-align: center; font-weight: bold; color: var(--deep-purple); }
+
+    .reveal-item { opacity: 0; transform: translateY(15px); transition: all 0.6s ease-out; list-style: none; margin-bottom: 5px; }
+    .reveal-item.visible { opacity: 1; transform: translateY(0); }
+
+    #btn-back-to-top { position: fixed; bottom: 20px; right: 20px; display: none; z-index: 1000; background: var(--school-purple); color: var(--school-gold); border: 2px solid var(--school-gold); width: 45px; height: 45px; border-radius: 50%; }
+
+    /* Contact List specific styles */
+    .contact-card { background: white; border-radius: 10px; border-left: 5px solid var(--school-gold); transition: transform 0.2s; }
+    .contact-card:hover { transform: translateY(-3px); }
+    .phone-link { color: var(--school-purple); text-decoration: none; font-weight: bold; }
+    .phone-link:hover { text-decoration: underline; }
+  </style> 
+</head>
+
+<body id="top">
+
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
   <div class="container">
-    <h1 class="display-4 fw-bold">Financial Overview</h1>
-    <p class="lead">Class of 1976 Reunion Budget Tracking</p>
-    <a href="index.html" class="btn px-4 mt-2 btn-back">← Back to Home</a>
+    <a class="navbar-brand" href="#" style="color: var(--school-gold) !important;">SMSH '76</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link px-2" href="#rsvp">Who's Coming</a></li>
+        <li class="nav-item"><a class="nav-link px-2" href="#calendar">Meetings</a></li>
+        <li class="nav-item"><a class="nav-link px-2" href="#zelle">Payments</a></li>
+        <li class="nav-item"><a class="nav-link px-2" href="#music">Music</a></li>
+        <li class="nav-item"><a class="nav-link px-2" href="#photos">Photos</a></li>
+        <li class="nav-item"><a class="nav-link px-2" href="#contacts">Contacts</a></li>
+        <li class="nav-item"><a class="nav-link px-2" href="#memorial">Memorial</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="container text-center">
+    <h1 class="display-4">ST. MARTINVILLE SENIOR HIGH</h1>
+    <h2 class="shadow-sm">Class of 1976 — 50th Reunion</h2>
+    <h3 class="mt-2" style="letter-spacing: 2px;">June 26-27, 2026</h3>
   </div>
 </header>
 
-<main class="container py-5">
-  <div class="row g-4 mb-5 text-center">
-    <div class="col-md-4">
-      <div class="info-box shadow-sm">
-        <p class="text-muted fw-bold small">TOTAL DUES COLLECTED</p>
-        <h2 class="fw-bold" id="total-collected" style="color: var(--school-purple);">$0</h2>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="info-box shadow-sm">
-        <p class="text-muted fw-bold small">TOTAL EXPENSES</p>
-        <h2 class="fw-bold text-danger" id="total-expenses">$0</h2>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="info-box shadow-sm" style="border-top: 5px solid var(--school-gold) !important;">
-        <p class="text-muted fw-bold small">AVAILABLE BALANCE</p>
-        <h2 class="fw-bold text-success" id="remaining-balance">$0</h2>
-      </div>
+<section class="timer-band">
+  <div class="container">
+    <div class="countdown-flex">
+      <div><span class="unit-num" id="days">00</span><span class="unit-label">Days</span></div>
+      <div><span class="unit-num" id="hours">00</span><span class="unit-label">Hrs</span></div>
+      <div><span class="unit-num" id="mins">00</span><span class="unit-label">Min</span></div>
+      <div><span class="unit-num" id="secs">00</span><span class="unit-label">Sec</span></div>
     </div>
   </div>
+</section>
 
-  <div class="table-responsive shadow-sm">
-    <table class="table table-hover align-middle mb-0">
-      <thead>
-        <tr>
-          <th class="ps-4">CATEGORY</th>
-          <th>DESCRIPTION</th>
-          <th>ESTIMATED</th>
-          <th>ACTUAL PAID</th>
-          <th class="pe-4">STATUS</th>
-        </tr>
-      </thead>
-      <tbody id="budgetTableBody">
-        </tbody>
-    </table>
-  </div>
-</main>
-
-<script>
-  const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRtTwQGFMfz_ZLxnoD_U7crGvvjxMkRMsolyXCC3t3OL_dPtno6dxKhhn8Gr6LZPXT8X61QC_ZOP5It/pub?gid=0&single=true&output=csv';
-
-  fetch(csvUrl)
-    .then(res => res.text())
-    .then(csvText => {
-      const rows = csvText.split('\n').map(row => row.split(','));
-
-      // Summary Boxes (Rows 1-3)
-      document.getElementById('total-collected').innerText = "$" + (rows[0][1] || "0").trim();
-      document.getElementById('total-expenses').innerText = "$" + (rows[1][1] || "0").trim();
-      document.getElementById('remaining-balance').innerText = "$" + (rows[2][1] || "0").trim();
-
-      let tableHtml = '';
-      // We skip the header rows and specifically look for rows with content starting at index 7
-      for (let i = 7; i < rows.length; i++) { 
-        const category = (rows[i][0] || "").trim();
-        
-        // This stops the "Duplicate Line" by only allowing actual categories 
-        // and skipping any row that says "Category" again
-        if (category !== "" && category.toLowerCase() !== "category") {
-          const description = rows[i][1] || "";
-          const estimated   = rows[i][2] || "0";
-          const actualPaid  = rows[i][3] || "0";
-          const statusText  = rows[i][4] || "Pending";
-          
-          const badgeClass = statusText.toLowerCase().includes('paid') ? 'bg-success' : 'bg-warning text-dark';
-          
-          tableHtml += `
-            <tr>
-              <td class="ps-4 fw-bold">${category}</td>
-              <td>${description}</td>
-              <td>$${estimated}</td>
-              <td>$${actualPaid}</td>
-              <td class="pe-4"><span class="badge ${badgeClass}">${statusText}</span></td>
-            </tr>`;
-        }
-      }
-      document.getElementById('budgetTableBody').innerHTML = tableHtml;
-    })
-    .catch(err => console.error("Could not load spreadsheet:", err));
-</script>
-
-</body>
-</html>
+<section id="contacts" class="py-5 bg-light border-bottom">
+  <div class="container text-center">
+    <h2 class="mb-2 fw-bold" style="color: var(--school-purple);">Reunion Contact List</h2>
+    <p class="text-muted mb-5">Planning Committee & Key Contacts</p>
+    
+    <div class="row g-3 justify-content-center text-start">
+      <div class="col-md-6 col-lg-4">
+        <div class="contact-card p-3 shadow-sm border">
+          <p class="mb
