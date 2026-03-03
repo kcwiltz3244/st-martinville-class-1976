@@ -75,24 +75,29 @@
       const rows = csvText.split('\n').map(row => row.split(','));
 
       // STEP 2: Fill the top boxes (Rows 1, 2, 3)
-      // row[0][1] is Cell B1, row[1][1] is Cell B2, etc.
-      document.getElementById('total-collected').innerText = "$" + rows[0][1];
-      document.getElementById('total-expenses').innerText = "$" + rows[1][1];
-      document.getElementById('remaining-balance').innerText = "$" + rows[2][1];
+      // These pull from Column B (Index 1)
+      document.getElementById('total-collected').innerText = "$" + (rows[0][1] || "0").trim();
+      document.getElementById('total-expenses').innerText = "$" + (rows[1][1] || "0").trim();
+      document.getElementById('remaining-balance').innerText = "$" + (rows[2][1] || "0").trim();
 
       // STEP 3: Fill the table (Rows 8 to 12)
       let tableHtml = '';
       for (let i = 7; i <= 11; i++) { 
-        if (rows[i] && rows[i][0]) {
-          const statusText = rows[i][4] || "Pending";
+        if (rows[i] && rows[i][0] && rows[i][0].trim() !== "") {
+          const category    = rows[i][0]; // Column A
+          const description = rows[i][1]; // Column B
+          const estimated   = rows[i][2]; // Column C
+          const actualPaid  = rows[i][3]; // Column D
+          const statusText  = rows[i][4]; // Column E (Only takes the first status column)
+          
           const badgeClass = statusText.toLowerCase().includes('paid') ? 'bg-success' : 'bg-warning text-dark';
           
           tableHtml += `
             <tr>
-              <td class="ps-4 fw-bold">${rows[i][0]}</td>
-              <td>${rows[i][1]}</td>
-              <td>$${rows[i][2]}</td>
-              <td>$${rows[i][3]}</td>
+              <td class="ps-4 fw-bold">${category}</td>
+              <td>${description}</td>
+              <td>$${estimated}</td>
+              <td>$${actualPaid}</td>
               <td class="pe-4"><span class="badge ${badgeClass}">${statusText}</span></td>
             </tr>`;
         }
