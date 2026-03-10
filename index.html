@@ -10,8 +10,18 @@
     :root { --school-purple:#4b0082; --school-gold:#ffd700; --deep-purple: #2a004a; }
     body { background:#fafafa; color:#333; font-family: 'Segoe UI', Arial, sans-serif; overflow-x: hidden; }
     
-    .navbar { background-color:var(--school-purple); border-bottom: 2px solid var(--school-gold); }
-    .navbar a.nav-link { color:white !important; font-weight:bold; text-transform: uppercase; font-size: 0.8rem; }
+    /* Fixed Navigation Styling */
+    .navbar { background-color:var(--school-purple); border-bottom: 2px solid var(--school-gold); padding: 0.8rem 0; }
+    .navbar-brand { font-weight: 900; letter-spacing: 1px; }
+    .navbar a.nav-link { 
+      color: white !important; 
+      font-weight: bold; 
+      text-transform: uppercase; 
+      font-size: 0.85rem; 
+      padding: 0.5rem 1rem !important;
+      transition: 0.3s;
+    }
+    .navbar a.nav-link:hover { color: var(--school-gold) !important; }
     
     header {
       position:relative; background:url("tiger.png") center/cover no-repeat;
@@ -26,7 +36,6 @@
     .unit-num { font-size: 2.5rem; display: block; line-height: 1; color: var(--school-gold); }
     .unit-label { font-size: 0.7rem; text-transform: uppercase; }
 
-    /* UNIFORM CARD STYLING */
     .uniform-section { max-width: 900px; margin: 0 auto; }
     .uniform-card { 
       background: white; 
@@ -58,7 +67,6 @@
     .contact-item { width: 100%; padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 1rem; color: #333; }
     .contact-phone { color: var(--school-purple); text-decoration: none; }
 
-    /* RSVP & MEMORIAL STYLES */
     .rsvp-status-pill { background: var(--deep-purple); color: var(--school-gold); border: 2px solid var(--school-gold); border-radius: 50px; padding: 15px 40px; display: inline-block; margin-bottom: 20px; }
     #yesListContainer { border-radius: 12px; background: white; border: 1px solid #dee2e6; max-height: 280px; overflow-y: auto; }
     .rsvp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
@@ -74,21 +82,20 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
   <div class="container">
-    <a class="navbar-brand" href="#" style="color: var(--school-gold) !important;">SMSH '76</a>
+    <a class="navbar-brand" href="#top" style="color: var(--school-gold) !important;">SMSH '76</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link px-2" href="#rsvp">Who's Coming</a></li>
-        <li class="nav-item"><a class="nav-link px-2" href="#calendar">Meetings</a></li>
-        <!-- BUDGET NAV LINK -->
-        <li class="nav-item"><a class="nav-link px-2" href="#budget">Budget</a></li>
-        <li class="nav-item"><a class="nav-link px-2" href="#zelle">Payments</a></li>
-        <li class="nav-item"><a class="nav-link px-2" href="#music">Music</a></li>
-        <li class="nav-item"><a class="nav-link px-2" href="#photos">Photos</a></li>
-        <li class="nav-item"><a class="nav-link px-2" href="#contacts">Contacts</a></li>
-        <li class="nav-item"><a class="nav-link px-2" href="#memorial">Memorial</a></li>
+        <li class="nav-item"><a class="nav-link" href="#rsvp">RSVP</a></li>
+        <li class="nav-item"><a class="nav-link" href="#calendar">Calendar</a></li>
+        <li class="nav-item"><a class="nav-link" href="budget.html">Budget</a></li>
+        <li class="nav-item"><a class="nav-link" href="#zelle">Payments</a></li>
+        <li class="nav-item"><a class="nav-link" href="#music">Music</a></li>
+        <li class="nav-item"><a class="nav-link" href="gallery.html">Photos</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contacts">Contacts</a></li>
+        <li class="nav-item"><a class="nav-link" href="#memorial">Memorial</a></li>
       </ul>
     </div>
   </div>
@@ -113,6 +120,7 @@
   </div>
 </section>
 
+<!-- Rest of the sections remain identical... -->
 <section id="rsvp" class="py-5 bg-light border-bottom">
   <div class="container text-center">
     <h2 class="mb-4 fw-bold" style="color: var(--school-purple);">Who's Coming?</h2>
@@ -138,14 +146,12 @@
 </section>
 
 <div class="container py-5 uniform-section">
-  
   <div id="meeting-notes" class="uniform-card text-center">
     <h3>Committee Meeting Notes</h3>
     <p class="text-muted">Archives from our planning sessions.</p>
     <a href="https://docs.google.com/document/d/1IA0RBRPbgjZej4OG0shiXa8227rz6dZ7DadP4rqmiz0/edit?usp=sharing" target="_blank" class="btn btn-custom shadow-sm">View Meeting Notes</a>
   </div>
 
-  <!-- BUDGET CARD -->
   <div id="budget" class="uniform-card text-center">
     <h3>Financial Transparency</h3>
     <p class="text-muted">Review our current budget, expenses, and reunion funds.</p>
