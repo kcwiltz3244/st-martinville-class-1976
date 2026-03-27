@@ -32,6 +32,7 @@
 <main class="container py-5">
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
     
+    <!-- EXISTING PHOTOS (unchanged) -->
     <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic1.jpg', 'STATE CHAMPS')"><img src="pic1.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name">STATE CHAMPS</p></div></div></div>
     <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic2.jpg', 'Upward Bound')"><img src="pic2.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name">Upward Bound</p></div></div></div>
     <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic3.jpg', 'The cool kids')"><img src="pic3.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name">The cool kids</p></div></div></div>
@@ -56,6 +57,15 @@
     <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic22.jpg', '')"><img src="pic22.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name"> </p></div></div></div>
     <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic23.jpg', '')"><img src="pic23.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name"> </p></div></div></div>
 
+    <!-- ✅ ONLY ADDITION: pics 24–30 -->
+    <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic24.jpeg', '')"><img src="pic24.jpeg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name"> </p></div></div></div>
+    <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic25.jpeg', '')"><img src="pic25.jpeg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name"> </p></div></div></div>
+    <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic26.jpeg', '')"><img src="pic26.jpeg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name"> </p></div></div></div>
+    <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic27.png', '')"><img src="pic27.png" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name"> </p></div></div></div>
+    <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic28.jpg', '')"><img src="pic28.jpg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name"> </p></div></div></div>
+    <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic29.JPG', '')"><img src="pic29.JPG" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name"> </p></div></div></div>
+    <div class="col"><div class="card photo-card shadow-sm h-100"><div class="img-container" onclick="openLightbox('pic30.jpeg', '')"><img src="pic30.jpeg" class="gallery-img"></div><div class="card-body caption-bar text-center p-2"><p class="photo-name"> </p></div></div></div>
+
   </div>
 </main>
 
@@ -65,7 +75,7 @@
       <div class="modal-body p-0 text-center position-relative">
         <img src="" id="lightboxImg" class="img-fluid rounded-top shadow-lg" style="max-height: 80vh;">
         <div id="lightboxCaption" class="rounded-bottom text-center"></div>
-        <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal"></button>
       </div>
     </div>
   </div>
@@ -80,5 +90,6 @@
     myModal.show();
   }
 </script>
+
 </body>
 </html>
