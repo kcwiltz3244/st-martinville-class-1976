@@ -35,6 +35,7 @@
     .countdown-flex { display: flex; justify-content: center; gap: 25px; font-weight: bold; }
     .unit-num { font-size: 2.5rem; display: block; line-height: 1; color: var(--school-gold); }
     .unit-label { font-size: 0.7rem; text-transform: uppercase; }
+    .welcome-msg { font-size: 2rem; color: var(--school-gold); font-weight: bold; letter-spacing: 1px; }
 
     .uniform-section { max-width: 900px; margin: 0 auto; }
     .uniform-card { 
@@ -110,7 +111,7 @@
 </header>
 
 <section class="timer-band">
-  <div class="container">
+  <div class="container" id="countdown-container">
     <div class="countdown-flex">
       <div><span class="unit-num" id="days">00</span><span class="unit-label">Days</span></div>
       <div><span class="unit-num" id="hours">00</span><span class="unit-label">Hrs</span></div>
@@ -223,11 +224,21 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+  let timerExpired = false;
+
   function updateTimer() {
     const targetDate = new Date("June 26, 2026 18:00:00").getTime();
     const now = new Date().getTime();
     const diff = targetDate - now;
-    if (diff <= 0) return;
+    
+    if (diff <= 0) {
+      if (!timerExpired) {
+        document.getElementById("countdown-container").innerHTML = `<div class="welcome-msg">Welcome to the SMSH 50th Year Reunion</div>`;
+        timerExpired = true;
+      }
+      return;
+    }
+    
     document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
     document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     document.getElementById("mins").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
